@@ -2,6 +2,10 @@
 
 Collectieve reisblog voor de reis van 2023 naar Japan.
 
+<hr>
+
+## RedwoodJS
+
 Welcome to [RedwoodJS](https://redwoodjs.com)!
 
 > **Prerequisites**
