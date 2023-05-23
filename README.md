@@ -1,4 +1,6 @@
-# README
+# Ohayo Goededagu
+
+Collectieve reisblog voor de reis van 2023 naar Japan.
 
 Welcome to [RedwoodJS](https://redwoodjs.com)!
 
