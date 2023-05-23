@@ -19,3 +19,10 @@ model User {
   resetToken          String?   // <─┤
   resetTokenExpiresAt DateTime? // <─┘
 }
+
+model Post {
+  id        Int      @id @default(autoincrement())
+  title     String
+  body      String
+  createdAt DateTime @default(now())
+}
