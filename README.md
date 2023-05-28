@@ -1,3 +1,5 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/acf9bb03-2303-4f3c-b509-04488c739b42/deploy-status)](https://app.netlify.com/sites/ohayo-goededagu/deploys)
+
 # Ohayo Goededagu
 
 Collectieve reisblog voor de reis van 2023 naar Japan.
