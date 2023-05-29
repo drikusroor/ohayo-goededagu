@@ -18,6 +18,7 @@ const Routes = () => {
   return (
     <Router useAuth={useAuth}>
       <Private unauthenticated="home">
+        <Route path="/admin" page={AdminPage} name="admin" />
         <Set wrap={ScaffoldLayout} title="Posts" titleTo="posts" buttonLabel="New Post" buttonTo="newPost">
           <Route path="/admin/posts/new" page={PostNewPostPage} name="newPost" />
           <Route path="/admin/posts/{id:Int}/edit" page={PostEditPostPage} name="editPost" />
@@ -33,6 +34,7 @@ const Routes = () => {
         <Route path="/forgot-password" page={ForgotPasswordPage} name="forgotPassword" />
         <Route path="/reset-password" page={ResetPasswordPage} name="resetPassword" />
         <Route path="/account" page={AccountPage} name="account" />
+        <Route path="/about" page={AboutPage} name="about" />
       </Set>
       <Route notfound page={NotFoundPage} />
     </Router>

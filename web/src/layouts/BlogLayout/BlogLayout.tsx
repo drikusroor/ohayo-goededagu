@@ -23,8 +23,23 @@ const BlogLayout = ({ children }: BlogLayoutProps) => {
       )}
 
       <header className="w-full pb-5 pt-3 text-center">
-        <h1 className="text-2xl">Ohayou Goededagu</h1>
-        <pre>Collectieve reisblog voor de reis van 2023 naar Japan.</pre>
+        <h1 className="text-3xl font-bold">Ohayou Goededagu</h1>
+        <pre className="mt-3">Collectieve reisblog voor de reis van 2023 naar Japan.</pre>
+        <nav>
+          <ul className="flex justify-center gap-5 mt-3">
+            <li>
+              <Link className="text-blue-500 hover:underline" to={routes.home()}>Blog</Link>
+            </li>
+            <li>
+              <Link className="text-blue-500 hover:underline" to={routes.about()}>About</Link>
+            </li>
+            {isAuthenticated && (
+              <li>
+                <Link className="text-blue-500 hover:underline" to={routes.admin()}>Admin</Link>
+              </li>
+            )}
+          </ul>
+        </nav>
       </header>
       <main className="mx-auto max-w-xl">{children}</main>
     </>
