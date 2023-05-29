@@ -17,11 +17,11 @@ export const QUERY = gql`
 `
 export const Loading = () => <div>
   {Array.from({ length: 5 }).map((_, i) => (
-    <>
+    <div key={i}>
       <Skeleton className="rounded-sm mb-2 md:w-1/2 h-8" />
       <Skeleton className="rounded-sm mb-2 md:w-1/3 h-8" />
       <Skeleton className="rounded-sm mb-5 w-full h-32" />
-    </>
+    </div>
   ))}
 </div>
 
