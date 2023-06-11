@@ -19,6 +19,7 @@ model User {
   salt                String    // <─┼─ add these lines
   resetToken          String?   // <─┤
   resetTokenExpiresAt DateTime? // <─┘
+  posts               Post[]
 }
 
 model Post {
@@ -26,4 +27,6 @@ model Post {
   title     String
   body      String
   createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id])
+  userId    Int
 }
