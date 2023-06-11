@@ -4,8 +4,8 @@ import { Toaster } from '@redwoodjs/web/toast'
 type LayoutProps = {
   title: string
   titleTo: string
-  buttonLabel: string
-  buttonTo: string
+  buttonLabel?: string
+  buttonTo?: string
   children: React.ReactNode
 }
 
