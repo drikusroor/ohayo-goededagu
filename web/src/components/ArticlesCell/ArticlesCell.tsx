@@ -12,18 +12,23 @@ export const QUERY = gql`
       title
       body
       createdAt
+      user {
+        name
+      }
     }
   }
 `
-export const Loading = () => <div>
-  {Array.from({ length: 5 }).map((_, i) => (
-    <div key={i}>
-      <Skeleton className="rounded-sm mb-2 md:w-1/2 h-8" />
-      <Skeleton className="rounded-sm mb-2 md:w-1/3 h-8" />
-      <Skeleton className="rounded-sm mb-5 w-full h-32" />
-    </div>
-  ))}
-</div>
+export const Loading = () => (
+  <div>
+    {Array.from({ length: 5 }).map((_, i) => (
+      <div key={i}>
+        <Skeleton className="mb-2 h-8 rounded-sm md:w-1/2" />
+        <Skeleton className="mb-2 h-8 rounded-sm md:w-1/3" />
+        <Skeleton className="mb-5 h-32 w-full rounded-sm" />
+      </div>
+    ))}
+  </div>
+)
 
 export const Empty = () => <div>There are no posts</div>
 
