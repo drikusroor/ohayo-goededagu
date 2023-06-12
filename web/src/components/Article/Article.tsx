@@ -16,6 +16,9 @@ const Article = ({ article }: Props) => {
         <sub className="text-sm text-slate-500">
           Posted at: {new Date(article.createdAt).toLocaleString()}
         </sub>
+        <span className="ml-2 font-normal text-gray-400">
+          by {article.user.name}
+        </span>
       </header>
       <div>{article.body}</div>
     </article>
