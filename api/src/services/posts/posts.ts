@@ -1,5 +1,3 @@
-import type { QueryResolvers, MutationResolvers } from 'types/graphql'
-
 import { db } from 'src/lib/db'
 
 export const posts = () => {
@@ -7,26 +5,7 @@ export const posts = () => {
 }
 
 export const post = ({ id }) => {
-  return db.post.findFirst({
-    where: { id },
-  })
-}
-
-export const createPost = ({ input }) => {
-  return db.post.create({
-    data: { ...input, userId: context.currentUser.id },
-  })
-}
-
-export const updatePost: MutationResolvers['updatePost'] = ({ id, input }) => {
-  return db.post.update({
-    data: input,
-    where: { id },
-  })
-}
-
-export const deletePost: MutationResolvers['deletePost'] = ({ id }) => {
-  return db.post.delete({
+  return db.post.findUnique({
     where: { id },
   })
 }
