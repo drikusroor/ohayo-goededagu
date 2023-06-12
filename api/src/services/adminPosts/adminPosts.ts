@@ -22,10 +22,10 @@ export const updatePost = async ({ id, input }) => {
   const post = await db.post.findUnique({ where: { id } })
 
   if (!post) {
-    throw new Error(`Post with ID ${id} not found`);
+    throw new Error(`Post with ID ${id} not found`)
   }
 
-  await verifyOwnership(post);
+  await verifyOwnership(post)
 
   return db.post.update({
     data: input,
@@ -33,21 +33,21 @@ export const updatePost = async ({ id, input }) => {
   })
 }
 
-export const deletePost = async ({ id }, context) => {
+export const deletePost = async ({ id }) => {
   const post = await db.post.findUnique({ where: { id } })
 
   if (!post) {
-    throw new Error(`Post with ID ${id} not found`);
+    throw new Error(`Post with ID ${id} not found`)
   }
 
-  await verifyOwnership(post);
+  await verifyOwnership(post)
 
   return db.post.delete({
     where: { id },
   })
 }
 
-const verifyOwnership = async (id) {
+const verifyOwnership = async (id) => {
   if (await adminPost({ id })) {
     return true
   } else {
