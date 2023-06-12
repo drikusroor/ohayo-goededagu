@@ -3,12 +3,12 @@ import type { QueryResolvers, MutationResolvers } from 'types/graphql'
 import { db } from 'src/lib/db'
 
 export const posts = () => {
-  return db.post.findMany({ where: { userId: context.currentUser.id } })
+  return db.post.findMany()
 }
 
 export const post = ({ id }) => {
   return db.post.findFirst({
-    where: { id, userId: context.currentUser.id },
+    where: { id },
   })
 }
 
