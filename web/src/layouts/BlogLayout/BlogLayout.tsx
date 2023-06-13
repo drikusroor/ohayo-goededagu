@@ -34,7 +34,7 @@ const BlogLayout = ({ children }: BlogLayoutProps) => {
             </ul>
           </div>
         )}
-        <h1 className="pt-3 text-3xl font-bold">Ohayou Goededagu</h1>
+        <h1 className="pt-3 text-3xl font-bold">Ohayou Goededagu | おはよ グデダグ</h1>
         <pre className="mt-3">
           Collectieve reisblog voor de reis van 2023 naar Japan.
         </pre>
