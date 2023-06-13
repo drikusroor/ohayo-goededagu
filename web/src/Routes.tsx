@@ -7,7 +7,7 @@
 // 'src/pages/HomePage/HomePage.js'         -> HomePage
 // 'src/pages/Admin/BooksPage/BooksPage.js' -> AdminBooksPage
 
-import { Router, Route, Set, Private } from '@redwoodjs/router'
+import { Router, Route, Set, Private, Redirect } from '@redwoodjs/router'
 
 import ScaffoldLayout from 'src/layouts/ScaffoldLayout'
 
@@ -20,7 +20,7 @@ const Routes = () => {
     <Router useAuth={useAuth}>
       <Private unauthenticated="login">
         <Set wrap={AdminDashboardLayout}>
-          <Route path="/admin" page={AdminPage} name="admin" />
+          <Route path="/admin" page={() => <Redirect to="/admin/posts" />} name="admin" />
           <Set wrap={ScaffoldLayout} title="Posts" titleTo="posts" buttonLabel="New Post" buttonTo="newPost">
             <Route path="/admin/posts/new" page={PostNewPostPage} name="newPost" />
             <Route path="/admin/posts/{id:Int}/edit" page={PostEditPostPage} name="editPost" />
