@@ -17,7 +17,11 @@ const Article = ({ article }: Props) => {
           Posted at: {new Date(article.createdAt).toLocaleString()}
         </sub>
         <span className="ml-2 font-normal text-gray-400">
-          by {article.user.name}
+          {article.user.name
+            ? `by ${article.user.name}`
+            : article.user.email
+            ? article.user.email
+            : 'by Anonymous'}
         </span>
       </header>
       <div>{article.body}</div>
