@@ -1,10 +1,10 @@
+import type { DeletePostMutationVariables, FindPostById } from 'types/graphql'
+
 import { Link, routes, navigate } from '@redwoodjs/router'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
 import { timeTag } from 'src/lib/formatters'
-
-import type { DeletePostMutationVariables, FindPostById } from 'types/graphql'
 
 const DELETE_POST_MUTATION = gql`
   mutation DeletePostMutation($id: Int!) {
@@ -56,6 +56,10 @@ const Post = ({ post }: Props) => {
             <tr>
               <th>Body</th>
               <td>{post.body}</td>
+            </tr>
+            <tr>
+              <th>Published</th>
+              <td>{post.published ? 'Yes' : 'No'}</td>
             </tr>
             <tr>
               <th>Created at</th>

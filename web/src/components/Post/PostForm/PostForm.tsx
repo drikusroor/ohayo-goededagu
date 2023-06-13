@@ -1,3 +1,5 @@
+import type { EditPostById, UpdatePostInput } from 'types/graphql'
+
 import {
   Form,
   FormError,
@@ -5,9 +7,8 @@ import {
   Label,
   TextField,
   Submit,
+  CheckboxField,
 } from '@redwoodjs/forms'
-
-import type { EditPostById, UpdatePostInput } from 'types/graphql'
 import type { RWGqlError } from '@redwoodjs/forms'
 
 type FormPost = NonNullable<EditPostById['post']>
@@ -59,6 +60,20 @@ const PostForm = (props: PostFormProps) => {
         >
           Body
         </Label>
+
+        <Label
+          name="published"
+          className="rw-label"
+          errorClassName="rw-label rw-label-error"
+        >
+          Published
+        </Label>
+        <CheckboxField
+          name="published"
+          defaultChecked={props.post?.published}
+          className="rw-input"
+          errorClassName="rw-input rw-input-error"
+        />
 
         <TextField
           name="body"
