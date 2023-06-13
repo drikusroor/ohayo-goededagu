@@ -20,6 +20,7 @@ model User {
   resetToken          String?   // <─┤
   resetTokenExpiresAt DateTime? // <─┘
   posts               Post[]
+  roles               String @default("moderator")
 }
 
 model Post {
