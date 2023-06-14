@@ -6,21 +6,12 @@ export const schema = gql`
     createdAt: DateTime!
     updatedAt: DateTime!
     user: User!
+    published: Boolean!
   }
 
   type Query {
     posts: [Post!]! @skipAuth
     post(id: Int!): Post @skipAuth
-  }
-
-  input CreatePostInput {
-    title: String!
-    body: String!
-  }
-
-  input UpdatePostInput {
-    title: String
-    body: String
   }
 
   type Mutation {

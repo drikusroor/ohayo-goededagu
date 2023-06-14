@@ -6,6 +6,7 @@ export const schema = gql`
     createdAt: DateTime!
     updatedAt: DateTime!
     user: User!
+    published: Boolean!
   }
 
   type Query {
@@ -16,11 +17,13 @@ export const schema = gql`
   input CreatePostInput {
     title: String!
     body: String!
+    published: Boolean
   }
 
   input UpdatePostInput {
     title: String
     body: String
+    published: Boolean
   }
 
   type Mutation {

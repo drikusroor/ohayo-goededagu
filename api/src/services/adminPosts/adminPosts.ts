@@ -47,7 +47,7 @@ export const deletePost = async ({ id }) => {
   })
 }
 
-const verifyOwnership = async (id) => {
+const verifyOwnership = async ({ id }) => {
   if (await adminPost({ id })) {
     return true
   } else {
