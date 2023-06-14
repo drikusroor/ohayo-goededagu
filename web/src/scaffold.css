@@ -395,3 +395,16 @@
   font-weight: bold;
   margin-bottom: 1rem;
 }
+
+.rw-dashboard-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right-width: 0.25rem;
+  border-color: rgb(55 65 81);
+  background-color: rgb(243 244 246);
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
