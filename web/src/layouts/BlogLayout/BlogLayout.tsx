@@ -12,47 +12,37 @@ const BlogLayout = ({ children }: BlogLayoutProps) => {
     <>
       <header className="w-full pb-5 text-center">
         {isAuthenticated && currentUser && (
-          <div className="flex items-center justify-between bg-red-500 p-3 text-white">
+          <div className="flex items-center justify-between bg-slate-500 p-3 text-white">
             <span>Logged in as {currentUser.email}</span>
             <ul className="flex items-center gap-3">
               <li>
-                <Link
-                  className="block rounded bg-blue-900 px-4 py-2 font-bold text-white transition-colors hover:bg-blue-800"
-                  to={routes.admin()}
-                >
-                  Admin
+                <Link className="rw-button rw-button-blue" to={routes.admin()}>
+                  Dashboard
                 </Link>
               </li>
               <li>
-                <button
-                  className="rounded bg-red-900 px-4 py-2 font-bold text-white transition-colors hover:bg-red-800"
-                  onClick={logOut}
-                >
+                <button className="rw-button rw-button-red" onClick={logOut}>
                   Logout
                 </button>
               </li>
             </ul>
           </div>
         )}
-        <h1 className="pt-3 text-3xl font-bold">Ohayou Goededagu | おはよ グデダグ</h1>
+        <h1 className="pt-3 text-3xl font-bold">
+          Ohayou Goededagu | おはよ グデダグ
+        </h1>
         <pre className="mt-3">
           Collectieve reisblog voor de reis van 2023 naar Japan.
         </pre>
         <nav>
           <ul className="mt-3 flex justify-center gap-5">
             <li>
-              <Link
-                className="text-blue-500 hover:underline"
-                to={routes.home()}
-              >
+              <Link className="rw-button" to={routes.home()}>
                 Blog
               </Link>
             </li>
             <li>
-              <Link
-                className="text-blue-500 hover:underline"
-                to={routes.about()}
-              >
+              <Link className="rw-button" to={routes.about()}>
                 About
               </Link>
             </li>

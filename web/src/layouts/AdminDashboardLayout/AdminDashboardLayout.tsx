@@ -17,12 +17,13 @@ const AdminDashboardLayout = ({ children }: AdminDashboardLayoutProps) => {
             <h1 className="text-3xl font-bold">Dashboard</h1>
           </div>
           <nav>
-            <ul className="flex flex-col py-4">
-              <li className="flex items-center border-r-4 border-gray-700 bg-gray-100 px-4 py-2 text-gray-700">
-                <Link className="w-full" to="/admin/posts">
-                  Posts
-                </Link>
-              </li>
+            <ul className="flex flex-col gap-1 py-4">
+              <Link className="dashboard-item" to="/">
+                Home
+              </Link>
+              <Link className="dashboard-item" to="/admin/posts">
+                Posts
+              </Link>
             </ul>
           </nav>
         </div>
@@ -32,7 +33,7 @@ const AdminDashboardLayout = ({ children }: AdminDashboardLayoutProps) => {
             <button
               type="button"
               onClick={logOut}
-              className="rounded bg-red-500 px-4 py-2 font-bold text-white hover:bg-red-700"
+              className="rw-button rw-button-red"
             >
               Logout
             </button>
