@@ -18,16 +18,12 @@ const AdminDashboardLayout = ({ children }: AdminDashboardLayoutProps) => {
           </div>
           <nav>
             <ul className="flex flex-col gap-1 py-4">
-              <li className="dashboard-item">
-                <Link className="w-full" to="/">
-                  Home
-                </Link>
-              </li>
-              <li className="dashboard-item">
-                <Link className="w-full" to="/admin/posts">
-                  Posts
-                </Link>
-              </li>
+              <Link className="dashboard-item" to="/">
+                Home
+              </Link>
+              <Link className="dashboard-item" to="/admin/posts">
+                Posts
+              </Link>
             </ul>
           </nav>
         </div>
