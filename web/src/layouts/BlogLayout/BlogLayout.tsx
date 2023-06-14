@@ -34,25 +34,21 @@ const BlogLayout = ({ children }: BlogLayoutProps) => {
             </ul>
           </div>
         )}
-        <h1 className="pt-3 text-3xl font-bold">Ohayou Goededagu | おはよ グデダグ</h1>
+        <h1 className="pt-3 text-3xl font-bold">
+          Ohayou Goededagu | おはよ グデダグ
+        </h1>
         <pre className="mt-3">
           Collectieve reisblog voor de reis van 2023 naar Japan.
         </pre>
         <nav>
           <ul className="mt-3 flex justify-center gap-5">
             <li>
-              <Link
-                className="text-blue-500 hover:underline"
-                to={routes.home()}
-              >
+              <Link className="rw-button" to={routes.home()}>
                 Blog
               </Link>
             </li>
             <li>
-              <Link
-                className="text-blue-500 hover:underline"
-                to={routes.about()}
-              >
+              <Link className="rw-button" to={routes.about()}>
                 About
               </Link>
             </li>
