@@ -20,4 +20,12 @@
   @apply px-4 py-2;
   @apply transition-colors hover:bg-gray-300;
   }
+
+  .h1 {
+    @apply text-2xl font-bold;
+  }
+
+  .h2 {
+      @apply text-lg font-semibold;
+    }
 }

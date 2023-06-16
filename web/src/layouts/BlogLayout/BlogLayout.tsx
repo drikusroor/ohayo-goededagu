@@ -43,7 +43,7 @@ const BlogLayout = ({ children }: BlogLayoutProps) => {
             </li>
             <li>
               <Link className="rw-button" to={routes.about()}>
-                About
+                Reisgezelschap
               </Link>
             </li>
           </ul>
