@@ -1,13 +1,11 @@
 [![Netlify Status](https://api.netlify.com/api/v1/badges/acf9bb03-2303-4f3c-b509-04488c739b42/deploy-status)](https://app.netlify.com/sites/ohayo-goededagu/deploys)
 
 # Ohayo Goededagu
-
 Collectieve reisblog voor de reis van 2023 naar Japan.
 
 <hr>
 
 ## RedwoodJS
-
 Welcome to [RedwoodJS](https://redwoodjs.com)!
 
 > **Prerequisites**
@@ -41,7 +39,6 @@ Your browser should automatically open to http://localhost:8910 where you'll see
 > For all the details, see the [CLI reference](https://redwoodjs.com/docs/cli-commands).
 
 ## Prisma and the database
-
 Redwood wouldn't be a full-stack framework without a database. It all starts with the schema. Open the [`schema.prisma`](api/db/schema.prisma) file in `api/db` and replace the `UserExample` model with the following `Post` model:
 
 ```
@@ -78,7 +75,6 @@ Navigate to http://localhost:8910/posts/new, fill in the title and body, and cli
 Did we just create a post in the database? Yup! With `yarn rw g scaffold <model>`, Redwood created all the pages, components, and services necessary to perform all CRUD actions on our posts table.
 
 ## Frontend first with Storybook
-
 Don't know what your data models look like?
 That's more than ok—Redwood integrates Storybook so that you can work on design without worrying about data.
 Mockup, build, and verify your React components, even in complete isolation from the backend:
@@ -94,7 +90,6 @@ yarn rw setup ui --help
 ```
 
 ## Testing with Jest
-
 It'd be hard to scale from side project to startup without a few tests.
 Redwood fully integrates Jest with the front and the backends and makes it easy to keep your whole app covered by generating test files with all your components and services:
 
@@ -105,7 +100,6 @@ yarn rw test
 To make the integration even more seamless, Redwood augments Jest with database [scenarios](https://redwoodjs.com/docs/testing.md#scenarios)  and [GraphQL mocking](https://redwoodjs.com/docs/testing.md#mocking-graphql-calls).
 
 ## Ship it
-
 Redwood is designed for both serverless deploy targets like Netlify and Vercel and serverful deploy targets like Render and AWS:
 
 ```
@@ -120,11 +114,9 @@ yarn rw setup auth --help
 ```
 
 ## Next Steps
-
 The best way to learn Redwood is by going through the comprehensive [tutorial](https://redwoodjs.com/docs/tutorial/foreword) and joining the community (via the [Discourse forum](https://community.redwoodjs.com) or the [Discord server](https://discord.gg/redwoodjs)).
 
 ## Quick Links
-
 - Stay updated: read [Forum announcements](https://community.redwoodjs.com/c/announcements/5), follow us on [Twitter](https://twitter.com/redwoodjs), and subscribe to the [newsletter](https://redwoodjs.com/newsletter)
 - [Learn how to contribute](https://redwoodjs.com/docs/contributing)
 
