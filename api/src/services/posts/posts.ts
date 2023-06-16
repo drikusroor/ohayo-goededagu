@@ -1,7 +1,10 @@
 import { db } from 'src/lib/db'
 
 export const posts = () => {
-  return db.post.findMany({ where: { published: true } })
+  return db.post.findMany({
+    where: { published: true },
+    orderBy: { createdAt: 'desc' },
+  })
 }
 
 export const post = ({ id }) => {
