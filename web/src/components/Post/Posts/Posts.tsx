@@ -79,6 +79,7 @@ const PostsList = ({ posts }: FindPosts) => {
                     title={'Delete post ' + post.id}
                     onClick={() => onDeleteClick(post.id)}
                     color="monza-red"
+                    variant="outlined"
                   />
                 </nav>
               </td>
