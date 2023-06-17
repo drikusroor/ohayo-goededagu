@@ -75,7 +75,8 @@ const PostsList = ({ posts }: FindPosts) => {
                     Edit
                   </Link>
                   <Button
-                    text={'Delete post ' + post.id}
+                    text="Delete"
+                    title={'Delete post ' + post.id}
                     onClick={() => onDeleteClick(post.id)}
                     color="monza-red"
                   />
