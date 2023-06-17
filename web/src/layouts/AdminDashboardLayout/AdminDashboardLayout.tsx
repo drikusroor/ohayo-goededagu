@@ -1,6 +1,7 @@
 import { Link, routes } from '@redwoodjs/router'
 
 import { useAuth } from 'src/auth'
+import Button from 'src/components/Button/Button'
 
 type AdminDashboardLayoutProps = {
   children?: React.ReactNode
@@ -30,13 +31,7 @@ const AdminDashboardLayout = ({ children }: AdminDashboardLayoutProps) => {
         {isAuthenticated ? (
           <div className="flex items-center justify-between bg-slate-500 p-3 text-white">
             <span>Logged in as {currentUser.email.split('@')[0]}</span>
-            <button
-              type="button"
-              onClick={logOut}
-              className="rw-button rw-button-red"
-            >
-              Logout
-            </button>
+            <Button text="Logout" onClick={logOut} color="monza-red" />
           </div>
         ) : (
           <Link to={routes.login()}>Login</Link>
