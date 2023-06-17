@@ -5,6 +5,8 @@ Collectieve reisblog voor de reis van 2023 naar Japan.
 
 <hr>
 
+[ohayo-goededagu.netlify.app](https://ohayo-goededagu.netlify.app/)
+
 ## RedwoodJS
 Welcome to [RedwoodJS](https://redwoodjs.com)!
 
