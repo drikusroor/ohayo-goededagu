@@ -28,12 +28,18 @@ const BlogLayout = ({ children }: BlogLayoutProps) => {
             </ul>
           </div>
         )}
+
+        <img
+          src="/images/logo.png"
+          className="mx-auto rounded-b-full shadow-lg"
+          alt="Logo Ohayo Goededagu"
+          width={128}
+          height={128}
+        />
         <h1 className="pt-3 text-3xl font-bold">
           Ohayou Goededagu | おはよ グデダギュ
         </h1>
-        <pre className="mt-3">
-          Japan 2023
-        </pre>
+        <pre className="mt-3">Japan 2023</pre>
         <nav>
           <ul className="mt-3 flex justify-center gap-5">
             <li>
