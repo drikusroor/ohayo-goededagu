@@ -37,7 +37,7 @@ const AdminDashboardLayout = ({ children }: AdminDashboardLayoutProps) => {
           <Link to={routes.login()}>Login</Link>
         )}
       </div>
-      <div className="flex flex-1 flex-col">{children}</div>
+      <div className="flex flex-1 flex-col overflow-auto">{children}</div>
     </div>
   )
 }
