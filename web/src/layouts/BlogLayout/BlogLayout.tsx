@@ -1,6 +1,7 @@
 import { Link, routes } from '@redwoodjs/router'
 
 import { useAuth } from 'src/auth'
+import Button from 'src/components/Button/Button'
 
 type BlogLayoutProps = {
   children?: React.ReactNode
@@ -24,12 +25,7 @@ const BlogLayout = ({ children }: BlogLayoutProps) => {
                 </Link>
               </li>
               <li>
-                <button
-                  className="block rounded bg-monza-red px-3 py-2 text-xs font-semibold uppercase text-white transition hover:brightness-110 hover:filter "
-                  onClick={logOut}
-                >
-                  Logout
-                </button>
+                <Button text="Logout" onClick={logOut} color="monza-red" />
               </li>
             </ul>
           </div>
