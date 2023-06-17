@@ -50,6 +50,10 @@ export const CustomChildren = () => {
   )
 }
 
+export const CustomVariant = () => {
+  return <Button variant="outlined" text="Outlined" className="mr-3" />
+}
+
 export default {
   title: 'Components/Button',
   component: Button,
