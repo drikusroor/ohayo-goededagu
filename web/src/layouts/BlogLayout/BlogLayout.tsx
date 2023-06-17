@@ -14,14 +14,20 @@ const BlogLayout = ({ children }: BlogLayoutProps) => {
         {isAuthenticated && currentUser && (
           <div className="flex items-center justify-between bg-slate-500 p-3 text-white">
             <span>Logged in as {currentUser.email}</span>
-            <ul className="flex items-center gap-3">
+            <ul className="flex gap-3">
               <li>
-                <Link className="rw-button rw-button-blue" to={routes.admin()}>
+                <Link
+                  className="block rounded bg-cobalt-blue px-3 py-2 text-xs font-semibold uppercase text-white transition hover:brightness-110 hover:filter "
+                  to={routes.admin()}
+                >
                   Dashboard
                 </Link>
               </li>
               <li>
-                <button className="rw-button rw-button-red" onClick={logOut}>
+                <button
+                  className="block rounded bg-monza-red px-3 py-2 text-xs font-semibold uppercase text-white transition hover:brightness-110 hover:filter "
+                  onClick={logOut}
+                >
                   Logout
                 </button>
               </li>
