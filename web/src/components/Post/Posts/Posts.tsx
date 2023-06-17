@@ -4,6 +4,7 @@ import { Link, routes } from '@redwoodjs/router'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
+import Button from 'src/components/Button/Button'
 import { QUERY } from 'src/components/Post/PostsCell'
 import { timeTag, truncate } from 'src/lib/formatters'
 
@@ -73,14 +74,13 @@ const PostsList = ({ posts }: FindPosts) => {
                   >
                     Edit
                   </Link>
-                  <button
-                    type="button"
+                  <Button
+                    text="Delete"
                     title={'Delete post ' + post.id}
-                    className="rw-button rw-button-small rw-button-red"
                     onClick={() => onDeleteClick(post.id)}
-                  >
-                    Delete
-                  </button>
+                    color="monza-red"
+                    variant="outlined"
+                  />
                 </nav>
               </td>
             </tr>

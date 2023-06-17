@@ -4,6 +4,7 @@ import { Link, routes, navigate } from '@redwoodjs/router'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
+import Button from 'src/components/Button/Button'
 import { timeTag } from 'src/lib/formatters'
 
 const DELETE_POST_MUTATION = gql`
@@ -75,13 +76,11 @@ const Post = ({ post }: Props) => {
         >
           Edit
         </Link>
-        <button
-          type="button"
-          className="rw-button rw-button-red"
+        <Button
+          text="Delete"
           onClick={() => onDeleteClick(post.id)}
-        >
-          Delete
-        </button>
+          color="monza-red"
+        />
       </nav>
     </>
   )
