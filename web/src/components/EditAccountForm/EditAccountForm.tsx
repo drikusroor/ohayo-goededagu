@@ -9,6 +9,9 @@ import {
   Submit,
 } from '@redwoodjs/forms'
 import type { RWGqlError } from '@redwoodjs/forms'
+import { Link, routes } from '@redwoodjs/router'
+
+import Button from '../Button/Button'
 
 type FormAccount = NonNullable<EditUserProfileById['user']>
 
@@ -58,6 +61,12 @@ const EditAccountForm = (props: EditAccountFormProps) => {
           <Submit disabled={props.loading} className="rw-button rw-button-blue">
             Save
           </Submit>
+
+          <Link to={routes.account()}>
+            <Button color="monza-red" variant="outlined">
+              Cancel
+            </Button>
+          </Link>
         </div>
       </Form>
     </div>

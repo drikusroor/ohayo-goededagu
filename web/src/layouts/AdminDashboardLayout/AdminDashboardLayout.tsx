@@ -40,7 +40,6 @@ type AdminDashboardLayoutProps = {
 
 const AdminDashboardLayout = ({ children }: AdminDashboardLayoutProps) => {
   const { isAuthenticated, currentUser, logOut } = useAuth()
-
   const { pathname } = useLocation()
 
   const getIsActiveClass = useCallback(
