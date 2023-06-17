@@ -22,15 +22,15 @@ const AdminDashboardLayout = ({ children }: AdminDashboardLayoutProps) => {
       <div className="flex h-screen flex-col justify-between bg-gray-200 md:w-64">
         <div>
           <div className="p-1 md:p-3 md:text-center">
-            <h1 className="text-xl font-bold md:text-3xl">
-              <img
-                className="mr-2 inline"
-                alt="Logo"
-                src="/public/images/logo.png"
-                width="32"
-                height="32"
-              />
+            <h1 className="flex items-center justify-between text-xl font-bold md:text-3xl">
               <span className="hidden md:inline">Dashboard</span>
+              <img
+                className="inline h-12 w-12"
+                alt="Logo"
+                src="/images/logo.png"
+                width="48"
+                height="48"
+              />
             </h1>
           </div>
           <nav>
