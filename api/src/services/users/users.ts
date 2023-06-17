@@ -12,6 +12,19 @@ export const user: QueryResolvers['user'] = ({ id }) => {
   })
 }
 
+export const updateUserProfile = ({ input }) => {
+  if (!context.currentUser) {
+    throw new Error('User not authenticated')
+  }
+
+  const id = context.currentUser.id
+
+  return db.user.update({
+    data: input,
+    where: { id },
+  })
+}
+
 export const User: UserRelationResolvers = {
   posts: (_obj, { root }) => {
     return db.user.findUnique({ where: { id: root?.id } }).posts()

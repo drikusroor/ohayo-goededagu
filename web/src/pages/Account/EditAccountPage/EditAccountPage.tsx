@@ -1,20 +1,18 @@
-import { Link, routes } from '@redwoodjs/router'
 import { MetaTags } from '@redwoodjs/web'
 
+import { useAuth } from 'src/auth'
+import EditAccountCell from 'src/components/EditAccountCell'
+
 const EditAccountPage = () => {
+  const { currentUser } = useAuth()
+
+  const userId = currentUser.id
+
   return (
     <>
-      <MetaTags title="EditAccount" description="EditAccount page" />
+      <MetaTags title="Edit Account" description="Edit Account page" />
 
-      <h1>EditAccountPage</h1>
-      <p>
-        Find me in{' '}
-        <code>./web/src/pages/EditAccountPage/EditAccountPage.tsx</code>
-      </p>
-      <p>
-        My default route is named <code>editAccount</code>, link to me with `
-        <Link to={routes.editAccount()}>EditAccount</Link>`
-      </p>
+      <EditAccountCell id={userId} />
     </>
   )
 }

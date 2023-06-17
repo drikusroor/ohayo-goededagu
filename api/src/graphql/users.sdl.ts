@@ -32,4 +32,12 @@ export const schema = gql`
     resetToken: String
     resetTokenExpiresAt: DateTime
   }
+
+  input UpdateUserProfileInput {
+    name: String
+  }
+
+  type Mutation {
+    updateUserProfile(input: UpdateUserProfileInput!): User! @requireAuth
+  }
 `
