@@ -19,13 +19,22 @@ const AdminDashboardLayout = ({ children }: AdminDashboardLayoutProps) => {
 
   return (
     <div className="flex flex-row">
-      <div className="flex h-screen w-64 flex-col justify-between bg-gray-200">
+      <div className="flex h-screen flex-col justify-between bg-gray-200 md:w-64">
         <div>
-          <div className="flex h-16 flex-col items-center justify-center">
-            <h1 className="text-3xl font-bold">Dashboard</h1>
+          <div className="p-1 md:p-3 md:text-center">
+            <h1 className="text-xl font-bold md:text-3xl">
+              <img
+                className="mr-2 inline"
+                alt="Logo"
+                src="/public/images/logo.png"
+                width="32"
+                height="32"
+              />
+              <span className="hidden md:inline">Dashboard</span>
+            </h1>
           </div>
           <nav>
-            <ul className="flex flex-col gap-1 py-4">
+            <ul className="flex flex-col gap-1 py-2 md:my-4">
               <Link className={`dashboard-item`} to="/">
                 Home
               </Link>
@@ -40,7 +49,9 @@ const AdminDashboardLayout = ({ children }: AdminDashboardLayoutProps) => {
         </div>
         {isAuthenticated ? (
           <div className="flex items-center justify-between bg-slate-500 p-3 text-white">
-            <span>Logged in as {currentUser.email.split('@')[0]}</span>
+            <span className="hidden md:block">
+              Logged in as {currentUser.email.split('@')[0]}
+            </span>
             <Button text="Logout" onClick={logOut} color="monza-red" />
           </div>
         ) : (
