@@ -1,4 +1,5 @@
 import { Link, routes } from '@redwoodjs/router'
+import { useLocation } from '@redwoodjs/router'
 
 import { useAuth } from 'src/auth'
 import Button from 'src/components/Button/Button'
@@ -10,6 +11,12 @@ type AdminDashboardLayoutProps = {
 const AdminDashboardLayout = ({ children }: AdminDashboardLayoutProps) => {
   const { isAuthenticated, currentUser, logOut } = useAuth()
 
+  const { pathname } = useLocation()
+
+  const getIsActiveClass = (path: string) => {
+    return pathname === path ? 'border-r-4 border-gray-700' : ''
+  }
+
   return (
     <div className="flex flex-row">
       <div className="flex h-screen w-64 flex-col justify-between bg-gray-200">
@@ -19,10 +26,13 @@ const AdminDashboardLayout = ({ children }: AdminDashboardLayoutProps) => {
           </div>
           <nav>
             <ul className="flex flex-col gap-1 py-4">
-              <Link className="dashboard-item" to="/">
+              <Link className={`dashboard-item`} to="/">
                 Home
               </Link>
-              <Link className="dashboard-item" to="/admin/posts">
+              <Link
+                className={`dashboard-item ${getIsActiveClass('/admin/posts')}`}
+                to="/admin/posts"
+              >
                 Posts
               </Link>
             </ul>
