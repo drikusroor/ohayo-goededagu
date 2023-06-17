@@ -6,9 +6,16 @@ interface Props {
   article: Post
 }
 
-const Article = ({ article }: Props) => {
+const ArticlePreview = ({ article }: Props) => {
+  const onReadMore = (article: 'article') => {
+    navigate(routes.article({ id: article.id }))
+  }
+
   return (
-    <article className="mb-4 p-2">
+    <article
+      className="mb-4 rounded border-2 p-2 hover:cursor-pointer hover:border-black"
+      onClick={() => onReadMore(article)}
+    >
       <header className="mb-3">
         <h2 className="text-2xl">
           <Link to={routes.article({ id: article.id })}>{article.title}</Link>
@@ -31,4 +38,4 @@ const Article = ({ article }: Props) => {
   )
 }
 
-export default Article
+export default ArticlePreview

@@ -2,7 +2,7 @@ import type { ArticlesQuery } from 'types/graphql'
 
 import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
 
-import Article from '../Article/Article'
+import ArticlePreview from '../Article/ArticlePreview'
 import Skeleton from '../Skeleton/Skeleton'
 
 export const QUERY = gql`
@@ -40,7 +40,7 @@ export const Success = ({ articles }: CellSuccessProps<ArticlesQuery>) => {
   return (
     <ul>
       {articles.map((article) => {
-        return <Article key={article.id} article={article} />
+        return <ArticlePreview key={article.id} article={article} />
       })}
     </ul>
   )
