@@ -7,7 +7,7 @@ const AboutPage = () => {
   return (
     <>
       <MetaTags title="About" description="About page" />
-      <div className="flex flex-col gap-4">
+      <div className="grid grid-cols-2 grid-rows-3 gap-4 pb-4">
         <Person
           name="Adriana"
           quote="えーどりあな"

@@ -1,14 +1,21 @@
 import type { Post } from 'types/graphql'
 
-import { Link, routes } from '@redwoodjs/router'
+import { Link, navigate, routes } from '@redwoodjs/router'
 
 interface Props {
   article: Post
 }
 
 const Article = ({ article }: Props) => {
+  const onReadMore = (article: 'article') => {
+    navigate(routes.article({ id: article.id }))
+  }
+
   return (
-    <article className="mb-4 rounded border-2 border-black p-2">
+    <article
+      className="mb-4 rounded border-2 p-2 hover:cursor-pointer hover:border-black"
+      onClick={() => onReadMore(article)}
+    >
       <header className="mb-3">
         <h2 className="text-2xl">
           <Link to={routes.article({ id: article.id })}>{article.title}</Link>

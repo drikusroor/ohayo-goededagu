@@ -31,9 +31,7 @@ const BlogLayout = ({ children }: BlogLayoutProps) => {
         <h1 className="pt-3 text-3xl font-bold">
           Ohayou Goededagu | おはよ グデダギュ
         </h1>
-        <pre className="mt-3">
-          Japan 2023
-        </pre>
+        <pre className="mt-3">Japan 2023</pre>
         <nav>
           <ul className="mt-3 flex justify-center gap-5">
             <li>
@@ -49,7 +47,7 @@ const BlogLayout = ({ children }: BlogLayoutProps) => {
           </ul>
         </nav>
       </header>
-      <main className="mx-auto max-w-xl">{children}</main>
+      <main className="max-w-screen mx-auto p-4">{children}</main>
     </>
   )
 }
