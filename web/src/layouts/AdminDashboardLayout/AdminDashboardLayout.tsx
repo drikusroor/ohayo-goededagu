@@ -1,8 +1,33 @@
+import { useCallback } from 'react'
+
 import { Link, routes } from '@redwoodjs/router'
 import { useLocation } from '@redwoodjs/router'
 
 import { useAuth } from 'src/auth'
 import Button from 'src/components/Button/Button'
+
+interface MenuItem {
+  name: string
+  path: string
+  activeRoutePattern?: string
+}
+
+const menuItems: MenuItem[] = [
+  {
+    name: 'Home',
+    path: '/',
+  },
+  {
+    name: 'Posts',
+    path: '/admin/posts',
+    activeRoutePattern: '/posts',
+  },
+  {
+    name: 'Profiles',
+    path: '/profiles',
+    activeRoutePattern: '/profiles',
+  },
+]
 
 type AdminDashboardLayoutProps = {
   children?: React.ReactNode
@@ -13,9 +38,14 @@ const AdminDashboardLayout = ({ children }: AdminDashboardLayoutProps) => {
 
   const { pathname } = useLocation()
 
-  const getIsActiveClass = (path: string) => {
-    return pathname === path ? 'border-r-4 border-gray-700' : ''
-  }
+  const getIsActiveClass = useCallback(
+    (path: string) => {
+      if (!pathname) return ''
+
+      return pathname.includes(path) ? 'border-r-4 border-gray-700' : ''
+    },
+    [pathname]
+  )
 
   return (
     <div className="flex flex-row">
@@ -35,15 +65,17 @@ const AdminDashboardLayout = ({ children }: AdminDashboardLayoutProps) => {
           </div>
           <nav>
             <ul className="flex flex-col gap-1 py-2 md:my-4">
-              <Link className={`dashboard-item`} to="/">
-                Home
-              </Link>
-              <Link
-                className={`dashboard-item ${getIsActiveClass('/admin/posts')}`}
-                to="/admin/posts"
-              >
-                Posts
-              </Link>
+              {menuItems.map((item) => (
+                <Link
+                  key={item.name}
+                  className={`dashboard-item ${getIsActiveClass(
+                    item.activeRoutePattern
+                  )}`}
+                  to={item.path}
+                >
+                  {item.name}
+                </Link>
+              ))}
             </ul>
           </nav>
         </div>
