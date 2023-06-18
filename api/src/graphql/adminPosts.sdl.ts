@@ -10,8 +10,8 @@ export const schema = gql`
   }
 
   type Query {
-    adminPosts: [Post!]! @requireAuth(roles: ["admin"])
-    adminPost(id: Int!): Post @requireAuth(roles: ["admin"])
+    adminPosts: [Post!]! @requireAuth(roles: ["ADMIN"])
+    adminPost(id: Int!): Post @requireAuth(roles: ["ADMIN"])
   }
 
   input CreatePostInput {
@@ -27,9 +27,9 @@ export const schema = gql`
   }
 
   type Mutation {
-    createPost(input: CreatePostInput!): Post! @requireAuth(roles: ["admin"])
+    createPost(input: CreatePostInput!): Post! @requireAuth(roles: ["ADMIN"])
     updatePost(id: Int!, input: UpdatePostInput!): Post!
-      @requireAuth(roles: ["admin"])
-    deletePost(id: Int!): Post! @requireAuth(roles: ["admin"])
+      @requireAuth(roles: ["ADMIN"])
+    deletePost(id: Int!): Post! @requireAuth(roles: ["ADMIN"])
   }
 `

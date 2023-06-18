@@ -20,7 +20,7 @@ model User {
   resetToken          String?   // <─┤
   resetTokenExpiresAt DateTime? // <─┘
   posts               Post[]
-  roles               String @default("moderator")
+  roles               Role[]    @default([GUEST])
 }
 
 model Post {
@@ -31,4 +31,11 @@ model Post {
   user      User     @relation(fields: [userId], references: [id])
   userId    Int
   published Boolean  @default(false)
+}
+
+enum Role {
+  ADMIN
+  MODERATOR
+  USER
+  GUEST
 }
