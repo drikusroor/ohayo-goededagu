@@ -27,6 +27,12 @@ const Routes = () => {
             <Route path="/admin/posts/{id:Int}" page={PostPostPage} name="post" />
             <Route path="/admin/posts" page={PostPostsPage} name="posts" />
           </Set>
+          <Set wrap={ScaffoldLayout} title="Profile" titleTo="profileSelf" buttonLabel="New Profile" buttonTo="newProfile">
+            <Route path="/admin/profile/new" page={ProfileNewProfilePage} name="newProfile" />
+            <Route path="/admin/profile/self" page={ProfileProfileSelfPage} name="profileSelf" />
+            <Route path="/admin/profile/self/edit" page={ProfileEditProfilePage} name="editProfile" />
+            <Route path="/admin/profile/{id:Int}" page={ProfileProfilePage} name="profile" />
+          </Set>
         </Set>
       </Private>
       <Set wrap={BlogLayout}>

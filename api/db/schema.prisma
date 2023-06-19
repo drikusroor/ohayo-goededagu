@@ -21,6 +21,17 @@ model User {
   resetTokenExpiresAt DateTime? // <─┘
   posts               Post[]
   roles               Role[]    @default([GUEST])
+  profile             Profile?
+}
+
+model Profile {
+  id        Int     @id @default(autoincrement())
+  bio       String?
+  user      User    @relation(fields: [userId], references: [id])
+  userId    Int     @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  avatar    String?
 }
 
 model Post {
