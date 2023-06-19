@@ -83,13 +83,6 @@ const Profile = ({ profile }: Props) => {
           <Link to={routes.editProfile()} className="rw-button rw-button-blue">
             Edit
           </Link>
-          <button
-            type="button"
-            className="rw-button rw-button-red"
-            onClick={() => onDeleteClick(profile.id)}
-          >
-            Delete
-          </button>
         </nav>
       )}
     </>
