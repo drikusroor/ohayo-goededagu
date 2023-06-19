@@ -23,6 +23,11 @@ const menuItems: MenuItem[] = [
     activeRoutePattern: '/posts',
   },
   {
+    name: 'Account',
+    path: '/admin/account',
+    activeRoutePattern: '/account',
+  },
+  {
     name: 'Profile',
     path: '/admin/profile/self',
     activeRoutePattern: '/profile',
@@ -35,7 +40,6 @@ type AdminDashboardLayoutProps = {
 
 const AdminDashboardLayout = ({ children }: AdminDashboardLayoutProps) => {
   const { isAuthenticated, currentUser, logOut } = useAuth()
-
   const { pathname } = useLocation()
 
   const getIsActiveClass = useCallback(

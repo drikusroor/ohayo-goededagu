@@ -19,7 +19,7 @@ export const profile: QueryResolvers['profile'] = ({ id }) => {
 }
 
 export const profileSelf: QueryResolvers['profileSelf'] = () => {
-  return db.profile.findUnique({ where: { id: context.currentUser.id } })
+  return db.profile.findUnique({ where: { userId: context.currentUser.id } })
 }
 
 export const createProfile: MutationResolvers['createProfile'] = ({
