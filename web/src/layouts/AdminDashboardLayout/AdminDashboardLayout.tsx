@@ -23,9 +23,9 @@ const menuItems: MenuItem[] = [
     activeRoutePattern: '/posts',
   },
   {
-    name: 'Profiles',
-    path: '/profiles',
-    activeRoutePattern: '/profiles',
+    name: 'Profile',
+    path: '/admin/profile/self',
+    activeRoutePattern: '/profile',
   },
 ]
 

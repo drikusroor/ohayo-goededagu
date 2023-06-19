@@ -1,13 +1,14 @@
-import { Link, routes, navigate } from '@redwoodjs/router'
-import { useMutation } from '@redwoodjs/web'
-import { toast } from '@redwoodjs/web/toast'
-
-import { timeTag } from 'src/lib/formatters'
-
 import type {
   DeleteProfileMutationVariables,
   FindProfileById,
 } from 'types/graphql'
+
+import { Link, routes, navigate } from '@redwoodjs/router'
+import { useMutation } from '@redwoodjs/web'
+import { toast } from '@redwoodjs/web/toast'
+
+import { useAuth } from 'src/auth'
+import { timeTag } from 'src/lib/formatters'
 
 const DELETE_PROFILE_MUTATION = gql`
   mutation DeleteProfileMutation($id: Int!) {
@@ -22,6 +23,8 @@ interface Props {
 }
 
 const Profile = ({ profile }: Props) => {
+  const { currentUser } = useAuth()
+
   const [deleteProfile] = useMutation(DELETE_PROFILE_MUTATION, {
     onCompleted: () => {
       toast.success('Profile deleted')
@@ -75,21 +78,20 @@ const Profile = ({ profile }: Props) => {
           </tbody>
         </table>
       </div>
-      <nav className="rw-button-group">
-        <Link
-          to={routes.editProfile({ id: profile.id })}
-          className="rw-button rw-button-blue"
-        >
-          Edit
-        </Link>
-        <button
-          type="button"
-          className="rw-button rw-button-red"
-          onClick={() => onDeleteClick(profile.id)}
-        >
-          Delete
-        </button>
-      </nav>
+      {currentUser?.id === profile.userId && (
+        <nav className="rw-button-group">
+          <Link to={routes.editProfile()} className="rw-button rw-button-blue">
+            Edit
+          </Link>
+          <button
+            type="button"
+            className="rw-button rw-button-red"
+            onClick={() => onDeleteClick(profile.id)}
+          >
+            Delete
+          </button>
+        </nav>
+      )}
     </>
   )
 }

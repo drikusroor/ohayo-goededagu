@@ -1,4 +1,4 @@
-import type { EditProfileById, UpdateProfileInput } from 'types/graphql'
+import type { FindProfileSelf, UpdateProfileInput } from 'types/graphql'
 
 import { navigate, routes } from '@redwoodjs/router'
 import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
@@ -8,11 +8,10 @@ import { toast } from '@redwoodjs/web/toast'
 import ProfileForm from 'src/components/Profile/ProfileForm'
 
 export const QUERY = gql`
-  query EditProfileById($id: Int!) {
-    profile: profile(id: $id) {
+  query FindProfileSelf {
+    profileSelf {
       id
       bio
-      userId
       createdAt
       updatedAt
       avatar
@@ -20,11 +19,10 @@ export const QUERY = gql`
   }
 `
 const UPDATE_PROFILE_MUTATION = gql`
-  mutation UpdateProfileMutation($id: Int!, $input: UpdateProfileInput!) {
-    updateProfile(id: $id, input: $input) {
+  mutation UpdateProfileMutation($input: UpdateProfileInput!) {
+    updateProfile(input: $input) {
       id
       bio
-      userId
       createdAt
       updatedAt
       avatar
@@ -38,13 +36,13 @@ export const Failure = ({ error }: CellFailureProps) => (
   <div className="rw-cell-error">{error?.message}</div>
 )
 
-export const Success = ({ profile }: CellSuccessProps<EditProfileById>) => {
+export const Success = ({ profileSelf }: CellSuccessProps<FindProfileSelf>) => {
   const [updateProfile, { loading, error }] = useMutation(
     UPDATE_PROFILE_MUTATION,
     {
       onCompleted: () => {
         toast.success('Profile updated')
-        navigate(routes.profiles())
+        navigate(routes.profileSelf())
       },
       onError: (error) => {
         toast.error(error.message)
@@ -52,23 +50,20 @@ export const Success = ({ profile }: CellSuccessProps<EditProfileById>) => {
     }
   )
 
-  const onSave = (
-    input: UpdateProfileInput,
-    id: EditProfileById['profile']['id']
-  ) => {
-    updateProfile({ variables: { id, input } })
+  const onSave = (input: UpdateProfileInput) => {
+    updateProfile({ variables: { input } })
   }
 
   return (
     <div className="rw-segment">
       <header className="rw-segment-header">
         <h2 className="rw-heading rw-heading-secondary">
-          Edit Profile {profile?.id}
+          Edit Profile {profileSelf?.id}
         </h2>
       </header>
       <div className="rw-segment-main">
         <ProfileForm
-          profile={profile}
+          profile={profileSelf}
           onSave={onSave}
           error={error}
           loading={loading}

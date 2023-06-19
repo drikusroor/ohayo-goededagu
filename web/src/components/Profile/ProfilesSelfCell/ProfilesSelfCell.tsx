@@ -1,13 +1,13 @@
-import type { FindProfiles } from 'types/graphql'
+import type { FindProfileSelf } from 'types/graphql'
 
 import { Link, routes } from '@redwoodjs/router'
 import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
 
-import Profiles from 'src/components/Profile/Profiles'
+import Profile from 'src/components/Profile/Profile'
 
 export const QUERY = gql`
-  query FindProfiles {
-    profiles {
+  query FindProfileSelf {
+    profile: profileSelf {
       id
       bio
       userId
@@ -35,6 +35,6 @@ export const Failure = ({ error }: CellFailureProps) => (
   <div className="rw-cell-error">{error?.message}</div>
 )
 
-export const Success = ({ profiles }: CellSuccessProps<FindProfiles>) => {
-  return <Profiles profiles={profiles} />
+export const Success = ({ profile }: CellSuccessProps<FindProfileSelf>) => {
+  return <Profile profile={profile} />
 }
