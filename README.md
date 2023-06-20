@@ -7,8 +7,16 @@ Collectieve reisblog voor de reis van 2023 naar Japan.
 
 [ohayo-goededagu.netlify.app](https://ohayo-goededagu.netlify.app/)
 
-## RedwoodJS
-Welcome to [RedwoodJS](https://redwoodjs.com)!
+## Setup development environment
+
+To setup a local development environment, you need the following applications:
+* Node.js
+* Yarn
+* Docker
+
+### RedwoodJS
+
+This project uses the opiniated application framework [RedwoodJS](https://redwoodjs.com)!
 
 > **Prerequisites**
 >
@@ -40,7 +48,8 @@ Your browser should automatically open to http://localhost:8910 where you'll see
 > ```
 > For all the details, see the [CLI reference](https://redwoodjs.com/docs/cli-commands).
 
-## Prisma and the database
+### Prisma and the database
+
 Redwood wouldn't be a full-stack framework without a database. It all starts with the schema. Open the [`schema.prisma`](api/db/schema.prisma) file in `api/db` and replace the `UserExample` model with the following `Post` model:
 
 ```
@@ -76,7 +85,30 @@ Navigate to http://localhost:8910/posts/new, fill in the title and body, and cli
 
 Did we just create a post in the database? Yup! With `yarn rw g scaffold <model>`, Redwood created all the pages, components, and services necessary to perform all CRUD actions on our posts table.
 
-## Frontend first with Storybook
+### Setup a local Postgresql database using Docker
+
+First, make sure Docker is installed. Then, in your terminal, type:
+
+```sh
+docker compose up -d
+```
+
+Then, in your `.env` file, set your database url to the following value to connect to the local database:
+
+```sh
+DATABASE_URL=postgresql://postgres:mysecretpassword@localhost:5432/postgres
+```
+
+Lastly, you need to apply the latest migrations to have all the tables you need to get started.
+
+```sh
+yarn rw prisma migrate dev
+```
+
+And remember, this new DB doesn't yet have any account or other data so you first need to make a new account and publish some posts if you want to see anything. Perhaps we can think about some nice seeding data to pre-populate new databases on local development environments.
+
+### Frontend first with Storybook
+
 Don't know what your data models look like?
 That's more than ok—Redwood integrates Storybook so that you can work on design without worrying about data.
 Mockup, build, and verify your React components, even in complete isolation from the backend:
@@ -91,7 +123,8 @@ Before you start, see if the CLI's `setup ui` command has your favorite styling 
 yarn rw setup ui --help
 ```
 
-## Testing with Jest
+### Testing with Jest
+
 It'd be hard to scale from side project to startup without a few tests.
 Redwood fully integrates Jest with the front and the backends and makes it easy to keep your whole app covered by generating test files with all your components and services:
 
@@ -101,7 +134,8 @@ yarn rw test
 
 To make the integration even more seamless, Redwood augments Jest with database [scenarios](https://redwoodjs.com/docs/testing.md#scenarios)  and [GraphQL mocking](https://redwoodjs.com/docs/testing.md#mocking-graphql-calls).
 
-## Ship it
+### Ship it
+
 Redwood is designed for both serverless deploy targets like Netlify and Vercel and serverful deploy targets like Render and AWS:
 
 ```
@@ -115,18 +149,22 @@ Lock down your front and backends with Redwood's built-in, database-backed authe
 yarn rw setup auth --help
 ```
 
-## Next Steps
+### Next Steps
+
 The best way to learn Redwood is by going through the comprehensive [tutorial](https://redwoodjs.com/docs/tutorial/foreword) and joining the community (via the [Discourse forum](https://community.redwoodjs.com) or the [Discord server](https://discord.gg/redwoodjs)).
 
-## Quick Links
+### Quick Links
+
 - Stay updated: read [Forum announcements](https://community.redwoodjs.com/c/announcements/5), follow us on [Twitter](https://twitter.com/redwoodjs), and subscribe to the [newsletter](https://redwoodjs.com/newsletter)
 - [Learn how to contribute](https://redwoodjs.com/docs/contributing)
 
 ## Contributors
+
 - Ainab
 - Naomi
 - Gakkenyak
 - Adriana
 
 ## Lurker
+
 - Emiel
