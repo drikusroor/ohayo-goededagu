@@ -18,7 +18,8 @@ import BlogLayout from './layouts/BlogLayout/BlogLayout'
 const Routes = () => {
   const { currentUser } = useAuth()
 
-  const adminRedirect = currentUser?.roles.includes('ADMIN') ? '/admin/posts' : '/admin/profile/self'
+  const requiredRolesAdminPosts = ['ADMIN', 'MODERATOR']
+  const adminRedirect = currentUser?.roles.some((role) => requiredRolesAdminPosts.includes(role)) ? '/admin/posts' : '/admin/profile/self'
 
   return (
     <Router useAuth={useAuth}>
