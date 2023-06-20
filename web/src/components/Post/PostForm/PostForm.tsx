@@ -61,20 +61,6 @@ const PostForm = (props: PostFormProps) => {
           Body
         </Label>
 
-        <Label
-          name="published"
-          className="rw-label"
-          errorClassName="rw-label rw-label-error"
-        >
-          Published
-        </Label>
-        <CheckboxField
-          name="published"
-          defaultChecked={props.post?.published}
-          className="rw-input"
-          errorClassName="rw-input rw-input-error"
-        />
-
         <TextField
           name="body"
           defaultValue={props.post?.body}
@@ -84,6 +70,21 @@ const PostForm = (props: PostFormProps) => {
         />
 
         <FieldError name="body" className="rw-field-error" />
+
+        <Label
+          name="published"
+          className="rw-label"
+          errorClassName="rw-label rw-label-error"
+        >
+          Published
+        </Label>
+
+        <CheckboxField
+          name="published"
+          defaultChecked={props.post?.published}
+          className="rw-input"
+          errorClassName="rw-input rw-input-error"
+        />
 
         <div className="rw-button-group">
           <Submit disabled={props.loading} className="rw-button rw-button-blue">
