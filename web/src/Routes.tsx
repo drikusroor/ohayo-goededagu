@@ -38,6 +38,10 @@ const Routes = () => {
             <Route path="/admin/profile/self/edit" page={ProfileEditProfilePage} name="editProfile" />
             <Route path="/admin/profile/{id:Int}" page={ProfileProfilePage} name="profile" />
           </Set>
+          <Set wrap={ScaffoldLayout} title="Account" titleTo="account">
+            <Route path="/admin/account/edit" page={AccountEditAccountPage} name="editAccount" />
+            <Route path="/admin/account" page={AccountAccountPage} name="account" />
+          </Set>
         </Set>
       </Private>
       <Set wrap={BlogLayout}>
@@ -47,7 +51,6 @@ const Routes = () => {
         <Route path="/signup" page={SignupPage} name="signup" />
         <Route path="/forgot-password" page={ForgotPasswordPage} name="forgotPassword" />
         <Route path="/reset-password" page={ResetPasswordPage} name="resetPassword" />
-        <Route path="/account" page={AccountPage} name="account" />
         <Route path="/about" page={AboutPage} name="about" />
       </Set>
       <Route notfound page={NotFoundPage} />
