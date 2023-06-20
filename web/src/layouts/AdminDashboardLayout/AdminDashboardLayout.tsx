@@ -30,11 +30,6 @@ const menuItems: MenuItem[] = [
     activeRoutePattern: '/account',
   },
   {
-    name: 'Account',
-    path: '/admin/account',
-    activeRoutePattern: '/account',
-  },
-  {
     name: 'Profile',
     path: '/admin/profile/self',
     activeRoutePattern: '/profile',
