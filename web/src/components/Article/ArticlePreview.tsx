@@ -4,6 +4,14 @@ import type { Post } from 'types/graphql'
 
 import { Link, navigate, routes } from '@redwoodjs/router'
 
+enum EPostType {
+  ARTICLE = 'ARTICLE',
+  VIDEO = 'VIDEO',
+  HAIKU = 'HAIKU',
+  CHOTTO = 'CHOTTO',
+  PHOTO_GALLERY = 'PHOTO_GALLERY',
+}
+
 interface Props {
   article: Post
 }
@@ -15,13 +23,15 @@ const ArticlePreview = ({ article }: Props) => {
 
   const getPostTypeImage = useCallback((type: Post['type']) => {
     switch (type) {
-      case 'ARTICLE':
+      case EPostType.ARTICLE:
         return '/images/post-types/article.png'
-      case 'VIDEO':
+      case EPostType.VIDEO:
         return '/images/post-types/video.png'
-      case 'HAIKU':
+      case EPostType.HAIKU:
         return '/images/post-types/haiku.png'
-      case 'CHOTTO':
+      case EPostType.PHOTO_GALLERY:
+        return '/images/post-types/photo-gallery.png'
+      case EPostType.CHOTTO:
         return '/images/post-types/chotto.png'
       default:
         return '/images/post-types/unknown.png'
