@@ -7,6 +7,7 @@ export const schema = gql`
     updatedAt: DateTime!
     user: User!
     published: Boolean!
+    type: String!
   }
 
   type Query {
