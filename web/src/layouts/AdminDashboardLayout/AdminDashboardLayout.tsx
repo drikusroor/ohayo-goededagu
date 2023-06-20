@@ -10,6 +10,7 @@ interface MenuItem {
   name: string
   path: string
   activeRoutePattern?: string
+  roles?: string[]
 }
 
 const menuItems: MenuItem[] = [
@@ -21,6 +22,12 @@ const menuItems: MenuItem[] = [
     name: 'Posts',
     path: '/admin/posts',
     activeRoutePattern: '/posts',
+    roles: ['ADMIN', 'MODERATOR'],
+  },
+  {
+    name: 'Account',
+    path: '/admin/account',
+    activeRoutePattern: '/account',
   },
   {
     name: 'Profile',
@@ -35,7 +42,6 @@ type AdminDashboardLayoutProps = {
 
 const AdminDashboardLayout = ({ children }: AdminDashboardLayoutProps) => {
   const { isAuthenticated, currentUser, logOut } = useAuth()
-
   const { pathname } = useLocation()
 
   const getIsActiveClass = useCallback(
@@ -65,17 +71,27 @@ const AdminDashboardLayout = ({ children }: AdminDashboardLayoutProps) => {
           </div>
           <nav>
             <ul className="flex flex-col gap-1 py-2 md:my-4">
-              {menuItems.map((item) => (
-                <Link
-                  key={item.name}
-                  className={`dashboard-item ${getIsActiveClass(
-                    item.activeRoutePattern
-                  )}`}
-                  to={item.path}
-                >
-                  {item.name}
-                </Link>
-              ))}
+              {menuItems.map((item) => {
+                const isAllowed =
+                  !item.roles ||
+                  currentUser?.roles?.some((r) =>
+                    item.roles.includes(r as string)
+                  )
+
+                if (!isAllowed) return null
+
+                return (
+                  <Link
+                    key={item.name}
+                    className={`dashboard-item ${getIsActiveClass(
+                      item.activeRoutePattern
+                    )}`}
+                    to={item.path}
+                  >
+                    {item.name}
+                  </Link>
+                )
+              })}
             </ul>
           </nav>
         </div>

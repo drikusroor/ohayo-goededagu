@@ -16,11 +16,15 @@ import AdminDashboardLayout from './layouts/AdminDashboardLayout/AdminDashboardL
 import BlogLayout from './layouts/BlogLayout/BlogLayout'
 
 const Routes = () => {
+  const { currentUser } = useAuth()
+
+  const adminRedirect = currentUser?.roles.includes('ADMIN') ? '/admin/posts' : '/admin/profile/self'
+
   return (
     <Router useAuth={useAuth}>
       <Private unauthenticated="login">
         <Set wrap={AdminDashboardLayout}>
-          <Route path="/admin" page={() => <Redirect to="/admin/posts" />} name="admin" />
+          <Route path="/admin" page={() => <Redirect to={adminRedirect} />} name="admin" />
           <Set wrap={ScaffoldLayout} title="Posts" titleTo="posts" buttonLabel="New Post" buttonTo="newPost">
             <Route path="/admin/posts/new" page={PostNewPostPage} name="newPost" />
             <Route path="/admin/posts/{id:Int}/edit" page={PostEditPostPage} name="editPost" />
