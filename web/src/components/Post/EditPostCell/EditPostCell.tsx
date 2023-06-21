@@ -15,6 +15,7 @@ export const QUERY = gql`
       body
       createdAt
       published
+      video
     }
   }
 `
@@ -26,6 +27,7 @@ const UPDATE_POST_MUTATION = gql`
       body
       createdAt
       published
+      video
     }
   }
 `
@@ -48,9 +50,10 @@ export const Success = ({ post }: CellSuccessProps<EditPostById>) => {
   })
 
   const onSave = (input: UpdatePostInput, id: EditPostById['post']['id']) => {
+    console.log('edit, onsave', input)
     updatePost({ variables: { id, input } })
   }
-
+  console.log('post', post)
   return (
     <div className="rw-segment">
       <header className="rw-segment-header">

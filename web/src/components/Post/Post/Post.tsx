@@ -35,6 +35,7 @@ const Post = ({ post }: Props) => {
       deletePost({ variables: { id } })
     }
   }
+  console.log('post', post)
 
   return (
     <>
@@ -57,6 +58,10 @@ const Post = ({ post }: Props) => {
             <tr>
               <th>Body</th>
               <td>{post.body}</td>
+            </tr>
+            <tr>
+              <th>Video</th>
+              <td>{post.video}</td>
             </tr>
             <tr>
               <th>Published</th>

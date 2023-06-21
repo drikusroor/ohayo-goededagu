@@ -36,6 +36,7 @@ const PostsList = ({ posts }: FindPosts) => {
       deletePost({ variables: { id } })
     }
   }
+  console.log('posts', posts)
 
   return (
     <div className="rw-segment rw-table-wrapper-responsive">
@@ -45,6 +46,7 @@ const PostsList = ({ posts }: FindPosts) => {
             <th>Id</th>
             <th>Title</th>
             <th>Body</th>
+            <th>Video</th>
             <th>Published</th>
             <th>Created at</th>
             <th>&nbsp;</th>
@@ -56,6 +58,7 @@ const PostsList = ({ posts }: FindPosts) => {
               <td>{truncate(post.id)}</td>
               <td>{truncate(post.title)}</td>
               <td>{truncate(post.body)}</td>
+              <td>{post.video ? 'Yes' : 'No'}</td>
               <td>{post.published ? 'Yes' : 'No'}</td>
               <td>{timeTag(post.createdAt)}</td>
               <td>

@@ -14,6 +14,7 @@ const Article = ({ article }: Props) => {
     hour: 'numeric',
     minute: 'numeric',
   })
+  console.log('article', article)
 
   return (
     <article className="mb-4 p-2">
@@ -33,6 +34,20 @@ const Article = ({ article }: Props) => {
         </div>
       </header>
       <div>{article.body}</div>
+      video: {article.video} <br />
+      {article.video ? (
+        <iframe
+          width="560"
+          height="315"
+          src={article.video}
+          title="YouTube video player"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowFullScreen
+        ></iframe>
+      ) : (
+        <span>no video</span>
+        // <></>
+      )}
     </article>
   )
 }

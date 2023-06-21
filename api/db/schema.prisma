@@ -1,6 +1,6 @@
 datasource db {
   provider = "postgresql"
-  url = env("DATABASE_URL")
+  url      = env("DATABASE_URL")
 }
 
 generator client {
@@ -12,12 +12,12 @@ generator client {
 // to create migrations for them and apply to your dev DB.
 // TODO: Please remove the following example:
 model User {
-  id             Int @id @default(autoincrement())
-  email          String  @unique
+  id                  Int       @id @default(autoincrement())
+  email               String    @unique
   name                String?
-  hashedPassword      String    // <─┐
-  salt                String    // <─┼─ add these lines
-  resetToken          String?   // <─┤
+  hashedPassword      String // <─┐
+  salt                String // <─┼─ add these lines
+  resetToken          String? // <─┤
   resetTokenExpiresAt DateTime? // <─┘
   posts               Post[]
   roles               Role[]    @default([GUEST])
@@ -25,10 +25,10 @@ model User {
 }
 
 model Profile {
-  id        Int     @id @default(autoincrement())
+  id        Int      @id @default(autoincrement())
   bio       String?
-  user      User    @relation(fields: [userId], references: [id])
-  userId    Int     @unique
+  user      User     @relation(fields: [userId], references: [id])
+  userId    Int      @unique
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   avatar    String?
@@ -42,6 +42,7 @@ model Post {
   user      User     @relation(fields: [userId], references: [id])
   userId    Int
   published Boolean  @default(false)
+  video     String?
 }
 
 enum Role {

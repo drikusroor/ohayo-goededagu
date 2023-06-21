@@ -33,6 +33,20 @@ const ArticlePreview = ({ article }: Props) => {
           </span>
         </div>
       </header>
+      video: {article.video}
+      {article.video ? (
+        <iframe
+          width="560"
+          height="315"
+          src={article.video}
+          title="YouTube video player"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowFullScreen
+        ></iframe>
+      ) : (
+        <span>no video</span>
+        // <></>
+      )}
       <div>{article.body}</div>
     </article>
   )

@@ -22,8 +22,10 @@ interface PostFormProps {
 
 const PostForm = (props: PostFormProps) => {
   const onSubmit = (data: FormPost) => {
+    console.log('submit, data:', data)
     props.onSave(data, props?.post?.id)
   }
+  console.log('postform, post', props.post)
 
   return (
     <div className="rw-form-wrapper">
@@ -42,7 +44,6 @@ const PostForm = (props: PostFormProps) => {
         >
           Title
         </Label>
-
         <TextField
           name="title"
           defaultValue={props.post?.title}
@@ -50,7 +51,6 @@ const PostForm = (props: PostFormProps) => {
           errorClassName="rw-input rw-input-error"
           validation={{ required: true }}
         />
-
         <FieldError name="title" className="rw-field-error" />
 
         <Label
@@ -60,6 +60,30 @@ const PostForm = (props: PostFormProps) => {
         >
           Body
         </Label>
+        <TextField
+          name="body"
+          defaultValue={props.post?.body}
+          className="rw-input"
+          errorClassName="rw-input rw-input-error"
+          validation={{ required: true }}
+        />
+        <FieldError name="body" className="rw-field-error" />
+
+        <Label
+          name="video"
+          className="rw-label"
+          errorClassName="rw-label rw-label-error"
+        >
+          Video
+        </Label>
+        <TextField
+          name="video"
+          defaultValue={props.post?.video}
+          className="rw-input"
+          errorClassName="rw-input rw-input-error"
+          validation={{ required: false }}
+        />
+        <FieldError name="video" className="rw-field-error" />
 
         <Label
           name="published"
@@ -74,16 +98,6 @@ const PostForm = (props: PostFormProps) => {
           className="rw-input"
           errorClassName="rw-input rw-input-error"
         />
-
-        <TextField
-          name="body"
-          defaultValue={props.post?.body}
-          className="rw-input"
-          errorClassName="rw-input rw-input-error"
-          validation={{ required: true }}
-        />
-
-        <FieldError name="body" className="rw-field-error" />
 
         <div className="rw-button-group">
           <Submit disabled={props.loading} className="rw-button rw-button-blue">
