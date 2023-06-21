@@ -1,0 +1,5 @@
+-- CreateEnum
+CREATE TYPE "PostType" AS ENUM ('ARTICLE', 'VIDEO', 'CHOTTO', 'HAIKU', 'PHOTO_GALLERY');
+
+-- AlterTable
+ALTER TABLE "Post" ADD COLUMN     "type" "PostType" NOT NULL DEFAULT 'ARTICLE';

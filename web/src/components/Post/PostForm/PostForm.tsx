@@ -22,10 +22,8 @@ interface PostFormProps {
 
 const PostForm = (props: PostFormProps) => {
   const onSubmit = (data: FormPost) => {
-    console.log('submit, data:', data)
     props.onSave(data, props?.post?.id)
   }
-  console.log('postform, post', props.post)
 
   return (
     <div className="rw-form-wrapper">

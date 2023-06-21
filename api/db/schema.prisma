@@ -43,6 +43,7 @@ model Post {
   userId    Int
   published Boolean  @default(false)
   video     String?
+  type      PostType @default(ARTICLE)
 }
 
 enum Role {
@@ -50,4 +51,12 @@ enum Role {
   MODERATOR
   USER
   GUEST
+}
+
+enum PostType {
+  ARTICLE
+  VIDEO
+  CHOTTO
+  HAIKU
+  PHOTO_GALLERY
 }

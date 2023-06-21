@@ -8,6 +8,7 @@ export const schema = gql`
     user: User!
     published: Boolean!
     video: String!
+    type: String!
   }
 
   type Query {
