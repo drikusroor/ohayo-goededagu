@@ -39,7 +39,7 @@ export default ({ comment }: ICommentProps) => {
           </span>
         </div>
       </div>
-      <div className="mt-4 text-sm leading-relaxed text-slate-600">
+      <div className="ml-14 mt-4 text-sm leading-relaxed text-slate-600">
         {comment.body}
       </div>
     </div>
