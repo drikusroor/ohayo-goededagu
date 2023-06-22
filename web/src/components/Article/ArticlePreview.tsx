@@ -4,6 +4,8 @@ import type { Post } from 'types/graphql'
 
 import { Link, navigate, routes } from '@redwoodjs/router'
 
+import Avatar from '../Avatar/Avatar'
+
 enum EPostType {
   ARTICLE = 'ARTICLE',
   VIDEO = 'VIDEO',
@@ -46,30 +48,38 @@ const ArticlePreview = ({ article }: Props) => {
     <article
       className="mb-4 rounded border-2 p-2 hover:cursor-pointer hover:border-black"
       onClick={() => onReadMore(article)}
+      tabIndex={0}
     >
       <header className="mb-3">
-        <h2 className="text-2xl">
-          <Link to={routes.article({ id: article.id })}>{article.title}</Link>
-        </h2>
-        <div className="flex items-center gap-2">
-          <img
-            src={getPostTypeImage(article.type)}
-            alt={getFirstChar(article.type)}
-            width="32"
-            height="32"
-            className="flex h-8 w-8 items-center justify-center rounded-full bg-slate-300 text-slate-900"
-            title={article.type}
+        <div className="flex flex-row items-center gap-4">
+          <Avatar
+            src={article.user?.profile?.avatar}
+            alt={article.user.name}
+            name={article.user.name || article.user.email}
           />
-          <span className=" text-sm text-slate-500">
-            Posted at: {new Date(article.createdAt).toLocaleString()}
-          </span>
-          <span className=" text-sm text-gray-400">
-            {article.user.name
-              ? `by ${article.user.name}`
-              : article.user.email
-              ? article.user.email
-              : 'by Anonymous'}
-          </span>
+          <h2 className="text-2xl">
+            <Link to={routes.article({ id: article.id })}>{article.title}</Link>
+          </h2>
+        </div>
+        <div className="flex flex-row items-center gap-4">
+          <Avatar
+            src={article.user?.profile?.avatar}
+            alt={article.user.name}
+            name={article.user.name || article.user.email}
+          />
+
+          <div>
+            <span className="text-base font-semibold text-slate-700">
+              {article.user.name
+                ? article.user.name
+                : article.user.email
+                ? article.user.email
+                : 'Anonymous'}
+            </span>
+            <span className="ml-2 text-sm text-slate-500">
+              | {new Date(article.createdAt).toLocaleString('nl-NL')}
+            </span>
+          </div>
         </div>
       </header>
       <div>{article.body}</div>
