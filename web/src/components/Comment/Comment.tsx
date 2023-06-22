@@ -6,7 +6,7 @@ interface ICommentProps {
 
 export default ({ comment }: ICommentProps) => {
   return (
-    <div className="rounded-lg bg-slate-100 p-4 shadow-md transition-shadow duration-200 hover:shadow-lg">
+    <div className="rounded-lg bg-slate-100 p-4 ">
       <div className="flex flex-row items-center gap-4">
         {comment.user.profile?.avatar ? (
           <img
