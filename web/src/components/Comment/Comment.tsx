@@ -6,40 +6,42 @@ interface ICommentProps {
 
 export default ({ comment }: ICommentProps) => {
   return (
-    <div className="bg-slate-100 p-2">
-      <div className="flex flex-row items-center gap-2">
+    <div className="rounded-lg bg-slate-100 p-4 shadow-md transition-shadow duration-200 hover:shadow-lg">
+      <div className="flex flex-row items-center gap-4">
         {comment.user.profile?.avatar ? (
           <img
             src={comment.user.profile?.avatar}
             alt="Avatar"
-            className="h-8 w-8 rounded-full"
-            width={32}
-            height={32}
+            className="h-10 w-10 rounded-full object-cover shadow"
+            width={40}
+            height={40}
           />
         ) : (
-          <div className="h-8 w-8 rounded-full bg-gray-200">
-            <span className="text-slate-500">
-              {comment.user.name
-                ? comment.user.name[0]
-                : comment.user.email
-                ? comment.user.email[0]
-                : 'A'}
-            </span>
+          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-200 text-lg font-semibold text-slate-500">
+            {comment.user.name
+              ? comment.user.name[0]
+              : comment.user.email
+              ? comment.user.email[0]
+              : 'A'}
           </div>
         )}
 
-        <span className="text-sm text-slate-500">
-          {comment.user.name
-            ? comment.user.name
-            : comment.user.email
-            ? comment.user.email
-            : 'Anonymous'}
-        </span>
-        <span className="text-sm text-slate-500">
-          | {new Date(comment.createdAt).toLocaleString('nl-NL')}
-        </span>
+        <div>
+          <span className="text-base font-semibold text-slate-700">
+            {comment.user.name
+              ? comment.user.name
+              : comment.user.email
+              ? comment.user.email
+              : 'Anonymous'}
+          </span>
+          <span className="ml-2 text-sm text-slate-500">
+            | {new Date(comment.createdAt).toLocaleString('nl-NL')}
+          </span>
+        </div>
       </div>
-      <div className="ml-10 mt-2">{comment.body}</div>
+      <div className="mt-4 text-sm leading-relaxed text-slate-600">
+        {comment.body}
+      </div>
     </div>
   )
 }
