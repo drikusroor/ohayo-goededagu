@@ -37,6 +37,11 @@ interface Props {
 const CommentForm = ({ postId }: Props) => {
   const { currentUser } = useAuth()
 
+  const allowedRoles = ['ADMIN', 'MODERATOR', 'USER']
+  const isAllowedToComment =
+    currentUser?.id &&
+    currentUser?.roles.some((role) => allowedRoles.includes(role))
+
   const [body, setBody] = useState('')
   const [createComment, { loading, error }] = useMutation(CREATE_COMMENT, {
     onCompleted: () => {
@@ -50,6 +55,20 @@ const CommentForm = ({ postId }: Props) => {
 
   const onSubmit: SubmitHandler<FormValues> = (input) => {
     createComment({ variables: { input: { postId, ...input } } })
+  }
+
+  if (!isAllowedToComment) {
+    return (
+      <div className="max-w-xl">
+        <h3 className="text-lg font-light text-gray-600">Leave a Comment</h3>
+        <div className="mt-4">
+          <p className="text-sm text-gray-600">
+            You don&apos;t have permission to comment. Please contact the site
+            admin.
+          </p>
+        </div>
+      </div>
+    )
   }
 
   return (

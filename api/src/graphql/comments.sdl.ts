@@ -31,8 +31,11 @@ export const schema = gql`
   }
 
   type Mutation {
-    createComment(input: CreateCommentInput!): Comment! @requireAuth
-    updateComment(id: Int!, input: UpdateCommentInput!): Comment! @requireAuth
-    deleteComment(id: Int!): Comment! @requireAuth
+    createComment(input: CreateCommentInput!): Comment!
+      @requireAuth(roles: ["ADMIN", "MODERATOR", "USER"])
+    updateComment(id: Int!, input: UpdateCommentInput!): Comment!
+      @requireAuth(roles: ["ADMIN", "MODERATOR", "USER"])
+    deleteComment(id: Int!): Comment!
+      @requireAuth(roles: ["ADMIN", "MODERATOR", "USER"])
   }
 `
