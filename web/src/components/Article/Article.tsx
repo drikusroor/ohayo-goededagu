@@ -2,6 +2,7 @@ import type { Post } from 'types/graphql'
 
 import { Link, routes } from '@redwoodjs/router'
 
+import Comment from '../Comment/Comment'
 import CommentForm from '../CommentForm/CommentForm'
 
 interface Props {
@@ -39,19 +40,7 @@ const Article = ({ article }: Props) => {
       <ul className="mt-4">
         {article.comments.map((comment) => (
           <li key={comment.id} className="mb-4">
-            <div className="flex flex-row items-end gap-2">
-              <span className="text-sm text-slate-500">
-                {comment.user.name
-                  ? comment.user.name
-                  : comment.user.email
-                  ? comment.user.email
-                  : 'Anonymous'}
-              </span>
-              <span className="text-sm text-slate-500">
-                | {new Date(comment.createdAt).toLocaleString('nl-NL')}
-              </span>
-            </div>
-            <div className="mt-2">{comment.body}</div>
+            <Comment comment={comment} />
           </li>
         ))}
       </ul>

@@ -20,6 +20,7 @@ export const QUERY = gql`
         createdAt
         user {
           name
+          email
         }
       }
     }
