@@ -14,6 +14,9 @@ export const QUERY = gql`
       createdAt
       user {
         name
+        profile {
+          avatar
+        }
       }
       type
     }

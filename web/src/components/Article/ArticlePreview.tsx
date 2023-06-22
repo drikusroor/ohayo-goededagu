@@ -57,32 +57,36 @@ const ArticlePreview = ({ article }: Props) => {
             alt={article.user.name}
             name={article.user.name || article.user.email}
           />
-          <h2 className="text-2xl">
-            <Link to={routes.article({ id: article.id })}>{article.title}</Link>
-          </h2>
-        </div>
-        <div className="flex flex-row items-center gap-4">
-          <Avatar
-            src={article.user?.profile?.avatar}
-            alt={article.user.name}
-            name={article.user.name || article.user.email}
-          />
-
           <div>
-            <span className="text-base font-semibold text-slate-700">
+            <span
+              className="text-sm text-slate-500"
+              title={article.user.name || article.user.email}
+            >
               {article.user.name
                 ? article.user.name
                 : article.user.email
                 ? article.user.email
                 : 'Anonymous'}
             </span>
-            <span className="ml-2 text-sm text-slate-500">
+            <span
+              className="ml-2 text-sm text-slate-500"
+              title={new Date(article.createdAt).toLocaleString('nl-NL')}
+            >
               | {new Date(article.createdAt).toLocaleString('nl-NL')}
             </span>
           </div>
         </div>
+        <div className="mt-4 flex flex-row items-center gap-4">
+          <Avatar alt={article.type[0]} name={article.type} />
+          <h2
+            className="text-2xl font-semibold text-slate-700"
+            title={article.title}
+          >
+            <Link to={routes.article({ id: article.id })}>{article.title}</Link>
+          </h2>
+        </div>
       </header>
-      <div>{article.body}</div>
+      <div className="ml-14">{article.body}</div>
     </article>
   )
 }
