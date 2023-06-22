@@ -37,7 +37,7 @@ const Article = ({ article }: Props) => {
       </header>
       <div>{article.body}</div>
       <h3 className="mt-4 text-lg font-light text-gray-600">Comments</h3>
-      <ul className="mt-4">
+      <ul className="mt-4 max-w-xl">
         {article.comments.map((comment) => (
           <li key={comment.id} className="mb-4">
             <Comment comment={comment} />
