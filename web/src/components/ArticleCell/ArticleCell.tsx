@@ -14,6 +14,14 @@ export const QUERY = gql`
       user {
         name
       }
+      comments {
+        id
+        body
+        createdAt
+        user {
+          name
+        }
+      }
     }
   }
 `

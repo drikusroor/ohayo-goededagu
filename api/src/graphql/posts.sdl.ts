@@ -8,6 +8,7 @@ export const schema = gql`
     user: User!
     published: Boolean!
     type: String!
+    comments: [Comment]!
   }
 
   type Query {
