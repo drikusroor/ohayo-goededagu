@@ -16,29 +16,34 @@ export const comment: QueryResolvers['comment'] = ({ id }) => {
   })
 }
 
-export const createComment: MutationResolvers['createComment'] = ({
+export const createComment: MutationResolvers['createComment'] = async ({
   input,
 }) => {
+  console.log('createComment input: ', input)
+
   if (!input.postId) {
-    throw new Error('Post ID is required')
+    throw new Error('Post ID is required for Comment')
   }
 
-  const parentComment = db.comment.findUnique({ where: { id: input.parentId } })
+  if (input.parentId) {
+    const parentComment = await db.comment.findUnique({
+      where: { id: input.parentId },
+    })
 
-  // check if post id is the same as parent post id
-  if (parentComment && parentComment.postId !== input.postId) {
-    throw new Error('Post ID does not match parent post ID')
-  }
+    // check if post id is the same as parent post id
+    if (parentComment && parentComment.postId !== input.postId) {
+      throw new Error('Post ID does not match parent post ID')
+    }
 
-  // if parent already has a parent, throw error
-  if (parentComment && parentComment.parentId) {
-    throw new Error('Parent comment cannot have a parent')
+    // if parent already has a parent, throw error
+    if (parentComment && parentComment.parentId) {
+      throw new Error('Parent comment cannot have a parent')
+    }
   }
 
   return db.comment.create({
     data: {
       ...input,
-      // currentUser
       userId: context.currentUser.id,
     },
   })

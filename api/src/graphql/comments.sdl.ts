@@ -19,7 +19,6 @@ export const schema = gql`
 
   input CreateCommentInput {
     body: String!
-    userId: Int!
     postId: Int!
     parentId: Int
   }

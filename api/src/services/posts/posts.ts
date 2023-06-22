@@ -18,6 +18,6 @@ export const post = ({ id }) => {
 export const Post: PostRelationResolvers = {
   user: (_obj, { root }) => db.user.findFirst({ where: { id: root.userId } }),
   comments: (_obj, { root }) => {
-    return db.comment.findMany({ where: { id: root?.id } })
+    return db.comment.findMany({ where: { postId: root?.id } })
   },
 }
