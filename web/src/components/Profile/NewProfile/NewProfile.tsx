@@ -1,10 +1,10 @@
+import type { CreateProfileInput } from 'types/graphql'
+
 import { navigate, routes } from '@redwoodjs/router'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
 import ProfileForm from 'src/components/Profile/ProfileForm'
-
-import type { CreateProfileInput } from 'types/graphql'
 
 const CREATE_PROFILE_MUTATION = gql`
   mutation CreateProfileMutation($input: CreateProfileInput!) {
@@ -20,7 +20,7 @@ const NewProfile = () => {
     {
       onCompleted: () => {
         toast.success('Profile created')
-        navigate(routes.profiles())
+        navigate(routes.profileSelf())
       },
       onError: (error) => {
         toast.error(error.message)

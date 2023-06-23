@@ -28,7 +28,7 @@ const Profile = ({ profile }: Props) => {
   const [deleteProfile] = useMutation(DELETE_PROFILE_MUTATION, {
     onCompleted: () => {
       toast.success('Profile deleted')
-      navigate(routes.profiles())
+      navigate(routes.profileSelf())
     },
     onError: (error) => {
       toast.error(error.message)

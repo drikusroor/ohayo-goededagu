@@ -1,4 +1,7 @@
-import type { FindProfileSelf, UpdateProfileInput } from 'types/graphql'
+import type {
+  FindProfileSelfForEditQuery,
+  UpdateProfileInput,
+} from 'types/graphql'
 
 import { navigate, routes } from '@redwoodjs/router'
 import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
@@ -8,7 +11,7 @@ import { toast } from '@redwoodjs/web/toast'
 import ProfileForm from 'src/components/Profile/ProfileForm'
 
 export const QUERY = gql`
-  query FindProfileSelf {
+  query FindProfileSelfForEditQuery {
     profileSelf {
       id
       bio
@@ -36,7 +39,9 @@ export const Failure = ({ error }: CellFailureProps) => (
   <div className="rw-cell-error">{error?.message}</div>
 )
 
-export const Success = ({ profileSelf }: CellSuccessProps<FindProfileSelf>) => {
+export const Success = ({
+  profileSelf,
+}: CellSuccessProps<FindProfileSelfForEditQuery>) => {
   const [updateProfile, { loading, error }] = useMutation(
     UPDATE_PROFILE_MUTATION,
     {

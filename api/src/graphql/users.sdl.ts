@@ -8,6 +8,7 @@ export const schema = gql`
     # resetToken: String
     # resetTokenExpiresAt: DateTime
     posts: [Post]!
+    profile: Profile
   }
 
   type Query {

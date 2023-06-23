@@ -8,7 +8,7 @@ import { toast } from '@redwoodjs/web/toast'
 import EditAccountForm from '../EditAccountForm/EditAccountForm'
 
 export const QUERY = gql`
-  query FindAccountQuery($id: Int!) {
+  query FindAccountForEditQuery($id: Int!) {
     user(id: $id) {
       id
       name

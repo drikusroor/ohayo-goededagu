@@ -4,6 +4,8 @@ import type { Post } from 'types/graphql'
 
 import { Link, navigate, routes } from '@redwoodjs/router'
 
+import Avatar from '../Avatar/Avatar'
+
 enum EPostType {
   ARTICLE = 'ARTICLE',
   VIDEO = 'VIDEO',
@@ -46,33 +48,52 @@ const ArticlePreview = ({ article }: Props) => {
     <article
       className="mb-4 rounded border-2 p-2 hover:cursor-pointer hover:border-black"
       onClick={() => onReadMore(article)}
+      tabIndex={0}
     >
       <header className="mb-3">
-        <h2 className="text-2xl">
-          <Link to={routes.article({ id: article.id })}>{article.title}</Link>
-        </h2>
-        <div className="flex items-center gap-2">
-          <img
-            src={getPostTypeImage(article.type)}
-            alt={getFirstChar(article.type)}
-            width="32"
-            height="32"
-            className="flex h-8 w-8 items-center justify-center rounded-full bg-slate-300 text-slate-900"
-            title={article.type}
+        <div className="flex flex-row items-center gap-4">
+          <Avatar
+            src={article.user?.profile?.avatar}
+            alt={article.user.name}
+            name={article.user.name || article.user.email}
           />
-          <span className=" text-sm text-slate-500">
-            Posted at: {new Date(article.createdAt).toLocaleString()}
-          </span>
-          <span className=" text-sm text-gray-400">
-            {article.user.name
-              ? `by ${article.user.name}`
-              : article.user.email
-              ? article.user.email
-              : 'by Anonymous'}
-          </span>
+          <div>
+            <span
+              className="text-sm text-slate-500"
+              title={article.user.name || article.user.email}
+            >
+              {article.user.name
+                ? article.user.name
+                : article.user.email
+                ? article.user.email
+                : 'Anonymous'}
+            </span>
+            <span
+              className="ml-2 text-sm text-slate-500"
+              title={new Date(article.createdAt).toLocaleString('nl-NL', {
+                hour: '2-digit',
+                minute: '2-digit',
+              })}
+            >
+              | {new Date(article.createdAt).toLocaleDateString('nl-NL')}{' '}
+              {new Date(article.createdAt).toLocaleTimeString('nl-NL', {
+                hour: '2-digit',
+                minute: '2-digit',
+              })}
+            </span>
+          </div>
+        </div>
+        <div className="mt-4 flex flex-row items-center gap-4">
+          <Avatar alt={article.type[0]} name={article.type} />
+          <h2
+            className="text-2xl font-semibold text-slate-700"
+            title={article.title}
+          >
+            <Link to={routes.article({ id: article.id })}>{article.title}</Link>
+          </h2>
         </div>
       </header>
-      <div>{article.body}</div>
+      <div className="ml-14">{article.body}</div>
     </article>
   )
 }

@@ -3,6 +3,7 @@ import type { FindArticleQuery, FindArticleQueryVariables } from 'types/graphql'
 import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
 
 import Article from '../Article/Article'
+import Skeleton from '../Skeleton/Skeleton'
 
 export const QUERY = gql`
   query FindArticleQuery($id: Int!) {
@@ -14,11 +15,33 @@ export const QUERY = gql`
       user {
         name
       }
+      comments {
+        id
+        body
+        createdAt
+        user {
+          name
+          email
+          profile {
+            avatar
+          }
+        }
+      }
     }
   }
 `
 
-export const Loading = () => <div>Loading...</div>
+export const Loading = () => (
+  <div>
+    <Skeleton className="h-8 w-64" />
+    <Skeleton className="mt-2 h-6 w-48" />
+    <Skeleton className="mt-4 h-64 w-full" />
+    <Skeleton className="mt-4 h-8 w-48" />
+    <Skeleton className="mt-4 h-32 max-w-xl" />
+    <Skeleton className="mt-4 h-32 max-w-xl" />
+    <Skeleton className="mt-4 h-32 max-w-xl" />
+  </div>
+)
 
 export const Empty = () => <div>Empty</div>
 

@@ -1,6 +1,9 @@
 import type { Post } from 'types/graphql'
 
-import { Link, navigate, routes } from '@redwoodjs/router'
+import { Link, routes } from '@redwoodjs/router'
+
+import Comment from '../Comment/Comment'
+import CommentForm from '../CommentForm/CommentForm'
 
 interface Props {
   article: Post
@@ -8,11 +11,8 @@ interface Props {
 
 const Article = ({ article }: Props) => {
   const formattedDate = new Date(article.createdAt).toLocaleString('nl-NL', {
-    day: 'numeric',
-    month: 'long',
-    year: 'numeric',
-    hour: 'numeric',
-    minute: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
   })
 
   return (
@@ -33,6 +33,17 @@ const Article = ({ article }: Props) => {
         </div>
       </header>
       <div>{article.body}</div>
+      <h3 className="mt-4 text-lg font-light text-gray-600">Comments</h3>
+      <ul className="mt-4 max-w-xl">
+        {article.comments.map((comment) => (
+          <li key={comment.id} className="mb-4">
+            <Comment comment={comment} />
+          </li>
+        ))}
+      </ul>
+      <div className="mt-2">
+        <CommentForm postId={article.id} />
+      </div>
     </article>
   )
 }

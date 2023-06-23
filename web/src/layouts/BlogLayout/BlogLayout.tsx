@@ -1,4 +1,5 @@
 import { Link, routes } from '@redwoodjs/router'
+import { Toaster } from '@redwoodjs/web/dist/toast'
 
 import { useAuth } from 'src/auth'
 import Button from 'src/components/Button/Button'
@@ -11,6 +12,7 @@ const BlogLayout = ({ children }: BlogLayoutProps) => {
   const { isAuthenticated, logOut, currentUser } = useAuth()
   return (
     <>
+      <Toaster />
       <header className="w-full pb-5 text-center">
         {isAuthenticated && currentUser && (
           <div className="flex items-center justify-between bg-slate-500 p-3 text-white">

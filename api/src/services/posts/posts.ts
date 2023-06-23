@@ -1,3 +1,5 @@
+import { PostRelationResolvers } from 'types/graphql'
+
 import { db } from 'src/lib/db'
 
 export const posts = () => {
@@ -13,6 +15,9 @@ export const post = ({ id }) => {
   })
 }
 
-export const Post = {
+export const Post: PostRelationResolvers = {
   user: (_obj, { root }) => db.user.findFirst({ where: { id: root.userId } }),
+  comments: (_obj, { root }) => {
+    return db.comment.findMany({ where: { postId: root?.id } })
+  },
 }
