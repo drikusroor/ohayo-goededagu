@@ -11,11 +11,8 @@ interface Props {
 
 const Article = ({ article }: Props) => {
   const formattedDate = new Date(article.createdAt).toLocaleString('nl-NL', {
-    day: 'numeric',
-    month: 'long',
-    year: 'numeric',
-    hour: 'numeric',
-    minute: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
   })
 
   return (

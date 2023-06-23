@@ -25,7 +25,11 @@ export default ({ comment }: ICommentProps) => {
               : 'Anonymous'}
           </span>
           <span className="ml-2 text-sm text-slate-500">
-            | {new Date(comment.createdAt).toLocaleString('nl-NL')}
+            |{' '}
+            {new Date(comment.createdAt).toLocaleString('nl-NL', {
+              hour: '2-digit',
+              minute: '2-digit',
+            })}
           </span>
         </div>
       </div>

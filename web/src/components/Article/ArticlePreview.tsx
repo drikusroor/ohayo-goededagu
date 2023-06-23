@@ -70,9 +70,16 @@ const ArticlePreview = ({ article }: Props) => {
             </span>
             <span
               className="ml-2 text-sm text-slate-500"
-              title={new Date(article.createdAt).toLocaleString('nl-NL')}
+              title={new Date(article.createdAt).toLocaleString('nl-NL', {
+                hour: '2-digit',
+                minute: '2-digit',
+              })}
             >
-              | {new Date(article.createdAt).toLocaleString('nl-NL')}
+              | {new Date(article.createdAt).toLocaleDateString('nl-NL')}{' '}
+              {new Date(article.createdAt).toLocaleTimeString('nl-NL', {
+                hour: '2-digit',
+                minute: '2-digit',
+              })}
             </span>
           </div>
         </div>
