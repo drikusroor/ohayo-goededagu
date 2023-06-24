@@ -22,11 +22,15 @@ const CREATE_UPDATE_OR_DELETE_THUMB = gql`
 `
 
 export default ({ comment }: ICommentProps) => {
-  const [createUpdateOrDeleteThumb, { loading, error }] = useMutation(
+  const [createUpdateOrDeleteThumb] = useMutation(
     CREATE_UPDATE_OR_DELETE_THUMB,
     {
-      onCompleted: () => {
-        toast.success('You voted this comment!')
+      onCompleted: (data) => {
+        toast.success(
+          `You voted this comment ${
+            data.createUpdateOrDeleteThumb.up ? 'up' : 'down'
+          }`
+        )
       },
     }
   )
