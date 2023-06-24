@@ -3,6 +3,8 @@ import type { Comment } from 'types/graphql'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
+import { QUERY as FindArticleQuery } from 'src/components/ArticleCell'
+
 import Avatar from '../Avatar/Avatar'
 import Thumbs from '../Thumbs/Thumbs'
 
@@ -22,6 +24,8 @@ const CREATE_UPDATE_OR_DELETE_THUMB = gql`
 `
 
 export default ({ comment }: ICommentProps) => {
+  console.log(comment)
+
   const [createUpdateOrDeleteThumb] = useMutation(
     CREATE_UPDATE_OR_DELETE_THUMB,
     {
@@ -32,6 +36,12 @@ export default ({ comment }: ICommentProps) => {
           }`
         )
       },
+      refetchQueries: [
+        {
+          query: FindArticleQuery,
+          variables: { id: comment.postId, $id: comment.postId },
+        },
+      ],
     }
   )
 

@@ -19,6 +19,7 @@ export const QUERY = gql`
         id
         body
         createdAt
+        postId
         user {
           name
           email
