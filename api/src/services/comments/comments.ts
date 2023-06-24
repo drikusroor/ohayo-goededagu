@@ -19,8 +19,6 @@ export const comment: QueryResolvers['comment'] = ({ id }) => {
 export const createComment: MutationResolvers['createComment'] = async ({
   input,
 }) => {
-  console.log('createComment input: ', input)
-
   if (!input.postId) {
     throw new Error('Post ID is required for Comment')
   }

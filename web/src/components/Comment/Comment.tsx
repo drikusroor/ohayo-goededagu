@@ -26,8 +26,6 @@ const CREATE_UPDATE_OR_DELETE_THUMB = gql`
 `
 
 export default ({ comment }: ICommentProps) => {
-  console.log(comment)
-
   const [createUpdateOrDeleteThumb] = useMutation(
     CREATE_UPDATE_OR_DELETE_THUMB,
     {
