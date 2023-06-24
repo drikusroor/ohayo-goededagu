@@ -8,6 +8,8 @@ import ArticleTypeIcon, { EPostType } from '../ArticleTypeIcon/ArticleTypeIcon'
 import Comment from '../Comment/Comment'
 import CommentForm from '../CommentForm/CommentForm'
 
+import { hotScore } from './helpers/sort-comments'
+
 interface Props {
   article: Post
 }
@@ -22,27 +24,20 @@ const Article = ({ article }: Props) => {
   })
 
   const sortedComments = useMemo(() => {
-    // first sort by thumbs up
-    // then sort by thumbs down
-    // then sort by date
+    return [...article.comments].sort((a, b) => {
+      const aUpVotes = a.thumbs.filter((t) => t.up).length
+      const aDownVotes = a.thumbs.filter((t) => !t.up).length
 
-    return [...article.comments]
-      .sort((a, b) => {
-        return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
-      })
+      const bUpVotes = b.thumbs.filter((t) => t.up).length
+      const bDownVotes = b.thumbs.filter((t) => !t.up).length
 
-      .sort((a, b) => {
-        return (
-          a.thumbs.filter((t) => !t.up).length -
-          b.thumbs.filter((t) => !t.up).length
-        )
-      })
-      .sort((a, b) => {
-        return (
-          b.thumbs.filter((t) => t.up).length -
-          a.thumbs.filter((t) => t.up).length
-        )
-      })
+      const scoreA = hotScore(aUpVotes, aDownVotes, new Date(a.createdAt))
+      const scoreB = hotScore(bUpVotes, bDownVotes, new Date(b.createdAt))
+
+      if (scoreA > scoreB) return -1
+      if (scoreA < scoreB) return 1
+      return 0
+    })
   }, [article.comments])
 
   return (
