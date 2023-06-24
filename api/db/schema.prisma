@@ -1,6 +1,6 @@
 datasource db {
   provider = "postgresql"
-  url = env("DATABASE_URL")
+  url      = env("DATABASE_URL")
 }
 
 generator client {
@@ -12,38 +12,39 @@ generator client {
 // to create migrations for them and apply to your dev DB.
 // TODO: Please remove the following example:
 model User {
-  id             Int @id @default(autoincrement())
-  email          String  @unique
+  id                  Int       @id @default(autoincrement())
+  email               String    @unique
   name                String?
-  hashedPassword      String    // <─┐
-  salt                String    // <─┼─ add these lines
-  resetToken          String?   // <─┤
+  hashedPassword      String // <─┐
+  salt                String // <─┼─ add these lines
+  resetToken          String? // <─┤
   resetTokenExpiresAt DateTime? // <─┘
   posts               Post[]
   roles               Role[]    @default([GUEST])
   profile             Profile?
   comments            Comment[]
+  thumbs              Thumbs[]
 }
 
 model Profile {
-  id        Int     @id @default(autoincrement())
+  id        Int      @id @default(autoincrement())
   bio       String?
-  user      User    @relation(fields: [userId], references: [id])
-  userId    Int     @unique
+  user      User     @relation(fields: [userId], references: [id])
+  userId    Int      @unique
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   avatar    String?
 }
 
 model Post {
-  id        Int      @id @default(autoincrement())
+  id        Int       @id @default(autoincrement())
   title     String
   body      String
-  createdAt DateTime @default(now())
-  user      User     @relation(fields: [userId], references: [id])
+  createdAt DateTime  @default(now())
+  user      User      @relation(fields: [userId], references: [id])
   userId    Int
-  published Boolean  @default(false)
-  type      PostType @default(ARTICLE)
+  published Boolean   @default(false)
+  type      PostType  @default(ARTICLE)
   comments  Comment[]
 }
 
@@ -63,14 +64,25 @@ enum PostType {
 }
 
 model Comment {
-  id        Int      @id @default(autoincrement())
+  id        Int       @id @default(autoincrement())
   body      String
+  createdAt DateTime  @default(now())
+  user      User      @relation(fields: [userId], references: [id])
+  userId    Int
+  post      Post      @relation(fields: [postId], references: [id])
+  postId    Int
+  parent    Comment?  @relation("ChildComments", fields: [parentId], references: [id])
+  parentId  Int?
+  children  Comment[] @relation("ChildComments")
+  thumbs    Thumbs[]
+}
+
+model Thumbs {
+  id        Int      @id @default(autoincrement())
   createdAt DateTime @default(now())
   user      User     @relation(fields: [userId], references: [id])
   userId    Int
-  post      Post     @relation(fields: [postId], references: [id])
-  postId    Int
-  parent    Comment? @relation("ChildComments", fields: [parentId], references: [id])
-  parentId  Int?
-  children  Comment[] @relation("ChildComments")
+  comment   Comment  @relation(fields: [commentId], references: [id])
+  commentId Int
+  up        Boolean
 }
