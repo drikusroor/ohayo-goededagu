@@ -1,3 +1,5 @@
+import { useMemo } from 'react'
+
 import type { Post } from 'types/graphql'
 
 import { Link, routes } from '@redwoodjs/router'
@@ -18,6 +20,15 @@ const Article = ({ article }: Props) => {
     hour: '2-digit',
     minute: '2-digit',
   })
+
+  const sortedComments = useMemo(() => {
+    return [...article.comments].sort((a, b) => {
+      return (
+        b.thumbs.filter((t) => t.up).length -
+        a.thumbs.filter((t) => t.up).length
+      )
+    })
+  }, [article.comments])
 
   return (
     <article className="mb-4 p-2">
@@ -42,7 +53,7 @@ const Article = ({ article }: Props) => {
       <div>{article.body}</div>
       <h3 className="mt-4 text-lg font-light text-gray-600">Comments</h3>
       <ul className="mt-4 max-w-xl">
-        {article.comments.map((comment) => (
+        {sortedComments.map((comment) => (
           <li key={comment.id} className="mb-4">
             <Comment comment={comment} />
           </li>
