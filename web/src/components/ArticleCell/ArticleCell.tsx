@@ -26,6 +26,11 @@ export const QUERY = gql`
             avatar
           }
         }
+        thumbs {
+          id
+          userId
+          up
+        }
       }
     }
   }
@@ -54,5 +59,6 @@ export const Failure = ({
 export const Success = ({
   article,
 }: CellSuccessProps<FindArticleQuery, FindArticleQueryVariables>) => {
+  console.log(article)
   return <Article article={article} />
 }

@@ -75,4 +75,7 @@ export const Comment: CommentRelationResolvers = {
   children: (_obj, { root }) => {
     return db.comment.findUnique({ where: { id: root?.id } }).children()
   },
+  thumbs: (_obj, { root }) => {
+    return db.comment.findUnique({ where: { id: root?.id } }).thumbs()
+  },
 }
