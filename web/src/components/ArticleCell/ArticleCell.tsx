@@ -59,6 +59,5 @@ export const Failure = ({
 export const Success = ({
   article,
 }: CellSuccessProps<FindArticleQuery, FindArticleQueryVariables>) => {
-  console.log(article)
   return <Article article={article} />
 }

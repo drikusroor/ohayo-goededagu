@@ -1,6 +1,7 @@
 import type { Comment } from 'types/graphql'
 
 import Avatar from '../Avatar/Avatar'
+import Thumbs from '../Thumbs/Thumbs'
 
 interface ICommentProps {
   comment: Comment
@@ -31,6 +32,9 @@ export default ({ comment }: ICommentProps) => {
               minute: '2-digit',
             })}
           </span>
+        </div>
+        <div className="ml-auto">
+          <Thumbs thumbs={comment.thumbs} />
         </div>
       </div>
       <div className="ml-14 mt-4 text-sm leading-relaxed text-slate-600">
