@@ -4,12 +4,13 @@ interface IThumbProps {
   up: boolean
   active?: boolean
   count: number
+  onClick: () => void
 }
 
-const Thumb = ({ up, active, count }: IThumbProps) => {
+const Thumb = ({ up, active, count, onClick }: IThumbProps) => {
   return (
-    <Button className={active ? 'border-2 border-black' : ''}>
-      {up ? 'Up' : 'Down'} {count}
+    <Button className={active ? 'border-2 border-black' : ''} onClick={onClick}>
+      {up ? '👍' : '👎'} {count}
     </Button>
   )
 }

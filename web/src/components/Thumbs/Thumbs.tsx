@@ -6,6 +6,8 @@ import Thumb from '../Thumb/Thumb'
 
 export interface IThumbProps {
   thumbs: Thumbs[]
+  entityId: number
+  onThumb: (up: boolean) => void
 }
 
 const Thumbs = (props: IThumbProps) => {
@@ -29,16 +31,22 @@ const Thumbs = (props: IThumbProps) => {
   }, [downThumbs])
 
   const currentUserThumb = useMemo(() => {
-    return props.thumbs.find((thumb) => thumb.user.id === currentUser.id)
+    return props.thumbs.find((thumb) => thumb.userId === currentUser.id)
   }, [props.thumbs, currentUser])
 
   return (
     <div className="flex gap-2">
-      <Thumb up={true} count={upCount} active={currentUserThumb?.up} />
+      <Thumb
+        up={true}
+        count={upCount}
+        active={currentUserThumb?.up}
+        onClick={() => props.onThumb(true)}
+      />
       <Thumb
         up={false}
         count={downCount}
         active={currentUserThumb?.up === false}
+        onClick={() => props.onThumb(false)}
       />
     </div>
   )

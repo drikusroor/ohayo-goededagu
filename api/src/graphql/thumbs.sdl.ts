@@ -20,6 +20,11 @@ export const schema = gql`
     up: Boolean!
   }
 
+  input CreateUpdateOrDeleteThumbInput {
+    commentId: Int!
+    up: Boolean!
+  }
+
   input UpdateThumbInput {
     userId: Int
     commentId: Int
@@ -28,6 +33,8 @@ export const schema = gql`
 
   type Mutation {
     createThumb(input: CreateThumbInput!): Thumb! @requireAuth
+    createUpdateOrDeleteThumb(input: CreateUpdateOrDeleteThumbInput!): Thumb!
+      @requireAuth
     updateThumb(id: Int!, input: UpdateThumbInput!): Thumb! @requireAuth
     deleteThumb(id: Int!): Thumb! @requireAuth
   }
