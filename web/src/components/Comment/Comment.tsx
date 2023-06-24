@@ -1,3 +1,5 @@
+import { useMemo } from 'react'
+
 import type { Comment } from 'types/graphql'
 
 import { useMutation } from '@redwoodjs/web'
@@ -45,6 +47,33 @@ export default ({ comment }: ICommentProps) => {
     }
   )
 
+  const rating = useMemo(() => {
+    if (comment.thumbs.filter((t) => !t.up).length === 0) {
+      return 1
+    }
+
+    const rating =
+      comment.thumbs.filter((t) => t.up).length -
+        comment.thumbs.filter((t) => !t.up).length >
+      0
+        ? 0
+        : -1
+
+    return rating
+  }, [comment.thumbs])
+
+  const ratingOpacity = useMemo(() => {
+    if (rating === 0) {
+      return 'opacity-90'
+    }
+
+    if (rating < 0) {
+      return 'opacity-75'
+    }
+
+    return ''
+  }, [rating])
+
   const handleThumbClick = (up: boolean) => {
     createUpdateOrDeleteThumb({
       variables: { input: { commentId: comment.id, up } },
@@ -52,7 +81,9 @@ export default ({ comment }: ICommentProps) => {
   }
 
   return (
-    <div className="rounded-lg bg-slate-100 p-4 ">
+    <div
+      className={`rounded-lg bg-slate-100 p-4 transition-opacity ${ratingOpacity}`}
+    >
       <div className="flex flex-row items-center gap-4">
         <Avatar
           src={comment.user?.profile?.avatar}
