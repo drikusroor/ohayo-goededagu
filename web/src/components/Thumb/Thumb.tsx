@@ -9,7 +9,7 @@ interface IThumbProps {
 
 const Thumb = ({ up, active, count, onClick }: IThumbProps) => {
   return (
-    <Button className={active ? 'border-2 border-black' : ''} onClick={onClick}>
+    <Button onClick={onClick} variant={active ? 'filled' : 'outlined'}>
       {up ? '👍' : '👎'} {count}
     </Button>
   )
