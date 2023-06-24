@@ -22,12 +22,27 @@ const Article = ({ article }: Props) => {
   })
 
   const sortedComments = useMemo(() => {
-    return [...article.comments].sort((a, b) => {
-      return (
-        b.thumbs.filter((t) => t.up).length -
-        a.thumbs.filter((t) => t.up).length
-      )
-    })
+    // first sort by thumbs up
+    // then sort by thumbs down
+    // then sort by date
+
+    return [...article.comments]
+      .sort((a, b) => {
+        return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+      })
+
+      .sort((a, b) => {
+        return (
+          a.thumbs.filter((t) => !t.up).length -
+          b.thumbs.filter((t) => !t.up).length
+        )
+      })
+      .sort((a, b) => {
+        return (
+          b.thumbs.filter((t) => t.up).length -
+          a.thumbs.filter((t) => t.up).length
+        )
+      })
   }, [article.comments])
 
   return (
