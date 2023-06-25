@@ -45,7 +45,7 @@ const Avatar = ({
         width={width}
         height={height}
       />
-      <div className="absolute flex h-8 w-8 items-center justify-center rounded-full bg-black opacity-25 "></div>
+      <div className="absolute flex h-10 w-10 items-center justify-center rounded-full bg-black opacity-25 "></div>
 
       <div className="absolute text-white">{name ? name[0] : 'A'}</div>
     </div>
