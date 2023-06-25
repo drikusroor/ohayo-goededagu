@@ -2,7 +2,7 @@ import type { Post } from 'types/graphql'
 
 import { Link, navigate, routes } from '@redwoodjs/router'
 
-import ArticleTypeIcon from '../ArticleTypeIcon/ArticleTypeIcon'
+import ArticleTypeIcon, { EPostType } from '../ArticleTypeIcon/ArticleTypeIcon'
 import Avatar from '../Avatar/Avatar'
 
 interface Props {
@@ -54,7 +54,7 @@ const ArticlePreview = ({ article }: Props) => {
           </div>
         </div>
         <div className="mt-4 flex flex-row items-center gap-4">
-          <ArticleTypeIcon type={article.type} />
+          <ArticleTypeIcon type={article.type as EPostType} />
           <h2
             className="text-2xl font-semibold text-slate-700"
             title={article.title}
