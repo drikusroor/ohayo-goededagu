@@ -3412,6 +3412,52 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@fortawesome/fontawesome-common-types@npm:6.4.0":
+  version: 6.4.0
+  resolution: "@fortawesome/fontawesome-common-types@npm:6.4.0"
+  checksum: fa5028a04188ca3bb36ee14b2df65d382b3d7344fbfcd596315612370b292e0eafa7408ce6498ba675441e72b2a28d64afe20fdd93ebc755aa385d8dd619a63a
+  languageName: node
+  linkType: hard
+
+"@fortawesome/fontawesome-svg-core@npm:^6.4.0":
+  version: 6.4.0
+  resolution: "@fortawesome/fontawesome-svg-core@npm:6.4.0"
+  dependencies:
+    "@fortawesome/fontawesome-common-types": 6.4.0
+  checksum: fae9957c4ac453c89b6b5654106db35733d110932d291d78b039e3e00419015245e40bd627cfa48156be995e5daa0782597be504fac40c53c76ab131f1424658
+  languageName: node
+  linkType: hard
+
+"@fortawesome/free-regular-svg-icons@npm:^6.4.0":
+  version: 6.4.0
+  resolution: "@fortawesome/free-regular-svg-icons@npm:6.4.0"
+  dependencies:
+    "@fortawesome/fontawesome-common-types": 6.4.0
+  checksum: d12a0f89351bd4ccda3a37df53db6aecf90737d23557a3cd09cc2477e20fc1b0bd7e6734915b8cd1bfe00053fd00a80e014165ed780b70d82d3a171cc354c0c3
+  languageName: node
+  linkType: hard
+
+"@fortawesome/free-solid-svg-icons@npm:^6.4.0":
+  version: 6.4.0
+  resolution: "@fortawesome/free-solid-svg-icons@npm:6.4.0"
+  dependencies:
+    "@fortawesome/fontawesome-common-types": 6.4.0
+  checksum: b3fc24fa9fca18dfe7a5ca10e48ae248cefe35c22eba02e374625b3649ae9c5bd6b53a41c9f7453f28d96b4b70abd1b946f5758a64eb34fcdf84844b850b85e2
+  languageName: node
+  linkType: hard
+
+"@fortawesome/react-fontawesome@npm:latest":
+  version: 0.2.0
+  resolution: "@fortawesome/react-fontawesome@npm:0.2.0"
+  dependencies:
+    prop-types: ^15.8.1
+  peerDependencies:
+    "@fortawesome/fontawesome-svg-core": ~1 || ~6
+    react: ">=16.3"
+  checksum: cf1bd3840dfe1b39d2d5ee92ac49ba3aabad95d05dd6374368a5a1e5f140c8e497d11599290cb70afc6c856bb3228628269199e9659ce8f3132692a2d1e464a5
+  languageName: node
+  linkType: hard
+
 "@gar/promisify@npm:^1.0.1, @gar/promisify@npm:^1.1.3":
   version: 1.1.3
   resolution: "@gar/promisify@npm:1.1.3"
@@ -22274,6 +22320,10 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "root-workspace-0b6124@workspace:."
   dependencies:
+    "@fortawesome/fontawesome-svg-core": ^6.4.0
+    "@fortawesome/free-regular-svg-icons": ^6.4.0
+    "@fortawesome/free-solid-svg-icons": ^6.4.0
+    "@fortawesome/react-fontawesome": latest
     "@redwoodjs/auth-dbauth-setup": 5.3.0
     "@redwoodjs/core": 5.3.0
     prettier-plugin-tailwindcss: ^0.3.0
