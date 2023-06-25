@@ -22,17 +22,17 @@ interface IArticleTypeIconProps {
 export const getIcon = (type: EPostType) => {
   switch (type) {
     case EPostType.ARTICLE:
-      return <BsJournalRichtext />
+      return <BsJournalRichtext data-testid="BsJournalRichtext" />
     case EPostType.VIDEO:
-      return <BsFilm />
+      return <BsFilm data-testid="BsFilm" />
     case EPostType.HAIKU:
-      return <BsBrush />
+      return <BsBrush data-testid="BsBrush" />
     case EPostType.PHOTO_GALLERY:
-      return <BsImages />
+      return <BsImages data-testid="BsImages" />
     case EPostType.CHOTTO:
-      return <BsSticky />
+      return <BsSticky data-testid="BsSticky" />
     default:
-      return <BsQuestion />
+      return <BsQuestion data-testid="BsQuestion" />
   }
 }
 
