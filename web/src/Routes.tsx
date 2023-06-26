@@ -46,7 +46,9 @@ const Routes = () => {
       </Private>
       <Set wrap={BlogLayout}>
         <Route path="/" page={HomePage} name="home" />
-        <Route path="/article/{id:Int}" page={ArticlePage} name="article" />
+        <Private unauthenticated="home">
+          <Route path="/article/{id:Int}" page={ArticlePage} name="article" />
+        </Private>
         <Route path="/login" page={LoginPage} name="login" />
         <Route path="/signup" page={SignupPage} name="signup" />
         <Route path="/forgot-password" page={ForgotPasswordPage} name="forgotPassword" />
