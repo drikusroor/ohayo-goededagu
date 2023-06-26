@@ -1,18 +1,9 @@
-import { useCallback } from 'react'
-
 import type { Post } from 'types/graphql'
 
 import { Link, navigate, routes } from '@redwoodjs/router'
 
+import ArticleTypeIcon, { EPostType } from '../ArticleTypeIcon/ArticleTypeIcon'
 import Avatar from '../Avatar/Avatar'
-
-enum EPostType {
-  ARTICLE = 'ARTICLE',
-  VIDEO = 'VIDEO',
-  HAIKU = 'HAIKU',
-  CHOTTO = 'CHOTTO',
-  PHOTO_GALLERY = 'PHOTO_GALLERY',
-}
 
 interface Props {
   article: Post
@@ -22,27 +13,6 @@ const ArticlePreview = ({ article }: Props) => {
   const onReadMore = (article: 'article') => {
     navigate(routes.article({ id: article.id }))
   }
-
-  const getPostTypeImage = useCallback((type: Post['type']) => {
-    switch (type) {
-      case EPostType.ARTICLE:
-        return '/images/post-types/article.png'
-      case EPostType.VIDEO:
-        return '/images/post-types/video.png'
-      case EPostType.HAIKU:
-        return '/images/post-types/haiku.png'
-      case EPostType.PHOTO_GALLERY:
-        return '/images/post-types/photo-gallery.png'
-      case EPostType.CHOTTO:
-        return '/images/post-types/chotto.png'
-      default:
-        return '/images/post-types/unknown.png'
-    }
-  }, [])
-
-  const getFirstChar = useCallback((str: string) => {
-    return str.charAt(0).toUpperCase()
-  }, [])
 
   return (
     <article
@@ -84,7 +54,7 @@ const ArticlePreview = ({ article }: Props) => {
           </div>
         </div>
         <div className="mt-4 flex flex-row items-center gap-4">
-          <Avatar alt={article.type[0]} name={article.type} />
+          <ArticleTypeIcon type={article.type as EPostType} />
           <h2
             className="text-2xl font-semibold text-slate-700"
             title={article.title}
