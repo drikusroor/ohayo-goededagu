@@ -1,3 +1,5 @@
+import { useMemo } from 'react'
+
 import type { Post } from 'types/graphql'
 
 import { Link, routes } from '@redwoodjs/router'
@@ -5,6 +7,8 @@ import { Link, routes } from '@redwoodjs/router'
 import ArticleTypeIcon, { EPostType } from '../ArticleTypeIcon/ArticleTypeIcon'
 import Comment from '../Comment/Comment'
 import CommentForm from '../CommentForm/CommentForm'
+
+import { hotScore } from './helpers/sort-comments'
 
 interface Props {
   article: Post
@@ -18,6 +22,23 @@ const Article = ({ article }: Props) => {
     hour: '2-digit',
     minute: '2-digit',
   })
+
+  const sortedComments = useMemo(() => {
+    return [...article.comments].sort((a, b) => {
+      const aUpVotes = a.thumbs.filter((t) => t.up).length
+      const aDownVotes = a.thumbs.filter((t) => !t.up).length
+
+      const bUpVotes = b.thumbs.filter((t) => t.up).length
+      const bDownVotes = b.thumbs.filter((t) => !t.up).length
+
+      const scoreA = hotScore(aUpVotes, aDownVotes, new Date(a.createdAt))
+      const scoreB = hotScore(bUpVotes, bDownVotes, new Date(b.createdAt))
+
+      if (scoreA > scoreB) return -1
+      if (scoreA < scoreB) return 1
+      return 0
+    })
+  }, [article.comments])
 
   return (
     <article className="mb-4 p-2">
@@ -42,7 +63,7 @@ const Article = ({ article }: Props) => {
       <div>{article.body}</div>
       <h3 className="mt-4 text-lg font-light text-gray-600">Comments</h3>
       <ul className="mt-4 max-w-xl">
-        {article.comments.map((comment) => (
+        {sortedComments.map((comment) => (
           <li key={comment.id} className="mb-4">
             <Comment comment={comment} />
           </li>

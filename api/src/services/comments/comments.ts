@@ -19,8 +19,6 @@ export const comment: QueryResolvers['comment'] = ({ id }) => {
 export const createComment: MutationResolvers['createComment'] = async ({
   input,
 }) => {
-  console.log('createComment input: ', input)
-
   if (!input.postId) {
     throw new Error('Post ID is required for Comment')
   }
@@ -74,5 +72,8 @@ export const Comment: CommentRelationResolvers = {
   },
   children: (_obj, { root }) => {
     return db.comment.findUnique({ where: { id: root?.id } }).children()
+  },
+  thumbs: (_obj, { root }) => {
+    return db.comment.findUnique({ where: { id: root?.id } }).thumbs()
   },
 }

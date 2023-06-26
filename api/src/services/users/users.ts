@@ -32,4 +32,7 @@ export const User: UserRelationResolvers = {
   profile: (_obj, { root }) => {
     return db.user.findUnique({ where: { id: root?.id } }).profile()
   },
+  thumbs: (_obj, { root }) => {
+    return db.user.findMany({ where: { id: root?.id } }).thumbs()
+  },
 }

@@ -10,6 +10,7 @@ export const schema = gql`
     parent: Comment
     parentId: Int
     children: [Comment]!
+    thumbs: [Thumb]!
   }
 
   type Query {

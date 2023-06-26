@@ -19,12 +19,18 @@ export const QUERY = gql`
         id
         body
         createdAt
+        postId
         user {
           name
           email
           profile {
             avatar
           }
+        }
+        thumbs {
+          id
+          userId
+          up
         }
       }
     }

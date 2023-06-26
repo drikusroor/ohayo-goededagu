@@ -27,8 +27,6 @@ const EditAccountForm = (props: EditAccountFormProps) => {
     props.onSave(data)
   }
 
-  console.log({ props })
-
   return (
     <div className="rw-form-wrapper">
       <Form<FormAccount> onSubmit={onSubmit} error={props.error}>
