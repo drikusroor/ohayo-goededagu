@@ -42,13 +42,15 @@ const EditAccountForm = (props: EditAccountFormProps) => {
           className="rw-label"
           errorClassName="rw-label rw-label-error"
         >
-          Name
+          Name (deprecated, now in profile)
         </Label>
 
         <TextField
           name="name"
+          disabled
           defaultValue={props.user?.name}
-          className="rw-input"
+          className="rw-input cursor-not-allowed"
+          title="Deprecated. Name is now in profile"
           errorClassName="rw-input rw-input-error"
           validation={{ required: true }}
         />
