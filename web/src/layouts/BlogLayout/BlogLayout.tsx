@@ -32,15 +32,17 @@ const BlogLayout = ({ children }: BlogLayoutProps) => {
             </ul>
           </div>
         )}
-        <Link to={routes.home()} title="Ohayou Goededagu" aria-label="Home">
-          <img
-            src="/images/logo.png"
-            className="mx-auto origin-top rounded-b-full shadow-lg transition duration-500 ease-in-out hover:scale-110 hover:transform hover:shadow-xl"
-            alt="Logo Ohayo Goededagu"
-            width={128}
-            height={128}
-          />
-        </Link>
+        <div className="mx-auto w-32">
+          <Link to={routes.home()} title="Ohayou Goededagu" aria-label="Home">
+            <img
+              src="/images/logo.png"
+              className="mx-auto origin-top rounded-b-full shadow-lg transition duration-500 ease-in-out hover:scale-110 hover:transform hover:shadow-xl"
+              alt="Logo Ohayo Goededagu"
+              width={128}
+              height={128}
+            />
+          </Link>
+        </div>
         <h1 className="pt-3 text-3xl font-bold">
           Ohayou Goededagu | おはよ グデダギュ
         </h1>
