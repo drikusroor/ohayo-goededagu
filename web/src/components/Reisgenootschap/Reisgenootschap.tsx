@@ -6,6 +6,8 @@ interface IReisgenootschap {
   profile: {
     avatar: string
     bio: string
+    name: string
+    japaneseName: string
   }
 }
 
@@ -26,13 +28,13 @@ const Reisgenootschap = ({ reisgenootschap = [] }: IReisgenootschapProps) => {
 
   return (
     <div className="grid gap-4 pb-4 md:grid-cols-2">
-      {reisgenootschap.map((person) => (
+      {reisgenootschap.map(({ id, profile }) => (
         <Person
-          key={person.id}
-          name={person.name}
-          quote=""
-          story={person.profile?.bio}
-          imgSrc={person.profile?.avatar}
+          key={id}
+          name={profile?.name}
+          quote={profile?.japaneseName}
+          story={profile?.bio}
+          imgSrc={profile?.avatar}
         />
       ))}
     </div>

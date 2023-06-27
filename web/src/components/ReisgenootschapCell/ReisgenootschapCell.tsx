@@ -16,6 +16,8 @@ export const QUERY = gql`
       profile {
         avatar
         bio
+        name
+        japaneseName
       }
     }
   }
