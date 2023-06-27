@@ -13,6 +13,9 @@ export const usersWithRoles: QueryResolvers['usersWithRoles'] = ({ roles }) => {
         hasSome: roles as Role[],
       },
     },
+    orderBy: {
+      name: 'asc',
+    },
   })
 }
 
