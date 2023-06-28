@@ -13,6 +13,8 @@ export const QUERY = gql`
       createdAt
       updatedAt
       avatar
+      name
+      japaneseName
     }
   }
 `

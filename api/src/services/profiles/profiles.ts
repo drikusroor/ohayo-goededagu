@@ -4,8 +4,6 @@ import type {
   ProfileRelationResolvers,
 } from 'types/graphql'
 
-import { ForbiddenError } from '@redwoodjs/graphql-server'
-
 import { db } from 'src/lib/db'
 
 export const profiles: QueryResolvers['profiles'] = () => {

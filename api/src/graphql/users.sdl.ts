@@ -14,6 +14,7 @@ export const schema = gql`
   type Query {
     users: [User!]! @requireAuth
     user(id: Int!): User @requireAuth
+    usersWithRoles(roles: [Role!]!): [User!]! @requireAuth
   }
 
   input CreateUserInput {
@@ -40,5 +41,12 @@ export const schema = gql`
 
   type Mutation {
     updateUserProfile(input: UpdateUserProfileInput!): User! @requireAuth
+  }
+
+  enum Role {
+    ADMIN
+    MODERATOR
+    USER
+    GUEST
   }
 `

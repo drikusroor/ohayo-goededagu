@@ -7,6 +7,8 @@ export const schema = gql`
     createdAt: DateTime!
     updatedAt: DateTime!
     avatar: String
+    name: String
+    japaneseName: String
   }
 
   type Query {
@@ -18,11 +20,15 @@ export const schema = gql`
   input CreateProfileInput {
     bio: String
     avatar: String
+    name: String
+    japaneseName: String
   }
 
   input UpdateProfileInput {
     bio: String
     avatar: String
+    name: String
+    japaneseName: String
   }
 
   type Mutation {

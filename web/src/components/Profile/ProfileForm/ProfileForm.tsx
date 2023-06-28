@@ -35,6 +35,36 @@ const ProfileForm = (props: ProfileFormProps) => {
         />
 
         <Label
+          name="name"
+          className="rw-label"
+          errorClassName="rw-label rw-label-error"
+        >
+          Name
+        </Label>
+
+        <TextField
+          name="name"
+          defaultValue={props.profile?.name}
+          className="rw-input"
+          errorClassName="rw-input rw-input-error"
+        />
+
+        <Label
+          name="japaneseName"
+          className="rw-label"
+          errorClassName="rw-label rw-label-error"
+        >
+          Japanese name
+        </Label>
+
+        <TextField
+          name="japaneseName"
+          defaultValue={props.profile?.japaneseName}
+          className="rw-input"
+          errorClassName="rw-input rw-input-error"
+        />
+
+        <Label
           name="bio"
           className="rw-label"
           errorClassName="rw-label rw-label-error"

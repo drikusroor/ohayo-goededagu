@@ -1,22 +1,9 @@
-import type {
-  DeleteProfileMutationVariables,
-  FindProfileById,
-} from 'types/graphql'
+import type { FindProfileById } from 'types/graphql'
 
-import { Link, routes, navigate } from '@redwoodjs/router'
-import { useMutation } from '@redwoodjs/web'
-import { toast } from '@redwoodjs/web/toast'
+import { Link, routes } from '@redwoodjs/router'
 
 import { useAuth } from 'src/auth'
 import { timeTag } from 'src/lib/formatters'
-
-const DELETE_PROFILE_MUTATION = gql`
-  mutation DeleteProfileMutation($id: Int!) {
-    deleteProfile(id: $id) {
-      id
-    }
-  }
-`
 
 interface Props {
   profile: NonNullable<FindProfileById['profile']>
@@ -24,22 +11,6 @@ interface Props {
 
 const Profile = ({ profile }: Props) => {
   const { currentUser } = useAuth()
-
-  const [deleteProfile] = useMutation(DELETE_PROFILE_MUTATION, {
-    onCompleted: () => {
-      toast.success('Profile deleted')
-      navigate(routes.profileSelf())
-    },
-    onError: (error) => {
-      toast.error(error.message)
-    },
-  })
-
-  const onDeleteClick = (id: DeleteProfileMutationVariables['id']) => {
-    if (confirm('Are you sure you want to delete profile ' + id + '?')) {
-      deleteProfile({ variables: { id } })
-    }
-  }
 
   return (
     <>
@@ -54,6 +25,14 @@ const Profile = ({ profile }: Props) => {
             <tr>
               <th>Id</th>
               <td>{profile.id}</td>
+            </tr>
+            <tr>
+              <th>Name</th>
+              <td>{profile.name}</td>
+            </tr>
+            <tr>
+              <th>Japanese name</th>
+              <td>{profile.japaneseName}</td>
             </tr>
             <tr>
               <th>Bio</th>

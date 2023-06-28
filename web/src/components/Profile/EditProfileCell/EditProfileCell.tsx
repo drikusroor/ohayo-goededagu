@@ -18,6 +18,8 @@ export const QUERY = gql`
       createdAt
       updatedAt
       avatar
+      name
+      japaneseName
     }
   }
 `
@@ -29,6 +31,8 @@ const UPDATE_PROFILE_MUTATION = gql`
       createdAt
       updatedAt
       avatar
+      name
+      japaneseName
     }
   }
 `
