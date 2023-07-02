@@ -38,11 +38,11 @@ export const getIcon = (type: EPostType) => {
 
 const ArticleTypeIcon = ({ type }: IArticleTypeIconProps) => {
   return (
-    <div className="bg-cobalt-red relative flex h-10 w-10 items-center justify-center rounded-full text-lg font-semibold text-slate-500">
+    <div className="bg-cobalt-red-500 relative flex h-10 w-10 items-center justify-center rounded-full text-lg font-semibold text-slate-500">
       <img
         src="/images/avatar.png"
         alt={type}
-        className="bg-cobalt-red absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-full object-cover shadow"
+        className="bg-cobalt-red-500 absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-full object-cover shadow"
         width={10}
         height={10}
       />

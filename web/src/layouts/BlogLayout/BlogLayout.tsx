@@ -20,7 +20,7 @@ const BlogLayout = ({ children }: BlogLayoutProps) => {
             <ul className="flex gap-3">
               <li>
                 <Link
-                  className="block rounded bg-cobalt-blue px-3 py-2 text-xs font-semibold uppercase text-white transition hover:brightness-110 hover:filter "
+                  className="block rounded bg-cobalt-blue-500 px-3 py-2 text-xs font-semibold uppercase text-white transition hover:bg-cobalt-blue-600 hover:filter"
                   to={routes.admin()}
                 >
                   Dashboard

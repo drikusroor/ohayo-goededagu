@@ -4,24 +4,34 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'cobalt-blue': '#1e4785',
-        'monza-red': '#BC002D',
+        'cobalt-blue': {
+          500: '#1e4785',
+          600: '#1c3d6e',
+        },
+        'monza-red': {
+          500: '#BC002D',
+          600: '#9c0028',
+        },
+        'rw-blue': {
+          500: '#3182ce',
+          600: '#2b6cb0',
+        },
       },
     },
   },
   safelist: [
-    'bg-cobalt-blue',
-    'bg-monza-red',
-    'text-cobalt-blue',
-    'text-monza-red',
-    'border-cobalt-blue',
-    'border-monza-red',
-    'hover:bg-cobalt-blue',
-    'hover:bg-monza-red',
-    'hover:text-cobalt-blue',
-    'hover:text-monza-red',
-    'hover:border-cobalt-blue',
-    'hover:border-monza-red',
+    'bg-cobalt-blue-500',
+    'bg-monza-red-500',
+    'text-cobalt-blue-500',
+    'text-monza-red-500',
+    'border-cobalt-blue-500',
+    'border-monza-red-600',
+    'hover:bg-cobalt-blue-600',
+    'hover:bg-monza-red-600',
+    'hover:text-cobalt-blue-600',
+    'hover:text-monza-red-600',
+    'hover:border-cobalt-blue-600',
+    'hover:border-monza-red-600',
   ],
   plugins: [],
 }
