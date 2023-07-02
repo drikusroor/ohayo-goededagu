@@ -8,10 +8,13 @@ import {
   Label,
   TextField,
   Submit,
-  CheckboxField,
+  SelectField,
 } from '@redwoodjs/forms'
 import type { RWGqlError } from '@redwoodjs/forms'
 
+import ArticleTypeIcon, {
+  postTypeOptions,
+} from 'src/components/ArticleTypeIcon/ArticleTypeIcon'
 import Button from 'src/components/Button/Button'
 import { classNames } from 'src/lib/class-names'
 
@@ -78,6 +81,29 @@ const PostForm = (props: PostFormProps) => {
         />
 
         <FieldError name="body" className="rw-field-error" />
+
+        <Label
+          name="type"
+          className="rw-label"
+          errorClassName="rw-label rw-label-error"
+        >
+          Post type
+        </Label>
+
+        <SelectField
+          name="type"
+          defaultValue={props.post?.type}
+          className="rw-input"
+          errorClassName="rw-input rw-input-error"
+          validation={{ required: true }}
+        >
+          {postTypeOptions.map((option) => (
+            <option key={option.value} value={option.value}>
+              {option.label}
+              <ArticleTypeIcon type={option.value} />
+            </option>
+          ))}
+        </SelectField>
 
         <div className="rw-button-group gap-0">
           <Button

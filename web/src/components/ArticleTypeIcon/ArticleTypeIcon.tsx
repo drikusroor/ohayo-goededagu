@@ -15,6 +15,14 @@ export enum EPostType {
   PHOTO_GALLERY = 'PHOTO_GALLERY',
 }
 
+export const postTypeOptions = [
+  { value: EPostType.ARTICLE, label: 'Article' },
+  { value: EPostType.VIDEO, label: 'Video' },
+  { value: EPostType.HAIKU, label: 'Haiku' },
+  { value: EPostType.CHOTTO, label: 'Chotto' },
+  { value: EPostType.PHOTO_GALLERY, label: 'Photo Gallery' },
+]
+
 interface IArticleTypeIconProps {
   type: EPostType
 }
