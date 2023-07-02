@@ -128,7 +128,6 @@ const PostForm = (props: PostFormProps) => {
           {postTypeOptions.map((option) => (
             <option key={option.value} value={option.value}>
               {option.label}
-              <ArticleTypeIcon type={option.value} />
             </option>
           ))}
         </SelectField>
