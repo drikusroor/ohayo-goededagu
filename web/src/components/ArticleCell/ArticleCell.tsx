@@ -13,6 +13,9 @@ export const QUERY = gql`
       body
       type
       createdAt
+      videoPost {
+        videoUrl
+      }
       user {
         name
       }

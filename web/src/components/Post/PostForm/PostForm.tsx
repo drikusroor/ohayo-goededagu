@@ -19,10 +19,13 @@ import {
 import type { RWGqlError } from '@redwoodjs/forms'
 
 import ArticleTypeIcon, {
+  EPostType,
   postTypeOptions,
 } from 'src/components/ArticleTypeIcon/ArticleTypeIcon'
 import Button from 'src/components/Button/Button'
 import { classNames } from 'src/lib/class-names'
+
+import VideoForm, { IVideoPostFormData } from './TypeForms/VideoForm'
 
 type FormPost = NonNullable<EditPostById['post']>
 
@@ -35,12 +38,28 @@ interface PostFormProps {
 
 const PostForm = (props: PostFormProps) => {
   const onSubmit = (data: FormPost) => {
-    props.onSave({ ...data, published }, props?.post?.id)
+    data.published = published
+
+    if (data.type === EPostType.VIDEO) {
+      delete data.videoUrl
+      data.videoPost = videoPostFormData
+    }
+
+    props.onSave(data, props?.post?.id)
   }
 
   const [published, setPublished] = React.useState<boolean>(
     props.post?.published || false
   )
+
+  const [postType, setPostType] = React.useState<EPostType>(
+    props.post?.type || EPostType.ARTICLE
+  )
+
+  const [videoPostFormData, setVideoPostFormData] =
+    React.useState<IVideoPostFormData>({
+      videoUrl: props.post?.videoUrl || '',
+    })
 
   return (
     <div className="rw-form-wrapper">
@@ -98,7 +117,10 @@ const PostForm = (props: PostFormProps) => {
 
         <SelectField
           name="type"
-          defaultValue={props.post?.type}
+          defaultValue={postType}
+          onChange={(e) => {
+            setPostType(e.target.value as EPostType)
+          }}
           className="rw-input"
           errorClassName="rw-input rw-input-error"
           validation={{ required: true }}
@@ -110,6 +132,13 @@ const PostForm = (props: PostFormProps) => {
             </option>
           ))}
         </SelectField>
+
+        {postType === EPostType.VIDEO && (
+          <VideoForm
+            videoPostFormData={videoPostFormData}
+            setVideoPostFormData={setVideoPostFormData}
+          />
+        )}
 
         <div className="rw-button-group gap-0">
           <Button

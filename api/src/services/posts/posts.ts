@@ -20,4 +20,10 @@ export const Post: PostRelationResolvers = {
   comments: (_obj, { root }) => {
     return db.comment.findMany({ where: { postId: root?.id } })
   },
+  videoPost: (_obj, { root }) => {
+    if (root.type === 'VIDEO') {
+      return db.videoPost.findFirst({ where: { postId: root?.id } })
+    }
+    return null
+  },
 }

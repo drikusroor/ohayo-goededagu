@@ -12,6 +12,9 @@ export const QUERY = gql`
       title
       body
       createdAt
+      videoPost {
+        videoUrl
+      }
       user {
         name
         profile {
