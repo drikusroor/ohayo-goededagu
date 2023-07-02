@@ -39,15 +39,23 @@ model Profile {
 }
 
 model Post {
-  id        Int      @id @default(autoincrement())
-  title     String
-  body      String
-  createdAt DateTime @default(now())
-  user      User     @relation(fields: [userId], references: [id])
-  userId    Int
-  published Boolean  @default(false)
-  type      PostType @default(ARTICLE)
-  comments  Comment[]
+  id          Int      @id @default(autoincrement())
+  title       String
+  body        String
+  createdAt   DateTime @default(now())
+  user        User     @relation(fields: [userId], references: [id])
+  userId      Int
+  published   Boolean  @default(false)
+  type        PostType @default(ARTICLE)
+  comments    Comment[]
+  videoPost   VideoPost?
+}
+
+model VideoPost {
+  id       Int   @id @default(autoincrement())
+  post     Post  @relation(fields: [postId], references: [id])
+  postId   Int   @unique
+  videoUrl String
 }
 
 enum Role {
