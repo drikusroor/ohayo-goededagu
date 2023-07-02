@@ -1,3 +1,4 @@
+import { BsFillSendFill, BsPencilSquare } from 'react-icons/bs'
 import type { EditPostById, UpdatePostInput } from 'types/graphql'
 
 import {
@@ -11,6 +12,9 @@ import {
 } from '@redwoodjs/forms'
 import type { RWGqlError } from '@redwoodjs/forms'
 
+import Button from 'src/components/Button/Button'
+import { classNames } from 'src/lib/class-names'
+
 type FormPost = NonNullable<EditPostById['post']>
 
 interface PostFormProps {
@@ -22,8 +26,12 @@ interface PostFormProps {
 
 const PostForm = (props: PostFormProps) => {
   const onSubmit = (data: FormPost) => {
-    props.onSave(data, props?.post?.id)
+    props.onSave({ ...data, published }, props?.post?.id)
   }
+
+  const [published, setPublished] = React.useState<boolean>(
+    props.post?.published || false
+  )
 
   return (
     <div className="rw-form-wrapper">
@@ -71,20 +79,35 @@ const PostForm = (props: PostFormProps) => {
 
         <FieldError name="body" className="rw-field-error" />
 
-        <Label
-          name="published"
-          className="rw-label"
-          errorClassName="rw-label rw-label-error"
-        >
-          Published
-        </Label>
+        <div className="rw-button-group gap-0">
+          <Button
+            type="button"
+            onClick={() => {
+              setPublished(false)
+            }}
+            className={classNames(
+              'flex items-center gap-2 rounded-r-none hover:bg-rw-blue-600',
+              !published ? 'bg-rw-blue-600 font-bold' : 'bg-rw-blue-500'
+            )}
+          >
+            Draft
+            <BsPencilSquare />
+          </Button>
 
-        <CheckboxField
-          name="published"
-          defaultChecked={props.post?.published}
-          className="rw-input"
-          errorClassName="rw-input rw-input-error"
-        />
+          <Button
+            type="button"
+            onClick={() => {
+              setPublished(true)
+            }}
+            className={classNames(
+              'flex items-center gap-2 rounded-l-none hover:bg-rw-blue-600',
+              published ? 'bg-rw-blue-600 font-bold' : 'bg-rw-blue-500'
+            )}
+          >
+            Published
+            <BsFillSendFill />
+          </Button>
+        </div>
 
         <div className="rw-button-group">
           <Submit disabled={props.loading} className="rw-button rw-button-blue">
