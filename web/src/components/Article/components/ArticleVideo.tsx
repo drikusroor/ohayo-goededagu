@@ -14,7 +14,7 @@ const ArticleVideo = ({ videoPost }: Props) => {
   if (!embedUrl) return null
 
   return (
-    <div className="aspect-video">
+    <div className="aspect-video max-h-[315px] max-w-[560px] bg-slate-300">
       <iframe
         width="560"
         height="315"
@@ -23,6 +23,7 @@ const ArticleVideo = ({ videoPost }: Props) => {
         frameBorder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         allowfullscreen
+        loading="lazy"
       ></iframe>
     </div>
   )
