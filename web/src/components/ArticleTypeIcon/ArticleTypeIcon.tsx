@@ -45,10 +45,12 @@ export const getIcon = (type: EPostType) => {
 }
 
 const ArticleTypeIcon = ({ type }: IArticleTypeIconProps) => {
+  const label = postTypeOptions.find((option) => option.value === type)?.label
+
   return (
     <div
       className="bg-cobalt-red-500 relative flex h-10 w-10 items-center justify-center rounded-full text-lg font-semibold text-slate-500"
-      title={`This is a ${type.toLowerCase()} post`}
+      title={`This is a ${label} post`}
     >
       <img
         src="/images/avatar.png"
