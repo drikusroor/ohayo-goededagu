@@ -20,8 +20,6 @@ const VideoForm = (props: VideoFormProps) => {
     })
   }
 
-  console.log('props.videoPostFormData', props.videoPostFormData)
-
   return (
     <div>
       <Label
