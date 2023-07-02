@@ -14,11 +14,10 @@ const ArticleVideo = ({ videoPost }: Props) => {
   if (!embedUrl) return null
 
   return (
-    <div className="aspect-video max-h-[315px] max-w-[560px] bg-slate-300">
+    <div className="aspect-video max-w-2xl bg-slate-300">
       <iframe
-        width="560"
-        height="315"
         src={embedUrl}
+        className="h-full w-full"
         title="YouTube video player"
         frameBorder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
