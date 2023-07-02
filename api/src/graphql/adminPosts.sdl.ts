@@ -7,6 +7,7 @@ export const schema = gql`
     updatedAt: DateTime!
     user: User!
     published: Boolean!
+    type: String!
   }
 
   type Query {
@@ -18,12 +19,14 @@ export const schema = gql`
     title: String!
     body: String!
     published: Boolean
+    type: String!
   }
 
   input UpdatePostInput {
     title: String
     body: String
     published: Boolean
+    type: String
   }
 
   type Mutation {

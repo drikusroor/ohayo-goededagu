@@ -13,6 +13,7 @@ export const QUERY = gql`
       body
       createdAt
       published
+      type
     }
   }
 `
