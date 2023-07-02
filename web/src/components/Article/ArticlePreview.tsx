@@ -66,11 +66,11 @@ const ArticlePreview = ({ article }: Props) => {
         </div>
       </header>
       <div className="ml-14">
-        <div>{article.body}</div>
-        <div className="mt-2">
+        <div>
           {article.type === EPostType.VIDEO && (
             <ArticleVideo videoPost={article.videoPost} />
           )}
+          <div className="mt-2">{article.body}</div>
         </div>
       </div>
     </article>
