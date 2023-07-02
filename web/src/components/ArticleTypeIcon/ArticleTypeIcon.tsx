@@ -38,7 +38,10 @@ export const getIcon = (type: EPostType) => {
 
 const ArticleTypeIcon = ({ type }: IArticleTypeIconProps) => {
   return (
-    <div className="bg-cobalt-red-500 relative flex h-10 w-10 items-center justify-center rounded-full text-lg font-semibold text-slate-500">
+    <div
+      className="bg-cobalt-red-500 relative flex h-10 w-10 items-center justify-center rounded-full text-lg font-semibold text-slate-500"
+      title={`This is a ${type.toLowerCase()} post`}
+    >
       <img
         src="/images/avatar.png"
         alt={type}
