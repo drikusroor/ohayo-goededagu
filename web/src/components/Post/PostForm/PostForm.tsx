@@ -58,7 +58,7 @@ const PostForm = (props: PostFormProps) => {
 
   const [videoPostFormData, setVideoPostFormData] =
     React.useState<IVideoPostFormData>({
-      videoUrl: props.post?.videoUrl || '',
+      videoUrl: props.post?.videoPost?.videoUrl || '',
     })
 
   return (
