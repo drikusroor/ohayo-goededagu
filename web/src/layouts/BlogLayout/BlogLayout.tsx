@@ -63,7 +63,8 @@ const BlogLayout = ({ children }: BlogLayoutProps) => {
           </Link>
         </div>
         <h1 className="pt-3 text-3xl font-bold">
-          Ohayou Goededagu | おはよ グデダギュ
+          <span className="whitespace-nowrap">Ohayou&nbsp;Goededagu</span> |{' '}
+          <span className="whitespace-nowrap">おはよ&nbsp;グデダギュ</span>
         </h1>
         <pre className="mt-3">Japan 2023</pre>
         <nav>
