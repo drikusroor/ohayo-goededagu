@@ -18,7 +18,7 @@ const ArticleVideo = ({ videoPost }: Props) => {
   if (!embedUrl) return null
 
   return (
-    <div className="aspect-video max-w-2xl bg-slate-300">
+    <div className="aspect-video bg-slate-300">
       <iframe
         src={embedUrl}
         className="h-full w-full"
