@@ -9,6 +9,7 @@ export const schema = gql`
     published: Boolean!
     type: String!
     comments: [Comment]!
+    videoPost: VideoPost
   }
 
   type Query {

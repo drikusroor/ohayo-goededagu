@@ -8,6 +8,7 @@ import ArticleTypeIcon, { EPostType } from '../ArticleTypeIcon/ArticleTypeIcon'
 import Comment from '../Comment/Comment'
 import CommentForm from '../CommentForm/CommentForm'
 
+import ArticleVideo from './components/ArticleVideo'
 import { hotScore } from './helpers/sort-comments'
 
 interface Props {
@@ -60,6 +61,9 @@ const Article = ({ article }: Props) => {
           <span className="text-sm text-slate-500"> | {formattedDate}</span>
         </div>
       </header>
+      {article.type === EPostType.VIDEO && (
+        <ArticleVideo videoPost={article.videoPost} />
+      )}
       <div>{article.body}</div>
       <h3 className="mt-4 text-lg font-light text-gray-600">Comments</h3>
       <ul className="mt-4 max-w-xl">

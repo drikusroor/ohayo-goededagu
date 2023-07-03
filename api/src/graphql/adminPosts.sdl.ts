@@ -8,6 +8,7 @@ export const schema = gql`
     user: User!
     published: Boolean!
     type: String!
+    videoPost: VideoPost
   }
 
   type Query {
@@ -20,6 +21,7 @@ export const schema = gql`
     body: String!
     published: Boolean
     type: String!
+    videoPost: CreateVideoPostInput
   }
 
   input UpdatePostInput {
@@ -27,6 +29,7 @@ export const schema = gql`
     body: String
     published: Boolean
     type: String
+    videoPost: CreateVideoPostInput
   }
 
   type Mutation {

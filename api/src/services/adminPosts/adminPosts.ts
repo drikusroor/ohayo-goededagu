@@ -12,13 +12,25 @@ export const adminPost = ({ id }) => {
   })
 }
 
-export const createPost = ({ input }) => {
-  return db.post.create({
-    data: { ...input, userId: context.currentUser.id },
+export const createPost = async ({ input }) => {
+  const { videoPost, ...postInput } = input
+
+  const created = await db.post.create({
+    data: { ...postInput, userId: context.currentUser.id },
   })
+
+  if (postInput.type === 'VIDEO' && videoPost) {
+    await db.videoPost.create({
+      data: { ...videoPost, postId: created.id },
+    })
+  }
+
+  return created
 }
 
 export const updatePost = async ({ id, input }) => {
+  const { videoPost, ...postInput } = input
+
   const post = await db.post.findUnique({ where: { id } })
 
   if (!post) {
@@ -27,10 +39,20 @@ export const updatePost = async ({ id, input }) => {
 
   await verifyOwnership(post)
 
-  return db.post.update({
-    data: input,
+  const updated = await db.post.update({
+    data: postInput,
     where: { id },
   })
+
+  if (postInput.type === 'VIDEO' && videoPost) {
+    await db.videoPost.upsert({
+      where: { postId: id },
+      create: { ...videoPost, postId: id },
+      update: videoPost,
+    })
+  }
+
+  return updated
 }
 
 export const deletePost = async ({ id }) => {

@@ -16,6 +16,9 @@ export const QUERY = gql`
       type
       createdAt
       published
+      videoPost {
+        videoUrl
+      }
     }
   }
 `
@@ -27,6 +30,9 @@ const UPDATE_POST_MUTATION = gql`
       body
       createdAt
       published
+      videoPost {
+        videoUrl
+      }
     }
   }
 `

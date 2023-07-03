@@ -5,6 +5,8 @@ import { Link, navigate, routes } from '@redwoodjs/router'
 import ArticleTypeIcon, { EPostType } from '../ArticleTypeIcon/ArticleTypeIcon'
 import Avatar from '../Avatar/Avatar'
 
+import ArticleVideo from './components/ArticleVideo'
+
 interface Props {
   article: Post
 }
@@ -63,7 +65,14 @@ const ArticlePreview = ({ article }: Props) => {
           </h2>
         </div>
       </header>
-      <div className="ml-14">{article.body}</div>
+      <div className="ml-14">
+        <div>
+          {article.type === EPostType.VIDEO && (
+            <ArticleVideo videoPost={article.videoPost} />
+          )}
+          <div className="mt-2">{article.body}</div>
+        </div>
+      </div>
     </article>
   )
 }
