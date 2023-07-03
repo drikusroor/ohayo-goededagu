@@ -1,5 +1,7 @@
 import { useMemo } from 'react'
 
+import extractVideoID from './helpers/extract-video-id'
+
 interface Props {
   videoPost: {
     videoUrl: string
@@ -8,7 +10,9 @@ interface Props {
 
 const ArticleVideo = ({ videoPost }: Props) => {
   const embedUrl = useMemo(() => {
-    return videoPost?.videoUrl.replace('/live/', '/embed/')
+    const videoId = extractVideoID(videoPost?.videoUrl)
+    if (!videoId) return null
+    return `https://www.youtube.com/embed/${videoId}`
   }, [videoPost?.videoUrl])
 
   if (!embedUrl) return null
