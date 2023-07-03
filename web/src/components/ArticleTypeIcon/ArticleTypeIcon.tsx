@@ -15,6 +15,14 @@ export enum EPostType {
   PHOTO_GALLERY = 'PHOTO_GALLERY',
 }
 
+export const postTypeOptions = [
+  { value: EPostType.ARTICLE, label: 'Article' },
+  { value: EPostType.VIDEO, label: 'Video' },
+  { value: EPostType.HAIKU, label: 'Haiku' },
+  { value: EPostType.CHOTTO, label: 'Chotto' },
+  { value: EPostType.PHOTO_GALLERY, label: 'Photo Gallery' },
+]
+
 interface IArticleTypeIconProps {
   type: EPostType
 }
@@ -37,8 +45,13 @@ export const getIcon = (type: EPostType) => {
 }
 
 const ArticleTypeIcon = ({ type }: IArticleTypeIconProps) => {
+  const label = postTypeOptions.find((option) => option.value === type)?.label
+
   return (
-    <div className="bg-cobalt-red-500 relative flex h-10 w-10 items-center justify-center rounded-full text-lg font-semibold text-slate-500">
+    <div
+      className="bg-cobalt-red-500 relative flex h-10 w-10 items-center justify-center rounded-full text-lg font-semibold text-slate-500"
+      title={`This is a ${label} post`}
+    >
       <img
         src="/images/avatar.png"
         alt={type}

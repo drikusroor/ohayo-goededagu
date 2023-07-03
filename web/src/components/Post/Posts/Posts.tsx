@@ -4,6 +4,9 @@ import { Link, routes } from '@redwoodjs/router'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
+import ArticleTypeIcon, {
+  EPostType,
+} from 'src/components/ArticleTypeIcon/ArticleTypeIcon'
 import Button from 'src/components/Button/Button'
 import { QUERY } from 'src/components/Post/PostsCell'
 import { timeTag, truncate } from 'src/lib/formatters'
@@ -45,6 +48,7 @@ const PostsList = ({ posts }: FindPosts) => {
             <th>Id</th>
             <th>Title</th>
             <th>Body</th>
+            <th>Type</th>
             <th>Published</th>
             <th>Created at</th>
             <th>&nbsp;</th>
@@ -56,6 +60,9 @@ const PostsList = ({ posts }: FindPosts) => {
               <td>{truncate(post.id)}</td>
               <td>{truncate(post.title)}</td>
               <td>{truncate(post.body)}</td>
+              <td>
+                <ArticleTypeIcon type={post.type as EPostType} />
+              </td>
               <td>{post.published ? 'Yes' : 'No'}</td>
               <td>{timeTag(post.createdAt)}</td>
               <td>
