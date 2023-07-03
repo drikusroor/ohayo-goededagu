@@ -110,7 +110,7 @@ const AdminDashboardLayout = ({ children }: AdminDashboardLayoutProps) => {
           </nav>
         </div>
         {isAuthenticated ? (
-          <div className="flex items-center justify-between bg-slate-500 p-3 text-white">
+          <div className="flex items-center justify-between bg-slate-500 p-1 text-white sm:p-3">
             <span className="hidden md:block">
               Logged in as {currentUser.email.split('@')[0]}
             </span>
