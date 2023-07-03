@@ -25,7 +25,7 @@ const Avatar = ({
       <img
         src={fallbackImage}
         alt={definitiveAlt}
-        className={`bg-cobalt-red flex h-10 w-10 items-center justify-center rounded-full object-cover shadow ${
+        className={`bg-cobalt-red-500 flex h-10 w-10 items-center justify-center rounded-full object-cover shadow ${
           className ?? ''
         }`}
         width={width}
@@ -34,12 +34,12 @@ const Avatar = ({
     </picture>
   ) : (
     <div
-      className={`bg-cobalt-red relative flex h-10 w-10 items-center justify-center rounded-full text-lg font-semibold text-slate-500 ${className}`}
+      className={`bg-cobalt-red-500 relative flex h-10 w-10 items-center justify-center rounded-full text-lg font-semibold text-slate-500 ${className}`}
     >
       <img
         src={fallbackImage}
         alt={definitiveAlt}
-        className={`bg-cobalt-red absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-full object-cover shadow ${
+        className={`bg-cobalt-red-500 absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-full object-cover shadow ${
           className ?? ''
         }`}
         width={width}

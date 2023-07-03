@@ -1,3 +1,10 @@
+import {
+  BsFillSendFill,
+  BsPencilSquare,
+  BsFillCircleFill,
+  BsFillCheckCircleFill,
+  BsFillExclamationTriangleFill,
+} from 'react-icons/bs'
 import type { EditPostById, UpdatePostInput } from 'types/graphql'
 
 import {
@@ -11,6 +18,9 @@ import {
 } from '@redwoodjs/forms'
 import type { RWGqlError } from '@redwoodjs/forms'
 
+import Button from 'src/components/Button/Button'
+import { classNames } from 'src/lib/class-names'
+
 type FormPost = NonNullable<EditPostById['post']>
 
 interface PostFormProps {
@@ -22,8 +32,12 @@ interface PostFormProps {
 
 const PostForm = (props: PostFormProps) => {
   const onSubmit = (data: FormPost) => {
-    props.onSave(data, props?.post?.id)
+    props.onSave({ ...data, published }, props?.post?.id)
   }
+
+  const [published, setPublished] = React.useState<boolean>(
+    props.post?.published || false
+  )
 
   return (
     <div className="rw-form-wrapper">
@@ -71,20 +85,47 @@ const PostForm = (props: PostFormProps) => {
 
         <FieldError name="body" className="rw-field-error" />
 
-        <Label
-          name="published"
-          className="rw-label"
-          errorClassName="rw-label rw-label-error"
-        >
-          Published
-        </Label>
+        <div className="rw-button-group gap-0">
+          <Button
+            type="button"
+            onClick={() => {
+              setPublished(false)
+            }}
+            className={classNames(
+              'flex items-center gap-2 rounded-r-none hover:bg-rw-blue-600',
+              !published ? 'bg-green-600 underline' : 'bg-rw-blue-500'
+            )}
+          >
+            Draft
+            <BsPencilSquare />
+            {!published ? <BsFillCheckCircleFill /> : <BsFillCircleFill />}
+          </Button>
 
-        <CheckboxField
-          name="published"
-          defaultChecked={props.post?.published}
-          className="rw-input"
-          errorClassName="rw-input rw-input-error"
-        />
+          <Button
+            type="button"
+            onClick={() => {
+              setPublished(true)
+            }}
+            className={classNames(
+              'flex items-center gap-2 rounded-l-none hover:bg-rw-blue-600',
+              published ? 'bg-green-600 underline' : 'bg-rw-blue-500'
+            )}
+          >
+            Published
+            <BsFillSendFill />
+            {published ? <BsFillCheckCircleFill /> : <BsFillCircleFill />}
+          </Button>
+        </div>
+
+        {published && (
+          <div
+            className="mt-5 flex items-center border-l-4 border-yellow-500 bg-yellow-100 p-4 text-yellow-700"
+            role="alert"
+          >
+            <BsFillExclamationTriangleFill className="mr-2 inline-block" />
+            <p className="font-bold">Warning: This post will be published.</p>
+          </div>
+        )}
 
         <div className="rw-button-group">
           <Submit disabled={props.loading} className="rw-button rw-button-blue">
