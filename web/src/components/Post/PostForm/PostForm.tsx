@@ -1,4 +1,10 @@
-import { BsFillSendFill, BsPencilSquare } from 'react-icons/bs'
+import {
+  BsFillSendFill,
+  BsPencilSquare,
+  BsFillCircleFill,
+  BsFillCheckCircleFill,
+  BsFillExclamationTriangleFill,
+} from 'react-icons/bs'
 import type { EditPostById, UpdatePostInput } from 'types/graphql'
 
 import {
@@ -113,11 +119,12 @@ const PostForm = (props: PostFormProps) => {
             }}
             className={classNames(
               'flex items-center gap-2 rounded-r-none hover:bg-rw-blue-600',
-              !published ? 'bg-rw-blue-600 font-bold' : 'bg-rw-blue-500'
+              !published ? 'bg-green-600 underline' : 'bg-rw-blue-500'
             )}
           >
             Draft
             <BsPencilSquare />
+            {!published ? <BsFillCheckCircleFill /> : <BsFillCircleFill />}
           </Button>
 
           <Button
@@ -127,13 +134,24 @@ const PostForm = (props: PostFormProps) => {
             }}
             className={classNames(
               'flex items-center gap-2 rounded-l-none hover:bg-rw-blue-600',
-              published ? 'bg-rw-blue-600 font-bold' : 'bg-rw-blue-500'
+              published ? 'bg-green-600 underline' : 'bg-rw-blue-500'
             )}
           >
             Published
             <BsFillSendFill />
+            {published ? <BsFillCheckCircleFill /> : <BsFillCircleFill />}
           </Button>
         </div>
+
+        {published && (
+          <div
+            className="mt-5 flex items-center border-l-4 border-yellow-500 bg-yellow-100 p-4 text-yellow-700"
+            role="alert"
+          >
+            <BsFillExclamationTriangleFill className="mr-2 inline-block" />
+            <p className="font-bold">Warning: This post will be published.</p>
+          </div>
+        )}
 
         <div className="rw-button-group">
           <Submit disabled={props.loading} className="rw-button rw-button-blue">
