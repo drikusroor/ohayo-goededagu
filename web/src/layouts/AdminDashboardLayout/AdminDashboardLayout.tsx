@@ -1,6 +1,12 @@
 import { useCallback } from 'react'
 
-import { BsBoxArrowUp } from 'react-icons/bs'
+import {
+  BsBoxArrowUp,
+  BsFillHouseFill,
+  BsFillJournalBookmarkFill,
+  BsFillPersonFill,
+  BsFillPersonVcardFill,
+} from 'react-icons/bs'
 
 import { Link, routes } from '@redwoodjs/router'
 import { useLocation } from '@redwoodjs/router'
@@ -13,28 +19,33 @@ interface MenuItem {
   path: string
   activeRoutePattern?: string
   roles?: string[]
+  icon?: React.ReactNode
 }
 
 const menuItems: MenuItem[] = [
   {
     name: 'Home',
     path: '/',
+    icon: <BsFillHouseFill />,
   },
   {
     name: 'Posts',
     path: '/admin/posts',
     activeRoutePattern: '/posts',
     roles: ['ADMIN', 'MODERATOR'],
+    icon: <BsFillJournalBookmarkFill />,
   },
   {
     name: 'Account',
     path: '/admin/account',
     activeRoutePattern: '/account',
+    icon: <BsFillPersonFill />,
   },
   {
     name: 'Profile',
     path: '/admin/profile/self',
     activeRoutePattern: '/profile',
+    icon: <BsFillPersonVcardFill />,
   },
 ]
 
@@ -85,12 +96,13 @@ const AdminDashboardLayout = ({ children }: AdminDashboardLayoutProps) => {
                 return (
                   <Link
                     key={item.name}
-                    className={`dashboard-item ${getIsActiveClass(
+                    className={`dashboard-item flex items-center gap-2 ${getIsActiveClass(
                       item.activeRoutePattern
                     )}`}
                     to={item.path}
                   >
-                    {item.name}
+                    <span className="mx-auto text-lg sm:mx-0">{item.icon}</span>
+                    <span className="hidden sm:inline-block">{item.name}</span>
                   </Link>
                 )
               })}
