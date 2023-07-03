@@ -1,5 +1,7 @@
 import { useCallback } from 'react'
 
+import { BsBoxArrowUp } from 'react-icons/bs'
+
 import { Link, routes } from '@redwoodjs/router'
 import { useLocation } from '@redwoodjs/router'
 
@@ -100,7 +102,14 @@ const AdminDashboardLayout = ({ children }: AdminDashboardLayoutProps) => {
             <span className="hidden md:block">
               Logged in as {currentUser.email.split('@')[0]}
             </span>
-            <Button text="Logout" onClick={logOut} color="monza-red" />
+            <Button
+              onClick={logOut}
+              color="monza-red"
+              className="flex items-center gap-2 px-4 py-3 sm:text-xs "
+            >
+              <BsBoxArrowUp />
+              <span className="hidden sm:block ">Logout</span>
+            </Button>
           </div>
         ) : (
           <Link to={routes.login()}>Login</Link>

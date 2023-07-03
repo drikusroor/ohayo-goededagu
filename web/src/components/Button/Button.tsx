@@ -30,7 +30,7 @@ const Button = ({
       type={type}
       aria-label={text}
       title={title ? title : text ? text : ''}
-      className={`block rounded px-3 py-2 text-xs font-semibold uppercase
+      className={`block rounded px-3 py-2 font-semibold uppercase
       ${buttonColors}
       ${className}
       `}
