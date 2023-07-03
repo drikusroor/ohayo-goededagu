@@ -2,10 +2,12 @@ import type { Post } from 'types/graphql'
 
 import { Link, navigate, routes } from '@redwoodjs/router'
 
-import ArticleTypeIcon, { EPostType } from '../ArticleTypeIcon/ArticleTypeIcon'
-import Avatar from '../Avatar/Avatar'
+import ArticleTypeIcon, {
+  EPostType,
+} from '../../ArticleTypeIcon/ArticleTypeIcon'
+import Avatar from '../../Avatar/Avatar'
 
-import ArticleVideo from './components/ArticleVideo'
+import ArticleVideo from './ArticleVideo'
 
 interface Props {
   article: Post
