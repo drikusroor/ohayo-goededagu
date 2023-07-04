@@ -17,7 +17,7 @@ const BlogLayout = ({ children }: BlogLayoutProps) => {
       <Toaster />
       <header className="w-full pb-5 text-center">
         {isAuthenticated && currentUser && (
-          <div className="fixed top-0 flex w-full items-center justify-between bg-slate-900 p-3 text-white">
+          <div className="fixed top-0 z-10 flex w-full items-center justify-between bg-slate-900 p-3 text-white">
             <div className="flex items-center gap-2">
               <Link
                 className="flex items-center gap-2 rounded bg-cobalt-blue-500 px-4 py-3 font-semibold uppercase text-white transition hover:bg-cobalt-blue-600 hover:filter sm:text-xs"
