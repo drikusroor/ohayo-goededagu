@@ -117,7 +117,7 @@ const AdminDashboardLayout = ({ children }: AdminDashboardLayoutProps) => {
             <Button
               onClick={logOut}
               color="monza-red"
-              className="flex items-center gap-2 px-4 py-3 sm:text-xs "
+              className="flex items-center gap-2 px-4 py-3 sm:text-sm"
             >
               <BsBoxArrowUp />
               <span className="hidden sm:block ">Logout</span>
