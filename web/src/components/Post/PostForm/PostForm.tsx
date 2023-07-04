@@ -99,10 +99,10 @@ const PostForm = (props: PostFormProps) => {
 
         <TextField
           name="body"
-          defaultValue={props.post?.body}
+          defaultValue={props.post?.body ?? ''}
           className="rw-input"
           errorClassName="rw-input rw-input-error"
-          validation={{ required: true }}
+          validation={{ required: postType !== EPostType.VIDEO }}
         />
 
         <FieldError name="body" className="rw-field-error" />
