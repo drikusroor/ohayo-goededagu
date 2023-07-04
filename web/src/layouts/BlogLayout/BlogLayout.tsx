@@ -1,3 +1,5 @@
+import { BsBoxArrowUp, BsPersonCircle, BsTools } from 'react-icons/bs'
+
 import { Link, routes } from '@redwoodjs/router'
 import { Toaster } from '@redwoodjs/web/dist/toast'
 
@@ -15,24 +17,41 @@ const BlogLayout = ({ children }: BlogLayoutProps) => {
       <Toaster />
       <header className="w-full pb-5 text-center">
         {isAuthenticated && currentUser && (
-          <div className="flex items-center justify-between bg-slate-500 p-3 text-white">
-            <span>Logged in as {currentUser.email}</span>
+          <div className="fixed top-0 z-10 flex w-full items-center justify-between bg-slate-900 p-3 text-white">
+            <div className="flex items-center gap-2">
+              <Link
+                className="flex items-center gap-2 rounded bg-cobalt-blue-500 px-4 py-3 font-semibold uppercase text-white transition hover:bg-cobalt-blue-600 hover:filter sm:text-xs"
+                to={routes.admin()}
+              >
+                <BsTools />
+                <span className="hidden sm:block">Dashboard</span>
+              </Link>
+            </div>
             <ul className="flex gap-3">
               <li>
                 <Link
-                  className="block rounded bg-cobalt-blue-500 px-3 py-2 text-xs font-semibold uppercase text-white transition hover:bg-cobalt-blue-600 hover:filter"
-                  to={routes.admin()}
+                  to={routes.account()}
+                  className="flex items-center gap-2 rounded bg-yellow-600 px-4 py-3 font-semibold uppercase text-white transition hover:bg-yellow-700 hover:filter sm:text-xs"
+                  title={currentUser.email}
                 >
-                  Dashboard
+                  <BsPersonCircle />
+                  <span className="hidden sm:inline-block">Account</span>
                 </Link>
               </li>
               <li>
-                <Button text="Logout" onClick={logOut} color="monza-red" />
+                <Button
+                  onClick={logOut}
+                  color="monza-red"
+                  className="flex items-center gap-2 px-4 py-3 sm:text-xs "
+                >
+                  <BsBoxArrowUp />
+                  <span className="hidden sm:block ">Logout</span>
+                </Button>
               </li>
             </ul>
           </div>
         )}
-        <div className="mx-auto w-32">
+        <div className={`mx-auto w-32 ${isAuthenticated && 'mt-16'}`}>
           <Link to={routes.home()} title="Ohayou Goededagu" aria-label="Home">
             <img
               src="/images/logo.png"
@@ -44,7 +63,8 @@ const BlogLayout = ({ children }: BlogLayoutProps) => {
           </Link>
         </div>
         <h1 className="pt-3 text-3xl font-bold">
-          Ohayou Goededagu | おはよ グデダギュ
+          <span className="whitespace-nowrap">Ohayou&nbsp;Goededagu</span> |{' '}
+          <span className="whitespace-nowrap">おはよ&nbsp;グデダギュ</span>
         </h1>
         <pre className="mt-3">Japan 2023</pre>
         <nav>

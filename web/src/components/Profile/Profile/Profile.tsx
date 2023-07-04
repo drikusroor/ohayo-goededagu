@@ -1,3 +1,4 @@
+import { BsFillPencilFill } from 'react-icons/bs'
 import type { FindProfileById } from 'types/graphql'
 
 import { Link, routes } from '@redwoodjs/router'
@@ -59,7 +60,12 @@ const Profile = ({ profile }: Props) => {
       </div>
       {currentUser?.id === profile.userId && (
         <nav className="rw-button-group">
-          <Link to={routes.editProfile()} className="rw-button rw-button-blue">
+          <Link
+            to={routes.editProfile()}
+            title="Edit profile"
+            className="rw-button rw-button-blue flex items-center gap-2 py-2 text-base transition-colors sm:text-sm"
+          >
+            <BsFillPencilFill />
             Edit
           </Link>
         </nav>

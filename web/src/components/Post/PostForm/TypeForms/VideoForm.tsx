@@ -1,5 +1,7 @@
 import { Label, InputField } from '@redwoodjs/forms'
 
+import ArticleVideo from 'src/components/Article/components/ArticleVideo'
+
 export interface IVideoPostFormData {
   videoUrl: string
 }
@@ -37,6 +39,12 @@ const VideoForm = (props: VideoFormProps) => {
         validation={{ required: true }}
         onChange={(e) => updateVideoPostFormData('videoUrl', e)}
       />
+
+      <div className="mt-4">
+        <ArticleVideo
+          videoPost={{ videoUrl: props.videoPostFormData?.videoUrl }}
+        />
+      </div>
     </div>
   )
 }

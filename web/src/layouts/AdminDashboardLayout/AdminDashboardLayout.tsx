@@ -1,5 +1,13 @@
 import { useCallback } from 'react'
 
+import {
+  BsBoxArrowUp,
+  BsFillHouseFill,
+  BsFillJournalBookmarkFill,
+  BsFillPersonFill,
+  BsFillPersonVcardFill,
+} from 'react-icons/bs'
+
 import { Link, routes } from '@redwoodjs/router'
 import { useLocation } from '@redwoodjs/router'
 
@@ -11,28 +19,33 @@ interface MenuItem {
   path: string
   activeRoutePattern?: string
   roles?: string[]
+  icon?: React.ReactNode
 }
 
 const menuItems: MenuItem[] = [
   {
     name: 'Home',
     path: '/',
+    icon: <BsFillHouseFill />,
   },
   {
     name: 'Posts',
     path: '/admin/posts',
     activeRoutePattern: '/posts',
     roles: ['ADMIN', 'MODERATOR'],
+    icon: <BsFillJournalBookmarkFill />,
   },
   {
     name: 'Account',
     path: '/admin/account',
     activeRoutePattern: '/account',
+    icon: <BsFillPersonFill />,
   },
   {
     name: 'Profile',
     path: '/admin/profile/self',
     activeRoutePattern: '/profile',
+    icon: <BsFillPersonVcardFill />,
   },
 ]
 
@@ -55,7 +68,7 @@ const AdminDashboardLayout = ({ children }: AdminDashboardLayoutProps) => {
 
   return (
     <div className="flex flex-row">
-      <div className="flex h-screen flex-col justify-between bg-gray-200 md:w-64">
+      <div className="fixed flex h-screen w-14 flex-col justify-between bg-gray-200 md:w-64">
         <div>
           <div className="p-1 md:p-3 md:text-center">
             <h1 className="flex items-center justify-between text-xl font-bold md:text-3xl">
@@ -83,12 +96,13 @@ const AdminDashboardLayout = ({ children }: AdminDashboardLayoutProps) => {
                 return (
                   <Link
                     key={item.name}
-                    className={`dashboard-item ${getIsActiveClass(
+                    className={`dashboard-item flex items-center gap-2 ${getIsActiveClass(
                       item.activeRoutePattern
                     )}`}
                     to={item.path}
                   >
-                    {item.name}
+                    <span className="mx-auto text-lg md:mx-0">{item.icon}</span>
+                    <span className="hidden md:inline-block">{item.name}</span>
                   </Link>
                 )
               })}
@@ -96,17 +110,26 @@ const AdminDashboardLayout = ({ children }: AdminDashboardLayoutProps) => {
           </nav>
         </div>
         {isAuthenticated ? (
-          <div className="flex items-center justify-between bg-slate-500 p-3 text-white">
+          <div className="flex items-center justify-between bg-slate-500 p-1 text-white md:p-3">
             <span className="hidden md:block">
               Logged in as {currentUser.email.split('@')[0]}
             </span>
-            <Button text="Logout" onClick={logOut} color="monza-red" />
+            <Button
+              onClick={logOut}
+              color="monza-red"
+              className="flex items-center gap-2 px-4 py-3 md:text-sm"
+            >
+              <BsBoxArrowUp />
+              <span className="hidden md:block ">Logout</span>
+            </Button>
           </div>
         ) : (
           <Link to={routes.login()}>Login</Link>
         )}
       </div>
-      <div className="flex flex-1 flex-col overflow-auto">{children}</div>
+      <div className="flex flex-1 flex-col overflow-auto pl-14 md:pl-64">
+        {children}
+      </div>
     </div>
   )
 }
