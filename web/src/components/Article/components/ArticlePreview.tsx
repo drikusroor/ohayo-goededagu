@@ -46,14 +46,16 @@ const ArticlePreview = ({ article }: Props) => {
 
           {article.type === EPostType.ARTICLE && (
             <>
-              <div className="flex items-center justify-center bg-yellow-400">
-                <img
-                  alt="cover"
-                  className="aspect-video w-full object-cover"
-                  src="https://cdn.cheapoguides.com/wp-content/uploads/sites/2/2020/05/akihabara-iStock-484915982-1024x683.jpg"
-                />
-              </div>
+              <img
+                alt="cover"
+                className="aspect-video w-full object-cover"
+                src="https://cdn.cheapoguides.com/wp-content/uploads/sites/2/2020/05/akihabara-iStock-484915982-1024x683.jpg"
+              />
             </>
+          )}
+
+          {(article.type === EPostType.HAIKU || EPostType.CHOTTO) && (
+            <div className="justmt-2">{article.body}</div>
           )}
 
           <div className="flex flex-col gap-4 pt-8">
@@ -101,7 +103,7 @@ const ArticlePreview = ({ article }: Props) => {
               )}
             </div>
 
-            {article.type != EPostType.VIDEO && (
+            {article.type === EPostType.ARTICLE && (
               <>
                 <div className="justmt-2 line-clamp-3">{article.body}</div>
                 <div className="flex justify-end">
