@@ -31,17 +31,29 @@ const ArticlePreview = ({ article }: Props) => {
         <div className="mt-4 flex flex-row items-center gap-4">
           <ArticleTypeIcon type={article.type as EPostType} />
           <h2
-            className="text-2xl font-semibold text-slate-700"
+            className="text-xl font-semibold text-slate-700 md:text-2xl"
             title={article.title}
           >
             <Link to={routes.article({ id: article.id })}>{article.title}</Link>
           </h2>
         </div>
       </header>
-      <div className="md:ml-14">
+      <div className="lg:mx-14">
         <div>
           {article.type === EPostType.VIDEO && (
             <ArticleVideo videoPost={article.videoPost} />
+          )}
+
+          {article.type === EPostType.ARTICLE && (
+            <>
+              <div className="flex items-center justify-center bg-yellow-400">
+                <img
+                  alt="cover"
+                  className="aspect-video w-full object-cover"
+                  src="https://cdn.cheapoguides.com/wp-content/uploads/sites/2/2020/05/akihabara-iStock-484915982-1024x683.jpg"
+                />
+              </div>
+            </>
           )}
 
           <div className="flex flex-col gap-4 pt-8">
@@ -80,17 +92,28 @@ const ArticlePreview = ({ article }: Props) => {
               </div>
               {article.type === EPostType.VIDEO && article.body && (
                 <Button
-                  className="flex items-center gap-2 px-4 py-3 sm:text-xs "
+                  className="flex items-center gap-2 px-4 py-3 text-xs"
                   onClick={() => onReadMore(article)}
                 >
-                  Lees blog
+                  <span className="hidden sm:inline-block">Lees blog</span>
                   <BsSearch />
                 </Button>
               )}
             </div>
 
             {article.type != EPostType.VIDEO && (
-              <div className="justmt-2">{article.body}</div>
+              <>
+                <div className="justmt-2 line-clamp-3">{article.body}</div>
+                <div className="flex justify-end">
+                  <Button
+                    className="flex max-w-fit items-center justify-end gap-2 px-4 py-3 text-xs"
+                    onClick={() => onReadMore(article)}
+                  >
+                    <span className="hidden sm:inline-block">Lees blog</span>
+                    <BsSearch />
+                  </Button>
+                </div>
+              </>
             )}
           </div>
         </div>

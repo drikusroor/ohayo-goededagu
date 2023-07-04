@@ -1,3 +1,6 @@
+import { icon } from '@fortawesome/fontawesome-svg-core'
+import { IconBase } from 'react-icons/lib'
+
 interface ButtonProps {
   onClick?: () => void
   className?: string

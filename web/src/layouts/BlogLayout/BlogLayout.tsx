@@ -82,7 +82,7 @@ const BlogLayout = ({ children }: BlogLayoutProps) => {
           </ul>
         </nav>
       </header>
-      <main className="max-w-screen mx-auto p-4 md:max-w-7xl">{children}</main>
+      <main className="mx-auto max-w-5xl p-4 ">{children}</main>
     </>
   )
 }
