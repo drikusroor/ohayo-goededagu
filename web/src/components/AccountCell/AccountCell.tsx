@@ -1,3 +1,4 @@
+import { BsFillPencilFill } from 'react-icons/bs'
 import type { FindAccountQuery, FindAccountQueryVariables } from 'types/graphql'
 
 import { Link, routes } from '@redwoodjs/router'
@@ -32,7 +33,12 @@ export const Success = ({
       <p className="mt-2 text-gray-700">Email: {account.email}</p>
 
       <div className="mt-5 flex gap-2">
-        <Link to={routes.editAccount()} className="rw-button rw-button-blue">
+        <Link
+          to={routes.editAccount()}
+          title="Edit account"
+          className="rw-button rw-button-blue flex items-center gap-2 py-2 text-base transition-colors sm:text-sm"
+        >
+          <BsFillPencilFill />
           Edit
         </Link>
       </div>
