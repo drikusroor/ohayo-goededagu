@@ -21,9 +21,16 @@ const ArticlePreview = ({ article }: Props) => {
     navigate(routes.article({ id: article.id }))
   }
 
+  const border =
+    article.type === EPostType.HAIKU
+      ? `border-y-2 border-x-0 rounded-none`
+      : article.type === EPostType.CHOTTO
+      ? `border-dashed`
+      : `border-solid`
+
   return (
     <article
-      className="mb-4 rounded border-2 p-2 hover:cursor-pointer hover:border-black"
+      className={`mb-4 rounded border-2 p-2 hover:cursor-pointer hover:border-black ${border}`}
       onClick={() => onReadMore(article)}
       tabIndex={0}
     >
