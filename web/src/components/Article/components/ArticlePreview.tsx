@@ -52,20 +52,15 @@ const ArticlePreview = ({ article }: Props) => {
           )}
 
           {article.type === EPostType.ARTICLE && (
-            <>
-              <img
-                alt="cover"
-                className="aspect-video w-full object-cover"
-                src="https://cdn.cheapoguides.com/wp-content/uploads/sites/2/2020/05/akihabara-iStock-484915982-1024x683.jpg"
-              />
-            </>
+            <img
+              alt="cover"
+              className="aspect-video w-full object-cover"
+              src="https://cdn.cheapoguides.com/wp-content/uploads/sites/2/2020/05/akihabara-iStock-484915982-1024x683.jpg"
+            />
           )}
 
-          {article.type === EPostType.HAIKU && (
-            <div className="justmt-2">{article.body}</div>
-          )}
-
-          {article.type === EPostType.CHOTTO && (
+          {(article.type === EPostType.HAIKU ||
+            article.type === EPostType.CHOTTO) && (
             <div className="justmt-2">{article.body}</div>
           )}
 
