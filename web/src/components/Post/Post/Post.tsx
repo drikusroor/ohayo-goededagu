@@ -1,3 +1,4 @@
+import { BsFillPencilFill, BsFillTrash3Fill } from 'react-icons/bs'
 import type { DeletePostMutationVariables, FindPostById } from 'types/graphql'
 
 import { Link, routes, navigate } from '@redwoodjs/router'
@@ -72,15 +73,21 @@ const Post = ({ post }: Props) => {
       <nav className="rw-button-group">
         <Link
           to={routes.editPost({ id: post.id })}
-          className="rw-button rw-button-blue"
+          title={'Edit post ' + post.id}
+          className="rw-button rw-button-blue flex items-center gap-2 text-base transition-colors sm:text-sm"
         >
+          <BsFillPencilFill />
           Edit
         </Link>
         <Button
-          text="Delete"
+          title={'Delete post ' + post.id}
           onClick={() => onDeleteClick(post.id)}
+          className="rw-button flex items-center gap-2 text-base transition-colors sm:text-sm"
           color="monza-red"
-        />
+        >
+          <BsFillTrash3Fill />
+          Delete
+        </Button>
       </nav>
     </>
   )
