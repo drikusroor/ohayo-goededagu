@@ -54,7 +54,11 @@ const ArticlePreview = ({ article }: Props) => {
             </>
           )}
 
-          {(article.type === EPostType.HAIKU || EPostType.CHOTTO) && (
+          {article.type === EPostType.HAIKU && (
+            <div className="justmt-2">{article.body}</div>
+          )}
+
+          {article.type === EPostType.CHOTTO && (
             <div className="justmt-2">{article.body}</div>
           )}
 
