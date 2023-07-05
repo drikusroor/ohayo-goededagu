@@ -45,7 +45,7 @@ export const Failure = ({ error }: CellFailureProps) => (
 
 export const Success = ({ articles }: CellSuccessProps<ArticlesQuery>) => {
   return (
-    <ul>
+    <ul className="flex flex-col justify-center gap-6 p-4 md:gap-12 md:px-10">
       {articles.map((article) => {
         return <ArticlePreview key={article.id} article={article} />
       })}
