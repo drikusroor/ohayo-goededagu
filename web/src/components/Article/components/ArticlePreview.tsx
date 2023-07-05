@@ -1,4 +1,4 @@
-import { BsSearch } from 'react-icons/bs'
+import { BsSearch, BsArrowRightCircle } from 'react-icons/bs'
 import type { Post } from 'types/graphql'
 
 import { Link, navigate, routes } from '@redwoodjs/router'
@@ -89,7 +89,7 @@ const ArticlePreview = ({ article }: Props) => {
                   onClick={() => onReadMore(article)}
                 >
                   <span className="hidden sm:inline-block">Lees verder</span>
-                  <BsSearch />
+                  <BsArrowRightCircle />
                 </Button>
               </a>
             </div>
@@ -183,7 +183,7 @@ const ArticlePreview = ({ article }: Props) => {
                       <span className="hidden sm:inline-block">
                         Lees verder
                       </span>
-                      <BsSearch />
+                      <BsArrowRightCircle />
                     </Button>
                   )}
                 </div>
@@ -199,7 +199,7 @@ const ArticlePreview = ({ article }: Props) => {
                         <span className="hidden sm:inline-block">
                           Lees verder
                         </span>
-                        <BsSearch />
+                        <BsArrowRightCircle />
                       </Button>
                     </div>
                   </>

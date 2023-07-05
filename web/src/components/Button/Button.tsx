@@ -27,7 +27,6 @@ const Button = ({
     variant === 'filled'
       ? `bg-${theme}-600 text-white transition hover:bg-${theme}-500 hover:filter`
       : `border-${theme}-500 text-${theme}-500 hover:bg-${theme}-500 hover:text-white transition-colors`
-
   return (
     <button
       type={type}
