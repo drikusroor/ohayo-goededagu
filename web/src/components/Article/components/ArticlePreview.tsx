@@ -103,7 +103,7 @@ const ArticlePreview = ({ article }: Props) => {
                   className="flex items-center gap-2 px-4 py-3 text-xs"
                   onClick={() => onReadMore(article)}
                 >
-                  <span className="hidden sm:inline-block">Lees blog</span>
+                  <span className="hidden sm:inline-block">Lees verder</span>
                   <BsSearch />
                 </Button>
               )}
@@ -117,7 +117,7 @@ const ArticlePreview = ({ article }: Props) => {
                     className="flex max-w-fit items-center justify-end gap-2 px-4 py-3 text-xs"
                     onClick={() => onReadMore(article)}
                   >
-                    <span className="hidden sm:inline-block">Lees blog</span>
+                    <span className="hidden sm:inline-block">Lees verder</span>
                     <BsSearch />
                   </Button>
                 </div>
