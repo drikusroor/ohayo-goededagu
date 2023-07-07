@@ -73,8 +73,8 @@ const ArticleVideo = ({ article, type, date }: Props) => {
 
       {type === EPostType.FULL && (
         <>
-          <header className="pb-4">
-            <h1 className="mb-4 flex items-center gap-2 text-3xl font-extrabold uppercase leading-none tracking-tight md:gap-4">
+          <header className="flex flex-col gap-1">
+            <h1 className="flex items-center gap-2 text-3xl font-extrabold uppercase tracking-tight md:gap-4">
               <ArticleTypeIcon type={article.type as EPostType} />
               {article.title}
             </h1>
