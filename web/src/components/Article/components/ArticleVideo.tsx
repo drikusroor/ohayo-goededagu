@@ -52,7 +52,7 @@ const ArticleVideo = ({ article }: Props) => {
       </div>
       <div className="flex flex-row items-center justify-between pt-4">
         <AvatarTimestamp article={article} />
-        {article.type === EPostType.VIDEO && article.body && (
+        {article.body && (
           <Button
             className="flex items-center gap-2 px-4 py-3 text-xs"
             onClick={() => navigate(routes.article({ id: article.id }))}
