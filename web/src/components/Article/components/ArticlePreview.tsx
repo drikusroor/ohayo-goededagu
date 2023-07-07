@@ -31,11 +31,17 @@ const ArticlePreview = ({ article }: Props) => {
         <ArticleArticle article={article} type={EPostType.PREVIEW} />
       )}
 
-      {article.type === EPostType.VIDEO && <ArticleVideo article={article} />}
+      {article.type === EPostType.VIDEO && (
+        <ArticleVideo article={article} type={EPostType.PREVIEW} />
+      )}
 
-      {article.type === EPostType.CHOTTO && <ArticleChotto article={article} />}
+      {article.type === EPostType.CHOTTO && (
+        <ArticleChotto article={article} type={EPostType.PREVIEW} />
+      )}
 
-      {article.type === EPostType.HAIKU && <ArticleHaiku article={article} />}
+      {article.type === EPostType.HAIKU && (
+        <ArticleHaiku article={article} type={EPostType.PREVIEW} />
+      )}
     </article>
   )
 }

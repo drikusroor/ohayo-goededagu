@@ -13,17 +13,10 @@ import Avatar from '../../Avatar/Avatar'
 interface Props {
   article: Post
   type: EPostType
+  date?: string
 }
 
-const ArticleArticle = ({ article, type }: Props) => {
-  const formattedDate = new Date(article.createdAt).toLocaleString('nl-NL', {
-    day: '2-digit',
-    month: '2-digit',
-    year: 'numeric',
-    hour: '2-digit',
-    minute: '2-digit',
-  })
-
+const ArticleArticle = ({ article, type, date }: Props) => {
   return (
     <>
       {type === EPostType.PREVIEW && (
@@ -113,7 +106,7 @@ const ArticleArticle = ({ article, type }: Props) => {
                   ? article.user.email
                   : 'Anonymous'}
               </span>
-              <span className="text-sm text-slate-200"> | {formattedDate}</span>
+              <span className="text-sm text-slate-200"> | {date}</span>
             </div>
           </div>
         </section>

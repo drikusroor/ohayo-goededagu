@@ -10,6 +10,8 @@ import Comment from '../Comment/Comment'
 import CommentForm from '../CommentForm/CommentForm'
 
 import ArticleArticle from './components/ArticleArticle'
+import ArticleChotto from './components/ArticleChotto'
+import ArticleHaiku from './components/ArticleHaiku'
 import ArticleVideo from './components/ArticleVideo'
 import { hotScore } from './helpers/sort-comments'
 
@@ -46,36 +48,36 @@ const Article = ({ article }: Props) => {
   return (
     <article className="mb-4 p-4">
       {article.type === EPostType.ARTICLE && (
-        <ArticleArticle article={article} type={EPostType.FULL} />
-      )}
-
-      {article.type != EPostType.ARTICLE && (
-        <header className="pb-4">
-          <h1 className="mb-4 flex items-center gap-2 text-3xl font-extrabold uppercase leading-none tracking-tight md:gap-4">
-            <ArticleTypeIcon type={article.type as EPostType} />
-            {article.title}
-          </h1>
-
-          <div className="flex flex-row items-center gap-2">
-            <span className="text-sm text-slate-500">
-              {article.user.name
-                ? article.user.name
-                : article.user.email
-                ? article.user.email
-                : 'Anonymous'}
-            </span>
-            <span className="text-sm text-slate-500"> | {formattedDate}</span>
-          </div>
-        </header>
+        <ArticleArticle
+          article={article}
+          type={EPostType.FULL}
+          date={formattedDate}
+        />
       )}
 
       {article.type === EPostType.VIDEO && (
-        <div className="pb-4">
-          <ArticleVideo videoPost={article.videoPost} />
-        </div>
+        <ArticleVideo
+          article={article}
+          type={EPostType.FULL}
+          date={formattedDate}
+        />
       )}
 
-      <div>{article.body}</div>
+      {article.type === EPostType.CHOTTO && (
+        <ArticleChotto
+          article={article}
+          type={EPostType.FULL}
+          date={formattedDate}
+        />
+      )}
+
+      {article.type === EPostType.HAIKU && (
+        <ArticleHaiku
+          article={article}
+          type={EPostType.FULL}
+          date={formattedDate}
+        />
+      )}
 
       <h3 className="mt-4 text-lg font-light text-gray-600">Comments</h3>
       <ul className="mt-4 max-w-xl">
