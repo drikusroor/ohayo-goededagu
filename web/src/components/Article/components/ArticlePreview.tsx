@@ -1,14 +1,8 @@
-import { BsArrowRightCircle } from 'react-icons/bs'
 import type { Post } from 'types/graphql'
 
-import { Link, navigate, routes } from '@redwoodjs/router'
+import { navigate, routes } from '@redwoodjs/router'
 
-import Button from 'src/components/Button/Button'
-
-import ArticleTypeIcon, {
-  EPostType,
-} from '../../ArticleTypeIcon/ArticleTypeIcon'
-import Avatar from '../../Avatar/Avatar'
+import { EPostType } from '../../ArticleTypeIcon/ArticleTypeIcon'
 
 import ArticleArticle from './ArticleArticle'
 import ArticleChotto from './ArticleChotto'
@@ -20,10 +14,6 @@ interface Props {
 }
 
 const ArticlePreview = ({ article }: Props) => {
-  const onReadMore = (article: 'article') => {
-    navigate(routes.article({ id: article.id }))
-  }
-
   const border =
     article.type === EPostType.HAIKU
       ? `border-y-2 border-x-0 rounded-none`
@@ -34,11 +24,11 @@ const ArticlePreview = ({ article }: Props) => {
   return (
     <article
       className={`rounded border-2 p-2 hover:cursor-pointer hover:border-black ${border}`}
-      onClick={() => onReadMore(article)}
+      onClick={() => navigate(routes.article({ id: article.id }))}
       tabIndex={0}
     >
       {article.type === EPostType.ARTICLE && (
-        <ArticleArticle article={article} />
+        <ArticleArticle article={article} type={EPostType.PREVIEW} />
       )}
 
       {article.type === EPostType.VIDEO && <ArticleVideo article={article} />}

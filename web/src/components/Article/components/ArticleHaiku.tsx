@@ -28,7 +28,7 @@ const ArticleHaiku = ({ article }: Props) => {
       </header>
       <div className="lg:mx-14">
         <div>
-          <div className="justmt-2">{article.body}</div>
+          <div className="justmt-2 line-clamp-5">{article.body}</div>
           <div className="pt-4">
             <AvatarTimestamp article={article} />
           </div>
