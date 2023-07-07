@@ -1,7 +1,7 @@
 import { BsFillPencilFill, BsFillTrash3Fill, BsSearch } from 'react-icons/bs'
 import type { DeletePostMutationVariables, FindPosts } from 'types/graphql'
 
-import { Link, routes } from '@redwoodjs/router'
+import { Link, routes, navigate } from '@redwoodjs/router'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
@@ -35,6 +35,14 @@ const PostsList = ({ posts }: FindPosts) => {
     awaitRefetchQueries: true,
   })
 
+  const onNavigatePost = (post: 'article') => {
+    navigate(routes.post({ id: post.id }))
+  }
+
+  const onNavigateEditPost = (post: 'article') => {
+    navigate(routes.editPost({ id: post.id }))
+  }
+
   const onDeleteClick = (id: DeletePostMutationVariables['id']) => {
     if (confirm('Are you sure you want to delete post ' + id + '?')) {
       deletePost({ variables: { id } })
@@ -67,23 +75,28 @@ const PostsList = ({ posts }: FindPosts) => {
               <td>{post.published ? 'Yes' : 'No'}</td>
               <td>{timeTag(post.createdAt)}</td>
               <td>
-                <nav className="rw-table-actions">
-                  <Link
-                    to={routes.post({ id: post.id })}
-                    title={'Show post ' + post.id + ' detail'}
+                <nav className="rw-table-actions gap-1">
+                  <Button
+                    title={'Show post' + post.id}
+                    onClick={() => onNavigatePost(post)}
                     className="rw-button flex items-center gap-2 text-base transition-colors sm:text-sm"
+                    color="rw-gray"
+                    icon={BsSearch}
+                    variant="outlined"
                   >
                     <BsSearch />
                     <span className="hidden sm:inline-block">Show</span>
-                  </Link>
-                  <Link
-                    to={routes.editPost({ id: post.id })}
-                    title={'Edit post ' + post.id}
+                  </Button>
+                  <Button
+                    title={'Edit post' + post.id}
+                    onClick={() => onNavigateEditPost(post)}
                     className="rw-button rw-button-blue flex items-center gap-2 text-base transition-colors sm:text-sm"
+                    color="cobalt-blue"
+                    variant="outlined"
                   >
                     <BsFillPencilFill />
                     <span className="hidden sm:inline-block">Edit</span>
-                  </Link>
+                  </Button>
                   <Button
                     title={'Delete post ' + post.id}
                     onClick={() => onDeleteClick(post.id)}

@@ -12,6 +12,7 @@ type BlogLayoutProps = {
 
 const BlogLayout = ({ children }: BlogLayoutProps) => {
   const { isAuthenticated, logOut, currentUser } = useAuth()
+
   return (
     <>
       <Toaster />
@@ -20,7 +21,7 @@ const BlogLayout = ({ children }: BlogLayoutProps) => {
           <div className="fixed top-0 z-10 flex w-full items-center justify-between bg-slate-900 p-3 text-white">
             <div className="flex items-center gap-2">
               <Link
-                className="flex items-center gap-2 rounded bg-cobalt-blue-500 px-4 py-3 font-semibold uppercase text-white transition hover:bg-cobalt-blue-600 hover:filter sm:text-xs"
+                className="flex items-center gap-2 rounded bg-cobalt-blue-600 px-4 py-3 font-semibold uppercase text-white transition hover:bg-cobalt-blue-500 hover:filter sm:text-xs"
                 to={routes.admin()}
               >
                 <BsTools />
@@ -31,7 +32,7 @@ const BlogLayout = ({ children }: BlogLayoutProps) => {
               <li>
                 <Link
                   to={routes.account()}
-                  className="flex items-center gap-2 rounded bg-yellow-600 px-4 py-3 font-semibold uppercase text-white transition hover:bg-yellow-700 hover:filter sm:text-xs"
+                  className="flex items-center gap-2 rounded bg-yellow-600 px-4 py-3 font-semibold uppercase text-white transition hover:bg-yellow-500 hover:filter sm:text-xs"
                   title={currentUser.email}
                 >
                   <BsPersonCircle />
@@ -82,7 +83,7 @@ const BlogLayout = ({ children }: BlogLayoutProps) => {
           </ul>
         </nav>
       </header>
-      <main className="max-w-screen mx-auto p-4 md:max-w-7xl">{children}</main>
+      <main className="mx-auto grid max-w-6xl">{children}</main>
     </>
   )
 }

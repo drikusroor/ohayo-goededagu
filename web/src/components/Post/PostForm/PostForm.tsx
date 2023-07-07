@@ -4,6 +4,7 @@ import {
   BsFillCircleFill,
   BsFillCheckCircleFill,
   BsFillExclamationTriangleFill,
+  BsSave,
 } from 'react-icons/bs'
 import type { EditPostById, UpdatePostInput } from 'types/graphql'
 

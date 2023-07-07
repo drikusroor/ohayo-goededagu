@@ -5,9 +5,13 @@ import type { Post } from 'types/graphql'
 import { Link, routes } from '@redwoodjs/router'
 
 import ArticleTypeIcon, { EPostType } from '../ArticleTypeIcon/ArticleTypeIcon'
+import Avatar from '../Avatar/Avatar'
 import Comment from '../Comment/Comment'
 import CommentForm from '../CommentForm/CommentForm'
 
+import ArticleArticle from './components/ArticleArticle'
+import ArticleChotto from './components/ArticleChotto'
+import ArticleHaiku from './components/ArticleHaiku'
 import ArticleVideo from './components/ArticleVideo'
 import { hotScore } from './helpers/sort-comments'
 
@@ -42,39 +46,53 @@ const Article = ({ article }: Props) => {
   }, [article.comments])
 
   return (
-    <article className="mb-4 p-2">
-      <header className="mb-3">
-        <div className="flex flex-row flex-wrap items-center justify-between">
-          <h2 className="text-2xl">
-            <Link to={routes.article({ id: article.id })}>{article.title}</Link>
-          </h2>
-          <ArticleTypeIcon type={article.type as EPostType} />
+    <article className="flex flex-col gap-24">
+      <div className="flex flex-col gap-4">
+        {article.type === EPostType.ARTICLE && (
+          <ArticleArticle
+            article={article}
+            type={EPostType.FULL}
+            date={formattedDate}
+          />
+        )}
+
+        {article.type === EPostType.VIDEO && (
+          <ArticleVideo
+            article={article}
+            type={EPostType.FULL}
+            date={formattedDate}
+          />
+        )}
+
+        {article.type === EPostType.CHOTTO && (
+          <ArticleChotto
+            article={article}
+            type={EPostType.FULL}
+            date={formattedDate}
+          />
+        )}
+
+        {article.type === EPostType.HAIKU && (
+          <ArticleHaiku
+            article={article}
+            type={EPostType.FULL}
+            date={formattedDate}
+          />
+        )}
+      </div>
+
+      <div>
+        <h3 className="mt-4 text-lg font-light text-gray-600">Comments</h3>
+        <ul className="mt-4 max-w-xl">
+          {sortedComments.map((comment) => (
+            <li key={comment.id} className="mb-4">
+              <Comment comment={comment} />
+            </li>
+          ))}
+        </ul>
+        <div className="mt-2">
+          <CommentForm postId={article.id} />
         </div>
-        <div className="flex flex-row items-end gap-2">
-          <span className="text-sm text-slate-500">
-            {article.user.name
-              ? article.user.name
-              : article.user.email
-              ? article.user.email
-              : 'Anonymous'}
-          </span>
-          <span className="text-sm text-slate-500"> | {formattedDate}</span>
-        </div>
-      </header>
-      {article.type === EPostType.VIDEO && (
-        <ArticleVideo videoPost={article.videoPost} />
-      )}
-      <div>{article.body}</div>
-      <h3 className="mt-4 text-lg font-light text-gray-600">Comments</h3>
-      <ul className="mt-4 max-w-xl">
-        {sortedComments.map((comment) => (
-          <li key={comment.id} className="mb-4">
-            <Comment comment={comment} />
-          </li>
-        ))}
-      </ul>
-      <div className="mt-2">
-        <CommentForm postId={article.id} />
       </div>
     </article>
   )
