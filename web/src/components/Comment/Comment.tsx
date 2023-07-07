@@ -100,6 +100,9 @@ export default ({ comment }: ICommentProps) => {
           <span className="ml-2 text-sm text-slate-500">
             |{' '}
             {new Date(comment.createdAt).toLocaleString('nl-NL', {
+              day: '2-digit',
+              month: '2-digit',
+              year: 'numeric',
               hour: '2-digit',
               minute: '2-digit',
             })}
