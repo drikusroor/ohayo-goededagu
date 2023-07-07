@@ -46,49 +46,53 @@ const Article = ({ article }: Props) => {
   }, [article.comments])
 
   return (
-    <article className="mb-4 p-4">
-      {article.type === EPostType.ARTICLE && (
-        <ArticleArticle
-          article={article}
-          type={EPostType.FULL}
-          date={formattedDate}
-        />
-      )}
+    <article className="flex flex-col gap-24">
+      <div>
+        {article.type === EPostType.ARTICLE && (
+          <ArticleArticle
+            article={article}
+            type={EPostType.FULL}
+            date={formattedDate}
+          />
+        )}
 
-      {article.type === EPostType.VIDEO && (
-        <ArticleVideo
-          article={article}
-          type={EPostType.FULL}
-          date={formattedDate}
-        />
-      )}
+        {article.type === EPostType.VIDEO && (
+          <ArticleVideo
+            article={article}
+            type={EPostType.FULL}
+            date={formattedDate}
+          />
+        )}
 
-      {article.type === EPostType.CHOTTO && (
-        <ArticleChotto
-          article={article}
-          type={EPostType.FULL}
-          date={formattedDate}
-        />
-      )}
+        {article.type === EPostType.CHOTTO && (
+          <ArticleChotto
+            article={article}
+            type={EPostType.FULL}
+            date={formattedDate}
+          />
+        )}
 
-      {article.type === EPostType.HAIKU && (
-        <ArticleHaiku
-          article={article}
-          type={EPostType.FULL}
-          date={formattedDate}
-        />
-      )}
+        {article.type === EPostType.HAIKU && (
+          <ArticleHaiku
+            article={article}
+            type={EPostType.FULL}
+            date={formattedDate}
+          />
+        )}
+      </div>
 
-      <h3 className="mt-4 text-lg font-light text-gray-600">Comments</h3>
-      <ul className="mt-4 max-w-xl">
-        {sortedComments.map((comment) => (
-          <li key={comment.id} className="mb-4">
-            <Comment comment={comment} />
-          </li>
-        ))}
-      </ul>
-      <div className="mt-2">
-        <CommentForm postId={article.id} />
+      <div>
+        <h3 className="mt-4 text-lg font-light text-gray-600">Comments</h3>
+        <ul className="mt-4 max-w-xl">
+          {sortedComments.map((comment) => (
+            <li key={comment.id} className="mb-4">
+              <Comment comment={comment} />
+            </li>
+          ))}
+        </ul>
+        <div className="mt-2">
+          <CommentForm postId={article.id} />
+        </div>
       </div>
     </article>
   )

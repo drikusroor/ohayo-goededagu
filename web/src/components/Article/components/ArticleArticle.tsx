@@ -88,28 +88,31 @@ const ArticleArticle = ({ article, type, date }: Props) => {
       )}
 
       {type === EPostType.FULL && (
-        <section className="mb-4 rounded bg-gray-400 bg-[url('https://a.cdn-hotels.com/gdcs/production8/d946/61ea3fbe-d21e-4b09-a90f-9c6ac0f82e99.jpg')] bg-cover bg-center bg-no-repeat bg-blend-multiply">
-          <div className="mx-auto flex aspect-video max-w-screen-xl flex-col justify-end px-4">
-            <div className="flex flex-row items-center justify-start gap-2 pb-2">
-              <div>
-                <ArticleTypeIcon type={article.type as EPostType} />
+        <>
+          <section className="mb-4 rounded bg-gray-400 bg-[url('https://a.cdn-hotels.com/gdcs/production8/d946/61ea3fbe-d21e-4b09-a90f-9c6ac0f82e99.jpg')] bg-cover bg-center bg-no-repeat bg-blend-multiply">
+            <div className="mx-auto flex aspect-video max-w-screen-xl flex-col justify-end px-4">
+              <div className="flex flex-row items-center justify-start gap-2 pb-2">
+                <div>
+                  <ArticleTypeIcon type={article.type as EPostType} />
+                </div>
+                <h1 className="flex items-center gap-2 text-3xl font-extrabold uppercase leading-none tracking-tight text-white drop-shadow-xl md:gap-4 md:text-5xl lg:text-6xl">
+                  {article.title}
+                </h1>
               </div>
-              <h1 className="flex items-center gap-2 text-3xl font-extrabold uppercase leading-none tracking-tight text-white drop-shadow-xl md:gap-4 md:text-5xl lg:text-6xl">
-                {article.title}
-              </h1>
+              <div className="mb-2 flex flex-row items-center gap-2">
+                <span className="text-sm text-slate-200">
+                  {article.user.name
+                    ? article.user.name
+                    : article.user.email
+                    ? article.user.email
+                    : 'Anonymous'}
+                </span>
+                <span className="text-sm text-slate-200"> | {date}</span>
+              </div>
             </div>
-            <div className="mb-2 flex flex-row items-center gap-2">
-              <span className="text-sm text-slate-200">
-                {article.user.name
-                  ? article.user.name
-                  : article.user.email
-                  ? article.user.email
-                  : 'Anonymous'}
-              </span>
-              <span className="text-sm text-slate-200"> | {date}</span>
-            </div>
-          </div>
-        </section>
+          </section>
+          <div> {article.body} </div>
+        </>
       )}
     </>
   )

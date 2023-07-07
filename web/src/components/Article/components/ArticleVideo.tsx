@@ -101,6 +101,7 @@ const ArticleVideo = ({ article, type, date }: Props) => {
               loading="lazy"
             ></iframe>
           </div>
+          <div> {article.body} </div>
         </>
       )}
     </>
