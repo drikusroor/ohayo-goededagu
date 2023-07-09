@@ -5,13 +5,44 @@ import { Toaster } from '@redwoodjs/web/dist/toast'
 
 import { useAuth } from 'src/auth'
 import Button from 'src/components/Button/Button'
+import Skeleton from 'src/components/Skeleton/Skeleton'
 
 type BlogLayoutProps = {
   children?: React.ReactNode
+  skeleton?: boolean
 }
 
-const BlogLayout = ({ children }: BlogLayoutProps) => {
+const BlogLayout = ({ children, skeleton }: BlogLayoutProps) => {
   const { isAuthenticated, logOut, currentUser } = useAuth()
+
+  if (skeleton) {
+    return (
+      <>
+        <header className="w-full pb-5 text-center">
+          <div className={`mx-auto w-32`}>
+            <Skeleton circle={true} height={128} width={128} />
+          </div>
+          <h1 className="pt-3 text-3xl font-bold">
+            <Skeleton width={200} />
+          </h1>
+          <Skeleton width={100} />
+          <nav>
+            <ul className="mt-3 flex justify-center gap-5">
+              <li>
+                <Skeleton width={50} />
+              </li>
+              <li>
+                <Skeleton width={150} />
+              </li>
+            </ul>
+          </nav>
+        </header>
+        <main className="max-w-screen mx-auto p-4 md:max-w-7xl">
+          <Skeleton count={5} />
+        </main>
+      </>
+    )
+  }
 
   return (
     <>
