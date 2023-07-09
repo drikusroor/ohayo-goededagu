@@ -3,6 +3,7 @@ import { IconBase } from 'react-icons/lib'
 
 interface ButtonProps {
   onClick?: () => void
+  id?: string
   className?: string
   color?: 'cobalt-blue' | 'monza-red' | ''
   children?: React.ReactNode
@@ -14,6 +15,7 @@ interface ButtonProps {
 
 const Button = ({
   onClick,
+  id = '',
   className = '',
   color = '',
   text = '',
@@ -29,6 +31,7 @@ const Button = ({
       : `border-${theme}-500 text-${theme}-500 hover:bg-${theme}-500 hover:text-white transition-colors`
   return (
     <button
+      id={id}
       type={type}
       aria-label={text}
       title={title ? title : text ? text : ''}
