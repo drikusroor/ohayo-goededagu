@@ -15,6 +15,8 @@ import { useAuth } from './auth'
 import AdminDashboardLayout from './layouts/AdminDashboardLayout/AdminDashboardLayout'
 import BlogLayout from './layouts/BlogLayout/BlogLayout'
 
+const BlogLoader = () => <BlogLayout skeleton />
+
 const Routes = () => {
   const { currentUser } = useAuth()
 
@@ -44,8 +46,8 @@ const Routes = () => {
           </Set>
         </Set>
       </Private>
-      <Set wrap={BlogLayout}>
-        <Route path="/" page={HomePage} name="home" />
+      <Set wrap={BlogLayout} whileLoadingAuth={BlogLoader}>
+        <Route path="/" page={HomePage} name="home" prerender />
         <Private unauthenticated="home">
           <Route path="/article/{id:Int}" page={ArticlePage} name="article" />
         </Private>
