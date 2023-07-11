@@ -1,6 +1,6 @@
 datasource db {
   provider = "postgresql"
-  url = env("DATABASE_URL")
+  url      = env("DATABASE_URL")
 }
 
 generator client {
@@ -12,13 +12,13 @@ generator client {
 // to create migrations for them and apply to your dev DB.
 // TODO: Please remove the following example:
 model User {
-  id             Int @id @default(autoincrement())
-  email          String  @unique
+  id                  Int       @id @default(autoincrement())
+  email               String    @unique
   name                String?
-  hashedPassword      String    // <─┐
-  salt                String    // <─┼─ add these lines
-  resetToken          String?   // <─┤
-  resetTokenExpiresAt DateTime? // <─┘
+  hashedPassword      String
+  salt                String
+  resetToken          String?
+  resetTokenExpiresAt DateTime?
   posts               Post[]
   roles               Role[]    @default([GUEST])
   profile             Profile?
@@ -27,34 +27,36 @@ model User {
 }
 
 model Profile {
-  id            Int     @id @default(autoincrement())
-  bio           String?
-  user          User    @relation(fields: [userId], references: [id])
-  userId        Int     @unique
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
-  avatar        String?
-  name          String?
-  japaneseName  String?
+  id           Int      @id @default(autoincrement())
+  bio          String?
+  user         User     @relation(fields: [userId], references: [id])
+  userId       Int      @unique
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  avatar       String?
+  name         String?
+  japaneseName String?
 }
 
 model Post {
-  id          Int      @id @default(autoincrement())
-  title       String
-  body        String?
-  createdAt   DateTime @default(now())
-  user        User     @relation(fields: [userId], references: [id])
-  userId      Int
-  published   Boolean  @default(false)
-  type        PostType @default(ARTICLE)
-  comments    Comment[]
-  videoPost   VideoPost?
+  id           Int        @id @default(autoincrement())
+  title        String
+  body         String?
+  createdAt    DateTime   @default(now())
+  user         User       @relation(fields: [userId], references: [id])
+  userId       Int
+  published    Boolean    @default(false)
+  type         PostType   @default(ARTICLE)
+  comments     Comment[]
+  videoPost    VideoPost?
+  coverImage   Image?     @relation(fields: [coverImageId], references: [id])
+  coverImageId Int?
 }
 
 model VideoPost {
-  id       Int   @id @default(autoincrement())
-  post     Post  @relation(fields: [postId], references: [id])
-  postId   Int   @unique
+  id       Int    @id @default(autoincrement())
+  post     Post   @relation(fields: [postId], references: [id])
+  postId   Int    @unique
   videoUrl String
 }
 
@@ -74,14 +76,14 @@ enum PostType {
 }
 
 model Comment {
-  id        Int      @id @default(autoincrement())
+  id        Int       @id @default(autoincrement())
   body      String
-  createdAt DateTime @default(now())
-  user      User     @relation(fields: [userId], references: [id])
+  createdAt DateTime  @default(now())
+  user      User      @relation(fields: [userId], references: [id])
   userId    Int
-  post      Post     @relation(fields: [postId], references: [id])
+  post      Post      @relation(fields: [postId], references: [id])
   postId    Int
-  parent    Comment? @relation("ChildComments", fields: [parentId], references: [id])
+  parent    Comment?  @relation("ChildComments", fields: [parentId], references: [id])
   parentId  Int?
   children  Comment[] @relation("ChildComments")
   thumbs    Thumb[]
@@ -95,4 +97,13 @@ model Thumb {
   comment   Comment  @relation(fields: [commentId], references: [id])
   commentId Int
   up        Boolean
+}
+
+model Image {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  imageId   String
+  url       String
+  postId    Int
+  Post      Post[]
 }
