@@ -18,7 +18,7 @@ import {
 } from '@redwoodjs/forms'
 import type { RWGqlError } from '@redwoodjs/forms'
 
-import ArticleTypeIcon, {
+import {
   EPostType,
   postTypeOptions,
 } from 'src/components/ArticleTypeIcon/ArticleTypeIcon'
@@ -56,6 +56,8 @@ const PostForm = (props: PostFormProps) => {
   const [postType, setPostType] = React.useState<EPostType>(
     props.post?.type || EPostType.ARTICLE
   )
+
+  const [coverImage, setCoverImage] = React.useState<string>()
 
   const [videoPostFormData, setVideoPostFormData] =
     React.useState<IVideoPostFormData>({
@@ -141,7 +143,13 @@ const PostForm = (props: PostFormProps) => {
             />
           )}
 
-          {postType === EPostType.ARTICLE && <Upload />}
+          {postType === EPostType.ARTICLE && (
+            <Upload
+              name="coverImage"
+              value={coverImage}
+              setValue={setCoverImage}
+            />
+          )}
 
           <div className="rw-button-group gap-0">
             <Button
