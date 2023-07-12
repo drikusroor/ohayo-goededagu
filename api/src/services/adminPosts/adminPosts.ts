@@ -26,14 +26,7 @@ export const createPost = async ({ input }) => {
   }
 
   if (coverImage) {
-    const createdCoverImage = await db.image.create({
-      data: { ...coverImage, postId: created.id },
-    })
-
-    await db.post.update({
-      data: { coverImageId: createdCoverImage.id },
-      where: { id: created.id },
-    })
+    await upsertCoverImage(created.id, coverImage)
   }
 
   return created
@@ -64,16 +57,7 @@ export const updatePost = async ({ id, input }) => {
   }
 
   if (coverImage) {
-    await db.image.upsert({
-      where: { id: coverImage.id },
-      create: { ...coverImage, postId: id },
-      update: coverImage,
-    })
-
-    await db.post.update({
-      data: { coverImageId: coverImage.id },
-      where: { id },
-    })
+    await upsertCoverImage(id, coverImage)
   }
 
   return updated
@@ -91,6 +75,22 @@ export const deletePost = async ({ id }) => {
   return db.post.delete({
     where: { id },
   })
+}
+
+// function to upsert cover image of a post
+export const upsertCoverImage = async (id, coverImage) => {
+  const createdCoverImage = await db.image.upsert({
+    where: { id: coverImage.id },
+    create: { ...coverImage, postId: id },
+    update: coverImage,
+  })
+
+  await db.post.update({
+    data: { coverImageId: createdCoverImage.id },
+    where: { id },
+  })
+
+  return createdCoverImage
 }
 
 const verifyOwnership = async ({ id }) => {
