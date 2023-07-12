@@ -37,6 +37,12 @@ interface PostFormProps {
   loading: boolean
 }
 
+interface IImage {
+  id?: string
+  imageId: string
+  url: string
+}
+
 const PostForm = (props: PostFormProps) => {
   const onSubmit = (data: FormPost) => {
     data.published = published
@@ -44,6 +50,12 @@ const PostForm = (props: PostFormProps) => {
     if (data.type === EPostType.VIDEO) {
       delete data.videoUrl
       data.videoPost = videoPostFormData
+    }
+
+    if (data.type === EPostType.ARTICLE) {
+      if (coverImage) {
+        data.coverImage = coverImage
+      }
     }
 
     props.onSave(data, props?.post?.id)
@@ -57,7 +69,9 @@ const PostForm = (props: PostFormProps) => {
     props.post?.type || EPostType.ARTICLE
   )
 
-  const [coverImage, setCoverImage] = React.useState<string>()
+  const [coverImage, setCoverImage] = React.useState<IImage>(
+    props.post?.coverImage
+  )
 
   const [videoPostFormData, setVideoPostFormData] =
     React.useState<IVideoPostFormData>({
@@ -146,8 +160,13 @@ const PostForm = (props: PostFormProps) => {
           {postType === EPostType.ARTICLE && (
             <Upload
               name="coverImage"
-              value={coverImage}
-              setValue={setCoverImage}
+              value={coverImage?.url}
+              setValue={({ public_id, secure_url }) =>
+                setCoverImage({
+                  imageId: public_id,
+                  url: secure_url,
+                })
+              }
             />
           )}
 

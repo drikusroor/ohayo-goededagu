@@ -16,13 +16,11 @@ export const schema = gql`
   input CreateImageInput {
     imageId: String!
     url: String!
-    postId: Int!
   }
 
   input UpdateImageInput {
     imageId: String
     url: String
-    postId: Int
   }
 
   type Mutation {

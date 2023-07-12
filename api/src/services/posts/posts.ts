@@ -26,4 +26,10 @@ export const Post: PostRelationResolvers = {
     }
     return null
   },
+  coverImage: (_obj, { root }) => {
+    if (root.type === 'ARTICLE') {
+      return db.image.findFirst({ where: { postId: root?.id } })
+    }
+    return null
+  },
 }

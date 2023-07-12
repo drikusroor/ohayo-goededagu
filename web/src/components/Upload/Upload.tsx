@@ -31,7 +31,7 @@ export interface ICloudinaryUploadResultInfo {
 
 interface IUploadProps {
   name: string
-  value?: ICloudinaryUploadResultInfo
+  value?: string
   setValue?: (value: ICloudinaryUploadResultInfo) => void
 }
 
@@ -68,7 +68,7 @@ const Upload = ({ name, value, setValue }: IUploadProps) => {
 
       <FieldError name="upload" className="rw-field-error" />
 
-      {value && <img className="mt-2" alt="cover" src={value.secure_url} />}
+      {value && <img className="mt-2" alt="cover" src={value} />}
     </>
   )
 }

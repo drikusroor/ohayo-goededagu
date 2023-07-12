@@ -10,6 +10,7 @@ export const schema = gql`
     type: String!
     comments: [Comment]!
     videoPost: VideoPost
+    coverImage: Image
   }
 
   type Query {

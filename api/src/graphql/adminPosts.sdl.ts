@@ -9,7 +9,7 @@ export const schema = gql`
     published: Boolean!
     type: String!
     videoPost: VideoPost
-    fcoverImage: Image
+    coverImage: Image
   }
 
   type Query {

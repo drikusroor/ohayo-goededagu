@@ -13,7 +13,7 @@ export const adminPost = ({ id }) => {
 }
 
 export const createPost = async ({ input }) => {
-  const { videoPost, ...postInput } = input
+  const { coverImage, videoPost, ...postInput } = input
 
   const created = await db.post.create({
     data: { ...postInput, userId: context.currentUser.id },
@@ -25,11 +25,22 @@ export const createPost = async ({ input }) => {
     })
   }
 
+  if (coverImage) {
+    const createdCoverImage = await db.image.create({
+      data: { ...coverImage, postId: created.id },
+    })
+
+    await db.post.update({
+      data: { coverImageId: createdCoverImage.id },
+      where: { id: created.id },
+    })
+  }
+
   return created
 }
 
 export const updatePost = async ({ id, input }) => {
-  const { videoPost, ...postInput } = input
+  const { videoPost, coverImage, ...postInput } = input
 
   const post = await db.post.findUnique({ where: { id } })
 
@@ -49,6 +60,19 @@ export const updatePost = async ({ id, input }) => {
       where: { postId: id },
       create: { ...videoPost, postId: id },
       update: videoPost,
+    })
+  }
+
+  if (coverImage) {
+    await db.image.upsert({
+      where: { id: coverImage.id },
+      create: { ...coverImage, postId: id },
+      update: coverImage,
+    })
+
+    await db.post.update({
+      data: { coverImageId: coverImage.id },
+      where: { id },
     })
   }
 
