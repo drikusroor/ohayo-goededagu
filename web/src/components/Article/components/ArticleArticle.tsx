@@ -17,10 +17,17 @@ interface Props {
 }
 
 const ArticleArticle = ({ article, type, date }: Props) => {
+  const { coverImage } = article
+
   return (
     <>
       {type === EPostType.PREVIEW && (
-        <section className="rounded bg-gray-600 bg-[url('https://cdn.cheapoguides.com/wp-content/uploads/sites/2/2020/05/akihabara-iStock-484915982-1024x683.jpg')] bg-cover bg-center bg-no-repeat bg-blend-multiply">
+        <section
+          style={{
+            backgroundImage: coverImage?.url ? `url(${coverImage.url})` : '',
+          }}
+          className="rounded bg-gray-600 bg-cover bg-center bg-no-repeat bg-blend-multiply"
+        >
           <div className="mx-auto max-w-screen-xl px-4 py-20 md:py-24 lg:py-56">
             <div className="flex flex-row items-center justify-center gap-2 pb-2">
               <div>
@@ -89,7 +96,12 @@ const ArticleArticle = ({ article, type, date }: Props) => {
 
       {type === EPostType.FULL && (
         <>
-          <section className="rounded bg-gray-400 bg-[url('https://a.cdn-hotels.com/gdcs/production8/d946/61ea3fbe-d21e-4b09-a90f-9c6ac0f82e99.jpg')] bg-cover bg-center bg-no-repeat bg-blend-multiply">
+          <section
+            style={{
+              backgroundImage: coverImage?.url ? `url(${coverImage.url})` : '',
+            }}
+            className="rounded bg-gray-400 bg-cover bg-center bg-no-repeat bg-blend-multiply"
+          >
             <div className="mx-auto flex aspect-video max-w-screen-xl flex-col justify-end px-4">
               <div className="flex flex-row items-center justify-start gap-2">
                 <div>

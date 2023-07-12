@@ -22,6 +22,9 @@ export const QUERY = gql`
         }
       }
       type
+      coverImage {
+        url
+      }
     }
   }
 `
