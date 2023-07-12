@@ -16,6 +16,9 @@ export const QUERY = gql`
       videoPost {
         videoUrl
       }
+      coverImage {
+        url
+      }
       user {
         name
       }

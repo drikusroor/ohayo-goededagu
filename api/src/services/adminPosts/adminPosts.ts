@@ -13,7 +13,7 @@ export const adminPost = ({ id }) => {
 }
 
 export const createPost = async ({ input }) => {
-  const { videoPost, ...postInput } = input
+  const { coverImage, videoPost, ...postInput } = input
 
   const created = await db.post.create({
     data: { ...postInput, userId: context.currentUser.id },
@@ -25,11 +25,15 @@ export const createPost = async ({ input }) => {
     })
   }
 
+  if (coverImage) {
+    await upsertCoverImage(created.id, coverImage)
+  }
+
   return created
 }
 
 export const updatePost = async ({ id, input }) => {
-  const { videoPost, ...postInput } = input
+  const { videoPost, coverImage, ...postInput } = input
 
   const post = await db.post.findUnique({ where: { id } })
 
@@ -52,6 +56,10 @@ export const updatePost = async ({ id, input }) => {
     })
   }
 
+  if (coverImage) {
+    await upsertCoverImage(id, coverImage)
+  }
+
   return updated
 }
 
@@ -67,6 +75,24 @@ export const deletePost = async ({ id }) => {
   return db.post.delete({
     where: { id },
   })
+}
+
+export const upsertCoverImage = async (postId, coverImage) => {
+  const upsertedCoverImage = coverImage.id
+    ? await db.image.update({
+        data: { ...coverImage, postId },
+        where: { id: coverImage.id },
+      })
+    : await db.image.create({
+        data: { ...coverImage, postId },
+      })
+
+  await db.post.update({
+    data: { coverImageId: upsertedCoverImage.id },
+    where: { id: postId },
+  })
+
+  return upsertedCoverImage
 }
 
 const verifyOwnership = async ({ id }) => {

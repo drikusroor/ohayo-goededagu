@@ -19,6 +19,11 @@ export const QUERY = gql`
       videoPost {
         videoUrl
       }
+      coverImage {
+        id
+        imageId
+        url
+      }
     }
   }
 `
@@ -32,6 +37,11 @@ const UPDATE_POST_MUTATION = gql`
       published
       videoPost {
         videoUrl
+      }
+      coverImage {
+        id
+        imageId
+        url
       }
     }
   }

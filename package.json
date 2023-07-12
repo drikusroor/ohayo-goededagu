@@ -7,8 +7,8 @@
     ]
   },
   "devDependencies": {
-    "@redwoodjs/auth-dbauth-setup": "5.4.2",
-    "@redwoodjs/core": "5.4.2",
+    "@redwoodjs/auth-dbauth-setup": "5.4.3",
+    "@redwoodjs/core": "5.4.3",
     "prettier-plugin-tailwindcss": "^0.3.0"
   },
   "eslintConfig": {
@@ -28,6 +28,7 @@
     "@fortawesome/free-regular-svg-icons": "^6.4.0",
     "@fortawesome/free-solid-svg-icons": "^6.4.0",
     "@fortawesome/react-fontawesome": "latest",
+    "cloudinary": "^1.37.3",
     "react-icons": "^4.10.1"
   }
 }
