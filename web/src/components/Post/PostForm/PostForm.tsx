@@ -43,9 +43,18 @@ interface IImage {
   url: string
 }
 
+const mapCoverImageDataToImageInput = (image: IImage) => {
+  return {
+    id: image.id,
+    imageId: image.imageId,
+    url: image.url,
+  }
+}
+
 const PostForm = (props: PostFormProps) => {
   const onSubmit = (data: FormPost) => {
     data.published = published
+    delete data.coverImage
 
     if (data.type === EPostType.VIDEO) {
       delete data.videoUrl
@@ -54,7 +63,7 @@ const PostForm = (props: PostFormProps) => {
 
     if (data.type === EPostType.ARTICLE) {
       if (coverImage) {
-        data.coverImage = coverImage
+        data.coverImage = mapCoverImageDataToImageInput(coverImage)
       }
     }
 

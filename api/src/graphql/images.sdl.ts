@@ -14,11 +14,13 @@ export const schema = gql`
   }
 
   input CreateImageInput {
+    id: Int
     imageId: String!
     url: String!
   }
 
   input UpdateImageInput {
+    id: Int
     imageId: String
     url: String
   }

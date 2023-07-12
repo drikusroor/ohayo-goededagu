@@ -77,20 +77,22 @@ export const deletePost = async ({ id }) => {
   })
 }
 
-// function to upsert cover image of a post
-export const upsertCoverImage = async (id, coverImage) => {
-  const createdCoverImage = await db.image.upsert({
-    where: { id: coverImage.id },
-    create: { ...coverImage, postId: id },
-    update: coverImage,
-  })
+export const upsertCoverImage = async (postId, coverImage) => {
+  const upsertedCoverImage = coverImage.id
+    ? await db.image.update({
+        data: { ...coverImage, postId },
+        where: { id: coverImage.id },
+      })
+    : await db.image.create({
+        data: { ...coverImage, postId },
+      })
 
   await db.post.update({
-    data: { coverImageId: createdCoverImage.id },
-    where: { id },
+    data: { coverImageId: upsertedCoverImage.id },
+    where: { id: postId },
   })
 
-  return createdCoverImage
+  return upsertedCoverImage
 }
 
 const verifyOwnership = async ({ id }) => {
