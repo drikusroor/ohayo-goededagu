@@ -2,10 +2,7 @@ import { useMemo } from 'react'
 
 import type { Post } from 'types/graphql'
 
-import { Link, routes } from '@redwoodjs/router'
-
-import ArticleTypeIcon, { EPostType } from '../ArticleTypeIcon/ArticleTypeIcon'
-import Avatar from '../Avatar/Avatar'
+import { EPostType } from '../ArticleTypeIcon/ArticleTypeIcon'
 import Comment from '../Comment/Comment'
 import CommentForm from '../CommentForm/CommentForm'
 

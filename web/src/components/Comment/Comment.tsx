@@ -8,6 +8,7 @@ import { toast } from '@redwoodjs/web/toast'
 import { QUERY as FindArticleQuery } from 'src/components/ArticleCell'
 
 import Avatar from '../Avatar/Avatar'
+import Button from '../Button/Button'
 import Thumbs from '../Thumbs/Thumbs'
 
 interface ICommentProps {
@@ -21,6 +22,14 @@ const CREATE_UPDATE_OR_DELETE_THUMB = gql`
     createUpdateOrDeleteThumb(input: $input) {
       commentId
       up
+    }
+  }
+`
+
+const DELETE_COMMENT = gql`
+  mutation DeleteCommentMutation($id: Int!) {
+    deleteComment(id: $id) {
+      id
     }
   }
 `
@@ -44,6 +53,24 @@ export default ({ comment }: ICommentProps) => {
       ],
     }
   )
+
+  const [deleteComment] = useMutation(DELETE_COMMENT, {
+    onCompleted: () => {
+      toast.success('Comment deleted')
+    },
+    refetchQueries: [
+      {
+        query: FindArticleQuery,
+        variables: { id: comment.postId, $id: comment.postId },
+      },
+    ],
+  })
+
+  const handleDelete = () => {
+    if (confirm('Are you sure you want to delete this comment?')) {
+      deleteComment({ variables: { id: comment.id } })
+    }
+  }
 
   const rating = useMemo(() => {
     if (comment.thumbs.filter((t) => !t.up).length === 0) {
@@ -80,7 +107,9 @@ export default ({ comment }: ICommentProps) => {
 
   return (
     <div
-      className={`rounded-lg bg-slate-100 p-4 transition-opacity ${ratingOpacity}`}
+      className={`rounded-lg bg-slate-100 p-4 transition-opacity ${ratingOpacity} group relative ${
+        comment.deleted ? 'opacity-50' : ''
+      }`}
     >
       <div className="flex flex-row items-center gap-4">
         <Avatar
@@ -119,6 +148,13 @@ export default ({ comment }: ICommentProps) => {
       <div className="ml-14 mt-4 text-sm leading-relaxed text-slate-600">
         {comment.body}
       </div>
+      <Button
+        onClick={handleDelete}
+        className="user-select-none absolute bottom-2 right-2 opacity-0 transition-opacity group-hover:cursor-pointer group-hover:opacity-100"
+        color="monza-red"
+      >
+        Delete
+      </Button>
     </div>
   )
 }

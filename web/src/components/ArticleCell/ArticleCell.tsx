@@ -27,6 +27,7 @@ export const QUERY = gql`
         body
         createdAt
         postId
+        deleted
         user {
           name
           email

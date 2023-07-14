@@ -54,10 +54,27 @@ export const updateComment: MutationResolvers['updateComment'] = ({
   throw new Error('Not implemented')
 }
 
-export const deleteComment: MutationResolvers['deleteComment'] = ({ id }) => {
-  return db.comment.delete({
+export const deleteComment: MutationResolvers['deleteComment'] = async ({
+  id,
+}) => {
+  await verifyOwnership({ id })
+
+  return db.comment.update({
     where: { id },
+    data: { deleted: true },
   })
+}
+
+const verifyOwnership = async ({ id }) => {
+  const comment = await db.comment.findUnique({ where: { id } })
+
+  if (!comment) {
+    throw new Error(`Comment with ID ${id} not found`)
+  }
+
+  if (comment.userId !== context.currentUser.id) {
+    throw new Error(`User does not own comment with ID ${id}`)
+  }
 }
 
 export const Comment: CommentRelationResolvers = {
