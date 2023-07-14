@@ -46,7 +46,7 @@ export const QUERY = gql`
 `
 
 export const Loading = () => (
-  <div>
+  <div className="p-3 md:p-10">
     <Skeleton className="h-8 w-64" />
     <Skeleton className="mt-2 h-6 w-48" />
     <Skeleton className="mt-4 h-64 w-full" />

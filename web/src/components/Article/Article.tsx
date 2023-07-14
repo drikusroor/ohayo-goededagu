@@ -43,7 +43,7 @@ const Article = ({ article }: Props) => {
   }, [article.comments])
 
   return (
-    <article className="flex flex-col gap-24">
+    <article className="flex flex-col gap-24 p-3 md:p-10">
       <div className="flex flex-col gap-4">
         {article.type === EPostType.ARTICLE && (
           <ArticleArticle
