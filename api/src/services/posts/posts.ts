@@ -18,7 +18,7 @@ export const post = ({ id }) => {
 export const Post: PostRelationResolvers = {
   user: (_obj, { root }) => db.user.findFirst({ where: { id: root.userId } }),
   comments: (_obj, { root }) => {
-    return db.comment.findMany({ where: { postId: root?.id } })
+    return db.comment.findMany({ where: { postId: root?.id, deleted: false } })
   },
   videoPost: (_obj, { root }) => {
     if (root.type === 'VIDEO') {

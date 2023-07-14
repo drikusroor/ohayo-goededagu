@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 
 import {
   Form,
@@ -37,6 +37,8 @@ interface Props {
 const CommentForm = ({ postId }: Props) => {
   const { currentUser } = useAuth()
 
+  const formRef = useRef<HTMLFormElement>(null)
+
   const allowedRoles = ['ADMIN', 'MODERATOR', 'USER']
   const isAllowedToComment =
     currentUser?.id &&
@@ -57,6 +59,16 @@ const CommentForm = ({ postId }: Props) => {
     createComment({ variables: { input: { postId, ...input } } })
   }
 
+  // ctrl/cmd + enter to submit
+  const onKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if ((e.key === 'Enter' && e.ctrlKey) || (e.key === 'Enter' && e.metaKey)) {
+      e.preventDefault()
+      formRef.current?.dispatchEvent(
+        new Event('submit', { cancelable: true, bubbles: true })
+      )
+    }
+  }
+
   if (!isAllowedToComment) {
     return (
       <div className="max-w-xl">
@@ -74,34 +86,25 @@ const CommentForm = ({ postId }: Props) => {
   return (
     <div className="max-w-xl">
       <h3 className="text-lg font-light text-gray-600">Leave a Comment</h3>
-      <Form className="mt-4 w-full" onSubmit={onSubmit}>
+      <Form className="mt-3 w-full" onSubmit={onSubmit} ref={formRef}>
         <FormError
           error={error}
           titleClassName="font-semibold"
           wrapperClassName="bg-red-100 text-red-900 text-sm p-3 rounded"
         />
 
-        <span className="block text-xs uppercase text-gray-500">
-          Logged in as &nbsp;
-          <span className="font-bold">
-            {currentUser.name ? currentUser.name : currentUser.email}
-          </span>
-        </span>
-
-        <Label
-          name="body"
-          className="mb-1 mt-2 block text-xs font-semibold uppercase text-gray-500"
-        >
-          Comment
-        </Label>
         <TextAreaField
           name="body"
           disabled={loading}
-          className="block h-24 w-full rounded border p-1 text-sm"
+          className={`block w-full rounded-lg border-2 border-solid border-gray-300 px-4 py-2 text-sm placeholder-gray-500
+        shadow-sm focus:border-transparent focus:ring-2 focus:ring-blue-500
+        ${loading ? 'cursor-not-allowed bg-gray-100' : 'bg-white'}`}
           validation={{ required: true }}
-          placeholder="Type your comment here..."
+          placeholder={`Type your comment here...
+(Hint: use ctrl/cmd + enter to submit)`}
           onChange={(e) => setBody(e.target.value)}
           value={body}
+          onKeyDown={onKeyDown}
         />
 
         <Submit

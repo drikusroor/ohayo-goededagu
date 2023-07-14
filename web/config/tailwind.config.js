@@ -17,6 +17,19 @@ module.exports = {
           600: '#2b6cb0',
         },
       },
+      keyframes: {
+        'fade-out': {
+          '0%': {
+            opacity: 1,
+          },
+          '100%': {
+            opacity: 0,
+          },
+        },
+      },
+      animation: {
+        'fade-out': 'fade-out 0.5s ease-out forwards',
+      },
     },
   },
   safelist: [

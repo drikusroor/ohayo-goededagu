@@ -11,6 +11,7 @@ export const schema = gql`
     parentId: Int
     children: [Comment]!
     thumbs: [Thumb]!
+    deleted: Boolean!
   }
 
   type Query {
@@ -29,6 +30,10 @@ export const schema = gql`
     userId: Int
     postId: Int
     parentId: Int
+  }
+
+  input DeleteCommentInput {
+    id: Int!
   }
 
   type Mutation {

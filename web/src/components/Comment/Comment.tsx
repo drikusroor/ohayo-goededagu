@@ -1,13 +1,16 @@
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 
+import { BsTrash } from 'react-icons/bs'
 import type { Comment } from 'types/graphql'
 
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
+import { useAuth } from 'src/auth'
 import { QUERY as FindArticleQuery } from 'src/components/ArticleCell'
 
 import Avatar from '../Avatar/Avatar'
+import Button from '../Button/Button'
 import Thumbs from '../Thumbs/Thumbs'
 
 interface ICommentProps {
@@ -25,7 +28,19 @@ const CREATE_UPDATE_OR_DELETE_THUMB = gql`
   }
 `
 
+const DELETE_COMMENT = gql`
+  mutation DeleteCommentMutation($id: Int!) {
+    deleteComment(id: $id) {
+      id
+    }
+  }
+`
+
 export default ({ comment }: ICommentProps) => {
+  const { currentUser } = useAuth()
+
+  const [deleteFadeOut, setDeleteFadeOut] = useState(false)
+
   const [createUpdateOrDeleteThumb] = useMutation(
     CREATE_UPDATE_OR_DELETE_THUMB,
     {
@@ -44,6 +59,26 @@ export default ({ comment }: ICommentProps) => {
       ],
     }
   )
+
+  const [deleteComment] = useMutation(DELETE_COMMENT, {
+    onCompleted: () => {
+      toast.success('Comment deleted')
+    },
+    refetchQueries: [
+      {
+        query: FindArticleQuery,
+        variables: { id: comment.postId, $id: comment.postId },
+      },
+    ],
+  })
+
+  const handleDelete = async () => {
+    if (confirm('Are you sure you want to delete this comment?')) {
+      setDeleteFadeOut(true)
+      await new Promise((resolve) => setTimeout(resolve, 500))
+      deleteComment({ variables: { id: comment.id } })
+    }
+  }
 
   const rating = useMemo(() => {
     if (comment.thumbs.filter((t) => !t.up).length === 0) {
@@ -80,7 +115,9 @@ export default ({ comment }: ICommentProps) => {
 
   return (
     <div
-      className={`rounded-lg bg-slate-100 p-4 transition-opacity ${ratingOpacity}`}
+      className={`rounded-lg bg-slate-100 p-4 transition-opacity ${ratingOpacity} group relative ${
+        deleteFadeOut ? 'animate-fade-out' : ''
+      }`}
     >
       <div className="flex flex-row items-center gap-4">
         <Avatar
@@ -119,6 +156,16 @@ export default ({ comment }: ICommentProps) => {
       <div className="ml-14 mt-4 text-sm leading-relaxed text-slate-600">
         {comment.body}
       </div>
+      {currentUser?.id === comment.user.id && (
+        <Button
+          onClick={handleDelete}
+          className="user-select-none bottom-2 right-2 ml-auto mt-3 transition-opacity group-hover:cursor-pointer group-hover:opacity-100 md:absolute md:mt-0 md:opacity-0"
+          color="monza-red"
+          title="Delete comment"
+        >
+          <BsTrash />
+        </Button>
+      )}
     </div>
   )
 }

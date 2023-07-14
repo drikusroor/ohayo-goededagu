@@ -87,6 +87,7 @@ model Comment {
   parentId  Int?
   children  Comment[] @relation("ChildComments")
   thumbs    Thumb[]
+  deleted   Boolean   @default(false)
 }
 
 model Thumb {
