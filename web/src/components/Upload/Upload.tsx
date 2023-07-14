@@ -6,6 +6,7 @@ import {
 
 import { ButtonField, FieldError, Label } from '@redwoodjs/forms'
 
+import { useAuth } from 'src/auth'
 import { classNames } from 'src/lib/class-names'
 
 import ArticleTypeIcon, { EPostType } from '../ArticleTypeIcon/ArticleTypeIcon'
@@ -58,6 +59,7 @@ const Upload = ({
   postTitle,
   postBody,
 }: IUploadProps) => {
+  const { currentUser } = useAuth()
   const widget = cloudinary.createUploadWidget(
     {
       cloudName: 'dl5elpdjy',
@@ -157,7 +159,9 @@ const Upload = ({
                     </h1>
                   </div>
                   <div className="flex flex-row items-center gap-2 pb-2">
-                    <span className="text-sm text-slate-200">Your name</span>
+                    <span className="text-sm text-slate-200">
+                      {currentUser?.name ? currentUser?.name : 'Your name'}
+                    </span>
                     <span className="text-sm text-slate-200">
                       | 11-11-2011 11:11
                     </span>
@@ -192,10 +196,13 @@ const Upload = ({
                   </p>
                   <div className="flex flex-row items-center justify-center gap-12">
                     <div className="flex flex-row items-center gap-2">
-                      <Avatar />
+                      <Avatar
+                        alt={currentUser.name}
+                        name={currentUser.name || currentUser.email}
+                      />
                       <div className="flex flex-col items-start">
                         <span className="text-sm text-slate-300">
-                          Your name
+                          {currentUser?.name ? currentUser?.name : 'Your name'}
                         </span>
                         <span className="text-sm text-slate-300">
                           11-11-2011 11:11
