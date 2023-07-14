@@ -1,5 +1,7 @@
 import { ButtonField, FieldError } from '@redwoodjs/forms'
 
+import ArticleTypeIcon, { EPostType } from '../ArticleTypeIcon/ArticleTypeIcon'
+
 declare const cloudinary: any
 
 export interface ICloudinaryUploadResultInfo {
@@ -31,11 +33,19 @@ export interface ICloudinaryUploadResultInfo {
 
 interface IUploadProps {
   name: string
+  postType: EPostType
+  postTitle: string
   value?: string
   setValue?: (value: ICloudinaryUploadResultInfo) => void
 }
 
-const Upload = ({ name, value, setValue }: IUploadProps) => {
+const Upload = ({
+  name,
+  postTitle,
+  postType,
+  value,
+  setValue,
+}: IUploadProps) => {
   const widget = cloudinary.createUploadWidget(
     {
       cloudName: 'dl5elpdjy',
@@ -68,7 +78,7 @@ const Upload = ({ name, value, setValue }: IUploadProps) => {
 
       <FieldError name="upload" className="rw-field-error" />
 
-      {value && <img className="mt-2" alt="cover" src={value} />}
+      {/* {value && <img className="mt-2" alt="cover" src={value} />} */}
     </>
   )
 }
