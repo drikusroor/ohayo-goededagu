@@ -86,7 +86,7 @@ const CommentForm = ({ postId }: Props) => {
   return (
     <div className="max-w-xl">
       <h3 className="text-lg font-light text-gray-600">Leave a Comment</h3>
-      <Form className="mt-4 w-full" onSubmit={onSubmit} ref={formRef}>
+      <Form className="mt-3 w-full" onSubmit={onSubmit} ref={formRef}>
         <FormError
           error={error}
           titleClassName="font-semibold"
@@ -96,11 +96,12 @@ const CommentForm = ({ postId }: Props) => {
         <TextAreaField
           name="body"
           disabled={loading}
-          className={`block w-full rounded-lg border-gray-300 px-4 py-2 text-sm placeholder-gray-500
+          className={`block w-full rounded-lg border-2 border-solid border-gray-300 px-4 py-2 text-sm placeholder-gray-500
         shadow-sm focus:border-transparent focus:ring-2 focus:ring-blue-500
         ${loading ? 'cursor-not-allowed bg-gray-100' : 'bg-white'}`}
           validation={{ required: true }}
-          placeholder="Type your comment here..."
+          placeholder={`Type your comment here...
+(Hint: use ctrl/cmd + enter to submit)`}
           onChange={(e) => setBody(e.target.value)}
           value={body}
           onKeyDown={onKeyDown}

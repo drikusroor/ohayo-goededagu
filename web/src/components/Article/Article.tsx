@@ -79,15 +79,15 @@ const Article = ({ article }: Props) => {
       </div>
 
       <div>
-        <h2 className="mt-4 text-2xl font-light text-gray-600">Comments</h2>
-        <ul className="mt-4 max-w-xl">
+        <h2 className="mt-5 text-2xl font-light text-gray-600">Comments</h2>
+        <ul className="mt-3 max-w-xl">
           {sortedComments.map((comment) => (
             <li key={comment.id} className="mb-4">
               <Comment comment={comment} />
             </li>
           ))}
         </ul>
-        <div className="mt-2">
+        <div className="mt-5">
           <CommentForm postId={article.id} />
         </div>
       </div>
