@@ -16,7 +16,11 @@ import type { ComponentMeta } from '@storybook/react'
 import ArticleCommentCountBadge from './ArticleCommentCountBadge'
 
 export const generated = () => {
-  return <ArticleCommentCountBadge />
+  return (
+    <div className="bg-slate-700 p-8">
+      <ArticleCommentCountBadge count={5} />
+    </div>
+  )
 }
 
 export default {
