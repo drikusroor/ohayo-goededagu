@@ -79,6 +79,15 @@ const Upload = ({
 
   const [blogRollPreview, setBlogRollPreview] = React.useState<boolean>(false)
 
+  //TODO: If the post is already published, this should be changed to the date the post was published at
+  const formattedCurrentDate = new Date().toLocaleString('nl-NL', {
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+  })
+
   return (
     <>
       <ButtonField
@@ -163,7 +172,7 @@ const Upload = ({
                       {currentUser?.name ? currentUser?.name : 'Your name'}
                     </span>
                     <span className="text-sm text-slate-200">
-                      | 11-11-2011 11:11
+                      | {formattedCurrentDate}
                     </span>
                   </div>
                 </div>
@@ -205,7 +214,7 @@ const Upload = ({
                           {currentUser?.name ? currentUser?.name : 'Your name'}
                         </span>
                         <span className="text-sm text-slate-300">
-                          11-11-2011 11:11
+                          {formattedCurrentDate}
                         </span>
                       </div>
                     </div>
