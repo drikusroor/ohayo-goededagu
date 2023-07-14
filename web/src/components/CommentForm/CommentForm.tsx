@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 
 import {
   Form,
@@ -37,6 +37,8 @@ interface Props {
 const CommentForm = ({ postId }: Props) => {
   const { currentUser } = useAuth()
 
+  const formRef = useRef<HTMLFormElement>(null)
+
   const allowedRoles = ['ADMIN', 'MODERATOR', 'USER']
   const isAllowedToComment =
     currentUser?.id &&
@@ -57,6 +59,16 @@ const CommentForm = ({ postId }: Props) => {
     createComment({ variables: { input: { postId, ...input } } })
   }
 
+  // ctrl + enter to submit
+  const onKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === 'Enter' && e.ctrlKey) {
+      e.preventDefault()
+      formRef.current?.dispatchEvent(
+        new Event('submit', { cancelable: true, bubbles: true })
+      )
+    }
+  }
+
   if (!isAllowedToComment) {
     return (
       <div className="max-w-xl">
@@ -74,7 +86,7 @@ const CommentForm = ({ postId }: Props) => {
   return (
     <div className="max-w-xl">
       <h3 className="text-lg font-light text-gray-600">Leave a Comment</h3>
-      <Form className="mt-4 w-full" onSubmit={onSubmit}>
+      <Form className="mt-4 w-full" onSubmit={onSubmit} ref={formRef}>
         <FormError
           error={error}
           titleClassName="font-semibold"
@@ -91,6 +103,7 @@ const CommentForm = ({ postId }: Props) => {
           placeholder="Type your comment here..."
           onChange={(e) => setBody(e.target.value)}
           value={body}
+          onKeyDown={onKeyDown}
         />
 
         <Submit
