@@ -51,9 +51,11 @@ const ArticleArticle = ({ article, type, date }: Props) => {
                 <div className="flex flex-col items-start">
                   <span
                     className="text-sm text-slate-300"
-                    title={article.user.name || article.user.email}
+                    title={article.user.profile.name}
                   >
-                    {article.user.name
+                    {article.user.profile.name
+                      ? article.user.profile.name
+                      : article.user.name
                       ? article.user.name
                       : article.user.email
                       ? article.user.email
@@ -113,7 +115,9 @@ const ArticleArticle = ({ article, type, date }: Props) => {
               </div>
               <div className="flex flex-row items-center gap-2 pb-2">
                 <span className="text-sm text-slate-200">
-                  {article.user.name
+                  {article.user.profile.name
+                    ? article.user.profile.name
+                    : article.user.name
                     ? article.user.name
                     : article.user.email
                     ? article.user.email
