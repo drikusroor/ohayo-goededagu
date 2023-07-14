@@ -4,10 +4,8 @@ import {
   BsFillCircleFill,
   BsFillCheckCircleFill,
   BsFillExclamationTriangleFill,
-  BsArrowRightCircle,
 } from 'react-icons/bs'
 import type { EditPostById, UpdatePostInput } from 'types/graphql'
-import { User } from 'types/graphql'
 
 import {
   Form,
@@ -17,15 +15,13 @@ import {
   TextField,
   Submit,
   SelectField,
-  CheckboxField,
 } from '@redwoodjs/forms'
 import type { RWGqlError } from '@redwoodjs/forms'
 
-import ArticleTypeIcon, {
+import {
   EPostType,
   postTypeOptions,
 } from 'src/components/ArticleTypeIcon/ArticleTypeIcon'
-import Avatar from 'src/components/Avatar/Avatar'
 import Button from 'src/components/Button/Button'
 import Upload from 'src/components/Upload/Upload'
 import { classNames } from 'src/lib/class-names'
