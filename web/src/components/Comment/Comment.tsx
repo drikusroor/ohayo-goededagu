@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react'
 
+import { BsTrash } from 'react-icons/bs'
 import type { Comment } from 'types/graphql'
 
 import { useMutation } from '@redwoodjs/web'
@@ -154,10 +155,11 @@ export default ({ comment }: ICommentProps) => {
       </div>
       <Button
         onClick={handleDelete}
-        className="user-select-none absolute bottom-2 right-2 opacity-0 transition-opacity group-hover:cursor-pointer group-hover:opacity-100"
+        className="user-select-none bottom-2 right-2 ml-auto mt-3 transition-opacity group-hover:cursor-pointer group-hover:opacity-100 md:absolute md:mt-0 md:opacity-0"
         color="monza-red"
+        title="Delete comment"
       >
-        Delete
+        <BsTrash />
       </Button>
     </div>
   )
