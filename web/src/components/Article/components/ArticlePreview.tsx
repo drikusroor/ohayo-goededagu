@@ -2,6 +2,8 @@ import type { Post } from 'types/graphql'
 
 import { navigate, routes } from '@redwoodjs/router'
 
+import { EPostDisplayType } from 'src/types/post-display-type.enum'
+
 import { EPostType } from '../../ArticleTypeIcon/ArticleTypeIcon'
 
 import ArticleArticle from './ArticleArticle'
@@ -28,19 +30,31 @@ const ArticlePreview = ({ article }: Props) => {
       tabIndex={0}
     >
       {article.type === EPostType.ARTICLE && (
-        <ArticleArticle article={article} type={EPostType.PREVIEW} />
+        <ArticleArticle
+          article={article}
+          displayType={EPostDisplayType.PREVIEW}
+        />
       )}
 
       {article.type === EPostType.VIDEO && (
-        <ArticleVideo article={article} type={EPostType.PREVIEW} />
+        <ArticleVideo
+          article={article}
+          displayType={EPostDisplayType.PREVIEW}
+        />
       )}
 
       {article.type === EPostType.CHOTTO && (
-        <ArticleChotto article={article} type={EPostType.PREVIEW} />
+        <ArticleChotto
+          article={article}
+          displayType={EPostDisplayType.PREVIEW}
+        />
       )}
 
       {article.type === EPostType.HAIKU && (
-        <ArticleHaiku article={article} type={EPostType.PREVIEW} />
+        <ArticleHaiku
+          article={article}
+          displayType={EPostDisplayType.PREVIEW}
+        />
       )}
     </article>
   )

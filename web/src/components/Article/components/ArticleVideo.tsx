@@ -11,16 +11,17 @@ import ArticleTypeIcon, {
 } from 'src/components/ArticleTypeIcon/ArticleTypeIcon'
 import AvatarTimestamp from 'src/components/Avatar/AvatarTimestamp/AvatarTimestamp'
 import Button from 'src/components/Button/Button'
+import { EPostDisplayType } from 'src/types/post-display-type.enum'
 
 import extractVideoID from './helpers/extract-video-id'
 
 interface Props {
   article: Post
-  type: EPostType
+  displayType: EPostDisplayType
   date?: string
 }
 
-const ArticleVideo = ({ article, type, date }: Props) => {
+const ArticleVideo = ({ article, displayType, date }: Props) => {
   const embedUrl = useMemo(() => {
     const videoId = extractVideoID(article?.videoPost?.videoUrl)
     if (!videoId) return null
@@ -31,7 +32,7 @@ const ArticleVideo = ({ article, type, date }: Props) => {
 
   return (
     <>
-      {type === EPostType.PREVIEW && (
+      {displayType === EPostDisplayType.PREVIEW && (
         <>
           <header className="mb-3">
             <div className="mt-4 flex flex-row items-center gap-2 pl-1">
@@ -73,7 +74,7 @@ const ArticleVideo = ({ article, type, date }: Props) => {
         </>
       )}
 
-      {type === EPostType.FULL && (
+      {displayType === EPostDisplayType.FULL && (
         <>
           <header className="flex flex-col gap-1">
             <h1 className="flex items-center gap-2 text-3xl font-extrabold uppercase tracking-tight md:gap-4">

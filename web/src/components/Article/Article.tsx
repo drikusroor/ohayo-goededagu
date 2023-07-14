@@ -48,7 +48,7 @@ const Article = ({ article }: Props) => {
         {article.type === EPostType.ARTICLE && (
           <ArticleArticle
             article={article}
-            type={EPostType.FULL}
+            displayType={EPostType.FULL}
             date={formattedDate}
           />
         )}
@@ -56,7 +56,7 @@ const Article = ({ article }: Props) => {
         {article.type === EPostType.VIDEO && (
           <ArticleVideo
             article={article}
-            type={EPostType.FULL}
+            displayType={EPostType.FULL}
             date={formattedDate}
           />
         )}
@@ -64,7 +64,7 @@ const Article = ({ article }: Props) => {
         {article.type === EPostType.CHOTTO && (
           <ArticleChotto
             article={article}
-            type={EPostType.FULL}
+            displayType={EPostType.FULL}
             date={formattedDate}
           />
         )}
@@ -72,7 +72,7 @@ const Article = ({ article }: Props) => {
         {article.type === EPostType.HAIKU && (
           <ArticleHaiku
             article={article}
-            type={EPostType.FULL}
+            displayType={EPostType.FULL}
             date={formattedDate}
           />
         )}

@@ -1,10 +1,11 @@
 import { BsArrowRightCircle } from 'react-icons/bs'
 import type { Post } from 'types/graphql'
 
-import { Link, navigate, routes } from '@redwoodjs/router'
+import { Link, routes } from '@redwoodjs/router'
 
 import ArticleCommentCountBadge from 'src/components/ArticleCommentCountBadge/ArticleCommentCountBadge'
 import Button from 'src/components/Button/Button'
+import { EPostDisplayType } from 'src/types/post-display-type.enum'
 
 import ArticleTypeIcon, {
   EPostType,
@@ -13,16 +14,16 @@ import Avatar from '../../Avatar/Avatar'
 
 interface Props {
   article: Post
-  type: EPostType
+  displayType: EPostDisplayType
   date?: string
 }
 
-const ArticleArticle = ({ article, type, date }: Props) => {
+const ArticleArticle = ({ article, displayType, date }: Props) => {
   const { coverImage } = article
 
   return (
     <>
-      {type === EPostType.PREVIEW && (
+      {displayType === EPostDisplayType.PREVIEW && (
         <section
           style={{
             backgroundImage: coverImage?.url ? `url(${coverImage.url})` : '',
@@ -95,7 +96,7 @@ const ArticleArticle = ({ article, type, date }: Props) => {
         </section>
       )}
 
-      {type === EPostType.FULL && (
+      {displayType === EPostDisplayType.FULL && (
         <>
           <section
             style={{

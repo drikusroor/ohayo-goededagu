@@ -13,8 +13,6 @@ export enum EPostType {
   HAIKU = 'HAIKU',
   CHOTTO = 'CHOTTO',
   PHOTO_GALLERY = 'PHOTO_GALLERY',
-  PREVIEW = 'PREVIEW',
-  FULL = 'FULL',
 }
 
 export const postTypeOptions = [

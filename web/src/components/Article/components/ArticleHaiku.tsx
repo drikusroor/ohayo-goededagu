@@ -4,6 +4,7 @@ import { Link, routes } from '@redwoodjs/router'
 
 import ArticleCommentCountBadge from 'src/components/ArticleCommentCountBadge/ArticleCommentCountBadge'
 import AvatarTimestamp from 'src/components/Avatar/AvatarTimestamp/AvatarTimestamp'
+import { EPostDisplayType } from 'src/types/post-display-type.enum'
 
 import ArticleTypeIcon, {
   EPostType,
@@ -11,14 +12,14 @@ import ArticleTypeIcon, {
 
 interface Props {
   article: Post
-  type: EPostType
+  displayType: EPostDisplayType
   date?: string
 }
 
-const ArticleHaiku = ({ article, type, date }: Props) => {
+const ArticleHaiku = ({ article, displayType, date }: Props) => {
   return (
     <>
-      {type === EPostType.PREVIEW && (
+      {displayType === EPostDisplayType.PREVIEW && (
         <>
           <header className="mb-3">
             <div className="mt-4 flex flex-row items-center gap-2 pl-1">
@@ -45,7 +46,7 @@ const ArticleHaiku = ({ article, type, date }: Props) => {
         </>
       )}
 
-      {type === EPostType.FULL && (
+      {displayType === EPostDisplayType.FULL && (
         <>
           <header className="flex flex-col gap-1">
             <h1 className="flex items-center gap-2 text-3xl font-extrabold uppercase leading-none tracking-tight md:gap-4">
