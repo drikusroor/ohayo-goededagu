@@ -6,6 +6,7 @@ import type { Comment } from 'types/graphql'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
+import { useAuth } from 'src/auth'
 import { QUERY as FindArticleQuery } from 'src/components/ArticleCell'
 
 import Avatar from '../Avatar/Avatar'
@@ -36,6 +37,8 @@ const DELETE_COMMENT = gql`
 `
 
 export default ({ comment }: ICommentProps) => {
+  const { currentUser } = useAuth()
+
   const [deleteFadeOut, setDeleteFadeOut] = useState(false)
 
   const [createUpdateOrDeleteThumb] = useMutation(
@@ -153,14 +156,16 @@ export default ({ comment }: ICommentProps) => {
       <div className="ml-14 mt-4 text-sm leading-relaxed text-slate-600">
         {comment.body}
       </div>
-      <Button
-        onClick={handleDelete}
-        className="user-select-none bottom-2 right-2 ml-auto mt-3 transition-opacity group-hover:cursor-pointer group-hover:opacity-100 md:absolute md:mt-0 md:opacity-0"
-        color="monza-red"
-        title="Delete comment"
-      >
-        <BsTrash />
-      </Button>
+      {currentUser?.id === comment.user.id && (
+        <Button
+          onClick={handleDelete}
+          className="user-select-none bottom-2 right-2 ml-auto mt-3 transition-opacity group-hover:cursor-pointer group-hover:opacity-100 md:absolute md:mt-0 md:opacity-0"
+          color="monza-red"
+          title="Delete comment"
+        >
+          <BsTrash />
+        </Button>
+      )}
     </div>
   )
 }
