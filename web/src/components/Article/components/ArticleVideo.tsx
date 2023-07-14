@@ -5,6 +5,7 @@ import { Post } from 'types/graphql'
 
 import { Link, navigate, routes } from '@redwoodjs/router'
 
+import ArticleCommentCountBadge from 'src/components/ArticleCommentCountBadge/ArticleCommentCountBadge'
 import ArticleTypeIcon, {
   EPostType,
 } from 'src/components/ArticleTypeIcon/ArticleTypeIcon'
@@ -58,6 +59,7 @@ const ArticleVideo = ({ article, type, date }: Props) => {
           </div>
           <div className="flex flex-row items-center justify-between pt-4">
             <AvatarTimestamp article={article} />
+            <ArticleCommentCountBadge count={article.comments.length} />
             {article.body && (
               <Button
                 className="flex items-center gap-2 px-4 py-3 text-xs"

@@ -1,8 +1,9 @@
 import { BsArrowRightCircle } from 'react-icons/bs'
 import type { Post } from 'types/graphql'
 
-import { navigate, routes } from '@redwoodjs/router'
+import { Link, navigate, routes } from '@redwoodjs/router'
 
+import ArticleCommentCountBadge from 'src/components/ArticleCommentCountBadge/ArticleCommentCountBadge'
 import Button from 'src/components/Button/Button'
 
 import ArticleTypeIcon, {
@@ -79,18 +80,16 @@ const ArticleArticle = ({ article, type, date }: Props) => {
                   </span>
                 </div>
               </div>
-              <a
-                href="#"
+              <ArticleCommentCountBadge count={article.comments.length} />
+              <Link
+                to={routes.article({ id: article.id })}
                 className="items-center justify-end text-center text-base font-medium text-white focus:ring-4 focus:ring-gray-400"
               >
-                <Button
-                  className="flex max-w-fit items-center justify-end gap-2 px-4 py-3 text-xs"
-                  onClick={() => navigate(routes.article({ id: article.id }))}
-                >
+                <Button className="flex max-w-fit items-center justify-end gap-2 px-4 py-3 text-xs">
                   <span className="hidden sm:inline-block">Lees verder</span>
                   <BsArrowRightCircle />
                 </Button>
-              </a>
+              </Link>
             </div>
           </div>
         </section>

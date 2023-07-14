@@ -2,6 +2,7 @@ import type { Post } from 'types/graphql'
 
 import { Link, routes } from '@redwoodjs/router'
 
+import ArticleCommentCountBadge from 'src/components/ArticleCommentCountBadge/ArticleCommentCountBadge'
 import AvatarTimestamp from 'src/components/Avatar/AvatarTimestamp/AvatarTimestamp'
 
 import ArticleTypeIcon, {
@@ -37,6 +38,7 @@ const ArticleChotto = ({ article, type, date }: Props) => {
               <div className="justmt-2 line-clamp-5">{article.body}</div>
               <div className="pt-4">
                 <AvatarTimestamp article={article} />
+                <ArticleCommentCountBadge count={article.comments.length} />
               </div>
             </div>
           </div>
