@@ -81,23 +81,12 @@ const CommentForm = ({ postId }: Props) => {
           wrapperClassName="bg-red-100 text-red-900 text-sm p-3 rounded"
         />
 
-        <span className="block text-xs uppercase text-gray-500">
-          Logged in as &nbsp;
-          <span className="font-bold">
-            {currentUser.name ? currentUser.name : currentUser.email}
-          </span>
-        </span>
-
-        <Label
-          name="body"
-          className="mb-1 mt-2 block text-xs font-semibold uppercase text-gray-500"
-        >
-          Comment
-        </Label>
         <TextAreaField
           name="body"
           disabled={loading}
-          className="block h-24 w-full rounded border p-1 text-sm"
+          className={`block w-full rounded-lg border-gray-300 px-4 py-2 text-sm placeholder-gray-500
+        shadow-sm focus:border-transparent focus:ring-2 focus:ring-blue-500
+        ${loading ? 'cursor-not-allowed bg-gray-100' : 'bg-white'}`}
           validation={{ required: true }}
           placeholder="Type your comment here..."
           onChange={(e) => setBody(e.target.value)}
