@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 
 import type { Comment } from 'types/graphql'
 
@@ -35,6 +35,8 @@ const DELETE_COMMENT = gql`
 `
 
 export default ({ comment }: ICommentProps) => {
+  const [deleteFadeOut, setDeleteFadeOut] = useState(false)
+
   const [createUpdateOrDeleteThumb] = useMutation(
     CREATE_UPDATE_OR_DELETE_THUMB,
     {
@@ -66,8 +68,10 @@ export default ({ comment }: ICommentProps) => {
     ],
   })
 
-  const handleDelete = () => {
+  const handleDelete = async () => {
     if (confirm('Are you sure you want to delete this comment?')) {
+      setDeleteFadeOut(true)
+      await new Promise((resolve) => setTimeout(resolve, 500))
       deleteComment({ variables: { id: comment.id } })
     }
   }
@@ -108,7 +112,7 @@ export default ({ comment }: ICommentProps) => {
   return (
     <div
       className={`rounded-lg bg-slate-100 p-4 transition-opacity ${ratingOpacity} group relative ${
-        comment.deleted ? 'opacity-50' : ''
+        deleteFadeOut ? 'animate-fade-out' : ''
       }`}
     >
       <div className="flex flex-row items-center gap-4">
