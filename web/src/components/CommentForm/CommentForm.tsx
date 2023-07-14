@@ -59,9 +59,9 @@ const CommentForm = ({ postId }: Props) => {
     createComment({ variables: { input: { postId, ...input } } })
   }
 
-  // ctrl + enter to submit
+  // ctrl/cmd + enter to submit
   const onKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    if (e.key === 'Enter' && e.ctrlKey) {
+    if ((e.key === 'Enter' && e.ctrlKey) || (e.key === 'Enter' && e.metaKey)) {
       e.preventDefault()
       formRef.current?.dispatchEvent(
         new Event('submit', { cancelable: true, bubbles: true })
