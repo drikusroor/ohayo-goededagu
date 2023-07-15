@@ -31,15 +31,16 @@ export interface ICloudinaryUploadResultInfo {
 
 interface IUploadProps {
   name: string
-  coverImage?: string
+  multiple: boolean
   setCoverImage?: (value: ICloudinaryUploadResultInfo) => void
 }
 
-const Upload = ({ name, setCoverImage }: IUploadProps) => {
+const Upload = ({ name, multiple, setCoverImage }: IUploadProps) => {
   const widget = cloudinary.createUploadWidget(
     {
       cloudName: 'dl5elpdjy',
       uploadPreset: 'bcfnswai',
+      multiple: multiple,
     },
     (error, result) => {
       if (!error && result && result.event === 'success') {

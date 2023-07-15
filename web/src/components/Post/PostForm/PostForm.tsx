@@ -160,6 +160,7 @@ const PostForm = (props: PostFormProps) => {
             <>
               <Upload
                 name="coverImage"
+                multiple={false}
                 setCoverImage={({ public_id, secure_url }) =>
                   setCoverImage({
                     imageId: public_id,
