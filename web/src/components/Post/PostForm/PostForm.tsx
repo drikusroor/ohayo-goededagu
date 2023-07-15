@@ -23,7 +23,8 @@ import {
   postTypeOptions,
 } from 'src/components/ArticleTypeIcon/ArticleTypeIcon'
 import Button from 'src/components/Button/Button'
-import Upload from 'src/components/Upload/Upload'
+import Preview from 'src/components/Upload/Preview/Preview'
+import Upload from 'src/components/Upload/Upload/Upload'
 import { classNames } from 'src/lib/class-names'
 
 import VideoForm, { IVideoPostFormData } from './TypeForms/VideoForm'
@@ -180,9 +181,6 @@ const PostForm = (props: PostFormProps) => {
             <>
               <Upload
                 name="coverImage"
-                postType={postType}
-                postTitle={postTitle}
-                postBody={postBody}
                 coverImage={coverImage?.url}
                 setCoverImage={({ public_id, secure_url }) =>
                   setCoverImage({
@@ -190,6 +188,13 @@ const PostForm = (props: PostFormProps) => {
                     url: secure_url,
                   })
                 }
+              />
+
+              <Preview
+                postType={postType}
+                postTitle={postTitle}
+                postBody={postBody}
+                coverImage={coverImage?.url}
               />
             </>
           )}
