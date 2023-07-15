@@ -60,18 +60,23 @@ const ArticleVideo = ({ article, displayType, date }: Props) => {
           </div>
           <div className="flex flex-row items-center justify-between pt-4">
             <AvatarTimestamp article={article} />
-            {article.comments.length > 0 && (
-              <ArticleCommentCountBadge count={article.comments.length} />
-            )}
-            {article.body && (
-              <Button
-                className="flex items-center gap-2 px-4 py-3 text-xs"
-                onClick={() => navigate(routes.article({ id: article.id }))}
-              >
-                <span className="hidden sm:inline-block">Lees verder</span>
-                <BsArrowRightCircle />
-              </Button>
-            )}
+            <div className="flex items-center gap-6">
+              {article.comments.length > 0 && (
+                <ArticleCommentCountBadge
+                  count={article.comments.length}
+                  variant="dark"
+                />
+              )}
+              {article.body && (
+                <Button
+                  className="flex items-center gap-2 px-4 py-3 text-xs"
+                  onClick={() => navigate(routes.article({ id: article.id }))}
+                >
+                  <span className="hidden sm:inline-block">Lees verder</span>
+                  <BsArrowRightCircle />
+                </Button>
+              )}
+            </div>
           </div>
         </>
       )}
