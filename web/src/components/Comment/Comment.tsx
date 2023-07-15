@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 
 import { BsTrash } from 'react-icons/bs'
 import type { Comment } from 'types/graphql'
@@ -40,6 +40,11 @@ export default ({ comment }: ICommentProps) => {
   const { currentUser } = useAuth()
 
   const [deleteFadeOut, setDeleteFadeOut] = useState(false)
+  const [thumbsDisabled, setThumbsDisabled] = useState(false)
+
+  useEffect(() => {
+    setThumbsDisabled(false)
+  }, [comment?.thumbs])
 
   const [createUpdateOrDeleteThumb] = useMutation(
     CREATE_UPDATE_OR_DELETE_THUMB,
@@ -108,6 +113,9 @@ export default ({ comment }: ICommentProps) => {
   }, [rating])
 
   const handleThumbClick = (up: boolean) => {
+    if (!thumbsDisabled) {
+      setThumbsDisabled(true)
+    }
     createUpdateOrDeleteThumb({
       variables: { input: { commentId: comment.id, up } },
     })
@@ -150,6 +158,7 @@ export default ({ comment }: ICommentProps) => {
             thumbs={comment.thumbs}
             entityId={comment.id}
             onThumb={handleThumbClick}
+            disabled={thumbsDisabled}
           />
         </div>
       </div>
