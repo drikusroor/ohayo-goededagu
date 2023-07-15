@@ -20,7 +20,7 @@ import ArticleHaiku from './ArticleHaiku'
 
 export const full = () => {
   return (
-    <div className="bg-slate-700 p-8">
+    <div className="p-8">
       <ArticleHaiku
         article={getArticle()}
         displayType={EPostDisplayType.FULL}
@@ -31,7 +31,7 @@ export const full = () => {
 
 export const preview = () => {
   return (
-    <div className="bg-slate-700 p-8">
+    <div className="p-8">
       <ArticleHaiku
         article={getArticle()}
         displayType={EPostDisplayType.PREVIEW}
@@ -44,7 +44,7 @@ export const previewNoComments = () => {
   const article = getArticle({ comments: [] })
 
   return (
-    <div className="bg-slate-700 p-8">
+    <div className="p-8">
       <ArticleHaiku article={article} displayType={EPostDisplayType.PREVIEW} />
     </div>
   )
