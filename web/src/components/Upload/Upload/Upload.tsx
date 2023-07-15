@@ -35,7 +35,7 @@ interface IUploadProps {
   setCoverImage?: (value: ICloudinaryUploadResultInfo) => void
 }
 
-const Upload = ({ name, coverImage, setCoverImage }: IUploadProps) => {
+const Upload = ({ name, setCoverImage }: IUploadProps) => {
   const widget = cloudinary.createUploadWidget(
     {
       cloudName: 'dl5elpdjy',

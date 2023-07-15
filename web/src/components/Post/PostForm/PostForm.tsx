@@ -18,7 +18,7 @@ import {
 } from '@redwoodjs/forms'
 import type { RWGqlError } from '@redwoodjs/forms'
 
-import ArticleTypeIcon, {
+import {
   EPostType,
   postTypeOptions,
 } from 'src/components/ArticleTypeIcon/ArticleTypeIcon'
@@ -160,7 +160,6 @@ const PostForm = (props: PostFormProps) => {
             <>
               <Upload
                 name="coverImage"
-                coverImage={coverImage?.url}
                 setCoverImage={({ public_id, secure_url }) =>
                   setCoverImage({
                     imageId: public_id,
