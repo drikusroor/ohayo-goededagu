@@ -39,7 +39,9 @@ const ArticleHaiku = ({ article, displayType, date }: Props) => {
               <div className="justmt-2 line-clamp-5">{article.body}</div>
               <div className="pt-4">
                 <AvatarTimestamp article={article} />
-                <ArticleCommentCountBadge count={article.comments.length} />
+                {article.comments.length > 0 && (
+                  <ArticleCommentCountBadge count={article.comments.length} />
+                )}
               </div>
             </div>
           </div>

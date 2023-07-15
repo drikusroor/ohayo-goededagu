@@ -60,7 +60,9 @@ const ArticleVideo = ({ article, displayType, date }: Props) => {
           </div>
           <div className="flex flex-row items-center justify-between pt-4">
             <AvatarTimestamp article={article} />
-            <ArticleCommentCountBadge count={article.comments.length} />
+            {article.comments.length > 0 && (
+              <ArticleCommentCountBadge count={article.comments.length} />
+            )}
             {article.body && (
               <Button
                 className="flex items-center gap-2 px-4 py-3 text-xs"

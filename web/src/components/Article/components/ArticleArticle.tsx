@@ -81,7 +81,9 @@ const ArticleArticle = ({ article, displayType, date }: Props) => {
                   </span>
                 </div>
               </div>
-              <ArticleCommentCountBadge count={article.comments.length} />
+              {article.comments.length > 0 && (
+                <ArticleCommentCountBadge count={article.comments.length} />
+              )}
               <Link
                 to={routes.article({ id: article.id })}
                 className="items-center justify-end text-center text-base font-medium text-white focus:ring-4 focus:ring-gray-400"
