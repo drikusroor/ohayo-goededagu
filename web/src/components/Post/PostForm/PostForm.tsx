@@ -18,7 +18,7 @@ import {
 } from '@redwoodjs/forms'
 import type { RWGqlError } from '@redwoodjs/forms'
 
-import {
+import ArticleTypeIcon, {
   EPostType,
   postTypeOptions,
 } from 'src/components/ArticleTypeIcon/ArticleTypeIcon'
@@ -38,34 +38,13 @@ interface PostFormProps {
   loading: boolean
 }
 
-interface IImage {
-  id?: string
-  imageId: string
-  url: string
-}
-
-const mapCoverImageDataToImageInput = (image: IImage) => {
-  return {
-    id: image.id,
-    imageId: image.imageId,
-    url: image.url,
-  }
-}
-
 const PostForm = (props: PostFormProps) => {
   const onSubmit = (data: FormPost) => {
     data.published = published
-    delete data.coverImage
 
     if (data.type === EPostType.VIDEO) {
       delete data.videoUrl
       data.videoPost = videoPostFormData
-    }
-
-    if (data.type === EPostType.ARTICLE) {
-      if (coverImage) {
-        data.coverImage = mapCoverImageDataToImageInput(coverImage)
-      }
     }
 
     props.onSave(data, props?.post?.id)
