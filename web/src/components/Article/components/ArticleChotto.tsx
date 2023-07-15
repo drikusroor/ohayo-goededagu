@@ -37,7 +37,7 @@ const ArticleChotto = ({ article, displayType, date }: Props) => {
           <div className="lg:mx-14">
             <div>
               <div className="justmt-2 line-clamp-5">{article.body}</div>
-              <div className="pt-4">
+              <div className="flex items-center justify-between pt-4">
                 <AvatarTimestamp article={article} />
                 {article.comments.length > 0 && (
                   <ArticleCommentCountBadge count={article.comments.length} />
