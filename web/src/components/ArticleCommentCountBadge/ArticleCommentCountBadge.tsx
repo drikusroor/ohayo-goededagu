@@ -1,12 +1,27 @@
-import { BsFillChatLeftFill } from 'react-icons/bs'
+import { BsChatLeft } from 'react-icons/bs'
 
-const ArticleCommentCountBadge = ({ count = 0 }) => {
+import { classNames } from 'src/lib/class-names'
+
+interface IArticleCommentCountBadgeProps {
+  count?: number
+  variant?: 'light' | 'dark'
+}
+
+const ArticleCommentCountBadge = ({
+  count = 0,
+  variant = 'light',
+}: IArticleCommentCountBadgeProps) => {
   return (
     <div className="relative flex flex-row items-center justify-center gap-1">
-      <BsFillChatLeftFill color="white" size="2rem">
+      <BsChatLeft size="2rem" fill={variant === 'light' ? '#fff' : '#000'}>
         {count}
-      </BsFillChatLeftFill>
-      <span className="absolute -mt-2 rounded-full text-xs text-slate-700">
+      </BsChatLeft>
+      <span
+        className={classNames(
+          'absolute -mt-2 rounded-full text-xs text-white',
+          variant === 'light' ? 'text-white' : 'text-black'
+        )}
+      >
         {count}
       </span>
     </div>
