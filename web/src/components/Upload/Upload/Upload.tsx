@@ -31,7 +31,7 @@ export interface ICloudinaryUploadResultInfo {
 
 interface IUploadProps {
   name: string
-  multiple: boolean
+  multiple?: boolean
   setCoverImage?: (value: ICloudinaryUploadResultInfo) => void
 }
 
@@ -40,7 +40,7 @@ const Upload = ({ name, multiple, setCoverImage }: IUploadProps) => {
     {
       cloudName: 'dl5elpdjy',
       uploadPreset: 'bcfnswai',
-      multiple: multiple,
+      multiple: multiple ? multiple : true,
     },
     (error, result) => {
       if (!error && result && result.event === 'success') {
