@@ -1,3 +1,5 @@
+import { classNames } from 'src/lib/class-names'
+
 import Button from '../Button/Button'
 
 interface IThumbProps {
@@ -5,11 +7,19 @@ interface IThumbProps {
   active?: boolean
   count: number
   onClick: () => void
+  disabled?: boolean
 }
 
-const Thumb = ({ up, active, count, onClick }: IThumbProps) => {
+const Thumb = ({ up, active, count, onClick, disabled }: IThumbProps) => {
   return (
-    <Button onClick={onClick} variant={active ? 'filled' : 'outlined'}>
+    <Button
+      onClick={disabled ? undefined : onClick}
+      variant={active ? 'filled' : 'outlined'}
+      className={classNames(
+        'transition-filter',
+        disabled ? 'cursor-not-allowed grayscale' : ''
+      )}
+    >
       {up ? '👍' : '👎'} {count}
     </Button>
   )

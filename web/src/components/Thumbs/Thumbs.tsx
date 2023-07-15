@@ -8,6 +8,7 @@ export interface IThumbProps {
   thumbs: Thumbs[]
   entityId: number
   onThumb: (up: boolean) => void
+  disabled?: boolean
 }
 
 const Thumbs = (props: IThumbProps) => {
@@ -41,12 +42,14 @@ const Thumbs = (props: IThumbProps) => {
         count={upCount}
         active={currentUserThumb?.up}
         onClick={() => props.onThumb(true)}
+        disabled={props.disabled}
       />
       <Thumb
         up={false}
         count={downCount}
         active={currentUserThumb?.up === false}
         onClick={() => props.onThumb(false)}
+        disabled={props.disabled}
       />
     </div>
   )
