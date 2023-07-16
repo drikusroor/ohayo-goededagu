@@ -59,7 +59,7 @@ const ResetPasswordPage = ({ resetToken }: { resetToken: string }) => {
 
   return (
     <>
-      <MetaTags title="Reset Password" />
+      <MetaTags title="Reset Wachtwoord" />
 
       <main className="rw-main">
         <Toaster toastOptions={{ className: 'rw-toast', duration: 6000 }} />
@@ -67,7 +67,7 @@ const ResetPasswordPage = ({ resetToken }: { resetToken: string }) => {
           <div className="rw-segment">
             <header className="rw-segment-header">
               <h2 className="rw-heading rw-heading-secondary">
-                Reset Password
+                Reset Wachtwoord
               </h2>
             </header>
 
@@ -80,7 +80,7 @@ const ResetPasswordPage = ({ resetToken }: { resetToken: string }) => {
                       className="rw-label"
                       errorClassName="rw-label rw-label-error"
                     >
-                      New Password
+                      Nieuw Wachtwoord
                     </Label>
                     <PasswordField
                       name="password"
@@ -92,7 +92,7 @@ const ResetPasswordPage = ({ resetToken }: { resetToken: string }) => {
                       validation={{
                         required: {
                           value: true,
-                          message: 'New Password is required',
+                          message: 'Wachtwoord is vereist',
                         },
                       }}
                     />
@@ -105,7 +105,7 @@ const ResetPasswordPage = ({ resetToken }: { resetToken: string }) => {
                       className="rw-button rw-button-blue"
                       disabled={!enabled}
                     >
-                      Submit
+                      Verstuur
                     </Submit>
                   </div>
                 </Form>

@@ -46,14 +46,14 @@ const LoginPage = () => {
 
   return (
     <>
-      <MetaTags title="Login" />
+      <MetaTags title="Inloggen" />
 
       <main className="rw-main">
         <Toaster toastOptions={{ className: 'rw-toast', duration: 6000 }} />
         <div className="rw-scaffold rw-login-container">
           <div className="rw-segment">
             <header className="rw-segment-header">
-              <h2 className="rw-heading rw-heading-secondary">Login</h2>
+              <h2 className="rw-heading rw-heading-secondary">Inloggen</h2>
             </header>
 
             <div className="rw-segment-main">
@@ -64,7 +64,7 @@ const LoginPage = () => {
                     className="rw-label"
                     errorClassName="rw-label rw-label-error"
                   >
-                    Username
+                    Gebruikersnaam
                   </Label>
                   <TextField
                     name="username"
@@ -74,7 +74,7 @@ const LoginPage = () => {
                     validation={{
                       required: {
                         value: true,
-                        message: 'Username is required',
+                        message: 'Gebruikersnaam is vereist',
                       },
                     }}
                   />
@@ -86,7 +86,7 @@ const LoginPage = () => {
                     className="rw-label"
                     errorClassName="rw-label rw-label-error"
                   >
-                    Password
+                    Wachtwoord
                   </Label>
                   <PasswordField
                     name="password"
@@ -96,7 +96,7 @@ const LoginPage = () => {
                     validation={{
                       required: {
                         value: true,
-                        message: 'Password is required',
+                        message: 'Wachtwoord is vereist',
                       },
                     }}
                   />
@@ -106,23 +106,25 @@ const LoginPage = () => {
                       to={routes.forgotPassword()}
                       className="rw-forgot-link"
                     >
-                      Forgot Password?
+                      Wachtwoord vergeten?
                     </Link>
                   </div>
 
                   <FieldError name="password" className="rw-field-error" />
 
                   <div className="rw-button-group">
-                    <Submit className="rw-button rw-button-blue">Login</Submit>
+                    <Submit className="rw-button rw-button-blue">
+                      Inloggen
+                    </Submit>
                   </div>
                 </Form>
               </div>
             </div>
           </div>
           <div className="rw-login-link">
-            <span>Don&apos;t have an account?</span>{' '}
+            <span>Heb je nog geen account?</span>{' '}
             <Link to={routes.signup()} className="rw-link">
-              Sign up!
+              Registreer
             </Link>
           </div>
         </div>

@@ -77,7 +77,7 @@ const BlogLayout = ({ children, skeleton }: BlogLayoutProps) => {
                   className="flex items-center gap-2 px-4 py-3 sm:text-xs "
                 >
                   <BsBoxArrowUp />
-                  <span className="hidden sm:block ">Logout</span>
+                  <span className="hidden sm:block ">Uitloggen</span>
                 </Button>
               </li>
             </ul>
