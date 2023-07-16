@@ -1,9 +1,11 @@
 import { BsArrowRightCircle } from 'react-icons/bs'
 import type { Post } from 'types/graphql'
 
-import { navigate, routes } from '@redwoodjs/router'
+import { Link, routes } from '@redwoodjs/router'
 
+import ArticleCommentCountBadge from 'src/components/ArticleCommentCountBadge/ArticleCommentCountBadge'
 import Button from 'src/components/Button/Button'
+import { EPostDisplayType } from 'src/types/post-display-type.enum'
 
 import ArticleTypeIcon, {
   EPostType,
@@ -12,16 +14,16 @@ import Avatar from '../../Avatar/Avatar'
 
 interface Props {
   article: Post
-  type: EPostType
+  displayType: EPostDisplayType
   date?: string
 }
 
-const ArticleArticle = ({ article, type, date }: Props) => {
+const ArticleArticle = ({ article, displayType, date }: Props) => {
   const { coverImage } = article
 
   return (
     <>
-      {type === EPostType.PREVIEW && (
+      {displayType === EPostDisplayType.PREVIEW && (
         <section
           style={{
             backgroundImage: coverImage?.url ? `url(${coverImage.url})` : '',
@@ -51,9 +53,11 @@ const ArticleArticle = ({ article, type, date }: Props) => {
                 <div className="flex flex-col items-start">
                   <span
                     className="text-sm text-slate-300"
-                    title={article.user.name || article.user.email}
+                    title={article.user.profile.name}
                   >
-                    {article.user.name
+                    {article.user.profile.name
+                      ? article.user.profile.name
+                      : article.user.name
                       ? article.user.name
                       : article.user.email
                       ? article.user.email
@@ -77,24 +81,24 @@ const ArticleArticle = ({ article, type, date }: Props) => {
                   </span>
                 </div>
               </div>
-              <a
-                href="#"
+              {article.comments.length > 0 && (
+                <ArticleCommentCountBadge count={article.comments.length} />
+              )}
+              <Link
+                to={routes.article({ id: article.id })}
                 className="items-center justify-end text-center text-base font-medium text-white focus:ring-4 focus:ring-gray-400"
               >
-                <Button
-                  className="flex max-w-fit items-center justify-end gap-2 px-4 py-3 text-xs"
-                  onClick={() => navigate(routes.article({ id: article.id }))}
-                >
+                <Button className="flex max-w-fit items-center justify-end gap-2 px-4 py-3 text-xs">
                   <span className="hidden sm:inline-block">Lees verder</span>
                   <BsArrowRightCircle />
                 </Button>
-              </a>
+              </Link>
             </div>
           </div>
         </section>
       )}
 
-      {type === EPostType.FULL && (
+      {displayType === EPostDisplayType.FULL && (
         <>
           <section
             style={{
@@ -113,7 +117,9 @@ const ArticleArticle = ({ article, type, date }: Props) => {
               </div>
               <div className="flex flex-row items-center gap-2 pb-2">
                 <span className="text-sm text-slate-200">
-                  {article.user.name
+                  {article.user.profile.name
+                    ? article.user.profile.name
+                    : article.user.name
                     ? article.user.name
                     : article.user.email
                     ? article.user.email

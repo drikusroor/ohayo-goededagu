@@ -18,12 +18,16 @@ export const QUERY = gql`
       user {
         name
         profile {
+          name
           avatar
         }
       }
       type
       coverImage {
         url
+      }
+      comments {
+        id
       }
     }
   }

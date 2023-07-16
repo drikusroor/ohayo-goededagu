@@ -1,5 +1,9 @@
 import { useMemo } from 'react'
 
+import {
+  BsFillEmojiHeartEyesFill,
+  BsFillEmojiSmileUpsideDownFill,
+} from 'react-icons/bs'
 import type { Post } from 'types/graphql'
 
 import { EPostType } from '../ArticleTypeIcon/ArticleTypeIcon'
@@ -48,7 +52,7 @@ const Article = ({ article }: Props) => {
         {article.type === EPostType.ARTICLE && (
           <ArticleArticle
             article={article}
-            type={EPostType.FULL}
+            displayType={EPostType.FULL}
             date={formattedDate}
           />
         )}
@@ -56,7 +60,7 @@ const Article = ({ article }: Props) => {
         {article.type === EPostType.VIDEO && (
           <ArticleVideo
             article={article}
-            type={EPostType.FULL}
+            displayType={EPostType.FULL}
             date={formattedDate}
           />
         )}
@@ -64,7 +68,7 @@ const Article = ({ article }: Props) => {
         {article.type === EPostType.CHOTTO && (
           <ArticleChotto
             article={article}
-            type={EPostType.FULL}
+            displayType={EPostType.FULL}
             date={formattedDate}
           />
         )}
@@ -72,7 +76,7 @@ const Article = ({ article }: Props) => {
         {article.type === EPostType.HAIKU && (
           <ArticleHaiku
             article={article}
-            type={EPostType.FULL}
+            displayType={EPostType.FULL}
             date={formattedDate}
           />
         )}
@@ -81,11 +85,18 @@ const Article = ({ article }: Props) => {
       <div>
         <h2 className="mt-5 text-2xl font-light text-gray-600">Comments</h2>
         <ul className="mt-3 max-w-xl">
-          {sortedComments.map((comment) => (
-            <li key={comment.id} className="mb-4">
-              <Comment comment={comment} />
-            </li>
-          ))}
+          {sortedComments.length > 0 ? (
+            sortedComments.map((comment) => (
+              <li key={comment.id} className="mb-4">
+                <Comment comment={comment} />
+              </li>
+            ))
+          ) : (
+            <div className="flex flex-col gap-2 rounded-md bg-gray-100 p-3">
+              <p className=" text-gray-500">No comments yet. 🙃</p>
+              <p className=" text-gray-500">Be the first! 😻</p>
+            </div>
+          )}
         </ul>
         <div className="mt-5">
           <CommentForm postId={article.id} />
