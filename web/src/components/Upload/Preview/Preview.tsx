@@ -16,13 +16,20 @@ import Avatar from '../../Avatar/Avatar'
 import Button from '../../Button/Button'
 
 interface Props {
+  profile: object
   postType: EPostType
   postTitle: string
   postBody: string
   coverImage?: string
 }
 
-const Preview = ({ coverImage, postType, postTitle, postBody }: Props) => {
+const Preview = ({
+  profile,
+  coverImage,
+  postType,
+  postTitle,
+  postBody,
+}: Props) => {
   const { currentUser } = useAuth()
 
   const [blogRollPreview, setBlogRollPreview] = React.useState<boolean>(false)
@@ -94,7 +101,7 @@ const Preview = ({ coverImage, postType, postTitle, postBody }: Props) => {
               </div>
               <div className="flex flex-row items-center gap-2 pb-2">
                 <span className="text-sm text-slate-200">
-                  {currentUser?.name ? currentUser?.name : 'Your name'}
+                  {profile.name ? profile.name : 'Your name'}
                 </span>
                 <span className="text-sm text-slate-200">
                   | {formattedCurrentDate}
@@ -131,12 +138,13 @@ const Preview = ({ coverImage, postType, postTitle, postBody }: Props) => {
               <div className="flex flex-row items-center justify-center gap-12">
                 <div className="flex flex-row items-center gap-2">
                   <Avatar
+                    src={profile.avatar}
                     alt={currentUser.name}
                     name={currentUser.name || currentUser.email}
                   />
                   <div className="flex flex-col items-start">
                     <span className="text-sm text-slate-300">
-                      {currentUser?.name ? currentUser?.name : 'Your name'}
+                      {profile.name ? profile.name : 'Your name'}
                     </span>
                     <span className="text-sm text-slate-300">
                       {formattedCurrentDate}

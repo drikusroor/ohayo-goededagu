@@ -33,6 +33,7 @@ type FormPost = NonNullable<EditPostById['post']>
 
 interface PostFormProps {
   post?: EditPostById['post']
+  profile: EditPostById['profile']
   onSave: (data: UpdatePostInput, id?: FormPost['id']) => void
   error: RWGqlError
   loading: boolean
@@ -170,6 +171,7 @@ const PostForm = (props: PostFormProps) => {
               />
 
               <Preview
+                profile={props.profile}
                 postType={postType}
                 postTitle={postTitle}
                 postBody={postBody}
