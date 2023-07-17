@@ -21,6 +21,9 @@ export const QUERY = gql`
       }
       user {
         name
+        profile {
+          name
+        }
       }
       comments {
         id

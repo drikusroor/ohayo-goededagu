@@ -46,9 +46,9 @@ const Routes = () => {
           </Set>
         </Set>
       </Private>
-      <Set wrap={BlogLayout} whileLoadingAuth={BlogLoader}>
-        <Route path="/" page={HomePage} name="home" prerender />
-        <Private unauthenticated="home">
+      <Set wrap={BlogLayout} whileLoadingAuth={() => BlogLoader()}>
+        <Private unauthenticated="login">
+          <Route path="/" page={HomePage} name="home" prerender />
           <Route path="/article/{id:Int}" page={ArticlePage} name="article" />
         </Private>
         <Route path="/login" page={LoginPage} name="login" />

@@ -48,14 +48,14 @@ const SignupPage = () => {
 
   return (
     <>
-      <MetaTags title="Signup" />
+      <MetaTags title="Registreer" />
 
       <main className="rw-main">
         <Toaster toastOptions={{ className: 'rw-toast', duration: 6000 }} />
         <div className="rw-scaffold rw-login-container">
           <div className="rw-segment">
             <header className="rw-segment-header">
-              <h2 className="rw-heading rw-heading-secondary">Signup</h2>
+              <h2 className="rw-heading rw-heading-secondary">Registreer</h2>
             </header>
 
             <div className="rw-segment-main">
@@ -66,7 +66,7 @@ const SignupPage = () => {
                     className="rw-label"
                     errorClassName="rw-label rw-label-error"
                   >
-                    Username
+                    Gebruikersnaam
                   </Label>
                   <TextField
                     name="username"
@@ -76,7 +76,7 @@ const SignupPage = () => {
                     validation={{
                       required: {
                         value: true,
-                        message: 'Username is required',
+                        message: 'Gebruikersnaam is vereist',
                       },
                     }}
                   />
@@ -87,7 +87,7 @@ const SignupPage = () => {
                     className="rw-label"
                     errorClassName="rw-label rw-label-error"
                   >
-                    Password
+                    Wachtwoord
                   </Label>
                   <PasswordField
                     name="password"
@@ -97,7 +97,7 @@ const SignupPage = () => {
                     validation={{
                       required: {
                         value: true,
-                        message: 'Password is required',
+                        message: 'Wachtwoord is vereist',
                       },
                     }}
                   />
@@ -105,7 +105,7 @@ const SignupPage = () => {
 
                   <div className="rw-button-group">
                     <Submit className="rw-button rw-button-blue">
-                      Sign Up
+                      Registreer
                     </Submit>
                   </div>
                 </Form>
@@ -113,9 +113,9 @@ const SignupPage = () => {
             </div>
           </div>
           <div className="rw-login-link">
-            <span>Already have an account?</span>{' '}
+            <span>Heb je al een account? </span>{' '}
             <Link to={routes.login()} className="rw-link">
-              Log in!
+              Inloggen
             </Link>
           </div>
         </div>

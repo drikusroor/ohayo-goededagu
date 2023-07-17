@@ -120,11 +120,11 @@ const AdminDashboardLayout = ({ children }: AdminDashboardLayoutProps) => {
               className="flex items-center gap-2 px-4 py-3 md:text-sm"
             >
               <BsBoxArrowUp />
-              <span className="hidden md:block ">Logout</span>
+              <span className="hidden md:block ">Uitloggen</span>
             </Button>
           </div>
         ) : (
-          <Link to={routes.login()}>Login</Link>
+          <Link to={routes.login()}>Inloggen</Link>
         )}
       </div>
       <div className="flex flex-1 flex-col overflow-auto pl-14 md:pl-64">

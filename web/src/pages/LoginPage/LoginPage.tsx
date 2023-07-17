@@ -46,14 +46,40 @@ const LoginPage = () => {
 
   return (
     <>
-      <MetaTags title="Login" />
+      <MetaTags title="Inloggen" />
 
       <main className="rw-main">
         <Toaster toastOptions={{ className: 'rw-toast', duration: 6000 }} />
-        <div className="rw-scaffold rw-login-container">
-          <div className="rw-segment">
+        <div className="rw-scaffold rw-login-container mt-0">
+          <h3 className="group select-none overflow-hidden rounded text-2xl font-bold leading-6">
+            <span className="inline-block py-3 pl-3 text-cobalt-blue-500 transition-colors duration-300 ease-in-out group-hover:bg-cobalt-blue-500 group-hover:text-white">
+              Wel
+            </span>
+            <span className="inline-block py-3 pr-3 text-monza-red-500 transition-colors duration-300 ease-in-out group-hover:bg-monza-red-500 group-hover:text-white">
+              kom!
+            </span>
+          </h3>
+          <p className="text-sm text-slate-700">
+            Je moet eerst inloggen om de inhoud van deze blog te kunnen
+            aanschouwen.
+          </p>
+
+          <p className="mt-3 text-sm text-slate-700">
+            Als je nog geen account hebt, kun je je{' '}
+            <Link
+              to={routes.signup()}
+              className="text-sky-500 underline hover:text-sky-600"
+            >
+              hier
+            </Link>{' '}
+            registreren. Wij zullen je aanvraag zo snel mogelijk controleren en
+            verwerken. De controle is bedoeld om te voorkomen dat er ongewenste
+            bezoekers op de blog komen.
+          </p>
+
+          <div className="rw-segment mt-5">
             <header className="rw-segment-header">
-              <h2 className="rw-heading rw-heading-secondary">Login</h2>
+              <h2 className="rw-heading rw-heading-secondary">Inloggen</h2>
             </header>
 
             <div className="rw-segment-main">
@@ -64,7 +90,7 @@ const LoginPage = () => {
                     className="rw-label"
                     errorClassName="rw-label rw-label-error"
                   >
-                    Username
+                    Gebruikersnaam
                   </Label>
                   <TextField
                     name="username"
@@ -74,7 +100,7 @@ const LoginPage = () => {
                     validation={{
                       required: {
                         value: true,
-                        message: 'Username is required',
+                        message: 'Gebruikersnaam is vereist',
                       },
                     }}
                   />
@@ -86,7 +112,7 @@ const LoginPage = () => {
                     className="rw-label"
                     errorClassName="rw-label rw-label-error"
                   >
-                    Password
+                    Wachtwoord
                   </Label>
                   <PasswordField
                     name="password"
@@ -96,7 +122,7 @@ const LoginPage = () => {
                     validation={{
                       required: {
                         value: true,
-                        message: 'Password is required',
+                        message: 'Wachtwoord is vereist',
                       },
                     }}
                   />
@@ -106,23 +132,25 @@ const LoginPage = () => {
                       to={routes.forgotPassword()}
                       className="rw-forgot-link"
                     >
-                      Forgot Password?
+                      Wachtwoord vergeten?
                     </Link>
                   </div>
 
                   <FieldError name="password" className="rw-field-error" />
 
                   <div className="rw-button-group">
-                    <Submit className="rw-button rw-button-blue">Login</Submit>
+                    <Submit className="rw-button rw-button-blue">
+                      Inloggen
+                    </Submit>
                   </div>
                 </Form>
               </div>
             </div>
           </div>
           <div className="rw-login-link">
-            <span>Don&apos;t have an account?</span>{' '}
+            <span>Heb je nog geen account?</span>{' '}
             <Link to={routes.signup()} className="rw-link">
-              Sign up!
+              Registreer
             </Link>
           </div>
         </div>

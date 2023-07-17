@@ -19,7 +19,9 @@ const AvatarTimestamp = ({ article }: Props) => {
           className="text-sm text-slate-500"
           title={article.user.name || article.user.email}
         >
-          {article.user.name
+          {article.user.profile?.name
+            ? article.user.profile.name
+            : article.user.name
             ? article.user.name
             : article.user.email
             ? article.user.email

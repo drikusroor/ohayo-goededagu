@@ -31,7 +31,8 @@ const ForgotPasswordPage = () => {
       // been invoked, let the user know how to get the link to reset their
       // password (sent in email, perhaps?)
       toast.success(
-        'A link to reset your password was sent to ' + response.email
+        'Wachtwoord reset link is verstuurd naar het opgegeven email adres.' +
+          response.email
       )
       navigate(routes.login())
     }
@@ -39,7 +40,7 @@ const ForgotPasswordPage = () => {
 
   return (
     <>
-      <MetaTags title="Forgot Password" />
+      <MetaTags title="Wachtwoord vergeten" />
 
       <main className="rw-main">
         <Toaster toastOptions={{ className: 'rw-toast', duration: 6000 }} />
@@ -47,7 +48,7 @@ const ForgotPasswordPage = () => {
           <div className="rw-segment">
             <header className="rw-segment-header">
               <h2 className="rw-heading rw-heading-secondary">
-                Forgot Password
+                Wachtwoord vergeten
               </h2>
             </header>
 
@@ -60,7 +61,7 @@ const ForgotPasswordPage = () => {
                       className="rw-label"
                       errorClassName="rw-label rw-label-error"
                     >
-                      Username
+                      Gebruikersnaam
                     </Label>
                     <TextField
                       name="username"
@@ -70,7 +71,7 @@ const ForgotPasswordPage = () => {
                       validation={{
                         required: {
                           value: true,
-                          message: 'Username is required',
+                          message: 'Gebruikersnaam is vereist',
                         },
                       }}
                     />
@@ -79,7 +80,9 @@ const ForgotPasswordPage = () => {
                   </div>
 
                   <div className="rw-button-group">
-                    <Submit className="rw-button rw-button-blue">Submit</Submit>
+                    <Submit className="rw-button rw-button-blue">
+                      Verstuur
+                    </Submit>
                   </div>
                 </Form>
               </div>
