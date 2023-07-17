@@ -108,6 +108,7 @@ const PostForm = (props: PostFormProps) => {
             titleClassName="rw-form-error-title"
             listClassName="rw-form-error-list"
           />
+
           <Label
             name="title"
             className="rw-label"
@@ -115,6 +116,7 @@ const PostForm = (props: PostFormProps) => {
           >
             Title
           </Label>
+
           <TextField
             name="title"
             defaultValue={props.post?.title}
@@ -122,7 +124,9 @@ const PostForm = (props: PostFormProps) => {
             errorClassName="rw-input rw-input-error"
             validation={{ required: true }}
           />
+
           <FieldError name="title" className="rw-field-error" />
+
           <Label
             name="body"
             className="rw-label"
@@ -130,8 +134,13 @@ const PostForm = (props: PostFormProps) => {
           >
             Body
           </Label>
-          <ReactQuill theme="snow" value={body} onChange={setBody} />
+
+          <div className="bg-white">
+            <ReactQuill theme="snow" value={body} onChange={setBody} />
+          </div>
+
           <FieldError name="body" className="rw-field-error" />
+
           <Label
             name="type"
             className="rw-label"
@@ -139,6 +148,7 @@ const PostForm = (props: PostFormProps) => {
           >
             Post type
           </Label>
+
           <SelectField
             name="type"
             defaultValue={postType}
@@ -155,12 +165,14 @@ const PostForm = (props: PostFormProps) => {
               </option>
             ))}
           </SelectField>
+
           {postType === EPostType.VIDEO && (
             <VideoForm
               videoPostFormData={videoPostFormData}
               setVideoPostFormData={setVideoPostFormData}
             />
           )}
+
           {postType === EPostType.ARTICLE && (
             <Upload
               name="coverImage"
@@ -173,6 +185,7 @@ const PostForm = (props: PostFormProps) => {
               }
             />
           )}
+
           <div className="rw-button-group gap-0">
             <Button
               type="button"
@@ -204,6 +217,7 @@ const PostForm = (props: PostFormProps) => {
               {published ? <BsFillCheckCircleFill /> : <BsFillCircleFill />}
             </Button>
           </div>
+
           {published && (
             <div
               className="mt-5 flex items-center border-l-4 border-yellow-500 bg-yellow-100 p-4 text-yellow-700"
@@ -213,6 +227,7 @@ const PostForm = (props: PostFormProps) => {
               <p className="font-bold">Warning: This post will be published.</p>
             </div>
           )}
+
           <div className="rw-button-group">
             <Submit
               disabled={props.loading}
