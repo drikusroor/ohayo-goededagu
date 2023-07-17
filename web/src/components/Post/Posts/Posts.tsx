@@ -76,27 +76,32 @@ const PostsList = ({ posts }: FindPosts) => {
               <td>{timeTag(post.createdAt)}</td>
               <td>
                 <nav className="rw-table-actions gap-1">
-                  <Button
-                    title={'Show post' + post.id}
-                    onClick={() => onNavigatePost(post)}
-                    className="rw-button flex items-center gap-2 text-base transition-colors sm:text-sm"
-                    color="rw-gray"
-                    icon={BsSearch}
-                    variant="outlined"
+                  <Link
+                    to={routes.article({ id: post.id })}
+                    title={'Show post ' + post.id + ' detail'}
                   >
-                    <BsSearch />
-                    <span className="hidden sm:inline-block">Show</span>
-                  </Button>
-                  <Button
-                    title={'Edit post' + post.id}
-                    onClick={() => onNavigateEditPost(post)}
-                    className="rw-button rw-button-blue flex items-center gap-2 text-base transition-colors sm:text-sm"
-                    color="cobalt-blue"
-                    variant="outlined"
+                    <Button
+                      title={'Show post' + post.id}
+                      className="rw-button flex items-center gap-2 text-base transition-colors sm:text-sm"
+                      variant="outlined"
+                    >
+                      <BsSearch />
+                      <span className="hidden sm:inline-block">Show</span>
+                    </Button>
+                  </Link>
+                  <Link
+                    to={routes.editPost({ id: post.id })}
+                    title={'Edit post ' + post.id}
                   >
-                    <BsFillPencilFill />
-                    <span className="hidden sm:inline-block">Edit</span>
-                  </Button>
+                    <Button
+                      title={'Edit post' + post.id}
+                      className="rw-button rw-button-blue flex items-center gap-2 text-base transition-colors sm:text-sm"
+                      variant="outlined"
+                    >
+                      <BsFillPencilFill />
+                      <span className="hidden sm:inline-block">Edit</span>
+                    </Button>
+                  </Link>
                   <Button
                     title={'Delete post ' + post.id}
                     onClick={() => onDeleteClick(post.id)}
