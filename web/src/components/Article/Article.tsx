@@ -1,10 +1,15 @@
 import { useMemo } from 'react'
 
+import { BsPencil } from 'react-icons/bs'
 import type { Post } from 'types/graphql'
 
+import { Link, routes } from '@redwoodjs/router'
+
+import { useAuth } from 'src/auth'
 import { EPostDisplayType } from 'src/types/post-display-type.enum'
 
 import { EPostType } from '../ArticleTypeIcon/ArticleTypeIcon'
+import Button from '../Button/Button'
 import Comment from '../Comment/Comment'
 import CommentForm from '../CommentForm/CommentForm'
 
@@ -19,6 +24,10 @@ interface Props {
 }
 
 const Article = ({ article }: Props) => {
+  const { currentUser } = useAuth()
+  console.log('currentUser', currentUser)
+  const isUserAuthor = article.user.id === currentUser?.id
+
   const formattedDate = new Date(article.createdAt).toLocaleString('nl-NL', {
     day: '2-digit',
     month: '2-digit',
@@ -79,6 +88,20 @@ const Article = ({ article }: Props) => {
           />
         )}
       </div>
+
+      {isUserAuthor && (
+        <div className="flex flex-row items-center justify-between pt-4">
+          <div className="flex items-center gap-6">
+            <Link to={routes.editPost({ id: article.id })}>
+              <Button className="flex items-center gap-2">
+                <BsPencil />
+                Edit
+              </Button>
+            </Link>
+            (Only visible to you)
+          </div>
+        </div>
+      )}
 
       <div>
         <h2 className="mt-5 text-2xl font-light text-gray-600">Comments</h2>
