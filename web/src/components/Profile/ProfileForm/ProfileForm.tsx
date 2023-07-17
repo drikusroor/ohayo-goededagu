@@ -12,6 +12,8 @@ import {
 } from '@redwoodjs/forms'
 import type { RWGqlError } from '@redwoodjs/forms'
 
+import Avatar from 'src/components/Avatar/Avatar'
+
 type FormProfile = NonNullable<FindProfileSelf['profile']>
 
 interface ProfileFormProps {
@@ -23,6 +25,7 @@ interface ProfileFormProps {
 
 const ProfileForm = (props: ProfileFormProps) => {
   const [bio, setBio] = React.useState(props.profile?.bio || '')
+  const [avatar, setAvatar] = React.useState(props.profile?.avatar || '')
 
   const onSubmit = (data: FormProfile) => {
     data.bio = bio
@@ -93,10 +96,15 @@ const ProfileForm = (props: ProfileFormProps) => {
 
         <TextField
           name="avatar"
-          defaultValue={props.profile?.avatar}
+          value={avatar}
+          onInput={(e) => setAvatar(e.currentTarget.value)}
           className="rw-input"
           errorClassName="rw-input rw-input-error"
         />
+
+        {avatar && (
+          <Avatar className="mt-2" src={avatar} alt={props.profile.name} />
+        )}
 
         <FieldError name="avatar" className="rw-field-error" />
 
