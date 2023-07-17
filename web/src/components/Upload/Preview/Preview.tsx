@@ -6,7 +6,6 @@ import {
 
 import { Label } from '@redwoodjs/forms'
 
-import { useAuth } from 'src/auth'
 import { classNames } from 'src/lib/class-names'
 
 import ArticleTypeIcon, {
@@ -30,8 +29,6 @@ const Preview = ({
   postTitle,
   postBody,
 }: Props) => {
-  const { currentUser } = useAuth()
-
   const [blogRollPreview, setBlogRollPreview] = React.useState<boolean>(false)
 
   const formattedCurrentDate = new Date().toLocaleString('nl-NL', {
@@ -139,8 +136,8 @@ const Preview = ({
                 <div className="flex flex-row items-center gap-2">
                   <Avatar
                     src={profile.avatar}
-                    alt={currentUser.name}
-                    name={currentUser.name || currentUser.email}
+                    alt={profile.name}
+                    name={profile.name}
                   />
                   <div className="flex flex-col items-start">
                     <span className="text-sm text-slate-300">
