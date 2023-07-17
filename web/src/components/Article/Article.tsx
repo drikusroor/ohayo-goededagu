@@ -1,10 +1,8 @@
 import { useMemo } from 'react'
 
-import {
-  BsFillEmojiHeartEyesFill,
-  BsFillEmojiSmileUpsideDownFill,
-} from 'react-icons/bs'
 import type { Post } from 'types/graphql'
+
+import { EPostDisplayType } from 'src/types/post-display-type.enum'
 
 import { EPostType } from '../ArticleTypeIcon/ArticleTypeIcon'
 import Comment from '../Comment/Comment'
@@ -52,7 +50,7 @@ const Article = ({ article }: Props) => {
         {article.type === EPostType.ARTICLE && (
           <ArticleArticle
             article={article}
-            displayType={EPostType.FULL}
+            displayType={EPostDisplayType.FULL}
             date={formattedDate}
           />
         )}
@@ -60,7 +58,7 @@ const Article = ({ article }: Props) => {
         {article.type === EPostType.VIDEO && (
           <ArticleVideo
             article={article}
-            displayType={EPostType.FULL}
+            displayType={EPostDisplayType.FULL}
             date={formattedDate}
           />
         )}
@@ -68,7 +66,7 @@ const Article = ({ article }: Props) => {
         {article.type === EPostType.CHOTTO && (
           <ArticleChotto
             article={article}
-            displayType={EPostType.FULL}
+            displayType={EPostDisplayType.FULL}
             date={formattedDate}
           />
         )}
@@ -76,7 +74,7 @@ const Article = ({ article }: Props) => {
         {article.type === EPostType.HAIKU && (
           <ArticleHaiku
             article={article}
-            displayType={EPostType.FULL}
+            displayType={EPostDisplayType.FULL}
             date={formattedDate}
           />
         )}
