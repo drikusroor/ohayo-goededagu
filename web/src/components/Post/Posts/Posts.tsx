@@ -10,6 +10,7 @@ import ArticleTypeIcon, {
 } from 'src/components/ArticleTypeIcon/ArticleTypeIcon'
 import Button from 'src/components/Button/Button'
 import { QUERY } from 'src/components/Post/PostsCell'
+import { classNames } from 'src/lib/class-names'
 import { timeTag, truncate } from 'src/lib/formatters'
 
 const DELETE_POST_MUTATION = gql`
@@ -35,14 +36,6 @@ const PostsList = ({ posts }: FindPosts) => {
     awaitRefetchQueries: true,
   })
 
-  const onNavigatePost = (post: 'article') => {
-    navigate(routes.post({ id: post.id }))
-  }
-
-  const onNavigateEditPost = (post: 'article') => {
-    navigate(routes.editPost({ id: post.id }))
-  }
-
   const onDeleteClick = (id: DeletePostMutationVariables['id']) => {
     if (confirm('Are you sure you want to delete post ' + id + '?')) {
       deletePost({ variables: { id } })
@@ -64,11 +57,30 @@ const PostsList = ({ posts }: FindPosts) => {
           </tr>
         </thead>
         <tbody>
-          {posts.map((post) => (
+          {posts.map((post, i) => (
             <tr key={post.id}>
               <td>{truncate(post.id)}</td>
               <td>{truncate(post.title)}</td>
-              <td>{truncate(post.body)}</td>
+              <td>
+                <div
+                  className={classNames(
+                    'relative h-16 overflow-hidden overflow-ellipsis bg-white',
+                    i % 2 === 0 ? 'bg-slate-50' : ''
+                  )}
+                >
+                  <div
+                    className="relative"
+                    dangerouslySetInnerHTML={{ __html: post.body }}
+                  />
+                  <div
+                    className={classNames(
+                      'absolute bottom-0 h-16 w-full bg-gradient-to-t to-transparent',
+                      i % 2 === 0 ? 'from-slate-50' : 'from-white'
+                    )}
+                    aria-hidden="true"
+                  ></div>
+                </div>
+              </td>
               <td>
                 <ArticleTypeIcon type={post.type as EPostType} />
               </td>
