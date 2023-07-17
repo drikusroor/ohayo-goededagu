@@ -5,6 +5,7 @@ import {
   BsFillCheckCircleFill,
   BsFillExclamationTriangleFill,
 } from 'react-icons/bs'
+import ReactQuill from 'react-quill'
 import type { EditPostById, UpdatePostInput } from 'types/graphql'
 
 import {
@@ -18,6 +19,8 @@ import {
 } from '@redwoodjs/forms'
 import type { RWGqlError } from '@redwoodjs/forms'
 
+import 'react-quill/dist/quill.snow.css'
+
 import {
   EPostType,
   postTypeOptions,
@@ -27,6 +30,8 @@ import Upload from 'src/components/Upload/Upload'
 import { classNames } from 'src/lib/class-names'
 
 import VideoForm, { IVideoPostFormData } from './TypeForms/VideoForm'
+
+import { useState } from 'react'
 
 type FormPost = NonNullable<EditPostById['post']>
 
@@ -53,6 +58,8 @@ const mapCoverImageDataToImageInput = (image: IImage) => {
 
 const PostForm = (props: PostFormProps) => {
   const onSubmit = (data: FormPost) => {
+    data.body = body
+
     data.published = published
     delete data.coverImage
 
@@ -70,20 +77,20 @@ const PostForm = (props: PostFormProps) => {
     props.onSave(data, props?.post?.id)
   }
 
-  const [published, setPublished] = React.useState<boolean>(
+  const [body, setBody] = useState<string>(props.post?.body || '')
+
+  const [published, setPublished] = useState<boolean>(
     props.post?.published || false
   )
 
-  const [postType, setPostType] = React.useState<EPostType>(
+  const [postType, setPostType] = useState<EPostType>(
     props.post?.type || EPostType.ARTICLE
   )
 
-  const [coverImage, setCoverImage] = React.useState<IImage>(
-    props.post?.coverImage
-  )
+  const [coverImage, setCoverImage] = useState<IImage>(props.post?.coverImage)
 
   const [videoPostFormData, setVideoPostFormData] =
-    React.useState<IVideoPostFormData>({
+    useState<IVideoPostFormData>({
       videoUrl: props.post?.videoPost?.videoUrl || '',
     })
 
@@ -97,7 +104,6 @@ const PostForm = (props: PostFormProps) => {
             titleClassName="rw-form-error-title"
             listClassName="rw-form-error-list"
           />
-
           <Label
             name="title"
             className="rw-label"
@@ -105,7 +111,6 @@ const PostForm = (props: PostFormProps) => {
           >
             Title
           </Label>
-
           <TextField
             name="title"
             defaultValue={props.post?.title}
@@ -113,9 +118,7 @@ const PostForm = (props: PostFormProps) => {
             errorClassName="rw-input rw-input-error"
             validation={{ required: true }}
           />
-
           <FieldError name="title" className="rw-field-error" />
-
           <Label
             name="body"
             className="rw-label"
@@ -123,17 +126,8 @@ const PostForm = (props: PostFormProps) => {
           >
             Body
           </Label>
-
-          <TextField
-            name="body"
-            defaultValue={props.post?.body ?? ''}
-            className="rw-input"
-            errorClassName="rw-input rw-input-error"
-            validation={{ required: postType !== EPostType.VIDEO }}
-          />
-
+          <ReactQuill theme="snow" value={body} onChange={setBody} />
           <FieldError name="body" className="rw-field-error" />
-
           <Label
             name="type"
             className="rw-label"
@@ -141,7 +135,6 @@ const PostForm = (props: PostFormProps) => {
           >
             Post type
           </Label>
-
           <SelectField
             name="type"
             defaultValue={postType}
@@ -158,14 +151,12 @@ const PostForm = (props: PostFormProps) => {
               </option>
             ))}
           </SelectField>
-
           {postType === EPostType.VIDEO && (
             <VideoForm
               videoPostFormData={videoPostFormData}
               setVideoPostFormData={setVideoPostFormData}
             />
           )}
-
           {postType === EPostType.ARTICLE && (
             <Upload
               name="coverImage"
@@ -178,7 +169,6 @@ const PostForm = (props: PostFormProps) => {
               }
             />
           )}
-
           <div className="rw-button-group gap-0">
             <Button
               type="button"
@@ -210,7 +200,6 @@ const PostForm = (props: PostFormProps) => {
               {published ? <BsFillCheckCircleFill /> : <BsFillCircleFill />}
             </Button>
           </div>
-
           {published && (
             <div
               className="mt-5 flex items-center border-l-4 border-yellow-500 bg-yellow-100 p-4 text-yellow-700"
@@ -220,7 +209,6 @@ const PostForm = (props: PostFormProps) => {
               <p className="font-bold">Warning: This post will be published.</p>
             </div>
           )}
-
           <div className="rw-button-group">
             <Submit
               disabled={props.loading}
