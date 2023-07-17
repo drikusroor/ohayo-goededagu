@@ -37,7 +37,10 @@ const Profile = ({ profile }: Props) => {
             </tr>
             <tr>
               <th>Bio</th>
-              <td>{profile.bio}</td>
+              <td
+                className="prose"
+                dangerouslySetInnerHTML={{ __html: profile.bio || '' }}
+              />
             </tr>
             <tr>
               <th>User id</th>

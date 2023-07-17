@@ -1,5 +1,7 @@
+import ReactQuill from 'react-quill'
 import type { FindProfileSelf, UpdateProfileInput } from 'types/graphql'
 
+import 'react-quill/dist/quill.snow.css'
 import {
   Form,
   FormError,
@@ -20,7 +22,10 @@ interface ProfileFormProps {
 }
 
 const ProfileForm = (props: ProfileFormProps) => {
+  const [bio, setBio] = React.useState(props.profile?.bio || '')
+
   const onSubmit = (data: FormProfile) => {
+    data.bio = bio
     props.onSave(data)
   }
 
@@ -72,12 +77,9 @@ const ProfileForm = (props: ProfileFormProps) => {
           Bio
         </Label>
 
-        <TextField
-          name="bio"
-          defaultValue={props.profile?.bio}
-          className="rw-input"
-          errorClassName="rw-input rw-input-error"
-        />
+        <div className="bg-white">
+          <ReactQuill theme="snow" value={bio} onChange={setBio} />
+        </div>
 
         <FieldError name="bio" className="rw-field-error" />
 

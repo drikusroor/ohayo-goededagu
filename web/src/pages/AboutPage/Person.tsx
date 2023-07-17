@@ -19,7 +19,7 @@ const Person = ({ name, imgSrc, quote, story }: Props) => {
       <div>
         <h2 className="h2"> {name} </h2>
         <h3 className="font-light italic"> {quote} </h3>
-        <p className="pt-2"> {story} </p>
+        <p className="prose pt-2" dangerouslySetInnerHTML={{ __html: story }} />
       </div>
     </div>
   )
