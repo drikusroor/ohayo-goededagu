@@ -39,7 +39,10 @@ const ArticleChotto = ({ article, displayType, date }: Props) => {
           </header>
           <div className="lg:mx-14">
             <div>
-              <div className="justmt-2 line-clamp-5">{article.body}</div>
+              <div
+                className="justmt-2 line-clamp-5"
+                dangerouslySetInnerHTML={{ __html: article.body }}
+              ></div>
               <div className="flex items-center justify-between pt-4">
                 <AvatarTimestamp article={article} />
                 {article.comments.length > 0 && (
@@ -67,7 +70,10 @@ const ArticleChotto = ({ article, displayType, date }: Props) => {
               <span className="text-sm text-slate-500"> | {date}</span>
             </div>
           </header>
-          <div>{article.body}</div>
+          <div
+            className="prose lg:prose-lg xl:prose-xl"
+            dangerouslySetInnerHTML={{ __html: article.body }}
+          ></div>
         </>
       )}
     </>

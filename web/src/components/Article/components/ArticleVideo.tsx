@@ -108,7 +108,10 @@ const ArticleVideo = ({ article, displayType, date }: Props) => {
               loading="lazy"
             ></iframe>
           </div>
-          <div> {article.body} </div>
+          <div
+            className="prose lg:prose-lg xl:prose-xl"
+            dangerouslySetInnerHTML={{ __html: article.body }}
+          ></div>
         </>
       )}
     </>

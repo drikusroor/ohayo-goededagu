@@ -43,9 +43,10 @@ const ArticleArticle = ({ article, displayType, date }: Props) => {
                 {article.title}
               </h1>
             </div>
-            <p className="mb-8 line-clamp-3 text-center text-lg font-normal text-gray-300 sm:px-16 lg:px-48 lg:text-xl">
-              {article.body}
-            </p>
+            <p
+              className="mb-8 line-clamp-3 text-center text-lg font-normal text-gray-300 sm:px-16 lg:px-48 lg:text-xl"
+              dangerouslySetInnerHTML={{ __html: article.body }}
+            ></p>
             <div className="flex flex-row items-center justify-center gap-12">
               <div className="flex flex-row items-center gap-2">
                 <Avatar
@@ -115,7 +116,10 @@ const ArticleArticle = ({ article, displayType, date }: Props) => {
               </div>
             </div>
           </section>
-          <div> {article.body} </div>
+          <div
+            className="prose lg:prose-lg xl:prose-xl"
+            dangerouslySetInnerHTML={{ __html: article.body }}
+          ></div>
         </>
       )}
     </>

@@ -38,16 +38,21 @@ const ArticleHaiku = ({ article, displayType, date }: Props) => {
             </div>
           </header>
           <div className="lg:mx-14">
-            <div>
-              <div className="justmt-2 line-clamp-5">{article.body}</div>
-              <div className="flex items-center justify-between pt-4">
-                <AvatarTimestamp article={article} />
-                {article.comments.length > 0 && (
-                  <ArticleCommentCountBadge
-                    count={article.comments.length}
-                    variant="dark"
-                  />
-                )}
+            <div className="mx-auto mt-4 flex flex-col leading-relaxed text-slate-700">
+              <div>
+                <div
+                  className="border-l-4 border-slate-700 pl-4"
+                  dangerouslySetInnerHTML={{ __html: article.body }}
+                ></div>
+                <div className="flex items-center justify-between pt-4">
+                  <AvatarTimestamp article={article} />
+                  {article.comments.length > 0 && (
+                    <ArticleCommentCountBadge
+                      count={article.comments.length}
+                      variant="dark"
+                    />
+                  )}
+                </div>
               </div>
             </div>
           </div>
@@ -69,7 +74,10 @@ const ArticleHaiku = ({ article, displayType, date }: Props) => {
               <span className="text-sm text-slate-500"> | {date}</span>
             </div>
           </header>
-          <div>{article.body}</div>
+          <div
+            className="mt-4 border-l-4 border-slate-700 pl-4 text-xl leading-relaxed text-slate-700"
+            dangerouslySetInnerHTML={{ __html: article.body }}
+          ></div>
         </>
       )}
     </>
