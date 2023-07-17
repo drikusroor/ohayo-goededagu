@@ -98,7 +98,7 @@ const Preview = ({
               </div>
               <div className="flex flex-row items-center gap-2 pb-2">
                 <span className="text-sm text-slate-200">
-                  {profile.name ? profile.name : 'Your name'}
+                  {profile?.name ? profile?.name : 'Your name'}
                 </span>
                 <span className="text-sm text-slate-200">
                   | {formattedCurrentDate}
@@ -135,13 +135,13 @@ const Preview = ({
               <div className="flex flex-row items-center justify-center gap-12">
                 <div className="flex flex-row items-center gap-2">
                   <Avatar
-                    src={profile.avatar}
-                    alt={profile.name}
-                    name={profile.name}
+                    src={profile?.avatar}
+                    alt={profile?.name}
+                    name={profile?.name}
                   />
                   <div className="flex flex-col items-start">
                     <span className="text-sm text-slate-300">
-                      {profile.name ? profile.name : 'Your name'}
+                      {profile?.name ? profile?.name : 'Your name'}
                     </span>
                     <span className="text-sm text-slate-300">
                       {formattedCurrentDate}
