@@ -1,9 +1,5 @@
 import { useMemo } from 'react'
 
-import {
-  BsFillEmojiHeartEyesFill,
-  BsFillEmojiSmileUpsideDownFill,
-} from 'react-icons/bs'
 import type { Post } from 'types/graphql'
 
 import { EPostDisplayType } from 'src/types/post-display-type.enum'
