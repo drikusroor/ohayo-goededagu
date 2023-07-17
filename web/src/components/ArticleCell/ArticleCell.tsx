@@ -20,6 +20,7 @@ export const QUERY = gql`
         url
       }
       user {
+        id
         name
         profile {
           name
