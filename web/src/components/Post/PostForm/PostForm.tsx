@@ -136,7 +136,46 @@ const PostForm = (props: PostFormProps) => {
           </Label>
 
           <div className="bg-white">
-            <ReactQuill theme="snow" value={body} onChange={setBody} />
+            <ReactQuill
+              theme={'snow'}
+              value={body}
+              className="prose max-w-4xl prose-p:!my-3"
+              onChange={setBody}
+              modules={{
+                toolbar: [
+                  [{ header: [1, 2, 3, 4, false] }],
+                  ['bold', 'italic', 'underline', 'strike'],
+                  ['blockquote', 'code-block'],
+                  [{ list: 'ordered' }, { list: 'bullet' }],
+                  [{ indent: '-1' }, { indent: '+1' }],
+                  [{ direction: 'rtl' }],
+                  [{ align: [] }],
+                  [{ color: [] }, { background: [] }],
+                  [{ font: [] }],
+                  ['link'],
+                  ['clean'],
+                ],
+              }}
+              formats={[
+                'header',
+                'bold',
+                'italic',
+                'underline',
+                'blockquote',
+                'code-block',
+                'strike',
+                'list',
+                'bullet',
+                'link',
+                'background',
+                'indent',
+                'clean',
+                'align',
+                'direction',
+                'color',
+                'font',
+              ]}
+            />
           </div>
 
           <FieldError name="body" className="rw-field-error" />
