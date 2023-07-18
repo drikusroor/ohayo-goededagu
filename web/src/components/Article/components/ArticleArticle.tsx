@@ -117,7 +117,7 @@ const ArticleArticle = ({ article, displayType, date }: Props) => {
             </div>
           </section>
           <div
-            className="prose lg:prose-lg xl:prose-xl"
+            className="prose leading-snug"
             dangerouslySetInnerHTML={{ __html: article.body }}
           ></div>
         </>

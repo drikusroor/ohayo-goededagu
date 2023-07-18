@@ -109,7 +109,7 @@ const ArticleVideo = ({ article, displayType, date }: Props) => {
             ></iframe>
           </div>
           <div
-            className="prose lg:prose-lg xl:prose-xl"
+            className="prose leading-snug"
             dangerouslySetInnerHTML={{ __html: article.body }}
           ></div>
         </>
