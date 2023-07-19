@@ -21,6 +21,9 @@ interface Props {
 const ArticleArticle = ({ article, displayType, date }: Props) => {
   const { coverImage } = article
 
+  const authorName =
+    article.user.profile?.name || article.user.name || 'Anonymous'
+
   return (
     <>
       {displayType === EPostDisplayType.PREVIEW && (
@@ -53,17 +56,8 @@ const ArticleArticle = ({ article, displayType, date }: Props) => {
                   name={article.user.name || article.user.email}
                 />
                 <div className="flex flex-col items-start">
-                  <span
-                    className="text-sm text-slate-300"
-                    title={article.user.profile.name}
-                  >
-                    {article.user.profile.name
-                      ? article.user.profile.name
-                      : article.user.name
-                      ? article.user.name
-                      : article.user.email
-                      ? article.user.email
-                      : 'Anonymous'}
+                  <span className="text-sm text-slate-300" title={authorName}>
+                    {authorName}
                   </span>
                   <span
                     className="text-sm text-slate-300"
@@ -120,15 +114,7 @@ const ArticleArticle = ({ article, displayType, date }: Props) => {
                 </h1>
               </div>
               <div className="flex flex-row items-center gap-2 pb-2">
-                <span className="text-sm text-slate-200">
-                  {article.user.profile.name
-                    ? article.user.profile.name
-                    : article.user.name
-                    ? article.user.name
-                    : article.user.email
-                    ? article.user.email
-                    : 'Anonymous'}
-                </span>
+                <span className="text-sm text-slate-200">{authorName}</span>
                 <span className="text-sm text-slate-200"> | {date}</span>
               </div>
             </div>
