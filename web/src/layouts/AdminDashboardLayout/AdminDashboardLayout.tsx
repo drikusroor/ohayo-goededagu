@@ -76,11 +76,11 @@ const AdminDashboardLayout = ({ children }: AdminDashboardLayoutProps) => {
 
   return (
     <div className="flex flex-row">
-      <div className="fixed flex h-screen w-14 flex-col justify-between bg-gray-200 md:w-64">
+      <div className="fixed flex h-screen w-14 flex-col justify-between bg-gray-200 lg:w-64">
         <div>
-          <div className="p-1 md:p-3 md:text-center">
-            <h1 className="flex items-center justify-between text-xl font-bold md:text-3xl">
-              <span className="hidden md:inline">Dashboard</span>
+          <div className="p-1 lg:p-3 lg:text-center">
+            <h1 className="flex items-center justify-between text-xl font-bold lg:text-3xl">
+              <span className="hidden lg:inline">Dashboard</span>
               <img
                 className="inline h-12 w-12"
                 alt="Logo"
@@ -91,7 +91,7 @@ const AdminDashboardLayout = ({ children }: AdminDashboardLayoutProps) => {
             </h1>
           </div>
           <nav>
-            <ul className="flex flex-col gap-1 py-2 md:my-4">
+            <ul className="flex flex-col gap-1 py-2 lg:my-4">
               {menuItems.map((item) => {
                 const isAllowed =
                   !item.roles ||
@@ -109,8 +109,8 @@ const AdminDashboardLayout = ({ children }: AdminDashboardLayoutProps) => {
                     )}`}
                     to={item.path}
                   >
-                    <span className="mx-auto text-lg md:mx-0">{item.icon}</span>
-                    <span className="hidden md:inline-block">{item.name}</span>
+                    <span className="mx-auto text-lg lg:mx-0">{item.icon}</span>
+                    <span className="hidden lg:inline-block">{item.name}</span>
                   </Link>
                 )
               })}
@@ -118,24 +118,24 @@ const AdminDashboardLayout = ({ children }: AdminDashboardLayoutProps) => {
           </nav>
         </div>
         {isAuthenticated ? (
-          <div className="flex items-center justify-between bg-slate-500 p-1 text-white md:p-3">
-            <span className="hidden md:block">
+          <div className="flex items-center justify-between bg-slate-500 p-1 text-white lg:p-3">
+            <span className="hidden lg:block">
               Logged in as {currentUser.email.split('@')[0]}
             </span>
             <Button
               onClick={logOut}
               color="monza-red"
-              className="flex items-center gap-2 px-4 py-3 md:text-sm"
+              className="flex items-center gap-2 px-4 py-3 lg:text-sm"
             >
               <BsBoxArrowUp />
-              <span className="hidden md:block ">Uitloggen</span>
+              <span className="hidden lg:block ">Uitloggen</span>
             </Button>
           </div>
         ) : (
           <Link to={routes.login()}>Inloggen</Link>
         )}
       </div>
-      <div className="flex flex-1 flex-col overflow-auto pl-14 md:pl-64">
+      <div className=":pl-64 flex flex-1 flex-col overflow-auto pl-14">
         {children}
       </div>
     </div>
