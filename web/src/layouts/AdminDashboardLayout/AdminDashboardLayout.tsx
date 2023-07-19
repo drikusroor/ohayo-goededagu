@@ -6,6 +6,7 @@ import {
   BsFillJournalBookmarkFill,
   BsFillPersonFill,
   BsFillPersonVcardFill,
+  BsJournals,
 } from 'react-icons/bs'
 
 import { Link, routes } from '@redwoodjs/router'
@@ -32,6 +33,13 @@ const menuItems: MenuItem[] = [
     name: 'Posts',
     path: '/admin/posts',
     activeRoutePattern: '/posts',
+    roles: ['ADMIN', 'MODERATOR'],
+    icon: <BsJournals />,
+  },
+  {
+    name: 'My Posts',
+    path: '/admin/posts/mine',
+    activeRoutePattern: '/posts/mine',
     roles: ['ADMIN', 'MODERATOR'],
     icon: <BsFillJournalBookmarkFill />,
   },
