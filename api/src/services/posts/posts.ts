@@ -9,6 +9,12 @@ export const posts = () => {
   })
 }
 
+export const allPosts = () => {
+  return db.post.findMany({
+    orderBy: { createdAt: 'desc' },
+  })
+}
+
 export const post = ({ id }) => {
   return db.post.findUnique({
     where: { id },
