@@ -16,6 +16,7 @@ import Button from '../../Button/Button'
 
 interface Props {
   profile: object
+  post: object
   postType: EPostType
   postTitle: string
   postBody: string
@@ -24,6 +25,7 @@ interface Props {
 
 const Preview = ({
   profile,
+  post,
   coverImage,
   postType,
   postTitle,
@@ -31,7 +33,17 @@ const Preview = ({
 }: Props) => {
   const [blogRollPreview, setBlogRollPreview] = React.useState<boolean>(false)
 
+  console.log('preview profile', profile)
+  console.log('preview post', post)
   const formattedCurrentDate = new Date().toLocaleString('nl-NL', {
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+  })
+
+  const formattedDate = new Date(post?.createdAt).toLocaleString('nl-NL', {
     day: '2-digit',
     month: '2-digit',
     year: 'numeric',
@@ -101,7 +113,7 @@ const Preview = ({
                   {profile?.name ? profile?.name : 'Your name'}
                 </span>
                 <span className="text-sm text-slate-200">
-                  | {formattedCurrentDate}
+                  | {post?.createdAt ? formattedDate : formattedCurrentDate}
                 </span>
               </div>
             </div>
@@ -144,7 +156,7 @@ const Preview = ({
                       {profile?.name ? profile?.name : 'Your name'}
                     </span>
                     <span className="text-sm text-slate-300">
-                      {formattedCurrentDate}
+                      {post.createdAt ? formattedDate : formattedCurrentDate}
                     </span>
                   </div>
                 </div>
