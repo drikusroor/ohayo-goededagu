@@ -98,7 +98,7 @@ const PostsList = ({ posts }: FindPosts) => {
                     variant="outlined"
                   >
                     <BsSearch />
-                    <span className="hidden sm:inline-block">Show</span>
+                    <span className="hidden lg:inline-block">Show</span>
                   </Button>
                 </nav>
               </td>
@@ -112,7 +112,7 @@ const PostsList = ({ posts }: FindPosts) => {
                     variant="outlined"
                   >
                     <BsFillPencilFill />
-                    <span className="hidden sm:inline-block">Edit</span>
+                    <span className="hidden lg:inline-block">Edit</span>
                   </Button>
                 </nav>
               </td>
@@ -127,7 +127,7 @@ const PostsList = ({ posts }: FindPosts) => {
                       variant="outlined"
                     >
                       <BsFillTrash3Fill />
-                      <span className="hidden sm:inline-block">Delete</span>
+                      <span className="hidden lg:inline-block">Delete</span>
                     </Button>
                   )}
                 </nav>
