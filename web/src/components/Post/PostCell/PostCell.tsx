@@ -12,6 +12,11 @@ export const QUERY = gql`
       body
       createdAt
       published
+      user {
+        name
+        id
+        email
+      }
     }
   }
 `

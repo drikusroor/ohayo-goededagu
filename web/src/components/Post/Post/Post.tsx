@@ -21,6 +21,7 @@ interface Props {
 }
 
 const Post = ({ post }: Props) => {
+  console.log(post)
   const [deletePost] = useMutation(DELETE_POST_MUTATION, {
     onCompleted: () => {
       toast.success('Post deleted')
@@ -62,6 +63,10 @@ const Post = ({ post }: Props) => {
             <tr>
               <th>Published</th>
               <td>{post.published ? 'Yes' : 'No'}</td>
+            </tr>
+            <tr>
+              <th>Author</th>
+              <td>{post.user.name ? post.user.name : post.user.email}</td>
             </tr>
             <tr>
               <th>Created at</th>
