@@ -33,8 +33,6 @@ const Preview = ({
 }: Props) => {
   const [blogRollPreview, setBlogRollPreview] = React.useState<boolean>(false)
 
-  console.log('preview profile', profile)
-  console.log('preview post', post)
   const formattedCurrentDate = new Date().toLocaleString('nl-NL', {
     day: '2-digit',
     month: '2-digit',
