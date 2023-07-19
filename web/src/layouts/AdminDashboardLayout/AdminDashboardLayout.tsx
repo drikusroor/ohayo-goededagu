@@ -91,7 +91,7 @@ const AdminDashboardLayout = ({ children }: AdminDashboardLayoutProps) => {
             </h1>
           </div>
           <nav>
-            <ul className="flex flex-col gap-1 py-2 lg:my-4">
+            <ul className="flex flex-col gap-1 py-2">
               {menuItems.map((item) => {
                 const isAllowed =
                   !item.roles ||
@@ -109,7 +109,9 @@ const AdminDashboardLayout = ({ children }: AdminDashboardLayoutProps) => {
                     )}`}
                     to={item.path}
                   >
-                    <span className="mx-auto text-lg lg:mx-0">{item.icon}</span>
+                    <span className="mx-auto text-lg md:my-2 lg:mx-0">
+                      {item.icon}
+                    </span>
                     <span className="hidden lg:inline-block">{item.name}</span>
                   </Link>
                 )
@@ -135,7 +137,7 @@ const AdminDashboardLayout = ({ children }: AdminDashboardLayoutProps) => {
           <Link to={routes.login()}>Inloggen</Link>
         )}
       </div>
-      <div className=":pl-64 flex flex-1 flex-col overflow-auto pl-14">
+      <div className="flex flex-1 flex-col overflow-auto pl-14 lg:pl-64">
         {children}
       </div>
     </div>
