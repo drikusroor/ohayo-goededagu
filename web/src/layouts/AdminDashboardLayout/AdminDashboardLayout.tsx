@@ -38,8 +38,8 @@ const menuItems: MenuItem[] = [
   },
   {
     name: 'My Posts',
-    path: '/admin/posts/mine',
-    activeRoutePattern: '/posts/mine',
+    path: '/admin/my-posts',
+    activeRoutePattern: '/my-posts',
     roles: ['ADMIN', 'MODERATOR'],
     icon: <BsFillJournalBookmarkFill />,
   },
