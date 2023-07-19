@@ -15,6 +15,8 @@ export const QUERY = gql`
       published
       type
       user {
+        id
+        email
         name
       }
     }

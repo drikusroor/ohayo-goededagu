@@ -15,6 +15,8 @@ export const QUERY = gql`
       published
       type
       user {
+        id
+        email
         name
       }
     }
@@ -39,6 +41,5 @@ export const Failure = ({ error }: CellFailureProps) => (
 )
 
 export const Success = ({ posts }: CellSuccessProps<FindPosts>) => {
-  console.log('postscell posts', posts)
   return <Posts posts={posts} />
 }

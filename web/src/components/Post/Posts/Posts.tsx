@@ -5,6 +5,7 @@ import { routes, navigate } from '@redwoodjs/router'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
+import { useAuth } from 'src/auth'
 import ArticleTypeIcon, {
   EPostType,
 } from 'src/components/ArticleTypeIcon/ArticleTypeIcon'
@@ -21,6 +22,8 @@ const DELETE_POST_MUTATION = gql`
 `
 
 const PostsList = ({ posts }: FindPosts) => {
+  const { currentUser } = useAuth()
+
   const [deletePost] = useMutation(DELETE_POST_MUTATION, {
     onCompleted: () => {
       toast.success('Post deleted')
@@ -77,7 +80,7 @@ const PostsList = ({ posts }: FindPosts) => {
               <td>{post?.user?.name}</td>
               <td>{timeTag(post.createdAt)}</td>
               <td>
-                <nav className="rw-table-actions gap-1">
+                <nav className="rw-table-actions">
                   <Button
                     title={'Show post' + post.id}
                     onClick={() => onNavigatePost(post)}
@@ -89,6 +92,10 @@ const PostsList = ({ posts }: FindPosts) => {
                     <BsSearch />
                     <span className="hidden sm:inline-block">Show</span>
                   </Button>
+                </nav>
+              </td>
+              <td>
+                <nav className="rw-table-actions">
                   <Button
                     title={'Edit post' + post.id}
                     onClick={() => onNavigateEditPost(post)}
@@ -99,16 +106,22 @@ const PostsList = ({ posts }: FindPosts) => {
                     <BsFillPencilFill />
                     <span className="hidden sm:inline-block">Edit</span>
                   </Button>
-                  <Button
-                    title={'Delete post ' + post.id}
-                    onClick={() => onDeleteClick(post.id)}
-                    className="rw-button rw-button-red flex items-center gap-2 text-base transition-colors sm:text-sm"
-                    color="monza-red"
-                    variant="outlined"
-                  >
-                    <BsFillTrash3Fill />
-                    <span className="hidden sm:inline-block">Delete</span>
-                  </Button>
+                </nav>
+              </td>
+              <td>
+                <nav className="rw-table-actions">
+                  {post?.user?.name === currentUser?.name && (
+                    <Button
+                      title={'Delete post ' + post.id}
+                      onClick={() => onDeleteClick(post.id)}
+                      className="rw-button rw-button-red flex items-center gap-2 text-base transition-colors sm:text-sm"
+                      color="monza-red"
+                      variant="outlined"
+                    >
+                      <BsFillTrash3Fill />
+                      <span className="hidden sm:inline-block">Delete</span>
+                    </Button>
+                  )}
                 </nav>
               </td>
             </tr>
