@@ -1,7 +1,7 @@
 import { BsFillPencilFill, BsFillTrash3Fill, BsSearch } from 'react-icons/bs'
 import type { DeletePostMutationVariables, FindPosts } from 'types/graphql'
 
-import { Link, routes, navigate } from '@redwoodjs/router'
+import { routes, navigate } from '@redwoodjs/router'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
