@@ -23,7 +23,7 @@ interface Props {
 
 const ArticleVideo = ({ article, displayType, date }: Props) => {
   const authorName =
-    article.user.profile?.name || article.user.name || 'Anonymous'
+    article?.user?.profile?.name || article?.user?.name || 'Anonymous'
 
   const embedUrl = useMemo(() => {
     const videoId = extractVideoID(article?.videoPost?.videoUrl)

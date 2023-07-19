@@ -33,7 +33,7 @@ const Routes = () => {
             <Route path="/admin/posts/{id:Int}/edit" page={PostEditPostPage} name="editPost" />
             <Route path="/admin/posts/{id:Int}" page={PostPostPage} name="post" />
             <Route path="/admin/posts" page={PostPostsPage} name="posts" />
-            <Route path="/admin/my-posts" page={PostMyPostsPage} name="posts" />
+            <Route path="/admin/my-posts" page={PostMyPostsPage} name="myPosts" />
           </Set>
           <Set wrap={ScaffoldLayout} title="Profile" titleTo="profileSelf" buttonLabel="New Profile" buttonTo="newProfile">
             <Route path="/admin/profile/new" page={ProfileNewProfilePage} name="newProfile" />
