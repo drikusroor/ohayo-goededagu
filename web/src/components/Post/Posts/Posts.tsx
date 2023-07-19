@@ -1,4 +1,10 @@
-import { BsFillPencilFill, BsFillTrash3Fill, BsSearch } from 'react-icons/bs'
+import {
+  BsFillPencilFill,
+  BsFillTrash3Fill,
+  BsPencilSquare,
+  BsSearch,
+  BsSendFill,
+} from 'react-icons/bs'
 import type { DeletePostMutationVariables, FindPosts } from 'types/graphql'
 
 import { routes, navigate } from '@redwoodjs/router'
@@ -78,7 +84,7 @@ const PostsList = ({ posts }: FindPosts) => {
               <td>
                 <ArticleTypeIcon type={post.type as EPostType} />
               </td>
-              <td>{post.published ? 'Yes' : 'No'}</td>
+              <td>{post.published ? <BsSendFill /> : <BsPencilSquare />}</td>
               <td>{post?.user?.name}</td>
               <td>{timeTag(post.createdAt)}</td>
               <td>
