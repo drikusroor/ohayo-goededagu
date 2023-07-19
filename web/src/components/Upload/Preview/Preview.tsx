@@ -156,7 +156,7 @@ const Preview = ({
                       {profile?.name ? profile?.name : 'Your name'}
                     </span>
                     <span className="text-sm text-slate-300">
-                      {post.createdAt ? formattedDate : formattedCurrentDate}
+                      {post?.createdAt ? formattedDate : formattedCurrentDate}
                     </span>
                   </div>
                 </div>

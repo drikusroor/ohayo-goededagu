@@ -16,6 +16,7 @@ const CREATE_POST_MUTATION = gql`
 `
 
 const NewPost = () => {
+  console.log('new post')
   const currentUser = useAuth()
   const newPostProfile = { name: currentUser?.currentUser?.name }
 
