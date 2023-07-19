@@ -1,10 +1,28 @@
+import type {
+  CreatePostInput,
+  FindProfileSelfForEditQuery,
+} from 'types/graphql'
+
 import { navigate, routes } from '@redwoodjs/router'
+import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
 import PostForm from 'src/components/Post/PostForm'
 
-import type { CreatePostInput } from 'types/graphql'
+export const QUERY = gql`
+  query FindProfileSelfForEditQuery {
+    profileSelf {
+      id
+      bio
+      createdAt
+      updatedAt
+      avatar
+      name
+      japaneseName
+    }
+  }
+`
 
 const CREATE_POST_MUTATION = gql`
   mutation CreatePostMutation($input: CreatePostInput!) {
@@ -14,7 +32,15 @@ const CREATE_POST_MUTATION = gql`
   }
 `
 
-const NewPost = () => {
+export const Loading = () => <div>Loading...</div>
+
+export const Failure = ({ error }: CellFailureProps) => (
+  <div className="rw-cell-error">{error?.message}</div>
+)
+
+export const Success = ({
+  profileSelf,
+}: CellSuccessProps<FindProfileSelfForEditQuery>) => {
   const [createPost, { loading, error }] = useMutation(CREATE_POST_MUTATION, {
     onCompleted: () => {
       toast.success('Post created')
@@ -35,10 +61,13 @@ const NewPost = () => {
         <h2 className="rw-heading rw-heading-secondary">New Post</h2>
       </header>
       <div className="rw-segment-main">
-        <PostForm onSave={onSave} loading={loading} error={error} />
+        <PostForm
+          profile={profileSelf}
+          onSave={onSave}
+          loading={loading}
+          error={error}
+        />
       </div>
     </div>
   )
 }
-
-export default NewPost

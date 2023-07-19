@@ -25,6 +25,10 @@ export const QUERY = gql`
         url
       }
     }
+    profile: profileSelf {
+      avatar
+      name
+    }
   }
 `
 const UPDATE_POST_MUTATION = gql`
@@ -53,7 +57,7 @@ export const Failure = ({ error }: CellFailureProps) => (
   <div className="rw-cell-error">{error?.message}</div>
 )
 
-export const Success = ({ post }: CellSuccessProps<EditPostById>) => {
+export const Success = ({ post, profile }: CellSuccessProps<EditPostById>) => {
   const [updatePost, { loading, error }] = useMutation(UPDATE_POST_MUTATION, {
     onCompleted: () => {
       toast.success('Post updated')
@@ -76,7 +80,13 @@ export const Success = ({ post }: CellSuccessProps<EditPostById>) => {
         </h2>
       </header>
       <div className="rw-segment-main">
-        <PostForm post={post} onSave={onSave} error={error} loading={loading} />
+        <PostForm
+          post={post}
+          profile={profile}
+          onSave={onSave}
+          error={error}
+          loading={loading}
+        />
       </div>
     </div>
   )
