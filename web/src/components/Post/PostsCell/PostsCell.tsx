@@ -7,13 +7,16 @@ import Posts from 'src/components/Post/Posts'
 
 export const QUERY = gql`
   query FindPosts {
-    posts: adminPosts {
+    posts: posts {
       id
       title
       body
       createdAt
       published
       type
+      user {
+        name
+      }
     }
   }
 `
@@ -36,5 +39,6 @@ export const Failure = ({ error }: CellFailureProps) => (
 )
 
 export const Success = ({ posts }: CellSuccessProps<FindPosts>) => {
+  console.log('postscell posts', posts)
   return <Posts posts={posts} />
 }

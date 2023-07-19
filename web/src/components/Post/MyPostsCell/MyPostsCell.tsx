@@ -14,6 +14,9 @@ export const QUERY = gql`
       createdAt
       published
       type
+      user {
+        name
+      }
     }
   }
 `

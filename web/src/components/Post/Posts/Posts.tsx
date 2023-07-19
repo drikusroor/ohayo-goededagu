@@ -59,6 +59,7 @@ const PostsList = ({ posts }: FindPosts) => {
             <th>Body</th>
             <th>Type</th>
             <th>Published</th>
+            <th>Author</th>
             <th>Created at</th>
             <th>&nbsp;</th>
           </tr>
@@ -73,6 +74,7 @@ const PostsList = ({ posts }: FindPosts) => {
                 <ArticleTypeIcon type={post.type as EPostType} />
               </td>
               <td>{post.published ? 'Yes' : 'No'}</td>
+              <td>{post?.user?.name}</td>
               <td>{timeTag(post.createdAt)}</td>
               <td>
                 <nav className="rw-table-actions gap-1">
