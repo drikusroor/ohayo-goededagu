@@ -31,20 +31,21 @@ export interface ICloudinaryUploadResultInfo {
 
 interface IUploadProps {
   name: string
-  value?: string
-  setValue?: (value: ICloudinaryUploadResultInfo) => void
+  multiple?: boolean
+  setCoverImage?: (value: ICloudinaryUploadResultInfo) => void
 }
 
-const Upload = ({ name, value, setValue }: IUploadProps) => {
+const Upload = ({ name, multiple, setCoverImage }: IUploadProps) => {
   const widget = cloudinary.createUploadWidget(
     {
       cloudName: 'dl5elpdjy',
       uploadPreset: 'bcfnswai',
+      multiple: multiple ? multiple : true,
     },
     (error, result) => {
       if (!error && result && result.event === 'success') {
         console.log('Done! Here is the image info: ', result.info)
-        setValue(result.info as ICloudinaryUploadResultInfo)
+        setCoverImage(result.info as ICloudinaryUploadResultInfo)
       }
     }
   )
@@ -58,17 +59,14 @@ const Upload = ({ name, value, setValue }: IUploadProps) => {
       <ButtonField
         id="upload_widget"
         name={name}
-        defaultValue="Upload image"
+        defaultValue="Upload cover image"
         className="rw-button rw-button-blue mt-4"
         errorClassName="rw-button rw-button-blue rw-button-error"
         onClick={() => {
           onClickUpload()
         }}
       />
-
       <FieldError name="upload" className="rw-field-error" />
-
-      {value && <img className="mt-2" alt="cover" src={value} />}
     </>
   )
 }

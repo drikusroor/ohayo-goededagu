@@ -1,7 +1,8 @@
-import NewPost from 'src/components/Post/NewPost'
+// import NewPost from 'src/components/Post/NewPost'
+import NewPostCell from 'src/components/Post/NewPostCell'
 
 const NewPostPage = () => {
-  return <NewPost />
+  return <NewPostCell />
 }
 
 export default NewPostPage

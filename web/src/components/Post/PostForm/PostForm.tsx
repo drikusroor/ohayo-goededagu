@@ -30,7 +30,8 @@ import {
   postTypeOptions,
 } from 'src/components/ArticleTypeIcon/ArticleTypeIcon'
 import Button from 'src/components/Button/Button'
-import Upload from 'src/components/Upload/Upload'
+import Preview from 'src/components/Upload/Preview/Preview'
+import Upload from 'src/components/Upload/Upload/Upload'
 import { classNames } from 'src/lib/class-names'
 
 import VideoForm, { IVideoPostFormData } from './TypeForms/VideoForm'
@@ -41,23 +42,10 @@ type FormPost = NonNullable<EditPostById['post']>
 
 interface PostFormProps {
   post?: EditPostById['post']
+  profile?: EditPostById['profile']
   onSave: (data: UpdatePostInput, id?: FormPost['id']) => void
   error: RWGqlError
   loading: boolean
-}
-
-interface IImage {
-  id?: string
-  imageId: string
-  url: string
-}
-
-const mapCoverImageDataToImageInput = (image: IImage) => {
-  return {
-    id: image.id,
-    imageId: image.imageId,
-    url: image.url,
-  }
 }
 
 const PostForm = (props: PostFormProps) => {
@@ -65,17 +53,10 @@ const PostForm = (props: PostFormProps) => {
     data.body = body
 
     data.published = published
-    delete data.coverImage
 
     if (data.type === EPostType.VIDEO) {
       delete data.videoUrl
       data.videoPost = videoPostFormData
-    }
-
-    if (data.type === EPostType.ARTICLE) {
-      if (coverImage) {
-        data.coverImage = mapCoverImageDataToImageInput(coverImage)
-      }
     }
 
     props.onSave(data, props?.post?.id)
@@ -92,6 +73,10 @@ const PostForm = (props: PostFormProps) => {
   )
 
   const [coverImage, setCoverImage] = useState<IImage>(props.post?.coverImage)
+
+  const [postTitle, setPostTitle] = React.useState<string>(props.post?.title)
+
+  const [postBody, setPostBody] = React.useState<string>(props.post?.body)
 
   const [videoPostFormData, setVideoPostFormData] =
     useState<IVideoPostFormData>({
@@ -119,9 +104,12 @@ const PostForm = (props: PostFormProps) => {
 
           <TextField
             name="title"
-            defaultValue={props.post?.title}
+            defaultValue={postTitle}
             className="rw-input"
             errorClassName="rw-input rw-input-error"
+            onChange={(e) => {
+              setPostTitle(e.target.value)
+            }}
             validation={{ required: true }}
           />
 
@@ -213,16 +201,27 @@ const PostForm = (props: PostFormProps) => {
           )}
 
           {postType === EPostType.ARTICLE && (
-            <Upload
-              name="coverImage"
-              value={coverImage?.url}
-              setValue={({ public_id, secure_url }) =>
-                setCoverImage({
-                  imageId: public_id,
-                  url: secure_url,
-                })
-              }
-            />
+            <>
+              <Upload
+                name="coverImage"
+                multiple={false}
+                setCoverImage={({ public_id, secure_url }) =>
+                  setCoverImage({
+                    imageId: public_id,
+                    url: secure_url,
+                  })
+                }
+              />
+
+              <Preview
+                profile={props.profile}
+                post={props.post}
+                postType={postType}
+                postTitle={postTitle}
+                postBody={postBody}
+                coverImage={coverImage?.url}
+              />
+            </>
           )}
 
           <div className="rw-button-group gap-0">

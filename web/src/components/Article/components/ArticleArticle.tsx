@@ -29,7 +29,9 @@ const ArticleArticle = ({ article, displayType, date }: Props) => {
       {displayType === EPostDisplayType.PREVIEW && (
         <section
           style={{
-            backgroundImage: coverImage?.url ? `url(${coverImage.url})` : '',
+            backgroundImage: coverImage?.url
+              ? `url(${coverImage.url})`
+              : `url(/images/logo-full.png)`,
           }}
           className="rounded bg-gray-600 bg-cover bg-center bg-no-repeat bg-blend-multiply"
         >
@@ -97,7 +99,9 @@ const ArticleArticle = ({ article, displayType, date }: Props) => {
         <>
           <section
             style={{
-              backgroundImage: coverImage?.url ? `url(${coverImage.url})` : '',
+              backgroundImage: coverImage?.url
+                ? `url(${coverImage.url})`
+                : `url(/images/logo-full.png)`,
             }}
             className="rounded bg-gray-400 bg-cover bg-center bg-no-repeat bg-blend-multiply"
           >
