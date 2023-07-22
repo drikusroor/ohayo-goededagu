@@ -21,7 +21,6 @@ interface Props {
 }
 
 const Post = ({ post }: Props) => {
-  console.log(post)
   const [deletePost] = useMutation(DELETE_POST_MUTATION, {
     onCompleted: () => {
       toast.success('Post deleted')
