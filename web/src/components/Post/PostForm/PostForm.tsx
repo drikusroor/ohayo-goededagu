@@ -46,10 +46,15 @@ interface PostFormProps {
 const PostForm = (props: PostFormProps) => {
   const onSubmit = (data: FormPost) => {
     data.published = published
+    delete data.coverImage
 
     if (data.type === EPostType.VIDEO) {
       delete data.videoUrl
       data.videoPost = videoPostFormData
+    }
+
+    if (coverImage) {
+      data.coverImage = coverImage
     }
 
     props.onSave(data, props?.post?.id)

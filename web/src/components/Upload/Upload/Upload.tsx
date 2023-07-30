@@ -62,9 +62,7 @@ const Upload = ({ name, multiple, setCoverImage }: IUploadProps) => {
         defaultValue="Upload cover image"
         className="rw-button rw-button-blue mt-4"
         errorClassName="rw-button rw-button-blue rw-button-error"
-        onClick={() => {
-          onClickUpload()
-        }}
+        onClick={onClickUpload}
       />
       <FieldError name="upload" className="rw-field-error" />
     </>
