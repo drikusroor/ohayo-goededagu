@@ -11,6 +11,8 @@ const Video = ({ embedUrl = '' }) => {
     return `https://www.youtube.com/embed/${videoId}`
   }, [embedUrl])
 
+  if (!formattedEmbedUrl) return null
+
   return (
     <div className="aspect-video bg-slate-300">
       <iframe
