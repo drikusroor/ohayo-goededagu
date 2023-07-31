@@ -1,5 +1,3 @@
-import { useMemo } from 'react'
-
 import { BsArrowRightCircle } from 'react-icons/bs'
 import { Post } from 'types/graphql'
 
