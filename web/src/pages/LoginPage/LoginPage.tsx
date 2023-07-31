@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import { useEffect } from 'react'
 
 import {
@@ -17,6 +17,7 @@ import { useAuth } from 'src/auth'
 
 const LoginPage = () => {
   const { isAuthenticated, logIn } = useAuth()
+  const [isLoggingIn, setIsLoggingIn] = useState(false)
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -30,6 +31,7 @@ const LoginPage = () => {
   }, [])
 
   const onSubmit = async (data: Record<string, string>) => {
+    setIsLoggingIn(true)
     const response = await logIn({
       username: data.username,
       password: data.password,
@@ -42,6 +44,8 @@ const LoginPage = () => {
     } else {
       toast.success('Welkom terug!')
     }
+
+    setIsLoggingIn(false)
   }
 
   return (
@@ -139,7 +143,14 @@ const LoginPage = () => {
                   <FieldError name="password" className="rw-field-error" />
 
                   <div className="rw-button-group">
-                    <Submit className="rw-button rw-button-blue">
+                    <Submit
+                      className={`rw-button rw-button-blue ${
+                        isLoggingIn
+                          ? 'animate-bounce cursor-wait opacity-50'
+                          : ''
+                      }`}
+                      disabled={isLoggingIn}
+                    >
                       Inloggen
                     </Submit>
                   </div>
