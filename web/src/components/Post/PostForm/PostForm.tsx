@@ -25,6 +25,7 @@ import {
 import Button from 'src/components/Button/Button'
 import Preview from 'src/components/Upload/Preview/Preview'
 import Upload from 'src/components/Upload/Upload/Upload'
+import Video from 'src/components/Video/Video'
 import { classNames } from 'src/lib/class-names'
 
 import VideoForm, { IVideoPostFormData } from './TypeForms/VideoForm'
@@ -151,10 +152,16 @@ const PostForm = (props: PostFormProps) => {
           </SelectField>
 
           {postType === EPostType.VIDEO && (
-            <VideoForm
-              videoPostFormData={videoPostFormData}
-              setVideoPostFormData={setVideoPostFormData}
-            />
+            <>
+              <VideoForm
+                videoPostFormData={videoPostFormData}
+                setVideoPostFormData={setVideoPostFormData}
+              />
+
+              <div className="mt-4">
+                <Video embedUrl={videoPostFormData?.videoUrl} />
+              </div>
+            </>
           )}
 
           {postType === EPostType.ARTICLE && (

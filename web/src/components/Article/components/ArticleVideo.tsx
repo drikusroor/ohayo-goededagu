@@ -11,9 +11,8 @@ import ArticleTypeIcon, {
 } from 'src/components/ArticleTypeIcon/ArticleTypeIcon'
 import AvatarTimestamp from 'src/components/Avatar/AvatarTimestamp/AvatarTimestamp'
 import Button from 'src/components/Button/Button'
+import Video from 'src/components/Video/Video'
 import { EPostDisplayType } from 'src/types/post-display-type.enum'
-
-import extractVideoID from './helpers/extract-video-id'
 
 interface Props {
   article: Post
@@ -23,15 +22,9 @@ interface Props {
 
 const ArticleVideo = ({ article, displayType, date }: Props) => {
   const authorName =
-    article.user.profile?.name || article.user.name || 'Anonymous'
+    article.user?.profile?.name || article.user?.name || 'Anonymous'
 
-  const embedUrl = useMemo(() => {
-    const videoId = extractVideoID(article?.videoPost?.videoUrl)
-    if (!videoId) return null
-    return `https://www.youtube.com/embed/${videoId}`
-  }, [article?.videoPost?.videoUrl])
-
-  if (!embedUrl) return null
+  if (!article?.videoPost?.videoUrl) return null
 
   return (
     <>
@@ -50,17 +43,9 @@ const ArticleVideo = ({ article, displayType, date }: Props) => {
               </h2>
             </div>
           </header>
-          <div className="aspect-video bg-slate-300">
-            <iframe
-              src={embedUrl}
-              className="h-full w-full"
-              title="YouTube video player"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowFullScreen
-              loading="lazy"
-            ></iframe>
-          </div>
+
+          <Video embedUrl={article?.videoPost?.videoUrl} />
+
           <div className="flex flex-row items-center justify-between pt-4">
             <AvatarTimestamp article={article} />
             <div className="flex items-center gap-6">
@@ -97,17 +82,7 @@ const ArticleVideo = ({ article, displayType, date }: Props) => {
               <span className="text-sm text-slate-500"> | {date}</span>
             </div>
           </header>
-          <div className="aspect-video bg-slate-300">
-            <iframe
-              src={embedUrl}
-              className="h-full w-full"
-              title="YouTube video player"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowFullScreen
-              loading="lazy"
-            ></iframe>
-          </div>
+          <Video embedUrl={article?.videoPost?.videoUrl} />
           <div> {article.body} </div>
         </>
       )}
