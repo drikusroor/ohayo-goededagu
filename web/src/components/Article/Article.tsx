@@ -25,7 +25,6 @@ interface Props {
 
 const Article = ({ article }: Props) => {
   const { currentUser } = useAuth()
-  console.log('currentUser', currentUser)
   const isUserAuthor = article.user.id === currentUser?.id
 
   const formattedDate = new Date(article.createdAt).toLocaleString('nl-NL', {
