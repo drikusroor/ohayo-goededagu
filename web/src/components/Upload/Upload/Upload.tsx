@@ -1,4 +1,6 @@
-import { ButtonField, FieldError } from '@redwoodjs/forms'
+import { FieldError } from '@redwoodjs/forms'
+
+import Button from 'src/components/Button/Button'
 
 declare const cloudinary: any
 
@@ -56,13 +58,12 @@ const Upload = ({ name, multiple, setCoverImage }: IUploadProps) => {
 
   return (
     <>
-      <ButtonField
+      <Button
         id="upload_widget"
-        name={name}
-        defaultValue="Upload cover image"
+        title="Upload files"
         className="rw-button rw-button-blue mt-4"
-        errorClassName="rw-button rw-button-blue rw-button-error"
         onClick={onClickUpload}
+        text="Upload image"
       />
       <FieldError name="upload" className="rw-field-error" />
     </>

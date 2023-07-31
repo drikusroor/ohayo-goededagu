@@ -7,7 +7,11 @@ import {
   BsFillXCircleFill,
   BsSaveFill,
 } from 'react-icons/bs'
-import type { EditPostById, UpdatePostInput } from 'types/graphql'
+import type {
+  CreateImageInput,
+  EditPostById,
+  UpdatePostInput,
+} from 'types/graphql'
 
 import {
   Form,
@@ -46,15 +50,20 @@ interface PostFormProps {
 const PostForm = (props: PostFormProps) => {
   const onSubmit = (data: FormPost) => {
     data.published = published
-    delete data.coverImage
 
     if (data.type === EPostType.VIDEO) {
       delete data.videoUrl
       data.videoPost = videoPostFormData
     }
 
-    if (coverImage) {
-      data.coverImage = coverImage
+    if (coverImage && typeof coverImage === 'object') {
+      delete data.coverImage
+      const { id, imageId, url } = coverImage
+      data.coverImage = {
+        id,
+        imageId,
+        url,
+      }
     }
 
     props.onSave(data, props?.post?.id)
@@ -65,10 +74,10 @@ const PostForm = (props: PostFormProps) => {
   )
 
   const [postType, setPostType] = React.useState<EPostType>(
-    props.post?.type || EPostType.ARTICLE
+    (props.post?.type as EPostType) || EPostType.ARTICLE
   )
 
-  const [coverImage, setCoverImage] = React.useState<IImage>(
+  const [coverImage, setCoverImage] = React.useState<CreateImageInput>(
     props.post?.coverImage
   )
 
