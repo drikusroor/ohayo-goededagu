@@ -144,11 +144,14 @@ const LoginPage = () => {
 
                   <div className="rw-button-group">
                     <Submit
-                      className="rw-button rw-button-blue"
+                      className={`rw-button rw-button-blue ${
+                        isLoggingIn
+                          ? 'animate-bounce cursor-wait opacity-50'
+                          : ''
+                      }`}
                       disabled={isLoggingIn}
                     >
                       Inloggen
-                      <span className="rw-button-loader" />
                     </Submit>
                   </div>
                 </Form>
