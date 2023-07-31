@@ -1,7 +1,7 @@
 import MyPostsCell from 'src/components/Post/MyPostsCell'
 
-const PostsPage = () => {
+const MyPostsPage = () => {
   return <MyPostsCell />
 }
 
-export default PostsPage
+export default MyPostsPage
