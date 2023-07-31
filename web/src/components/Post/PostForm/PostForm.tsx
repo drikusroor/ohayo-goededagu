@@ -4,6 +4,8 @@ import {
   BsFillCircleFill,
   BsFillCheckCircleFill,
   BsFillExclamationTriangleFill,
+  BsFillXCircleFill,
+  BsSaveFill,
 } from 'react-icons/bs'
 import type { EditPostById, UpdatePostInput } from 'types/graphql'
 
@@ -17,6 +19,7 @@ import {
   SelectField,
 } from '@redwoodjs/forms'
 import type { RWGqlError } from '@redwoodjs/forms'
+import { Link, routes } from '@redwoodjs/router'
 
 import {
   EPostType,
@@ -233,10 +236,27 @@ const PostForm = (props: PostFormProps) => {
           <div className="rw-button-group">
             <Submit
               disabled={props.loading}
-              className="rw-button rw-button-blue"
+              className="rw-button rw-button-blue flex items-center gap-2 text-sm"
             >
+              <BsSaveFill />
               Save
             </Submit>
+
+            <Link
+              to={routes.posts({ id: props.post?.id })}
+              title={'Back to overview'}
+            >
+              <Button
+                type="button"
+                className="rw-button rw-button-red group relative flex items-center gap-2 text-sm"
+              >
+                <BsFillXCircleFill />
+                Cancel
+                <span className="user-select-none absolute left-full ml-2 w-32 text-left text-xs text-monza-red-500 opacity-0 transition-opacity group-hover:opacity-100">
+                  Warning: All unsaved changes will be lost.
+                </span>
+              </Button>
+            </Link>
           </div>
         </Form>
       </div>
