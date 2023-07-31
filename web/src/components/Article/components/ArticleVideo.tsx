@@ -5,26 +5,21 @@ import { Post } from 'types/graphql'
 
 import { Link, navigate, routes } from '@redwoodjs/router'
 
-import ArticleCommentCountBadge from 'src/components/ArticleCommentCountBadge/ArticleCommentCountBadge'
 import ArticleTypeIcon, {
   EPostType,
 } from 'src/components/ArticleTypeIcon/ArticleTypeIcon'
 import AvatarTimestamp from 'src/components/Avatar/AvatarTimestamp/AvatarTimestamp'
 import Button from 'src/components/Button/Button'
-import { EPostDisplayType } from 'src/types/post-display-type.enum'
 
 import extractVideoID from './helpers/extract-video-id'
 
 interface Props {
   article: Post
-  displayType: EPostDisplayType
+  type: EPostType
   date?: string
 }
 
-const ArticleVideo = ({ article, displayType, date }: Props) => {
-  const authorName =
-    article?.user?.profile?.name || article?.user?.name || 'Anonymous'
-
+const ArticleVideo = ({ article, type, date }: Props) => {
   const embedUrl = useMemo(() => {
     const videoId = extractVideoID(article?.videoPost?.videoUrl)
     if (!videoId) return null
@@ -35,7 +30,7 @@ const ArticleVideo = ({ article, displayType, date }: Props) => {
 
   return (
     <>
-      {displayType === EPostDisplayType.PREVIEW && (
+      {type === EPostType.PREVIEW && (
         <>
           <header className="mb-3">
             <div className="mt-4 flex flex-row items-center gap-2 pl-1">
@@ -63,28 +58,20 @@ const ArticleVideo = ({ article, displayType, date }: Props) => {
           </div>
           <div className="flex flex-row items-center justify-between pt-4">
             <AvatarTimestamp article={article} />
-            <div className="flex items-center gap-6">
-              {article.comments.length > 0 && (
-                <ArticleCommentCountBadge
-                  count={article.comments.length}
-                  variant="dark"
-                />
-              )}
-              {article.body && (
-                <Button
-                  className="flex items-center gap-2 px-4 py-3 text-xs"
-                  onClick={() => navigate(routes.article({ id: article.id }))}
-                >
-                  <span className="hidden sm:inline-block">Lees verder</span>
-                  <BsArrowRightCircle />
-                </Button>
-              )}
-            </div>
+            {article.body && (
+              <Button
+                className="flex items-center gap-2 px-4 py-3 text-xs"
+                onClick={() => navigate(routes.article({ id: article.id }))}
+              >
+                <span className="hidden sm:inline-block">Lees verder</span>
+                <BsArrowRightCircle />
+              </Button>
+            )}
           </div>
         </>
       )}
 
-      {displayType === EPostDisplayType.FULL && (
+      {type === EPostType.FULL && (
         <>
           <header className="flex flex-col gap-1">
             <h1 className="flex items-center gap-2 text-3xl font-extrabold uppercase tracking-tight md:gap-4">
@@ -93,7 +80,13 @@ const ArticleVideo = ({ article, displayType, date }: Props) => {
             </h1>
 
             <div className="flex flex-row items-center gap-2">
-              <span className="text-sm text-slate-500">{authorName}</span>
+              <span className="text-sm text-slate-500">
+                {article.user.name
+                  ? article.user.name
+                  : article.user.email
+                  ? article.user.email
+                  : 'Anonymous'}
+              </span>
               <span className="text-sm text-slate-500"> | {date}</span>
             </div>
           </header>
