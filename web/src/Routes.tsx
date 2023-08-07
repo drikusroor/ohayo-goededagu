@@ -50,6 +50,7 @@ const Routes = () => {
         <Private unauthenticated="login">
           <Route path="/" page={HomePage} name="home" prerender />
           <Route path="/article/{id:Int}" page={ArticlePage} name="article" />
+          <Route path="/vlog" page={VlogPage} name="vlog" />
         </Private>
         <Route path="/login" page={LoginPage} name="login" />
         <Route path="/signup" page={SignupPage} name="signup" />
