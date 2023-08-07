@@ -18,7 +18,7 @@ const ArticleCommentCountBadge = ({
       </BsChatLeft>
       <span
         className={classNames(
-          'absolute -mt-2 rounded-full text-xs text-white',
+          'absolute -mt-2 rounded-full text-xs',
           variant === 'light' ? 'text-white' : 'text-black'
         )}
       >
