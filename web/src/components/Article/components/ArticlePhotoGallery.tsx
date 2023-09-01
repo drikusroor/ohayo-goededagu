@@ -21,16 +21,12 @@ const ArticlePhotoGallery = ({ article, displayType, date }: Props) => {
   const authorName =
     article.user?.profile?.name || article.user?.name || 'Anonymous'
 
-  console.log('article', article)
-
   return (
     <>
-      Hello world, this is the photo gallery
       <br />
       {displayType === EPostDisplayType.PREVIEW && (
         <>
           <header className="mb-3">
-            Preview
             <div className="mt-4 flex flex-row items-center gap-2 pl-1">
               <ArticleTypeIcon type={EPostType.PHOTO_GALLERY} />
               <h2
