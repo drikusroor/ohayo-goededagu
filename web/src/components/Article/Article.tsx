@@ -17,6 +17,7 @@ import CommentForm from '../CommentForm/CommentForm'
 import ArticleArticle from './components/ArticleArticle'
 import ArticleChotto from './components/ArticleChotto'
 import ArticleHaiku from './components/ArticleHaiku'
+import ArticlePhotoGallery from './components/ArticlePhotoGallery'
 import ArticleVideo from './components/ArticleVideo'
 import { hotScore } from './helpers/sort-comments'
 
@@ -80,6 +81,14 @@ const Article = ({ article }: Props) => {
           <ArticleHaiku
             article={article}
             displayType={EPostDisplayType.FULL}
+            date={formattedDate}
+          />
+        )}
+
+        {article.type === EPostType.PHOTO_GALLERY && (
+          <ArticlePhotoGallery
+            article={article}
+            displayType={EPostDisplayType.PREVIEW}
             date={formattedDate}
           />
         )}

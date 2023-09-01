@@ -9,6 +9,7 @@ import { EPostType } from '../../ArticleTypeIcon/ArticleTypeIcon'
 import ArticleArticle from './ArticleArticle'
 import ArticleChotto from './ArticleChotto'
 import ArticleHaiku from './ArticleHaiku'
+import ArticlePhotoGallery from './ArticlePhotoGallery'
 import ArticleVideo from './ArticleVideo'
 
 interface Props {
@@ -52,6 +53,13 @@ const ArticlePreview = ({ article }: Props) => {
 
       {article.type === EPostType.HAIKU && (
         <ArticleHaiku
+          article={article}
+          displayType={EPostDisplayType.PREVIEW}
+        />
+      )}
+
+      {article.type === EPostType.PHOTO_GALLERY && (
+        <ArticlePhotoGallery
           article={article}
           displayType={EPostDisplayType.PREVIEW}
         />

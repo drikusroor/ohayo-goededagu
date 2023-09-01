@@ -21,11 +21,16 @@ const ArticlePhotoGallery = ({ article, displayType, date }: Props) => {
   const authorName =
     article.user?.profile?.name || article.user?.name || 'Anonymous'
 
+  console.log('article', article)
+
   return (
     <>
+      Hello world, this is the photo gallery
+      <br />
       {displayType === EPostDisplayType.PREVIEW && (
         <>
           <header className="mb-3">
+            Preview
             <div className="mt-4 flex flex-row items-center gap-2 pl-1">
               <ArticleTypeIcon type={EPostType.PHOTO_GALLERY} />
               <h2
@@ -61,21 +66,37 @@ const ArticlePhotoGallery = ({ article, displayType, date }: Props) => {
           </div>
         </>
       )}
-
       {displayType === EPostDisplayType.FULL && (
         <>
-          <header className="flex flex-col gap-1">
+          <header className="mb-4 flex flex-col gap-1">
             <h1 className="flex items-center gap-2 text-3xl font-extrabold uppercase tracking-tight md:gap-4">
               <ArticleTypeIcon type={article.type as EPostType} />
               {article.title}
             </h1>
-
             <div className="flex flex-row items-center gap-2">
               <span className="text-sm text-slate-500">{authorName}</span>
               <span className="text-sm text-slate-500"> | {date}</span>
             </div>
           </header>
           <div> {article.body} </div>
+          <div className="mt-4 bg-gray-200 p-2">
+            <ul className="flex flex-wrap gap-4">
+              {article?.photoGallery?.map((photo) => {
+                return (
+                  <>
+                    <li className="relative h-[300px] grow basis-auto last:flex-initial">
+                      <img
+                        className="h-full w-full rounded-md object-cover align-middle"
+                        key={photo.id}
+                        src={photo.secure_url}
+                        alt={photo.original_filename}
+                      />
+                    </li>
+                  </>
+                )
+              })}
+            </ul>
+          </div>
         </>
       )}
     </>

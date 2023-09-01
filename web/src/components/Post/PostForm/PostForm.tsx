@@ -264,12 +264,23 @@ const PostForm = (props: PostFormProps) => {
               <FieldError name="title" className="rw-field-error" />
 
               {folder && (
-                <Upload
-                  name="photoGallery"
-                  multiple={true}
-                  folder={folder}
-                  setPhotoGallery={setPhotoGallery}
-                />
+                <>
+                  <Upload
+                    name="photoGallery"
+                    multiple={true}
+                    folder={folder}
+                    setPhotoGallery={setPhotoGallery}
+                  />
+                  <Preview
+                    profile={props.profile}
+                    post={props.post}
+                    postType={postType}
+                    postTitle={postTitle}
+                    postBody={postBody}
+                    coverImage={coverImage?.url}
+                    photoGallery={photoGallery}
+                  />
+                </>
               )}
             </>
           )}
