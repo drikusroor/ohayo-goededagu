@@ -16,6 +16,7 @@ interface Props {
   postTitle: string
   postBody: string
   coverImage?: string
+  videoPost: object
 }
 
 const Preview = ({
@@ -25,6 +26,7 @@ const Preview = ({
   postType,
   postTitle,
   postBody,
+  videoPost,
 }: Props) => {
   const [blogRollPreview, setBlogRollPreview] = React.useState<boolean>(false)
 
@@ -48,6 +50,7 @@ const Preview = ({
     createdAt: post?.createdAt ? post?.createdAt : formattedCurrentDate,
     coverImage: url,
     user: profile,
+    videoPost: videoPost,
   }
 
   return (

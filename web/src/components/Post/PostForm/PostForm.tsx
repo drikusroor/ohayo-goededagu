@@ -155,16 +155,10 @@ const PostForm = (props: PostFormProps) => {
           </SelectField>
 
           {postType === EPostType.VIDEO && (
-            <>
-              <VideoForm
-                videoPostFormData={videoPostFormData}
-                setVideoPostFormData={setVideoPostFormData}
-              />
-
-              <div className="mt-4">
-                <Video embedUrl={videoPostFormData?.videoUrl} />
-              </div>
-            </>
+            <VideoForm
+              videoPostFormData={videoPostFormData}
+              setVideoPostFormData={setVideoPostFormData}
+            />
           )}
 
           {postType === EPostType.ARTICLE && (
@@ -187,6 +181,7 @@ const PostForm = (props: PostFormProps) => {
             postTitle={postTitle}
             postBody={postBody}
             coverImage={coverImage?.url}
+            videoPost={videoPostFormData}
           />
 
           <div className="rw-button-group gap-0">
