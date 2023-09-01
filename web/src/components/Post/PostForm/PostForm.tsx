@@ -92,6 +92,10 @@ const PostForm = (props: PostFormProps) => {
     props.post?.location
   )
 
+  const [folder, setFolder] = React.useState<string>()
+
+  const [photoGallery, setPhotoGallery] = React.useState<Image>()
+
   const [videoPostFormData, setVideoPostFormData] =
     React.useState<IVideoPostFormData>({
       videoUrl: props.post?.videoPost?.videoUrl || '',
@@ -234,6 +238,40 @@ const PostForm = (props: PostFormProps) => {
               videoPostFormData={videoPostFormData}
               setVideoPostFormData={setVideoPostFormData}
             />
+          )}
+
+          {postType === EPostType.PHOTO_GALLERY && (
+            <>
+              <Label
+                name="folder"
+                className="rw-label"
+                errorClassName="rw-label rw-label-error"
+              >
+                Set the folder name for this gallery
+              </Label>
+
+              <TextField
+                name="folder"
+                defaultValue={folder}
+                className="rw-input"
+                errorClassName="rw-input rw-input-error"
+                onChange={(e) => {
+                  setFolder(e.target.value)
+                }}
+                validation={{ required: true }}
+              />
+
+              <FieldError name="title" className="rw-field-error" />
+
+              {folder && (
+                <Upload
+                  name="photoGallery"
+                  multiple={true}
+                  folder={folder}
+                  setPhotoGallery={setPhotoGallery}
+                />
+              )}
+            </>
           )}
 
           {postType === EPostType.ARTICLE && (

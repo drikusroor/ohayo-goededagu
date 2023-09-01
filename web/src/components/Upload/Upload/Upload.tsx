@@ -34,28 +34,34 @@ export interface ICloudinaryUploadResultInfo {
 interface IUploadProps {
   name: string
   multiple?: boolean
+  folder?: string
   setCoverImage?: (value: ICloudinaryUploadResultInfo) => void
-  setProfilePicture?: (value: ICloudinaryUploadResultInfo) => void
+  setPhotoGallery?: (value) => void
 }
 
 const Upload = ({
   name,
   multiple,
+  folder,
   setCoverImage,
-  setProfilePicture,
+  setPhotoGallery,
 }: IUploadProps) => {
+  const gallery = []
+
   const widget = cloudinary.createUploadWidget(
     {
       cloudName: 'dl5elpdjy',
       uploadPreset: 'bcfnswai',
+      folder: folder ? folder : '',
       multiple: multiple ? multiple : true,
     },
     (error, result) => {
       if (!error && result && result.event === 'success') {
-        if (name === 'profilePicture') {
-          setProfilePicture(result.info as ICloudinaryUploadResultInfo)
-        } else if (name === 'coverImage') {
+        if (name === 'coverImage') {
           setCoverImage(result.info as ICloudinaryUploadResultInfo)
+        } else {
+          gallery.push(result.info as ICloudinaryUploadResultInfo)
+          setPhotoGallery(gallery)
         }
       }
     }
@@ -70,9 +76,13 @@ const Upload = ({
       <Button
         id="upload_widget"
         title="Upload files"
-        className="rw-button rw-button-blue"
         onClick={onClickUpload}
         text="Upload image"
+        defaultValue={
+          name === 'coverImage' ? 'Upload cover image' : 'Upload images'
+        }
+        className="rw-button rw-button-blue mt-4"
+        errorClassName="rw-button rw-button-blue rw-button-error"
       />
       <FieldError name="upload" className="rw-field-error" />
     </>
