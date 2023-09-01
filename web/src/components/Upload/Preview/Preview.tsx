@@ -6,6 +6,7 @@ import {
 
 import { Label } from '@redwoodjs/forms'
 
+import ArticleCell from 'src/components/ArticleCell'
 import { classNames } from 'src/lib/class-names'
 
 import ArticleTypeIcon, {
@@ -87,37 +88,7 @@ const Preview = ({
         </Button>
       </div>
 
-      {!blogRollPreview && (
-        <div className="mt-2 grid max-w-6xl">
-          <section
-            style={{
-              backgroundImage: coverImage
-                ? `url(${coverImage})`
-                : `url(/images/logo-full.png)`,
-            }}
-            className="rounded bg-gray-400 bg-cover bg-center bg-no-repeat bg-blend-multiply"
-          >
-            <div className="mx-auto flex aspect-video max-w-screen-xl flex-col justify-end px-4">
-              <div className="flex flex-row items-center justify-start gap-2">
-                <div>
-                  <ArticleTypeIcon type={postType as EPostType} />
-                </div>
-                <h1 className="flex items-center gap-2 text-3xl font-extrabold uppercase leading-none tracking-tight text-white drop-shadow-xl md:gap-4 md:text-5xl lg:text-6xl">
-                  {postTitle ? postTitle : 'Title'}
-                </h1>
-              </div>
-              <div className="flex flex-row items-center gap-2 pb-2">
-                <span className="text-sm text-slate-200">
-                  {profile?.name ? profile?.name : 'Your name'}
-                </span>
-                <span className="text-sm text-slate-200">
-                  | {post?.createdAt ? formattedDate : formattedCurrentDate}
-                </span>
-              </div>
-            </div>
-          </section>
-        </div>
-      )}
+      {!blogRollPreview && <ArticleCell id={post.id} />}
 
       {blogRollPreview && (
         <div className="mt-2 grid max-w-6xl">
