@@ -1,8 +1,4 @@
-import {
-  BsArrowRightCircle,
-  BsFillCheckCircleFill,
-  BsFillCircleFill,
-} from 'react-icons/bs'
+import { BsFillCheckCircleFill, BsFillCircleFill } from 'react-icons/bs'
 
 import { Label } from '@redwoodjs/forms'
 
@@ -10,10 +6,7 @@ import Article from 'src/components/Article/Article'
 import ArticlePreview from 'src/components/Article/components/ArticlePreview'
 import { classNames } from 'src/lib/class-names'
 
-import ArticleTypeIcon, {
-  EPostType,
-} from '../../ArticleTypeIcon/ArticleTypeIcon'
-import Avatar from '../../Avatar/Avatar'
+import { EPostType } from '../../ArticleTypeIcon/ArticleTypeIcon'
 import Button from '../../Button/Button'
 
 interface Props {
@@ -36,14 +29,6 @@ const Preview = ({
   const [blogRollPreview, setBlogRollPreview] = React.useState<boolean>(false)
 
   const formattedCurrentDate = new Date().toLocaleString('nl-NL', {
-    day: '2-digit',
-    month: '2-digit',
-    year: 'numeric',
-    hour: '2-digit',
-    minute: '2-digit',
-  })
-
-  const formattedDate = new Date(post?.createdAt).toLocaleString('nl-NL', {
     day: '2-digit',
     month: '2-digit',
     year: 'numeric',
