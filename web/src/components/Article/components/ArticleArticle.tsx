@@ -24,8 +24,6 @@ const ArticleArticle = ({ article, displayType, date }: Props) => {
   const authorName =
     article.user.profile?.name || article.user.name || 'Anonymous'
 
-  console.log('article', article)
-
   return (
     <>
       {displayType === EPostDisplayType.PREVIEW && (
