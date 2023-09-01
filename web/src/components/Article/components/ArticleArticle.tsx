@@ -24,6 +24,8 @@ const ArticleArticle = ({ article, displayType, date }: Props) => {
   const authorName =
     article.user.profile?.name || article.user.name || 'Anonymous'
 
+  console.log('article', article)
+
   return (
     <>
       {displayType === EPostDisplayType.PREVIEW && (
@@ -77,7 +79,7 @@ const ArticleArticle = ({ article, displayType, date }: Props) => {
                   </span>
                 </div>
               </div>
-              {article.comments.length > 0 && (
+              {article?.comments?.length > 0 && (
                 <ArticleCommentCountBadge count={article.comments.length} />
               )}
               <Link
