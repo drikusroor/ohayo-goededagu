@@ -168,28 +168,26 @@ const PostForm = (props: PostFormProps) => {
           )}
 
           {postType === EPostType.ARTICLE && (
-            <>
-              <Upload
-                name="coverImage"
-                multiple={false}
-                setCoverImage={({ public_id, secure_url }) =>
-                  setCoverImage({
-                    imageId: public_id,
-                    url: secure_url,
-                  })
-                }
-              />
-
-              <Preview
-                profile={props.profile}
-                post={props.post}
-                postType={postType}
-                postTitle={postTitle}
-                postBody={postBody}
-                coverImage={coverImage?.url}
-              />
-            </>
+            <Upload
+              name="coverImage"
+              multiple={false}
+              setCoverImage={({ public_id, secure_url }) =>
+                setCoverImage({
+                  imageId: public_id,
+                  url: secure_url,
+                })
+              }
+            />
           )}
+
+          <Preview
+            profile={props.profile}
+            post={props.post}
+            postType={postType}
+            postTitle={postTitle}
+            postBody={postBody}
+            coverImage={coverImage?.url}
+          />
 
           <div className="rw-button-group gap-0">
             <Button

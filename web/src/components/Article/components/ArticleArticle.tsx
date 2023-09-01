@@ -104,7 +104,7 @@ const ArticleArticle = ({ article, displayType, date }: Props) => {
             }}
             className="rounded bg-gray-400 bg-cover bg-center bg-no-repeat bg-blend-multiply"
           >
-            <div className="mx-auto flex aspect-video max-w-screen-xl flex-col justify-end px-4">
+            <div className="flex aspect-video max-w-screen-xl flex-col justify-end px-4">
               <div className="flex flex-row items-center justify-start gap-2">
                 <div>
                   <ArticleTypeIcon type={article.type as EPostType} />

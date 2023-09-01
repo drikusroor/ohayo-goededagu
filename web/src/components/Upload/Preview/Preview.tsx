@@ -6,7 +6,7 @@ import {
 
 import { Label } from '@redwoodjs/forms'
 
-import ArticleCell from 'src/components/ArticleCell'
+import Article from 'src/components/Article/Article'
 import { classNames } from 'src/lib/class-names'
 
 import ArticleTypeIcon, {
@@ -50,6 +50,20 @@ const Preview = ({
     minute: '2-digit',
   })
 
+  const url = {
+    url: coverImage,
+  }
+
+  const article = {
+    id: post?.id ? post?.id : '',
+    title: postTitle,
+    body: postBody,
+    type: postType,
+    createdAt: post?.createdAt ? post?.createdAt : formattedCurrentDate,
+    coverImage: url,
+    user: profile,
+  }
+
   return (
     <>
       <Label
@@ -57,7 +71,7 @@ const Preview = ({
         className="rw-label"
         errorClassName="rw-label rw-label-error"
       >
-        Cover image preview for:
+        Article preview for:
       </Label>
       <div className="mt-2 flex flex-row gap-0">
         <Button
@@ -88,7 +102,11 @@ const Preview = ({
         </Button>
       </div>
 
-      {!blogRollPreview && <ArticleCell id={post.id} />}
+      {!blogRollPreview && (
+        <div className="my-2 rounded bg-gray-300">
+          <Article article={article} />
+        </div>
+      )}
 
       {blogRollPreview && (
         <div className="mt-2 grid max-w-6xl">
