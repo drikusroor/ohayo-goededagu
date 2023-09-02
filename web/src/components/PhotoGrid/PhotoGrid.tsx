@@ -3,7 +3,6 @@ interface Props {
   preview?: boolean
 }
 
-console.log('preview', preview)
 const previewGallery = photoGallery.slice(0, 5)
 
 const PhotoGrid = ({ photoGallery, preview }: Props) => {
