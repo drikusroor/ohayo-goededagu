@@ -17,7 +17,6 @@ interface Props {
 }
 
 const ArticlePreview = ({ article }: Props) => {
-  console.log('blog roll')
   const border =
     article.type === EPostType.HAIKU
       ? `border-y-2 border-x-0 rounded-none`

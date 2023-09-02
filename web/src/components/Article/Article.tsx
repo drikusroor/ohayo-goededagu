@@ -26,7 +26,6 @@ interface Props {
 }
 
 const Article = ({ article }: Props) => {
-  console.log('full')
   const { currentUser } = useAuth()
   const isUserAuthor = article?.user?.id === currentUser?.id
 
