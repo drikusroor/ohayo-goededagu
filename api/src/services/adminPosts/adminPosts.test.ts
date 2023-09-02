@@ -1,6 +1,6 @@
 import type { Post } from '@prisma/client'
 
-import { posts, post, createPost, updatePost, deletePost } from './adminPosts'
+import { posts, allPosts, post, createPost, updatePost, deletePost } from './adminPosts'
 import type { StandardScenario } from './adminPosts.scenarios
 
 // Generated boilerplate tests do not account for all circumstances
@@ -10,8 +10,17 @@ import type { StandardScenario } from './adminPosts.scenarios
 // https://redwoodjs.com/docs/testing#jest-expect-type-considerations
 
 describe('posts', () => {
-  scenario('returns all posts', async (scenario: StandardScenario) => {
-    const result = await posts()
+    scenario(
+    'returns all published posts',
+    async (scenario: StandardScenario) => {
+      const result = await posts()
+
+      expect(result.length).toEqual(Object.keys(scenario.post).length)
+    }
+  )
+
+  scenario('returns all  posts', async (scenario: StandardScenario) => {
+    const result = await allPosts()
 
     expect(result.length).toEqual(Object.keys(scenario.post).length)
   })

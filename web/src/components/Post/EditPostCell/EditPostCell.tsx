@@ -24,6 +24,9 @@ export const QUERY = gql`
         imageId
         url
       }
+      user {
+        name
+      }
     }
     profile: profileSelf {
       avatar
@@ -76,7 +79,7 @@ export const Success = ({ post, profile }: CellSuccessProps<EditPostById>) => {
     <div className="rw-segment">
       <header className="rw-segment-header">
         <h2 className="rw-heading rw-heading-secondary">
-          Edit Post {post?.id} by {profile?.name}
+          Edit Post {post?.id} by {post.user.name}
         </h2>
       </header>
       <div className="rw-segment-main">
