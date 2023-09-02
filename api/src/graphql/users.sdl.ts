@@ -35,12 +35,19 @@ export const schema = gql`
     resetTokenExpiresAt: DateTime
   }
 
+  input UpdateUserRolesInput {
+    id: Int!
+    roles: [Role!]!
+  }
+
   input UpdateUserProfileInput {
     name: String
   }
 
   type Mutation {
     updateUserProfile(input: UpdateUserProfileInput!): User! @requireAuth
+    updateUserRoles(id: Int!, input: UpdateUserRolesInput!): User!
+      @requireAuth(roles: ["ADMIN", "MODERATOR"])
   }
 
   enum Role {
