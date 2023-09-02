@@ -1,5 +1,7 @@
 import { render } from '@redwoodjs/testing/web'
 
+import getArticle from 'src/fixtures/get-article.fixture'
+
 import Article from './Article'
 
 //   Improve this test with help from the Redwood Testing Doc:
@@ -8,7 +10,9 @@ import Article from './Article'
 describe('Article', () => {
   it('renders successfully', () => {
     expect(() => {
-      render(<Article />)
+      const article = getArticle()
+
+      render(<Article article={article} />)
     }).not.toThrow()
   })
 })
