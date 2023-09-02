@@ -4,6 +4,7 @@ import { Link, routes } from '@redwoodjs/router'
 
 import ArticleCommentCountBadge from 'src/components/ArticleCommentCountBadge/ArticleCommentCountBadge'
 import AvatarTimestamp from 'src/components/Avatar/AvatarTimestamp/AvatarTimestamp'
+import RenderBody from 'src/components/RenderBody/RenderBody'
 import { EPostDisplayType } from 'src/types/post-display-type.enum'
 
 import ArticleTypeIcon, {
@@ -69,7 +70,7 @@ const ArticleHaiku = ({ article, displayType, date }: Props) => {
               <span className="text-sm text-slate-500"> | {date}</span>
             </div>
           </header>
-          <div>{article.body}</div>
+          <RenderBody body={article.body} />
         </>
       )}
     </>

@@ -9,6 +9,7 @@ import ArticleTypeIcon, {
 } from 'src/components/ArticleTypeIcon/ArticleTypeIcon'
 import AvatarTimestamp from 'src/components/Avatar/AvatarTimestamp/AvatarTimestamp'
 import Button from 'src/components/Button/Button'
+import RenderBody from 'src/components/RenderBody/RenderBody'
 import Video from 'src/components/Video/Video'
 import { EPostDisplayType } from 'src/types/post-display-type.enum'
 
@@ -81,7 +82,7 @@ const ArticleVideo = ({ article, displayType, date }: Props) => {
             </div>
           </header>
           <Video embedUrl={article?.videoPost?.videoUrl} />
-          <div> {article.body} </div>
+          <RenderBody body={article.body} />
         </>
       )}
     </>

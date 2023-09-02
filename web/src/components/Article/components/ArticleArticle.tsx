@@ -5,6 +5,7 @@ import { Link, routes } from '@redwoodjs/router'
 
 import ArticleCommentCountBadge from 'src/components/ArticleCommentCountBadge/ArticleCommentCountBadge'
 import Button from 'src/components/Button/Button'
+import RenderBody from 'src/components/RenderBody/RenderBody'
 import { EPostDisplayType } from 'src/types/post-display-type.enum'
 
 import ArticleTypeIcon, {
@@ -46,7 +47,7 @@ const ArticleArticle = ({ article, displayType, date }: Props) => {
               </h1>
             </div>
             <p className="mb-8 line-clamp-3 text-center text-lg font-normal text-gray-300 sm:px-16 lg:px-48 lg:text-xl">
-              {article.body}
+              <RenderBody body={article.body} />
             </p>
             <div className="flex flex-row items-center justify-center gap-12">
               <div className="flex flex-row items-center gap-2">
@@ -119,7 +120,9 @@ const ArticleArticle = ({ article, displayType, date }: Props) => {
               </div>
             </div>
           </section>
-          <div> {article.body} </div>
+          <div>
+            <RenderBody body={article.body} />
+          </div>
         </>
       )}
     </>

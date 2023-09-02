@@ -7,6 +7,7 @@ import { toast } from '@redwoodjs/web/toast'
 
 import { useAuth } from 'src/auth'
 import Button from 'src/components/Button/Button'
+import RenderBody from 'src/components/RenderBody/RenderBody'
 import { timeTag } from 'src/lib/formatters'
 
 const DELETE_POST_MUTATION = gql`
@@ -59,7 +60,9 @@ const Post = ({ post }: Props) => {
             </tr>
             <tr>
               <th>Body</th>
-              <td>{post.body}</td>
+              <td>
+                <RenderBody body={post.body} />
+              </td>
             </tr>
             <tr>
               <th>Published</th>

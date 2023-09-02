@@ -11,6 +11,7 @@ import { QUERY as FindArticleQuery } from 'src/components/ArticleCell'
 
 import Avatar from '../Avatar/Avatar'
 import Button from '../Button/Button'
+import RenderBody from '../RenderBody/RenderBody'
 import Thumbs from '../Thumbs/Thumbs'
 
 interface ICommentProps {
@@ -163,7 +164,7 @@ export default ({ comment }: ICommentProps) => {
         </div>
       </div>
       <div className="ml-14 mt-4 text-sm leading-relaxed text-slate-600">
-        {comment.body}
+        <RenderBody body={comment.body} />
       </div>
       {currentUser?.id === comment.user.id && (
         <Button

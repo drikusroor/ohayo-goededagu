@@ -21,6 +21,7 @@ import {
   TextField,
   Submit,
   SelectField,
+  TextAreaField,
 } from '@redwoodjs/forms'
 import type { RWGqlError } from '@redwoodjs/forms'
 import { Link, routes } from '@redwoodjs/router'
@@ -32,7 +33,6 @@ import {
 import Button from 'src/components/Button/Button'
 import Preview from 'src/components/Upload/Preview/Preview'
 import Upload from 'src/components/Upload/Upload/Upload'
-import Video from 'src/components/Video/Video'
 import { classNames } from 'src/lib/class-names'
 
 import VideoForm, { IVideoPostFormData } from './TypeForms/VideoForm'
@@ -130,10 +130,10 @@ const PostForm = (props: PostFormProps) => {
             Body
           </Label>
 
-          <TextField
+          <TextAreaField
             name="body"
             defaultValue={postBody}
-            className="rw-input"
+            className="rw-input h-96"
             errorClassName="rw-input rw-input-error"
             onChange={(e) => {
               setPostBody(e.target.value)
