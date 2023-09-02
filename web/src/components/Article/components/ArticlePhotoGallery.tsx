@@ -9,6 +9,7 @@ import ArticleTypeIcon, {
 } from 'src/components/ArticleTypeIcon/ArticleTypeIcon'
 import AvatarTimestamp from 'src/components/Avatar/AvatarTimestamp/AvatarTimestamp'
 import Button from 'src/components/Button/Button'
+import PhotoGrid from 'src/components/PhotoGrid/PhotoGrid'
 import { EPostDisplayType } from 'src/types/post-display-type.enum'
 
 interface Props {
@@ -18,6 +19,7 @@ interface Props {
 }
 
 const ArticlePhotoGallery = ({ article, displayType, date }: Props) => {
+  console.log('photo gallery', displayType, article)
   const authorName =
     article.user?.profile?.name || article.user?.name || 'Anonymous'
 
@@ -75,24 +77,9 @@ const ArticlePhotoGallery = ({ article, displayType, date }: Props) => {
             </div>
           </header>
           <div> {article.body} </div>
-          <div className="mt-4 bg-gray-200 p-2">
-            <ul className="flex flex-wrap gap-4">
-              {article?.photoGallery?.map((photo) => {
-                return (
-                  <>
-                    <li className="relative h-[300px] grow basis-auto last:flex-initial">
-                      <img
-                        className="h-full w-full rounded-md object-cover align-middle"
-                        key={photo.id}
-                        src={photo.secure_url}
-                        alt={photo.original_filename}
-                      />
-                    </li>
-                  </>
-                )
-              })}
-            </ul>
-          </div>
+          {article?.photoGallery && (
+            <PhotoGrid photoGallery={article?.photoGallery} />
+          )}
         </>
       )}
     </>

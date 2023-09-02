@@ -121,7 +121,7 @@ const PostForm = (props: PostFormProps) => {
         ...props.post?.user,
         profile: props.profile ? props.profile : {},
       },
-      imageGalleries: [],
+      imageGalleries: [photoGallery],
       location: postLocation,
     }
 
@@ -135,6 +135,7 @@ const PostForm = (props: PostFormProps) => {
     props.profile,
     videoPostFormData,
     postLocation,
+    photoGallery,
   ])
 
   return (
@@ -264,23 +265,12 @@ const PostForm = (props: PostFormProps) => {
               <FieldError name="title" className="rw-field-error" />
 
               {folder && (
-                <>
-                  <Upload
-                    name="photoGallery"
-                    multiple={true}
-                    folder={folder}
-                    setPhotoGallery={setPhotoGallery}
-                  />
-                  <Preview
-                    profile={props.profile}
-                    post={props.post}
-                    postType={postType}
-                    postTitle={postTitle}
-                    postBody={postBody}
-                    coverImage={coverImage?.url}
-                    photoGallery={photoGallery}
-                  />
-                </>
+                <Upload
+                  name="photoGallery"
+                  multiple={true}
+                  folder={folder}
+                  setPhotoGallery={setPhotoGallery}
+                />
               )}
             </>
           )}

@@ -26,6 +26,7 @@ interface Props {
 }
 
 const Article = ({ article }: Props) => {
+  console.log('full')
   const { currentUser } = useAuth()
   const isUserAuthor = article?.user?.id === currentUser?.id
 
@@ -88,7 +89,7 @@ const Article = ({ article }: Props) => {
         {article.type === EPostType.PHOTO_GALLERY && (
           <ArticlePhotoGallery
             article={article}
-            displayType={EPostDisplayType.PREVIEW}
+            displayType={EPostDisplayType.FULL}
             date={formattedDate}
           />
         )}
