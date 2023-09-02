@@ -23,6 +23,7 @@ import {
   TextField,
   Submit,
   SelectField,
+  CheckboxField,
 } from '@redwoodjs/forms'
 import type { RWGqlError } from '@redwoodjs/forms'
 import { Link, routes } from '@redwoodjs/router'
@@ -91,6 +92,8 @@ const PostForm = (props: PostFormProps) => {
   const [postLocation, setPostLocation] = React.useState<string>(
     props.post?.location
   )
+
+  const [addPhotos, setAddPhotos] = React.useState<boolean>()
 
   const [folder, setFolder] = React.useState<string>()
 
@@ -241,6 +244,76 @@ const PostForm = (props: PostFormProps) => {
             />
           )}
 
+          {postType === EPostType.ARTICLE && (
+            <>
+              <Upload
+                name="coverImage"
+                multiple={false}
+                setCoverImage={({ public_id, secure_url }) =>
+                  setCoverImage({
+                    imageId: public_id,
+                    url: secure_url,
+                  })
+                }
+              />
+              <div className="flex flex-row items-center">
+                <CheckboxField
+                  name="addPhotos"
+                  defaultValue={addPhotos}
+                  className="rw-input"
+                  errorClassName="rw-input rw-input-error"
+                  onChange={() => {
+                    setAddPhotos(addPhotos ? false : true)
+                  }}
+                  validation={{ required: true }}
+                />
+                <Label
+                  name="addPhotos"
+                  className="rw-label items-center"
+                  errorClassName="rw-label rw-label-error"
+                >
+                  Add photos to this article
+                </Label>
+
+                <FieldError name="addPhotos" className="rw-field-error" />
+              </div>
+
+              {addPhotos && (
+                <>
+                  <Label
+                    name="folder"
+                    className="rw-label"
+                    errorClassName="rw-label rw-label-error"
+                  >
+                    Set the folder name for the photo gallery
+                  </Label>
+
+                  <TextField
+                    name="folder"
+                    defaultValue={folder}
+                    className="rw-input"
+                    errorClassName="rw-input rw-input-error"
+                    onChange={(e) => {
+                      setFolder(e.target.value)
+                    }}
+                    validation={{ required: true }}
+                  />
+
+                  <FieldError name="title" className="rw-field-error" />
+
+                  {folder && (
+                    <Upload
+                      name="photoGallery"
+                      multiple={true}
+                      folder={folder}
+                      setPhotoGallery={setPhotoGallery}
+                    />
+                  )}
+                </>
+              )}
+            </>
+          )}
+
           {postType === EPostType.PHOTO_GALLERY && (
             <>
               <Label
@@ -248,7 +321,7 @@ const PostForm = (props: PostFormProps) => {
                 className="rw-label"
                 errorClassName="rw-label rw-label-error"
               >
-                Set the folder name for this gallery
+                Set the folder name for this photo gallery
               </Label>
 
               <TextField
