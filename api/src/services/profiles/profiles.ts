@@ -54,6 +54,24 @@ export const updateProfile: MutationResolvers['updateProfile'] = async ({
   })
 }
 
+export const deleteProfile: MutationResolvers['deleteProfile'] = async () => {
+  const userId = context.currentUser?.id
+
+  if (!userId) {
+    throw new Error('You must be logged in to delete your profile')
+  }
+
+  const profile = await db.profile.findUnique({ where: { userId } })
+
+  if (!profile) {
+    throw new Error(`Profile for user not found`)
+  }
+
+  return db.profile.delete({
+    where: { userId },
+  })
+}
+
 export const Profile: ProfileRelationResolvers = {
   user: (_obj, { root }) => {
     return db.profile.findUnique({ where: { id: root?.id } }).user()
