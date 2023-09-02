@@ -25,7 +25,7 @@ interface Props {
 
 const Article = ({ article }: Props) => {
   const { currentUser } = useAuth()
-  const isUserAuthor = article.user.id === currentUser?.id
+  const isUserAuthor = article?.user?.id === currentUser?.id
 
   const formattedDate = new Date(article.createdAt).toLocaleString('nl-NL', {
     day: '2-digit',
@@ -36,20 +36,22 @@ const Article = ({ article }: Props) => {
   })
 
   const sortedComments = useMemo(() => {
-    return [...article.comments].sort((a, b) => {
-      const aUpVotes = a.thumbs.filter((t) => t.up).length
-      const aDownVotes = a.thumbs.filter((t) => !t.up).length
+    if (article.comments) {
+      return [...article.comments].sort((a, b) => {
+        const aUpVotes = a.thumbs.filter((t) => t.up).length
+        const aDownVotes = a.thumbs.filter((t) => !t.up).length
 
-      const bUpVotes = b.thumbs.filter((t) => t.up).length
-      const bDownVotes = b.thumbs.filter((t) => !t.up).length
+        const bUpVotes = b.thumbs.filter((t) => t.up).length
+        const bDownVotes = b.thumbs.filter((t) => !t.up).length
 
-      const scoreA = hotScore(aUpVotes, aDownVotes, new Date(a.createdAt))
-      const scoreB = hotScore(bUpVotes, bDownVotes, new Date(b.createdAt))
+        const scoreA = hotScore(aUpVotes, aDownVotes, new Date(a.createdAt))
+        const scoreB = hotScore(bUpVotes, bDownVotes, new Date(b.createdAt))
 
-      if (scoreA > scoreB) return -1
-      if (scoreA < scoreB) return 1
-      return 0
-    })
+        if (scoreA > scoreB) return -1
+        if (scoreA < scoreB) return 1
+        return 0
+      })
+    }
   }, [article.comments])
 
   return (
@@ -102,26 +104,28 @@ const Article = ({ article }: Props) => {
         </div>
       )}
 
-      <div>
-        <h2 className="mt-5 text-2xl font-light text-gray-600">Comments</h2>
-        <ul className="mt-3 max-w-xl">
-          {sortedComments.length > 0 ? (
-            sortedComments.map((comment) => (
-              <li key={comment.id} className="mb-4">
-                <Comment comment={comment} />
-              </li>
-            ))
-          ) : (
-            <div className="flex flex-col gap-2 rounded-md bg-gray-100 p-3">
-              <p className=" text-gray-500">No comments yet. 🙃</p>
-              <p className=" text-gray-500">Be the first! 😻</p>
-            </div>
-          )}
-        </ul>
-        <div className="mt-5">
-          <CommentForm postId={article.id} />
+      {sortedComments && (
+        <div>
+          <h2 className="mt-5 text-2xl font-light text-gray-600">Comments</h2>
+          <ul className="mt-3 max-w-xl">
+            {sortedComments.length > 0 ? (
+              sortedComments.map((comment) => (
+                <li key={comment.id} className="mb-4">
+                  <Comment comment={comment} />
+                </li>
+              ))
+            ) : (
+              <div className="flex flex-col gap-2 rounded-md bg-gray-100 p-3">
+                <p className=" text-gray-500">No comments yet. 🙃</p>
+                <p className=" text-gray-500">Be the first! 😻</p>
+              </div>
+            )}
+          </ul>
+          <div className="mt-5">
+            <CommentForm postId={article.id} />
+          </div>
         </div>
-      </div>
+      )}
     </article>
   )
 }
