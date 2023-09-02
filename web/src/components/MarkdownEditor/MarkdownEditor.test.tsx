@@ -1,4 +1,4 @@
-import { render } from '@redwoodjs/testing/web'
+import { render, waitFor } from '@redwoodjs/testing/web'
 
 import MarkdownEditor from './MarkdownEditor'
 
@@ -7,16 +7,25 @@ import MarkdownEditor from './MarkdownEditor'
 
 describe('MarkdownEditor', () => {
   it('renders successfully', () => {
-    expect(() => {
-
+    expect(async () => {
       const name = 'test'
       const value = 'test'
       const onChange = () => {}
       const placeholder = 'test'
       const className = 'test'
-      const validation = { required: true}
-
-      render(<MarkdownEditor name={name} value={value} onChange={onChange} placeholder={placeholder} className={className} validation={validation} />)
+      const validation = { required: true }
+      await waitFor(() =>
+        render(
+          <MarkdownEditor
+            name={name}
+            value={value}
+            onChange={onChange}
+            placeholder={placeholder}
+            className={className}
+            validation={validation}
+          />
+        )
+      )
     }).not.toThrow()
   })
 })
