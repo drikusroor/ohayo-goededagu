@@ -10,6 +10,9 @@ import {
 } from '@redwoodjs/forms'
 import type { RWGqlError } from '@redwoodjs/forms'
 
+import Avatar from 'src/components/Avatar/Avatar'
+import Upload from 'src/components/Upload/Upload/Upload'
+
 type FormProfile = NonNullable<FindProfileSelf['profile']>
 
 interface ProfileFormProps {
@@ -21,8 +24,19 @@ interface ProfileFormProps {
 
 const ProfileForm = (props: ProfileFormProps) => {
   const onSubmit = (data: FormProfile) => {
+    if (profilePicture) {
+      if (data.avatar) {
+        delete data.avatar
+      }
+      data.avatar = profilePicture
+    }
+
     props.onSave(data)
   }
+
+  const [profilePicture, setProfilePicture] = React.useState<string>(
+    props.profile.avatar
+  )
 
   return (
     <div className="rw-form-wrapper">
@@ -82,21 +96,26 @@ const ProfileForm = (props: ProfileFormProps) => {
         <FieldError name="bio" className="rw-field-error" />
 
         <Label
-          name="avatar"
+          name="profilePicture"
           className="rw-label"
           errorClassName="rw-label rw-label-error"
         >
           Avatar
         </Label>
 
-        <TextField
-          name="avatar"
-          defaultValue={props.profile?.avatar}
-          className="rw-input"
-          errorClassName="rw-input rw-input-error"
-        />
+        <div className="mt-4 flex flex-row items-center gap-4">
+          <Upload
+            name="profilePicture"
+            multiple={false}
+            setProfilePicture={({ secure_url }) =>
+              setProfilePicture(secure_url)
+            }
+          />
 
-        <FieldError name="avatar" className="rw-field-error" />
+          {profilePicture && (
+            <Avatar src={profilePicture} alt="ProfilePicture" />
+          )}
+        </div>
 
         <div className="rw-button-group">
           <Submit disabled={props.loading} className="rw-button rw-button-blue">

@@ -35,9 +35,15 @@ interface IUploadProps {
   name: string
   multiple?: boolean
   setCoverImage?: (value: ICloudinaryUploadResultInfo) => void
+  setProfilePicture?: (value: ICloudinaryUploadResultInfo) => void
 }
 
-const Upload = ({ name, multiple, setCoverImage }: IUploadProps) => {
+const Upload = ({
+  name,
+  multiple,
+  setCoverImage,
+  setProfilePicture,
+}: IUploadProps) => {
   const widget = cloudinary.createUploadWidget(
     {
       cloudName: 'dl5elpdjy',
@@ -47,7 +53,11 @@ const Upload = ({ name, multiple, setCoverImage }: IUploadProps) => {
     (error, result) => {
       if (!error && result && result.event === 'success') {
         console.log('Done! Here is the image info: ', result.info)
-        setCoverImage(result.info as ICloudinaryUploadResultInfo)
+        if (name === 'profilePicture') {
+          setProfilePicture(result.info as ICloudinaryUploadResultInfo)
+        } else if (name === 'coverImage') {
+          setCoverImage(result.info as ICloudinaryUploadResultInfo)
+        }
       }
     }
   )
@@ -61,7 +71,7 @@ const Upload = ({ name, multiple, setCoverImage }: IUploadProps) => {
       <Button
         id="upload_widget"
         title="Upload files"
-        className="rw-button rw-button-blue mt-4"
+        className="rw-button rw-button-blue"
         onClick={onClickUpload}
         text="Upload image"
       />
