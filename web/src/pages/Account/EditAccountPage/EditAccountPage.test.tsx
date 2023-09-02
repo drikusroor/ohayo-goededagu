@@ -8,6 +8,13 @@ import EditAccountPage from './EditAccountPage'
 describe('EditAccountPage', () => {
   it('renders successfully', () => {
     expect(() => {
+      mockCurrentUser({
+        id: 1,
+        name: 'test',
+        email: 'info@exapmle.com',
+        roles: ['ADMIN'],
+      })
+
       render(<EditAccountPage />)
     }).not.toThrow()
   })
