@@ -29,7 +29,11 @@ const ArticlePhotoGallery = ({ article, displayType, date }: Props) => {
       {displayType === EPostDisplayType.PREVIEW && (
         <>
           <div className="relative ">
-            <PhotoGrid photoGallery={previewGallery} className="block w-full" />
+            <PhotoGrid
+              photoGallery={previewGallery}
+              preview={true}
+              className="block h-full w-full"
+            />
             <div className="font-3xl absolute bottom-0 z-10 mx-auto h-full w-full max-w-screen-xl bg-gray-600 bg-opacity-50 px-4 py-20 text-center text-white text-opacity-100 md:py-24 lg:py-56">
               <div className="flex flex-row items-center justify-center gap-2 pb-2">
                 <div>
