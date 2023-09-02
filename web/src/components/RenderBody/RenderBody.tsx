@@ -1,4 +1,6 @@
-import ReactMarkdown from 'react-markdown'
+import React, { lazy, Suspense } from 'react'
+
+const ReactMarkdown = lazy(() => import('react-markdown'))
 
 interface IRenderBodyProps {
   body: string
@@ -6,9 +8,11 @@ interface IRenderBodyProps {
 
 const RenderBody = ({ body }: IRenderBodyProps) => {
   return (
-    <ReactMarkdown className="prose prose-sm sm:prose lg:prose-lg xl:prose-xl">
-      {body}
-    </ReactMarkdown>
+    <Suspense fallback={<div>Loading...</div>}>
+      <ReactMarkdown className="prose prose-sm sm:prose lg:prose-lg xl:prose-xl">
+        {body}
+      </ReactMarkdown>
+    </Suspense>
   )
 }
 

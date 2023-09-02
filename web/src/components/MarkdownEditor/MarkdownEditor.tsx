@@ -10,9 +10,10 @@ import {
 import ReactMarkdown from 'react-markdown'
 
 import { TextAreaField } from '@redwoodjs/forms'
-import { Link } from '@redwoodjs/router'
 
 import { classNames } from 'src/lib/class-names'
+
+import RenderBody from '../RenderBody/RenderBody'
 
 interface IMarkdownEditorProps {
   name: string
@@ -117,9 +118,7 @@ const MarkdownEditor = ({
               previewState === 'SPLIT' ? 'md:w-1/2' : 'w-full'
             )}
           >
-            <ReactMarkdown className="prose w-full bg-white p-2">
-              {value || 'Nothing to preview'}
-            </ReactMarkdown>
+            <RenderBody body={value} />
           </div>
         )}
       </div>
