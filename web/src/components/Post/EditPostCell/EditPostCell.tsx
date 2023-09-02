@@ -76,7 +76,7 @@ export const Success = ({ post, profile }: CellSuccessProps<EditPostById>) => {
     <div className="rw-segment">
       <header className="rw-segment-header">
         <h2 className="rw-heading rw-heading-secondary">
-          Edit Post {post?.id}
+          Edit Post {post?.id} by {profile?.name}
         </h2>
       </header>
       <div className="rw-segment-main">
