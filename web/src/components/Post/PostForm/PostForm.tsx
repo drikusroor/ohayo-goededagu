@@ -31,6 +31,7 @@ import {
   postTypeOptions,
 } from 'src/components/ArticleTypeIcon/ArticleTypeIcon'
 import Button from 'src/components/Button/Button'
+import MarkdownEditor from 'src/components/MarkdownEditor/MarkdownEditor'
 import Preview from 'src/components/Upload/Preview/Preview'
 import Upload from 'src/components/Upload/Upload/Upload'
 import { classNames } from 'src/lib/class-names'
@@ -130,13 +131,10 @@ const PostForm = (props: PostFormProps) => {
             Body
           </Label>
 
-          <TextAreaField
-            name="body"
-            defaultValue={postBody}
-            className="rw-input h-96"
-            errorClassName="rw-input rw-input-error"
-            onChange={(e) => {
-              setPostBody(e.target.value)
+          <MarkdownEditor
+            body={postBody}
+            onChange={(body) => {
+              setPostBody(body)
             }}
             validation={{ required: postType !== EPostType.VIDEO }}
           />
