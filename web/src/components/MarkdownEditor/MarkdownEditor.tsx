@@ -1,9 +1,16 @@
 import { useState } from 'react'
 
-import { BsEyeglasses, BsLayoutSplit, BsPencil } from 'react-icons/bs'
+import {
+  BsBoxArrowUpRight,
+  BsEyeglasses,
+  BsLayoutSplit,
+  BsPencil,
+  BsQuestionCircle,
+} from 'react-icons/bs'
 import ReactMarkdown from 'react-markdown'
 
 import { TextAreaField } from '@redwoodjs/forms'
+import { Link } from '@redwoodjs/router'
 
 import { classNames } from 'src/lib/class-names'
 
@@ -34,7 +41,7 @@ const MarkdownEditor = ({
 
   return (
     <div>
-      <div className="flex flex-row rounded-md">
+      <div className="mt-2 flex flex-row rounded-md">
         <button
           className={classNames(
             'w-30 flex flex-row items-center gap-2 bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700',
@@ -72,6 +79,16 @@ const MarkdownEditor = ({
           <BsEyeglasses />
           Preview
         </button>
+        <a
+          href="https://www.markdownguide.org/basic-syntax/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="w-30 ml-auto flex flex-row items-center gap-2 px-4 py-2 font-bold text-blue-700 hover:text-blue-900 hover:underline"
+        >
+          <BsQuestionCircle />
+          Markdown cheatsheet
+          <BsBoxArrowUpRight />
+        </a>
       </div>
       <div className="mt-2 flex flex-col gap-3 md:flex-row">
         <div
