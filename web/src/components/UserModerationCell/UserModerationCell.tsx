@@ -4,7 +4,13 @@ import type {
   FindUserModerationQueryVariables,
 } from 'types/graphql'
 
-import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
+import { navigate, routes } from '@redwoodjs/router'
+import {
+  type CellSuccessProps,
+  type CellFailureProps,
+  useMutation,
+} from '@redwoodjs/web'
+import { toast } from '@redwoodjs/web/dist/toast'
 
 export const QUERY = gql`
   query FindUserModerationQuery {
@@ -12,6 +18,15 @@ export const QUERY = gql`
       id
       email
       name
+      roles
+    }
+  }
+`
+
+const UPDATE_USER_ROLES_MUTATION = gql`
+  mutation UpdateUserRolesMutation($input: UpdateUserRolesInput!) {
+    updateUserRoles(input: $input) {
+      id
       roles
     }
   }
@@ -56,8 +71,28 @@ export const Success = ({
   FindUserModerationQuery,
   FindUserModerationQueryVariables
 >) => {
-  const approveGuest = async (id: string) => {
-    throw new Error('Not implemented')
+  const [updateUserRoles, { loading, error }] = useMutation(
+    UPDATE_USER_ROLES_MUTATION,
+    {
+      onCompleted: () => {
+        toast.success('User roles updated')
+        navigate(routes.userModeration())
+      },
+      onError: (error) => {
+        toast.error(error.message)
+      },
+    }
+  )
+
+  const approveGuest = async (id: number) => {
+    await updateUserRoles({
+      variables: {
+        input: {
+          id,
+          roles: ['GUEST', 'USER'],
+        },
+      },
+    })
   }
 
   return (
@@ -85,7 +120,10 @@ export const Success = ({
                 <td>
                   {user.roles.join() === 'GUEST' && (
                     <button
-                      className="flex flex-row items-center gap-2 rounded bg-green-500 p-2 font-bold text-white hover:bg-green-700"
+                      className={`flex flex-row items-center gap-2 rounded bg-green-500 p-2 font-bold text-white hover:bg-green-700 ${
+                        loading ? 'cursor-not-allowed opacity-50' : ''
+                      }`}
+                      disabled={loading}
                       onClick={() => approveGuest(user.id)}
                     >
                       <BsCheck2Circle />
