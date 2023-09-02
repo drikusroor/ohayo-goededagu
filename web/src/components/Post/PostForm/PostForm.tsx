@@ -256,11 +256,11 @@ const PostForm = (props: PostFormProps) => {
                   })
                 }
               />
-              <div className="flex flex-row items-center">
+              <div className="my-2 flex flex-row items-center">
                 <CheckboxField
                   name="addPhotos"
                   defaultValue={addPhotos}
-                  className="rw-input"
+                  className="rw-input mb-1"
                   errorClassName="rw-input rw-input-error"
                   onChange={() => {
                     setAddPhotos(addPhotos ? false : true)
@@ -269,10 +269,10 @@ const PostForm = (props: PostFormProps) => {
                 />
                 <Label
                   name="addPhotos"
-                  className="rw-label items-center"
+                  className="rw-label m-0"
                   errorClassName="rw-label rw-label-error"
                 >
-                  Add photos to this article
+                  Add photo gallery to this article
                 </Label>
 
                 <FieldError name="addPhotos" className="rw-field-error" />
