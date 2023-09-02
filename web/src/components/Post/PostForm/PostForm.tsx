@@ -133,9 +133,7 @@ const PostForm = (props: PostFormProps) => {
 
           <MarkdownEditor
             body={postBody}
-            onChange={(body) => {
-              setPostBody(body)
-            }}
+            onChange={setPostBody}
             validation={{ required: postType !== EPostType.VIDEO }}
           />
 
