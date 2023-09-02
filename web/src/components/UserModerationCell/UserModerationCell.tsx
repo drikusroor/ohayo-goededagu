@@ -121,7 +121,7 @@ export const Success = ({
                   {user.roles.join() === 'GUEST' && (
                     <button
                       className={`flex flex-row items-center gap-2 rounded bg-green-500 p-2 font-bold text-white hover:bg-green-700 ${
-                        loading ? 'cursor-not-allowed opacity-50' : ''
+                        loading ? 'animate-bounce cursor-wait opacity-50' : ''
                       }`}
                       disabled={loading}
                       onClick={() => approveGuest(user.id)}
