@@ -17,6 +17,7 @@ import ArticleTypeIcon, {
 } from 'src/components/ArticleTypeIcon/ArticleTypeIcon'
 import Button from 'src/components/Button/Button'
 import { QUERY } from 'src/components/Post/PostsCell'
+import RenderBody from 'src/components/RenderBody/RenderBody'
 import { timeTag, truncate } from 'src/lib/formatters'
 
 const DELETE_POST_MUTATION = gql`
@@ -80,7 +81,9 @@ const PostsList = ({ posts }: FindPosts) => {
             <tr key={post.id}>
               <td>{truncate(post.id)}</td>
               <td>{truncate(post.title)}</td>
-              <td>{truncate(post.body)}</td>
+              <td>
+                <RenderBody body={truncate(post.body)} />
+              </td>
               <td>
                 <ArticleTypeIcon type={post.type as EPostType} />
               </td>
