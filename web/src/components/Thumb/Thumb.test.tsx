@@ -8,7 +8,11 @@ import Thumb from './Thumb'
 describe('Thumb', () => {
   it('renders successfully', () => {
     expect(() => {
-      render(<Thumb />)
+      const up = true
+      const count = 1
+      const onClick = () => {}
+
+      render(<Thumb up={up} count={count} onClick={onClick} />)
     }).not.toThrow()
   })
 })

@@ -51,7 +51,10 @@ export const updateComment: MutationResolvers['updateComment'] = ({
   id,
   input,
 }) => {
-  throw new Error('Not implemented')
+  return db.comment.update({
+    data: input,
+    where: { id },
+  })
 }
 
 export const deleteComment: MutationResolvers['deleteComment'] = async ({

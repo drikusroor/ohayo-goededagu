@@ -7,8 +7,23 @@ import Thumbs from './Thumbs'
 
 describe('Thumbs', () => {
   it('renders successfully', () => {
+    mockCurrentUser({
+      id: 1,
+      name: 'test',
+      email: 'info@example.com',
+      roles: ['ADMIN'],
+    })
+
     expect(() => {
-      render(<Thumbs />)
+      const thumbs = [
+        {
+          id: 1,
+          up: true,
+          userId: 1,
+        },
+      ]
+
+      render(<Thumbs thumbs={thumbs} />)
     }).not.toThrow()
   })
 })

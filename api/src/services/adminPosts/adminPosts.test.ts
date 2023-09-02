@@ -1,7 +1,13 @@
 import type { Post } from '@prisma/client'
 
-import { posts, post, createPost, updatePost, deletePost } from './adminPosts'
-import type { StandardScenario } from './adminPosts.scenarios
+import {
+  adminPosts,
+  adminPost,
+  createPost,
+  updatePost,
+  deletePost,
+} from './adminPosts'
+import type { StandardScenario } from './adminPosts.scenarios'
 
 // Generated boilerplate tests do not account for all circumstances
 // and can fail without adjustments, e.g. Float.
@@ -10,19 +16,50 @@ import type { StandardScenario } from './adminPosts.scenarios
 // https://redwoodjs.com/docs/testing#jest-expect-type-considerations
 
 describe('posts', () => {
-  scenario('returns all posts', async (scenario: StandardScenario) => {
-    const result = await posts()
+  scenario(
+    "returns all user's admin posts",
+    async (scenario: StandardScenario) => {
+      mockCurrentUser({
+        id: scenario.post.one.userId,
+        name: 'Admin User',
+        email: 'info@example.com',
+        roles: ['ADMIN'],
+      })
 
-    expect(result.length).toEqual(Object.keys(scenario.post).length)
-  })
+      const result = await adminPosts()
 
-  scenario('returns a single post', async (scenario: StandardScenario) => {
-    const result = await post({ id: scenario.post.one.id })
+      expect(result.length).toEqual(
+        Object.keys(scenario.post).filter(
+          (key) => scenario.post[key].userId === scenario.post.one.userId
+        ).length
+      )
+    }
+  )
 
-    expect(result).toEqual(scenario.post.one)
-  })
+  scenario(
+    'returns a single admin post',
+    async (scenario: StandardScenario) => {
+      mockCurrentUser({
+        id: scenario.post.one.userId,
+        name: 'Admin User',
+        email: 'info@example.com',
+        roles: ['ADMIN'],
+      })
 
-  scenario('creates a post', async () => {
+      const result = await adminPost({ id: scenario.post.one.id })
+
+      expect(result).toEqual(scenario.post.one)
+    }
+  )
+
+  scenario('creates a admin post', async (scenario: StandardScenario) => {
+    mockCurrentUser({
+      id: scenario.post.one.userId,
+      name: 'Admin User',
+      email: 'info@example.com',
+      roles: ['ADMIN'],
+    })
+
     const result = await createPost({
       input: { title: 'String', body: 'String' },
     })
@@ -31,8 +68,15 @@ describe('posts', () => {
     expect(result.body).toEqual('String')
   })
 
-  scenario('updates a post', async (scenario: StandardScenario) => {
-    const original = (await post({ id: scenario.post.one.id })) as Post
+  scenario('updates a admin post', async (scenario: StandardScenario) => {
+    mockCurrentUser({
+      id: scenario.post.one.userId,
+      name: 'Admin User',
+      email: 'info@example.com',
+      roles: ['ADMIN'],
+    })
+
+    const original = (await adminPost({ id: scenario.post.one.id })) as Post
     const result = await updatePost({
       id: original.id,
       input: { title: 'String2' },
@@ -41,9 +85,9 @@ describe('posts', () => {
     expect(result.title).toEqual('String2')
   })
 
-  scenario('deletes a post', async (scenario: StandardScenario) => {
+  scenario('deletes a admin post', async (scenario: StandardScenario) => {
     const original = (await deletePost({ id: scenario.post.one.id })) as Post
-    const result = await post({ id: original.id })
+    const result = await adminPost({ id: original.id })
 
     expect(result).toEqual(null)
   })

@@ -19,6 +19,7 @@ type RequireAuthValidate = ValidatorDirectiveFunc<{ roles?: string[] }>
 
 const validate: RequireAuthValidate = ({ directiveArgs }) => {
   const { roles } = directiveArgs
+
   applicationRequireAuth({ roles })
 }
 

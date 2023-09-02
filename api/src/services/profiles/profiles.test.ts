@@ -29,31 +29,58 @@ describe('profiles', () => {
   })
 
   scenario('creates a profile', async (scenario: StandardScenario) => {
+    mockCurrentUser({
+      id: scenario.profile.two.userId,
+      roles: ['USER'],
+      email: 'info@example.com',
+      name: 'Peter Pippeling',
+    })
+
+    await deleteProfile()
+
     const result = await createProfile({
       input: {
-        userId: scenario.profile.two.userId,
-        updatedAt: '2023-06-18T07:18:13.206Z',
+        avatar: '/avatar.png',
+        bio: 'bio',
+        name: 'Name',
+        japaneseName: 'JapaneseName',
       },
     })
 
     expect(result.userId).toEqual(scenario.profile.two.userId)
-    expect(result.updatedAt).toEqual(new Date('2023-06-18T07:18:13.206Z'))
+    expect(result.avatar).toEqual('/avatar.png')
+    expect(result.bio).toEqual('bio')
+    expect(result.name).toEqual('Name')
+    expect(result.japaneseName).toEqual('JapaneseName')
   })
 
   scenario('updates a profile', async (scenario: StandardScenario) => {
+    mockCurrentUser({
+      id: 123,
+      roles: ['USER'],
+      email: 'info@example.com',
+      name: 'Peter Pippeling',
+    })
+
     const original = (await profile({ id: scenario.profile.one.id })) as Profile
     const result = await updateProfile({
       id: original.id,
-      input: { updatedAt: '2023-06-19T07:18:13.206Z' },
+      input: { bio: 'Lol hahaha' },
     })
 
-    expect(result.updatedAt).toEqual(new Date('2023-06-19T07:18:13.206Z'))
+    expect(result.bio).toEqual('Lol hahaha')
   })
 
   scenario('deletes a profile', async (scenario: StandardScenario) => {
-    const original = (await deleteProfile({
-      id: scenario.profile.one.id,
-    })) as Profile
+    mockCurrentUser({
+      id: scenario.profile.one.userId,
+      roles: ['USER'],
+      email: 'info@example.com',
+      name: 'Peter Pippeling',
+    })
+
+    const original = (await deleteProfile()) as Profile
+
     const result = await profile({ id: original.id })
 
     expect(result).toEqual(null)

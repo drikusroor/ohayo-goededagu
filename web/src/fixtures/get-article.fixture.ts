@@ -20,6 +20,7 @@ export const getArticle = (overrides = {}) => ({
         id: 1,
         email: 'info@example.com',
         name: 'John Doe',
+        roles: ['ADMIN'],
         profile: {
           id: 1,
           name: 'John Doe',
