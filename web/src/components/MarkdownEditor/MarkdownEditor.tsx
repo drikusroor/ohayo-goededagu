@@ -101,7 +101,7 @@ const MarkdownEditor = ({
             )}
           >
             <ReactMarkdown className="prose w-full bg-white p-2">
-              {body || 'Nothing to preview'}
+              {value || 'Nothing to preview'}
             </ReactMarkdown>
           </div>
         )}
