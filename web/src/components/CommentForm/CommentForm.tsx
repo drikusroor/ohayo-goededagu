@@ -14,6 +14,8 @@ import { toast } from '@redwoodjs/web/toast'
 import { useAuth } from 'src/auth'
 import { QUERY as FindArticleQuery } from 'src/components/ArticleCell'
 
+import MarkdownEditor from '../MarkdownEditor/MarkdownEditor'
+
 const CREATE_COMMENT = gql`
   mutation CreateCommentMutation($input: CreateCommentInput!) {
     createComment(input: $input) {
@@ -103,6 +105,20 @@ const CommentForm = ({ postId }: Props) => {
           placeholder={`Type your comment here...
 (Hint: use ctrl/cmd + enter to submit)`}
           onChange={(e) => setBody(e.target.value)}
+          value={body}
+          onKeyDown={onKeyDown}
+        />
+
+        <MarkdownEditor
+          name="body"
+          disabled={loading}
+          className={`block w-full rounded-lg border-2 border-solid border-gray-300 px-4 py-2 text-sm placeholder-gray-500
+      shadow-sm focus:border-transparent focus:ring-2 focus:ring-blue-500
+      ${loading ? 'cursor-not-allowed bg-gray-100' : 'bg-white'}`}
+          validation={{ required: true }}
+          placeholder={`Type your comment here...
+(Hint: use ctrl/cmd + enter to submit)`}
+          onChange={setBody}
           value={body}
           onKeyDown={onKeyDown}
         />

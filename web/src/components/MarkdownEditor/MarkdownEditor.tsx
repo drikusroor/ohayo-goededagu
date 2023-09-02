@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { BsEye, BsEyeglasses, BsLayoutSplit, BsPencil } from 'react-icons/bs'
+import { BsEyeglasses, BsLayoutSplit, BsPencil } from 'react-icons/bs'
 import ReactMarkdown from 'react-markdown'
 
 import { TextAreaField } from '@redwoodjs/forms'
@@ -8,19 +8,27 @@ import { TextAreaField } from '@redwoodjs/forms'
 import { classNames } from 'src/lib/class-names'
 
 interface IMarkdownEditorProps {
-  body: string
+  name: string
+  placeholder?: string
+  value?: string
   onChange: (body: string) => void
   validation?: { required?: boolean }
   className?: string
+  disabled?: boolean
+  onKeyDown?: (e: React.KeyboardEvent<HTMLTextAreaElement>) => void
 }
 
 type PreviewState = 'PREVIEW' | 'EDIT' | 'SPLIT'
 
 const MarkdownEditor = ({
-  body,
+  name,
+  placeholder,
   onChange,
+  value,
   validation,
   className = '',
+  disabled = false,
+  onKeyDown,
 }: IMarkdownEditorProps) => {
   const [previewState, setPreviewState] = useState<PreviewState>('EDIT')
 
@@ -73,14 +81,17 @@ const MarkdownEditor = ({
           )}
         >
           <TextAreaField
-            name="body"
-            defaultValue={body}
+            name={name}
+            placeholder={placeholder}
+            value={value}
             className={`rw-input h-96 ${className} mt-0`}
             errorClassName="rw-input rw-input-error"
             onChange={(e) => {
               onChange(e.target.value)
             }}
             validation={validation}
+            disabled={disabled}
+            onKeyDown={onKeyDown}
           />
         </div>
         {previewState !== 'EDIT' && (
