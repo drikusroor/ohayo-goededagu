@@ -40,7 +40,9 @@ const ArticleChotto = ({ article, displayType, date }: Props) => {
           </header>
           <div className="lg:mx-14">
             <div>
-              <div className="justmt-2 line-clamp-5">{article.body}</div>
+              <div className="justmt-2 line-clamp-5">
+                <RenderBody body={article.body} />
+              </div>
               <div className="flex items-center justify-between pt-4">
                 <AvatarTimestamp article={article} />
                 {article?.comments?.length > 0 && (
