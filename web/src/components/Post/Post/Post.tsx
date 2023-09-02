@@ -5,6 +5,7 @@ import { Link, routes, navigate } from '@redwoodjs/router'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
+import { useAuth } from 'src/auth'
 import Button from 'src/components/Button/Button'
 import { timeTag } from 'src/lib/formatters'
 
@@ -21,6 +22,7 @@ interface Props {
 }
 
 const Post = ({ post }: Props) => {
+  const { currentUser } = useAuth()
   const [deletePost] = useMutation(DELETE_POST_MUTATION, {
     onCompleted: () => {
       toast.success('Post deleted')
@@ -64,6 +66,10 @@ const Post = ({ post }: Props) => {
               <td>{post.published ? 'Yes' : 'No'}</td>
             </tr>
             <tr>
+              <th>Author</th>
+              <td>{post.user.name ? post.user.name : post.user.email}</td>
+            </tr>
+            <tr>
               <th>Created at</th>
               <td>{timeTag(post.createdAt)}</td>
             </tr>
@@ -79,15 +85,17 @@ const Post = ({ post }: Props) => {
           <BsFillPencilFill />
           Edit
         </Link>
-        <Button
-          title={'Delete post ' + post.id}
-          onClick={() => onDeleteClick(post.id)}
-          className="rw-button flex items-center gap-2 text-base transition-colors sm:text-sm"
-          color="monza-red"
-        >
-          <BsFillTrash3Fill />
-          Delete
-        </Button>
+        {post?.user?.name === currentUser?.name && (
+          <Button
+            title={'Delete post ' + post.id}
+            onClick={() => onDeleteClick(post.id)}
+            className="rw-button flex items-center gap-2 text-base transition-colors sm:text-sm"
+            color="monza-red"
+          >
+            <BsFillTrash3Fill />
+            Delete
+          </Button>
+        )}
       </nav>
     </>
   )

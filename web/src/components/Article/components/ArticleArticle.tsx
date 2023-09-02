@@ -22,7 +22,7 @@ const ArticleArticle = ({ article, displayType, date }: Props) => {
   const { coverImage } = article
 
   const authorName =
-    article.user.profile?.name || article.user.name || 'Anonymous'
+    article?.user?.profile?.name || article?.user?.name || 'Anonymous'
 
   return (
     <>

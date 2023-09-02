@@ -1,10 +1,17 @@
-import { BsFillPencilFill, BsFillTrash3Fill, BsSearch } from 'react-icons/bs'
+import {
+  BsFillPencilFill,
+  BsFillTrash3Fill,
+  BsPencilSquare,
+  BsSearch,
+  BsSendFill,
+} from 'react-icons/bs'
 import type { DeletePostMutationVariables, FindPosts } from 'types/graphql'
 
-import { Link, routes, navigate } from '@redwoodjs/router'
+import { routes, navigate } from '@redwoodjs/router'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
+import { useAuth } from 'src/auth'
 import ArticleTypeIcon, {
   EPostType,
 } from 'src/components/ArticleTypeIcon/ArticleTypeIcon'
@@ -21,6 +28,8 @@ const DELETE_POST_MUTATION = gql`
 `
 
 const PostsList = ({ posts }: FindPosts) => {
+  const { currentUser } = useAuth()
+
   const [deletePost] = useMutation(DELETE_POST_MUTATION, {
     onCompleted: () => {
       toast.success('Post deleted')
@@ -59,7 +68,10 @@ const PostsList = ({ posts }: FindPosts) => {
             <th>Body</th>
             <th>Type</th>
             <th>Published</th>
+            <th>Author</th>
             <th>Created at</th>
+            <th>&nbsp;</th>
+            <th>&nbsp;</th>
             <th>&nbsp;</th>
           </tr>
         </thead>
@@ -72,10 +84,11 @@ const PostsList = ({ posts }: FindPosts) => {
               <td>
                 <ArticleTypeIcon type={post.type as EPostType} />
               </td>
-              <td>{post.published ? 'Yes' : 'No'}</td>
+              <td>{post.published ? <BsSendFill /> : <BsPencilSquare />}</td>
+              <td>{post?.user?.name}</td>
               <td>{timeTag(post.createdAt)}</td>
               <td>
-                <nav className="rw-table-actions gap-1">
+                <nav className="rw-table-actions">
                   <Button
                     title={'Show post' + post.id}
                     onClick={() => onNavigatePost(post)}
@@ -85,8 +98,12 @@ const PostsList = ({ posts }: FindPosts) => {
                     variant="outlined"
                   >
                     <BsSearch />
-                    <span className="hidden sm:inline-block">Show</span>
+                    <span className="hidden lg:inline-block">Show</span>
                   </Button>
+                </nav>
+              </td>
+              <td>
+                <nav className="rw-table-actions">
                   <Button
                     title={'Edit post' + post.id}
                     onClick={() => onNavigateEditPost(post)}
@@ -95,18 +112,24 @@ const PostsList = ({ posts }: FindPosts) => {
                     variant="outlined"
                   >
                     <BsFillPencilFill />
-                    <span className="hidden sm:inline-block">Edit</span>
+                    <span className="hidden lg:inline-block">Edit</span>
                   </Button>
-                  <Button
-                    title={'Delete post ' + post.id}
-                    onClick={() => onDeleteClick(post.id)}
-                    className="rw-button rw-button-red flex items-center gap-2 text-base transition-colors sm:text-sm"
-                    color="monza-red"
-                    variant="outlined"
-                  >
-                    <BsFillTrash3Fill />
-                    <span className="hidden sm:inline-block">Delete</span>
-                  </Button>
+                </nav>
+              </td>
+              <td>
+                <nav className="rw-table-actions">
+                  {post?.user?.name === currentUser?.name && (
+                    <Button
+                      title={'Delete post ' + post.id}
+                      onClick={() => onDeleteClick(post.id)}
+                      className="rw-button rw-button-red flex items-center gap-2 text-base transition-colors sm:text-sm"
+                      color="monza-red"
+                      variant="outlined"
+                    >
+                      <BsFillTrash3Fill />
+                      <span className="hidden lg:inline-block">Delete</span>
+                    </Button>
+                  )}
                 </nav>
               </td>
             </tr>
