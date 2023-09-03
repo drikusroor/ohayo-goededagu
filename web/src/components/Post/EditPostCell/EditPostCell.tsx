@@ -24,6 +24,15 @@ export const QUERY = gql`
         imageId
         url
       }
+      user {
+        id
+        name
+        profile {
+          id
+          name
+          avatar
+        }
+      }
     }
     profile: profileSelf {
       avatar
