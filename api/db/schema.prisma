@@ -124,6 +124,8 @@ model ImageGallery {
   createdAt          DateTime             @default(now())
   ImageGalleryOnPost ImageGalleryOnPost[]
   images             ImageGalleryImage[]
+  name               String?
+  description        String?
 }
 
 model ImageGalleryOnPost {
