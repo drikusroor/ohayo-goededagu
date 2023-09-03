@@ -11,6 +11,7 @@ export const schema = gql`
     comments: [Comment]!
     videoPost: VideoPost
     coverImage: Image
+    imageGalleries: [ImageGalleryOnPost]!
   }
 
   type Query {

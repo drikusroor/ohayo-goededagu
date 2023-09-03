@@ -2,9 +2,10 @@ export const schema = gql`
   type ImageGallery {
     id: Int!
     createdAt: DateTime!
-    imageId: String!
-    url: String!
     ImageGalleryOnPost: [ImageGalleryOnPost]!
+    images: [ImageGalleryImage]!
+    name: String
+    description: String
   }
 
   type Query {
@@ -13,13 +14,13 @@ export const schema = gql`
   }
 
   input CreateImageGalleryInput {
-    imageId: String!
-    url: String!
+    name: String
+    description: String
   }
 
   input UpdateImageGalleryInput {
-    imageId: String
-    url: String
+    name: String
+    description: String
   }
 
   type Mutation {

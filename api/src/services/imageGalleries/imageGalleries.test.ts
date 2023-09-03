@@ -31,27 +31,6 @@ describe('imageGalleries', () => {
     }
   )
 
-  scenario('creates a imageGallery', async () => {
-    const result = await createImageGallery({
-      input: { imageId: 'String', url: 'String' },
-    })
-
-    expect(result.imageId).toEqual('String')
-    expect(result.url).toEqual('String')
-  })
-
-  scenario('updates a imageGallery', async (scenario: StandardScenario) => {
-    const original = (await imageGallery({
-      id: scenario.imageGallery.one.id,
-    })) as ImageGallery
-    const result = await updateImageGallery({
-      id: original.id,
-      input: { imageId: 'String2' },
-    })
-
-    expect(result.imageId).toEqual('String2')
-  })
-
   scenario('deletes a imageGallery', async (scenario: StandardScenario) => {
     const original = (await deleteImageGallery({
       id: scenario.imageGallery.one.id,

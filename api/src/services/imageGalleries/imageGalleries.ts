@@ -48,4 +48,7 @@ export const ImageGallery: ImageGalleryRelationResolvers = {
       .findUnique({ where: { id: root?.id } })
       .ImageGalleryOnPost()
   },
+  images: (_obj, { root }) => {
+    return db.imageGallery.findUnique({ where: { id: root?.id } }).images()
+  },
 }

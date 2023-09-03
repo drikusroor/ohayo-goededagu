@@ -5,13 +5,13 @@ export const standard = defineScenario<Prisma.ImageGalleryOnPostCreateArgs>({
   imageGalleryOnPost: {
     one: {
       data: {
-        imageGallery: { create: { imageId: 'String', url: 'String' } },
+        imageGallery: { create: {} },
         post: {
           create: {
             title: 'String',
             user: {
               create: {
-                email: 'String9778770',
+                email: 'String3497095',
                 hashedPassword: 'String',
                 salt: 'String',
               },
@@ -22,13 +22,13 @@ export const standard = defineScenario<Prisma.ImageGalleryOnPostCreateArgs>({
     },
     two: {
       data: {
-        imageGallery: { create: { imageId: 'String', url: 'String' } },
+        imageGallery: { create: {} },
         post: {
           create: {
             title: 'String',
             user: {
               create: {
-                email: 'String3196586',
+                email: 'String2678795',
                 hashedPassword: 'String',
                 salt: 'String',
               },
