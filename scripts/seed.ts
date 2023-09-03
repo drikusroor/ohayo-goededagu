@@ -41,20 +41,20 @@ export default async () => {
     // the same algorithm that dbAuth uses internally:
 
     const users = [
-      { name: 'john', email: 'john@example.com', password: 'secret1' },
-      { name: 'jane', email: 'jane@example.com', password: 'secret2' },
-      {
-        name: 'drikus',
-        email: 'drikusroor@gmail.com',
-        password: 'Test1234!',
-        roles: ['GUEST', 'USER', 'MODERATOR', 'ADMIN'],
-      },
       {
         name: 'admin only',
         email: 'admin@example.com',
         password: 'Test1234!',
         roles: ['ADMIN'],
       },
+      {
+        name: 'drikus',
+        email: 'drikusroor@gmail.com',
+        password: 'Test1234!',
+        roles: ['GUEST', 'USER', 'MODERATOR', 'ADMIN'],
+      },
+      { name: 'john', email: 'john@example.com', password: 'secret1' },
+      { name: 'jane', email: 'jane@example.com', password: 'secret2' },
       {
         name: 'naomi',
         email: 'nreliasar@gmail.com@gmail.com',
