@@ -46,9 +46,10 @@ const ArticleArticle = ({ article, displayType, date }: Props) => {
                 {article.title}
               </h1>
             </div>
-            <p className="mb-8 line-clamp-3 text-center text-lg font-normal text-gray-300 sm:px-16 lg:px-48 lg:text-xl">
-              <RenderBody body={article.body} />
-            </p>
+            <RenderBody
+              body={article.body}
+              className="!prose-invert mx-auto mb-8  line-clamp-3 text-center"
+            />
             <div className="flex flex-row items-center justify-center gap-12">
               <div className="flex flex-row items-center gap-2">
                 <Avatar
