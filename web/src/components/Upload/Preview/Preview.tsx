@@ -1,4 +1,10 @@
-import { BsFillCheckCircleFill, BsFillCircleFill } from 'react-icons/bs'
+import {
+  BsFillCheckCircleFill,
+  BsFillCircleFill,
+  BsJournalRichtext,
+  BsViewList,
+  BsViewStacked,
+} from 'react-icons/bs'
 import { Post, Profile } from 'types/graphql'
 
 import { Label } from '@redwoodjs/forms'
@@ -61,26 +67,22 @@ const Preview = ({
   }
 
   return (
-    <>
-      <Label
-        name="image preview type"
-        className="rw-label"
-        errorClassName="rw-label rw-label-error"
-      >
-        Article preview for:
-      </Label>
-      <div className="mt-2 flex flex-row gap-0">
+    <div className="drop-shadow">
+      <div className="mt-8 flex flex-row gap-0">
         <Button
           type="button"
           onClick={() => {
             setBlogRollPreview(false)
           }}
           className={classNames(
-            'flex items-center gap-2 rounded-r-none hover:bg-rw-blue-600',
-            !blogRollPreview ? 'bg-green-600 underline' : 'bg-rw-blue-500'
+            'flex items-center gap-2 rounded-b-none rounded-r-none !text-gray-700 hover:bg-gray-200',
+            !blogRollPreview ? 'bg-gray-200' : 'bg-gray-300 shadow-inner'
           )}
+          title="Preview Full Article"
+          aria-label="Preview Full Article"
         >
-          Full Article
+          <BsJournalRichtext />
+          Preview Full Article
           {!blogRollPreview ? <BsFillCheckCircleFill /> : <BsFillCircleFill />}
         </Button>
         <Button
@@ -89,20 +91,23 @@ const Preview = ({
             setBlogRollPreview(true)
           }}
           className={classNames(
-            'flex items-center gap-2 rounded-l-none hover:bg-rw-blue-600',
-            blogRollPreview ? 'bg-green-600 underline' : 'bg-rw-blue-500'
+            'flex items-center gap-2 rounded-b-none rounded-l-none !text-gray-700 hover:bg-gray-200',
+            blogRollPreview ? 'bg-gray-200' : 'bg-gray-300 shadow-inner'
           )}
+          title="Preview Blog Roll"
+          aria-label="Preview Blog Roll"
         >
-          Blog Roll
+          <BsViewList />
+          Preview Blog Roll
           {blogRollPreview ? <BsFillCheckCircleFill /> : <BsFillCircleFill />}
         </Button>
       </div>
 
-      <div className="my-2 rounded bg-gray-300">
+      <div className="mb-2 rounded rounded-t-none bg-gray-200">
         {!blogRollPreview && <Article article={article} />}
         {blogRollPreview && <ArticlePreview article={article} />}
       </div>
-    </>
+    </div>
   )
 }
 
