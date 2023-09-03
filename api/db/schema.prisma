@@ -110,12 +110,20 @@ model Image {
   Post      Post[]
 }
 
+model ImageGalleryImage {
+  id             Int          @id @default(autoincrement())
+  createdAt      DateTime     @default(now())
+  imageId        String
+  url            String
+  imageGalleryId Int
+  imageGallery   ImageGallery @relation(fields: [imageGalleryId], references: [id])
+}
+
 model ImageGallery {
   id                 Int                  @id @default(autoincrement())
   createdAt          DateTime             @default(now())
-  imageId            String
-  url                String
   ImageGalleryOnPost ImageGalleryOnPost[]
+  images             ImageGalleryImage[]
 }
 
 model ImageGalleryOnPost {
