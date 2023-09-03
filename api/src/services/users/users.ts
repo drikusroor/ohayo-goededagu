@@ -44,7 +44,7 @@ export const updateUserRoles = ({ input }) => {
   }
 
   if (
-    !context.currentUser.roles.includes('ADMIN') ||
+    !context.currentUser.roles.includes('ADMIN') &&
     !context.currentUser.roles.includes('MODERATOR')
   ) {
     throw new Error('User not authorized')
