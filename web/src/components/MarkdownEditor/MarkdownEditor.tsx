@@ -7,7 +7,6 @@ import {
   BsPencil,
   BsQuestionCircle,
 } from 'react-icons/bs'
-import ReactMarkdown from 'react-markdown'
 
 import { TextAreaField } from '@redwoodjs/forms'
 
@@ -51,6 +50,7 @@ const MarkdownEditor = ({
           onClick={() => {
             setPreviewState('EDIT')
           }}
+          type="button"
         >
           <BsPencil />
           Edit
@@ -64,6 +64,7 @@ const MarkdownEditor = ({
           onClick={() => {
             setPreviewState('SPLIT')
           }}
+          type="button"
         >
           <BsLayoutSplit />
           Split
@@ -76,6 +77,7 @@ const MarkdownEditor = ({
           onClick={() => {
             setPreviewState('PREVIEW')
           }}
+          type="button"
         >
           <BsEyeglasses />
           Preview
