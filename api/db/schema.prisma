@@ -39,19 +39,19 @@ model Profile {
 }
 
 model Post {
-  id                 Int                  @id @default(autoincrement())
-  title              String
-  body               String?
-  createdAt          DateTime             @default(now())
-  user               User                 @relation(fields: [userId], references: [id])
-  userId             Int
-  published          Boolean              @default(false)
-  type               PostType             @default(ARTICLE)
-  comments           Comment[]
-  videoPost          VideoPost?
-  coverImage         Image?               @relation(fields: [coverImageId], references: [id])
-  coverImageId       Int?
-  ImageGalleryOnPost ImageGalleryOnPost[]
+  id             Int                  @id @default(autoincrement())
+  title          String
+  body           String?
+  createdAt      DateTime             @default(now())
+  user           User                 @relation(fields: [userId], references: [id])
+  userId         Int
+  published      Boolean              @default(false)
+  type           PostType             @default(ARTICLE)
+  comments       Comment[]
+  videoPost      VideoPost?
+  coverImage     Image?               @relation(fields: [coverImageId], references: [id])
+  coverImageId   Int?
+  imageGalleries ImageGalleryOnPost[]
 }
 
 model VideoPost {
