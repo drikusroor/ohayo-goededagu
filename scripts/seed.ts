@@ -49,6 +49,12 @@ export default async () => {
         password: 'Test1234!',
         roles: ['GUEST', 'USER', 'MODERATOR', 'ADMIN'],
       },
+      {
+        name: 'naomi',
+        email: 'nreliasar@gmail.com@gmail.com',
+        password: 'Test1234!',
+        roles: ['GUEST', 'USER', 'MODERATOR', 'ADMIN'],
+      },
     ]
 
     for (const user of users) {
