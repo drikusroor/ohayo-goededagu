@@ -1,4 +1,5 @@
 import { BsFillCheckCircleFill, BsFillCircleFill } from 'react-icons/bs'
+import { Post, Profile } from 'types/graphql'
 
 import { Label } from '@redwoodjs/forms'
 
@@ -10,8 +11,8 @@ import { EPostType } from '../../ArticleTypeIcon/ArticleTypeIcon'
 import Button from '../../Button/Button'
 
 interface Props {
-  profile: object
-  post: object
+  profile: Profile
+  post: Post
   postType: EPostType
   postTitle: string
   postBody: string
@@ -43,14 +44,20 @@ const Preview = ({
   }
 
   const article = {
+    ...post,
     id: post?.id ? post?.id : '',
     title: postTitle,
     body: postBody,
     type: postType,
     createdAt: post?.createdAt ? post?.createdAt : formattedCurrentDate,
+    updatedAt: post?.createdAt ? post?.createdAt : formattedCurrentDate,
     coverImage: url,
-    user: profile,
     videoPost: videoPost,
+    comments: [],
+    user: {
+      ...post?.user,
+      profile: profile ? profile : {},
+    },
   }
 
   return (

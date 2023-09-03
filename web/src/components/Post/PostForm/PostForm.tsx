@@ -185,7 +185,7 @@ const PostForm = (props: PostFormProps) => {
           )}
 
           <Preview
-            profile={props.profile}
+            profile={props.post?.user?.profile}
             post={props.post}
             postType={postType}
             postTitle={postTitle}
