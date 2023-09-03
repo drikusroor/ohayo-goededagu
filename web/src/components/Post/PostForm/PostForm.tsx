@@ -21,7 +21,6 @@ import {
   TextField,
   Submit,
   SelectField,
-  TextAreaField,
 } from '@redwoodjs/forms'
 import type { RWGqlError } from '@redwoodjs/forms'
 import { Link, routes } from '@redwoodjs/router'
