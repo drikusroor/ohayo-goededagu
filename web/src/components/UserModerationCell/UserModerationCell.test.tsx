@@ -1,4 +1,5 @@
 import { render } from '@redwoodjs/testing/web'
+
 import { Loading, Empty, Failure, Success } from './UserModerationCell'
 import { standard } from './UserModerationCell.mock'
 
@@ -35,7 +36,7 @@ describe('UserModerationCell', () => {
 
   it('renders Success successfully', async () => {
     expect(() => {
-      render(<Success userModeration={standard().userModeration} />)
+      render(<Success users={standard().users} />)
     }).not.toThrow()
   })
 })
