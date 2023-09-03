@@ -94,6 +94,30 @@ export default async () => {
         body: 'This is my first post',
         published: true,
         userId: 1,
+        imageGalleries: {
+          create: [
+            {
+              imageGallery: {
+                create: {
+                  name: 'First Gallery',
+                  description: 'This is the first gallery',
+                  images: {
+                    create: [
+                      {
+                        imageId: 'b1b9a0c0-9f0a-11eb-8dcd-0242ac130003',
+                        url: 'https://picsum.photos/seed/1/200/300',
+                      },
+                      {
+                        imageId: 'b1b9a0c0-9f0a-11eb-8dcd-0242ac130004',
+                        url: 'https://picsum.photos/seed/2/200/300',
+                      },
+                    ],
+                  },
+                },
+              },
+            },
+          ],
+        },
       },
       {
         title: 'Second Post',
