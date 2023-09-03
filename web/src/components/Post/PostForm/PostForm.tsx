@@ -21,7 +21,6 @@ import {
   TextField,
   Submit,
   SelectField,
-  TextAreaField,
 } from '@redwoodjs/forms'
 import type { RWGqlError } from '@redwoodjs/forms'
 import { Link, routes } from '@redwoodjs/router'
@@ -186,7 +185,7 @@ const PostForm = (props: PostFormProps) => {
           )}
 
           <Preview
-            profile={props.profile}
+            profile={props.post?.user?.profile}
             post={props.post}
             postType={postType}
             postTitle={postTitle}
