@@ -49,6 +49,12 @@ export default async () => {
         password: 'Test1234!',
         roles: ['GUEST', 'USER', 'MODERATOR', 'ADMIN'],
       },
+      {
+        name: 'naomi',
+        email: 'nreliasar@gmail.com@gmail.com',
+        password: 'Test1234!',
+        roles: ['GUEST', 'USER', 'MODERATOR', 'ADMIN'],
+      },
     ]
 
     for (const user of users) {
@@ -61,6 +67,34 @@ export default async () => {
           salt,
           roles: user.roles,
         },
+      })
+    }
+
+    const posts = [
+      {
+        title: 'First Post',
+        body: 'This is my first post',
+        published: true,
+        userId: 1,
+      },
+      {
+        title: 'Second Post',
+        body: `# Exuit corpora\n ## Utraque deae quo pars gestamina subterque de Lorem markdownum saucius te veniam portas arsit tactas. \n\nNon mediis. ipx_newline -= null; if (rate_printer(integrated.exploitVariable(dma + emulation, -1, -2), 554416 * file)) { ripcording = -1; peripheral_e_task = 5; } var maskMarketClock = code_computer_cpl - software_linux_cpu( reimageTouchscreenTerabyte(stringCron)); \n\nSilvis tu satis mentem. Tertius nos etiam sede deieci cuspis habebat disparibus labare inque quicquam! [Dabat certius](http://cornuaultime.net/monstratum-amento.php) mihi. \n\n ## Securi lacrimaeque nupta at ab nascentia imperat Fessis exilio esse videre, nuda Solem quoque pectus est capitis [luctus](http://www.lecti.com/), unius omni. Et caruit ista bracchia urbis nuper.\n\n - Nostra deploratosque gemitu desit\n - Equinis sanguis saepe primum`,
+        published: true,
+        userId: 1,
+      },
+      {
+        title: 'Third Post',
+        body: '# A chotto matte\n\n ## Utraque deae quo pars gestamina subterque de\nLorem markdownum saucius te veniam portas arsit tactas. Non mediis.\n- Nostra deploratosque gemitu desit\n- Equinis sanguis saepe primum',
+        published: true,
+        userId: 1,
+        type: 'CHOTTO',
+      },
+    ]
+
+    for (const post of posts) {
+      await db.post.create({
+        data: post,
       })
     }
   } catch (error) {
