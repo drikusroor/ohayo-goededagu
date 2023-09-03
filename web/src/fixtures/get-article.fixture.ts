@@ -1,9 +1,11 @@
+import { Role } from 'src/types/role'
+
 import { EPostType } from '../components/ArticleTypeIcon/ArticleTypeIcon'
 
 export const getArticle = (overrides = {}) => ({
   id: 1,
   title: 'My First Article',
-  body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris.',
+  body: 'Lorem ipsum dolor _sit_ amet, **consectetur** *adipiscing* __elit__. Donec a diam [lectus](https://example.com). \n\n Sed sit amet ipsum mauris. \n ## Little heading',
   type: EPostType.ARTICLE,
   comments: [
     {
@@ -20,7 +22,7 @@ export const getArticle = (overrides = {}) => ({
         id: 1,
         email: 'info@example.com',
         name: 'John Doe',
-        roles: ['ADMIN'],
+        roles: [Role.ADMIN],
         profile: {
           id: 1,
           name: 'John Doe',
@@ -55,6 +57,7 @@ export const getArticle = (overrides = {}) => ({
       updatedAt: '2021-07-01T19:24:00.000Z',
     },
     posts: [],
+    roles: [Role.ADMIN],
   },
   ...overrides,
 })
