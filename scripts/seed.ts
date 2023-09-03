@@ -50,10 +50,28 @@ export default async () => {
         roles: ['GUEST', 'USER', 'MODERATOR', 'ADMIN'],
       },
       {
+        name: 'admin only',
+        email: 'admin@example.com',
+        password: 'Test1234!',
+        roles: ['ADMIN'],
+      },
+      {
         name: 'naomi',
         email: 'nreliasar@gmail.com@gmail.com',
         password: 'Test1234!',
         roles: ['GUEST', 'USER', 'MODERATOR', 'ADMIN'],
+      },
+      {
+        name: 'moeder is guest',
+        email: 'memoeder@example.com',
+        password: 'Test1234!',
+        roles: ['GUEST'],
+      },
+      {
+        name: 'vader is user',
+        email: 'mevader@example.com',
+        password: 'Test1234!',
+        roles: ['USER'],
       },
     ]
 

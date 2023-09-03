@@ -9,6 +9,7 @@ export const schema = gql`
     # resetTokenExpiresAt: DateTime
     posts: [Post]!
     profile: Profile
+    roles: [Role!]!
   }
 
   type Query {
@@ -35,12 +36,19 @@ export const schema = gql`
     resetTokenExpiresAt: DateTime
   }
 
+  input UpdateUserRolesInput {
+    id: Int!
+    roles: [Role!]!
+  }
+
   input UpdateUserProfileInput {
     name: String
   }
 
   type Mutation {
     updateUserProfile(input: UpdateUserProfileInput!): User! @requireAuth
+    updateUserRoles(input: UpdateUserRolesInput!): User!
+      @requireAuth(roles: ["ADMIN", "MODERATOR"])
   }
 
   enum Role {
