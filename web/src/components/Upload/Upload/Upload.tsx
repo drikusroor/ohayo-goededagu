@@ -37,6 +37,7 @@ interface IUploadProps {
   folder?: string
   setCoverImage?: (value: ICloudinaryUploadResultInfo) => void
   setPhotoGallery?: (value) => void
+  setProfilePicture?: (value) => void
 }
 
 const Upload = ({
@@ -45,9 +46,8 @@ const Upload = ({
   folder,
   setCoverImage,
   setPhotoGallery,
+  setProfilePicture,
 }: IUploadProps) => {
-  const gallery = []
-
   const widget = cloudinary.createUploadWidget(
     {
       cloudName: 'dl5elpdjy',
@@ -57,12 +57,21 @@ const Upload = ({
     },
     (error, result) => {
       if (!error && result && result.event === 'success') {
-        if (name === 'coverImage') {
-          setCoverImage(result.info as ICloudinaryUploadResultInfo)
-        } else {
-          gallery.push(result.info as ICloudinaryUploadResultInfo)
-          setPhotoGallery(gallery)
-        }
+        console.log('Done! Here is the image info: ', result.info)
+      }
+
+      if (error && !result?.event) {
+        console.log('Error uploading image: ', error)
+        return
+      }
+
+      if (name === 'profilePicture') {
+        setProfilePicture(result.info as ICloudinaryUploadResultInfo)
+      } else if (name === 'coverImage') {
+        setCoverImage(result.info as ICloudinaryUploadResultInfo)
+      } else if (name === 'photoGallery') {
+        const images = result.info.files.map((image) => image.uploadInfo)
+        setPhotoGallery(images as ICloudinaryUploadResultInfo)
       }
     }
   )
