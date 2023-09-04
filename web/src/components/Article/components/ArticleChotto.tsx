@@ -4,6 +4,7 @@ import { Link, routes } from '@redwoodjs/router'
 
 import ArticleCommentCountBadge from 'src/components/ArticleCommentCountBadge/ArticleCommentCountBadge'
 import AvatarTimestamp from 'src/components/Avatar/AvatarTimestamp/AvatarTimestamp'
+import RenderBody from 'src/components/RenderBody/RenderBody'
 import { EPostDisplayType } from 'src/types/post-display-type.enum'
 
 import ArticleTypeIcon, {
@@ -18,7 +19,7 @@ interface Props {
 
 const ArticleChotto = ({ article, displayType, date }: Props) => {
   const authorName =
-    article.user.profile?.name || article.user.name || 'Anonymous'
+    article?.user?.profile?.name || article?.user?.name || 'Anonymous'
 
   return (
     <>
@@ -39,7 +40,9 @@ const ArticleChotto = ({ article, displayType, date }: Props) => {
           </header>
           <div className="lg:mx-14">
             <div>
-              <div className="justmt-2 line-clamp-5">{article.body}</div>
+              <div className="justmt-2 line-clamp-5">
+                <RenderBody body={article.body} />
+              </div>
               <div className="flex items-center justify-between pt-4">
                 <AvatarTimestamp article={article} />
                 {article?.comments?.length > 0 && (
@@ -67,7 +70,7 @@ const ArticleChotto = ({ article, displayType, date }: Props) => {
               <span className="text-sm text-slate-500"> | {date}</span>
             </div>
           </header>
-          <div>{article.body}</div>
+          <RenderBody body={article.body} />
         </>
       )}
     </>

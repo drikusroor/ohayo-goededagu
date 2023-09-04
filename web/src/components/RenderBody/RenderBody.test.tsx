@@ -1,18 +1,14 @@
 import { render } from '@redwoodjs/testing/web'
 
-import getArticle from 'src/fixtures/get-article.fixture'
-
-import Article from './Article'
+import RenderBody from './RenderBody'
 
 //   Improve this test with help from the Redwood Testing Doc:
 //    https://redwoodjs.com/docs/testing#testing-components
 
-describe('Article', () => {
+describe('RenderBody', () => {
   it('renders successfully', () => {
     expect(() => {
-      const article = getArticle()
-
-      render(<Article article={article} />)
+      render(<RenderBody />)
     }).not.toThrow()
   })
 })

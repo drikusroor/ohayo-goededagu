@@ -7,6 +7,7 @@ import {
   BsFillPersonFill,
   BsFillPersonVcardFill,
   BsJournals,
+  BsPersonCheckFill,
 } from 'react-icons/bs'
 
 import { Link, routes } from '@redwoodjs/router'
@@ -54,6 +55,13 @@ const menuItems: MenuItem[] = [
     path: '/admin/profile/self',
     activeRoutePattern: '/profile',
     icon: <BsFillPersonVcardFill />,
+  },
+  {
+    name: 'Moderate Users',
+    path: '/user-moderation',
+    activeRoutePattern: '/user-moderation',
+    roles: ['ADMIN', 'MODERATOR'],
+    icon: <BsPersonCheckFill />,
   },
 ]
 

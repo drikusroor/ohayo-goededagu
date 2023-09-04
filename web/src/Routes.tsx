@@ -50,6 +50,9 @@ const Routes = () => {
             <Route path="/admin/account/edit" page={AccountEditAccountPage} name="editAccount" />
             <Route path="/admin/account" page={AccountAccountPage} name="account" />
           </Set>
+          <Set wrap={ScaffoldLayout} title="Moderate Users" titleTo="userModeration">
+            <Route path="/user-moderation" page={UserModerationPage} name="userModeration" />
+          </Set>
         </Set>
       </Private>
       <Set wrap={BlogLayout} whileLoadingAuth={() => BlogLoader()}>

@@ -38,6 +38,34 @@ export const updateUserProfile = ({ input }) => {
   })
 }
 
+export const updateUserRoles = ({ input }) => {
+  if (!context.currentUser) {
+    throw new Error('User not authenticated')
+  }
+
+  if (
+    !context.currentUser.roles.includes('ADMIN') &&
+    !context.currentUser.roles.includes('MODERATOR')
+  ) {
+    throw new Error('User not authorized')
+  }
+
+  const user = db.user.findUnique({
+    where: { id: input.id },
+  })
+
+  if (!user) {
+    throw new Error('User not found')
+  }
+
+  return db.user.update({
+    data: {
+      roles: input.roles,
+    },
+    where: { id: input.id },
+  })
+}
+
 export const User: UserRelationResolvers = {
   posts: (_obj, { root }) => {
     return db.user.findUnique({ where: { id: root?.id } }).posts()

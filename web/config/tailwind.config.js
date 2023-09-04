@@ -58,5 +58,5 @@ module.exports = {
     'hover:border-cobalt-blue-600',
     'hover:border-monza-red-600',
   ],
-  plugins: [],
+  plugins: [require('@tailwindcss/typography')],
 }
