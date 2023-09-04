@@ -124,18 +124,6 @@ const ArticleArticle = ({ article, displayType, date }: Props) => {
           <div>
             <RenderBody body={article.body} />
           </div>
-          {/* this is how you can render images from an image gallery: */}
-          {article.imageGalleries.map((imageGalleryOnPost) => {
-            return imageGalleryOnPost.imageGallery.images.map((image) => {
-              return (
-                <img
-                  key={image.id}
-                  src={image.url}
-                  alt={imageGalleryOnPost.imageGallery.name}
-                />
-              )
-            })
-          })}
         </>
       )}
     </>
