@@ -94,7 +94,7 @@ const LoginPage = () => {
                     className="rw-label"
                     errorClassName="rw-label rw-label-error"
                   >
-                    Gebruikersnaam
+                    E-mail
                   </Label>
                   <TextField
                     name="username"
@@ -104,7 +104,7 @@ const LoginPage = () => {
                     validation={{
                       required: {
                         value: true,
-                        message: 'Gebruikersnaam is vereist',
+                        message: 'E-mail is vereist',
                       },
                     }}
                   />
