@@ -65,12 +65,12 @@ const Upload = ({
         return
       }
 
+      const images = result.info.files.map((image) => image.uploadInfo)
       if (name === 'profilePicture') {
-        setProfilePicture(result.info as ICloudinaryUploadResultInfo)
+        setProfilePicture(images[0] as ICloudinaryUploadResultInfo)
       } else if (name === 'coverImage') {
-        setCoverImage(result.info as ICloudinaryUploadResultInfo)
+        setCoverImage(images[0] as ICloudinaryUploadResultInfo)
       } else if (name === 'photoGallery') {
-        const images = result.info.files.map((image) => image.uploadInfo)
         setPhotoGallery(images as ICloudinaryUploadResultInfo)
       }
     }
