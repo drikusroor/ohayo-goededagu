@@ -86,6 +86,13 @@ describe('posts', () => {
   })
 
   scenario('deletes a admin post', async (scenario: StandardScenario) => {
+    mockCurrentUser({
+      id: scenario.post.one.userId,
+      name: 'Admin User',
+      email: 'info@example.com',
+      roles: ['ADMIN'],
+    })
+
     const original = (await deletePost({ id: scenario.post.one.id })) as Post
     const result = await adminPost({ id: original.id })
 
