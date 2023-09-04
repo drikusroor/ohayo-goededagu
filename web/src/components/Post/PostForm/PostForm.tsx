@@ -37,6 +37,7 @@ import LocationPin from 'src/components/LocationPin/LocationPin'
 import MarkdownEditor from 'src/components/MarkdownEditor/MarkdownEditor'
 import Preview from 'src/components/Upload/Preview/Preview'
 import Upload from 'src/components/Upload/Upload/Upload'
+import UploadGallery from 'src/components/Upload/UploadGallery/UploadGallery'
 import { classNames } from 'src/lib/class-names'
 
 import VideoForm, { IVideoPostFormData } from './TypeForms/VideoForm'
@@ -279,73 +280,21 @@ const PostForm = (props: PostFormProps) => {
               </div>
 
               {addPhotos && (
-                <>
-                  <Label
-                    name="folder"
-                    className="rw-label"
-                    errorClassName="rw-label rw-label-error"
-                  >
-                    Set the folder name for the photo gallery
-                  </Label>
-
-                  <TextField
-                    name="folder"
-                    defaultValue={folder}
-                    className="rw-input"
-                    errorClassName="rw-input rw-input-error"
-                    onChange={(e) => {
-                      setFolder(e.target.value)
-                    }}
-                    validation={{ required: true }}
-                  />
-
-                  <FieldError name="title" className="rw-field-error" />
-
-                  {folder && (
-                    <Upload
-                      name="photoGallery"
-                      multiple={true}
-                      folder={folder}
-                      setPhotoGallery={setPhotoGallery}
-                    />
-                  )}
-                </>
+                <UploadGallery
+                  folder={folder}
+                  setFolder={setFolder}
+                  setPhotoGallery={setPhotoGallery}
+                />
               )}
             </>
           )}
 
           {postType === EPostType.PHOTO_GALLERY && (
-            <>
-              <Label
-                name="folder"
-                className="rw-label"
-                errorClassName="rw-label rw-label-error"
-              >
-                Set the folder name for this photo gallery
-              </Label>
-
-              <TextField
-                name="folder"
-                defaultValue={folder}
-                className="rw-input"
-                errorClassName="rw-input rw-input-error"
-                onChange={(e) => {
-                  setFolder(e.target.value)
-                }}
-                validation={{ required: true }}
-              />
-
-              <FieldError name="title" className="rw-field-error" />
-
-              {folder && (
-                <Upload
-                  name="photoGallery"
-                  multiple={true}
-                  folder={folder}
-                  setPhotoGallery={setPhotoGallery}
-                />
-              )}
-            </>
+            <UploadGallery
+              folder={folder}
+              setFolder={setFolder}
+              setPhotoGallery={setPhotoGallery}
+            />
           )}
 
           {postType === EPostType.ARTICLE && (
