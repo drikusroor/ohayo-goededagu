@@ -41,8 +41,6 @@ export const updatePost = async ({ id, input }) => {
     throw new Error(`Post with ID ${id} not found`)
   }
 
-  await verifyOwnership(post)
-
   const updated = await db.post.update({
     data: postInput,
     where: { id },
