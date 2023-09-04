@@ -8,7 +8,9 @@ import RenderBody from './RenderBody'
 describe('RenderBody', () => {
   it('renders successfully', () => {
     expect(() => {
-      render(<RenderBody />)
+      const body = `# Hello, world! \n\n This is a test.`
+
+      render(<RenderBody body={body} />)
     }).not.toThrow()
   })
 })
