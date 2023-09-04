@@ -46,6 +46,18 @@ export const QUERY = gql`
           up
         }
       }
+      imageGalleries {
+        id
+        imageGallery {
+          name
+          description
+          images {
+            id
+            url
+            imageId
+          }
+        }
+      }
     }
   }
 `
