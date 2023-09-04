@@ -172,16 +172,18 @@ const PostForm = (props: PostFormProps) => {
           )}
 
           {postType === EPostType.ARTICLE && (
-            <Upload
-              name="coverImage"
-              multiple={false}
-              setCoverImage={({ public_id, secure_url }) =>
-                setCoverImage({
-                  imageId: public_id,
-                  url: secure_url,
-                })
-              }
-            />
+            <div className="mt-4">
+              <Upload
+                name="coverImage"
+                multiple={false}
+                setCoverImage={({ public_id, secure_url }) =>
+                  setCoverImage({
+                    imageId: public_id,
+                    url: secure_url,
+                  })
+                }
+              />
+            </div>
           )}
 
           <Preview

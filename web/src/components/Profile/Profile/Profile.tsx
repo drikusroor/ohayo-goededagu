@@ -4,6 +4,7 @@ import type { FindProfileById } from 'types/graphql'
 import { Link, routes } from '@redwoodjs/router'
 
 import { useAuth } from 'src/auth'
+import Avatar from 'src/components/Avatar/Avatar'
 import { timeTag } from 'src/lib/formatters'
 
 interface Props {
@@ -53,7 +54,7 @@ const Profile = ({ profile }: Props) => {
             </tr>
             <tr>
               <th>Avatar</th>
-              <td>{profile.avatar}</td>
+              <Avatar src={profile.avatar} alt={'profile'} />
             </tr>
           </tbody>
         </table>
