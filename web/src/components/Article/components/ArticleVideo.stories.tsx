@@ -58,6 +58,6 @@ export const previewNoComments = () => {
 }
 
 export default {
-  title: 'Components/ArticleVideo',
+  title: 'Articles/ArticleVideo',
   component: ArticleVideo,
 } as ComponentMeta<typeof ArticleVideo>

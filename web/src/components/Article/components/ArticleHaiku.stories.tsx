@@ -51,6 +51,6 @@ export const previewNoComments = () => {
 }
 
 export default {
-  title: 'Components/ArticleHaiku',
+  title: 'Articles/ArticleHaiku',
   component: ArticleHaiku,
 } as ComponentMeta<typeof ArticleHaiku>

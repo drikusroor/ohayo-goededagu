@@ -54,6 +54,6 @@ export const articleHaiku = () => {
 }
 
 export default {
-  title: 'Components/Article',
+  title: 'Articles/Article',
   component: Article,
 } as ComponentMeta<typeof Article>
