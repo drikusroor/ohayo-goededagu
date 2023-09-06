@@ -13,41 +13,18 @@
 
 import type { ComponentMeta } from '@storybook/react'
 
+import getArticle from 'src/fixtures/get-article.fixture'
+
 import PhotoGrid from './PhotoGrid'
 
-const photoGallery = [
-  {
-    secure_url:
-      'https://res.cloudinary.com/dl5elpdjy/image/upload/v1694013700/m7tz9smhnjqhc9jihxn8.jpg',
-  },
-  {
-    secure_url:
-      'https://res.cloudinary.com/dl5elpdjy/image/upload/v1694014709/gntfcglakmsgnev5ak7n.jpg',
-  },
-  {
-    secure_url:
-      'https://res.cloudinary.com/dl5elpdjy/image/upload/v1694013693/ftyhdb5tbmt2kkyqfxyf.jpg',
-  },
-  {
-    secure_url:
-      'https://res.cloudinary.com/dl5elpdjy/image/upload/v1694013774/Tokyo/dkqnbtx2uy0cielrlg4a.jpg',
-  },
-  {
-    secure_url:
-      'https://res.cloudinary.com/dl5elpdjy/image/upload/v1694013775/Tokyo/cpfxs2x0dvcps1wbvgk7.jpg',
-  },
-  {
-    secure_url:
-      'https://res.cloudinary.com/dl5elpdjy/image/upload/v1694013775/Tokyo/r47rc6ovrbutqjbkkpty.jpg',
-  },
-]
+const article = getArticle()
 
 export const full = () => {
-  return <PhotoGrid photoGallery={photoGallery} />
+  return <PhotoGrid photoGallery={article.photoGallery} />
 }
 
 export const preview = () => {
-  return <PhotoGrid preview={true} photoGallery={photoGallery} />
+  return <PhotoGrid preview={true} photoGallery={article.photoGallery} />
 }
 
 export default {

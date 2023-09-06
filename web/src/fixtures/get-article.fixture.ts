@@ -59,6 +59,32 @@ export const getArticle = (overrides = {}) => ({
     posts: [],
     roles: [Role.ADMIN],
   },
+  photoGallery: [
+    {
+      secure_url:
+        'https://res.cloudinary.com/dl5elpdjy/image/upload/v1694013700/m7tz9smhnjqhc9jihxn8.jpg',
+    },
+    {
+      secure_url:
+        'https://res.cloudinary.com/dl5elpdjy/image/upload/v1694014709/gntfcglakmsgnev5ak7n.jpg',
+    },
+    {
+      secure_url:
+        'https://res.cloudinary.com/dl5elpdjy/image/upload/v1694013693/ftyhdb5tbmt2kkyqfxyf.jpg',
+    },
+    {
+      secure_url:
+        'https://res.cloudinary.com/dl5elpdjy/image/upload/v1694013774/Tokyo/dkqnbtx2uy0cielrlg4a.jpg',
+    },
+    {
+      secure_url:
+        'https://res.cloudinary.com/dl5elpdjy/image/upload/v1694013775/Tokyo/cpfxs2x0dvcps1wbvgk7.jpg',
+    },
+    {
+      secure_url:
+        'https://res.cloudinary.com/dl5elpdjy/image/upload/v1694013775/Tokyo/r47rc6ovrbutqjbkkpty.jpg',
+    },
+  ],
   ...overrides,
 })
 

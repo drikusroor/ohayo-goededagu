@@ -18,40 +18,11 @@ import { EPostDisplayType } from 'src/types/post-display-type.enum'
 
 import ArticlePhotoGallery from './ArticlePhotoGallery'
 
-const article = getArticle({
-  photoGallery: [
-    {
-      secure_url:
-        'https://res.cloudinary.com/dl5elpdjy/image/upload/v1694013700/m7tz9smhnjqhc9jihxn8.jpg',
-    },
-    {
-      secure_url:
-        'https://res.cloudinary.com/dl5elpdjy/image/upload/v1694014709/gntfcglakmsgnev5ak7n.jpg',
-    },
-    {
-      secure_url:
-        'https://res.cloudinary.com/dl5elpdjy/image/upload/v1694013693/ftyhdb5tbmt2kkyqfxyf.jpg',
-    },
-    {
-      secure_url:
-        'https://res.cloudinary.com/dl5elpdjy/image/upload/v1694013774/Tokyo/dkqnbtx2uy0cielrlg4a.jpg',
-    },
-    {
-      secure_url:
-        'https://res.cloudinary.com/dl5elpdjy/image/upload/v1694013775/Tokyo/cpfxs2x0dvcps1wbvgk7.jpg',
-    },
-    {
-      secure_url:
-        'https://res.cloudinary.com/dl5elpdjy/image/upload/v1694013775/Tokyo/r47rc6ovrbutqjbkkpty.jpg',
-    },
-  ],
-})
-
 export const full = () => {
   return (
     <div className="p-8">
       <ArticlePhotoGallery
-        article={article}
+        article={getArticle()}
         displayType={EPostDisplayType.FULL}
       />
     </div>
@@ -62,7 +33,7 @@ export const preview = () => {
   return (
     <div className="p-8">
       <ArticlePhotoGallery
-        article={article}
+        article={getArticle()}
         displayType={EPostDisplayType.PREVIEW}
       />
     </div>
