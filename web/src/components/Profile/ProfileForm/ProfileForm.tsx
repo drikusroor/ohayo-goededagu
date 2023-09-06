@@ -107,6 +107,7 @@ const ProfileForm = (props: ProfileFormProps) => {
           <Upload
             name="profilePicture"
             multiple={false}
+            folder="Avatar"
             setProfilePicture={({ secure_url }) =>
               setProfilePicture(secure_url)
             }

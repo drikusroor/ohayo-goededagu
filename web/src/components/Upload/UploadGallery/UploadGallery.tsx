@@ -20,7 +20,7 @@ const UploadGallery = ({
         className="rw-label"
         errorClassName="rw-label rw-label-error"
       >
-        Set the folder name for this photo gallery
+        Set the folder name for this image gallery
       </Label>
 
       <TextField
@@ -29,9 +29,9 @@ const UploadGallery = ({
         className="rw-input"
         errorClassName="rw-input rw-input-error"
         onChange={(e) => {
-          setFolder(e.target.value)
+          setFolder(e.target.value ? e.target.value : 'Album')
         }}
-        validation={{ required: true }}
+        validation={{ required: false }}
       />
 
       <FieldError name="title" className="rw-field-error" />

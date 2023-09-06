@@ -88,7 +88,7 @@ const Upload = ({
         onClick={onClickUpload}
         text="Upload image"
         defaultValue={
-          name === 'coverImage' ? 'Upload cover image' : 'Upload images'
+          name === 'coverImage' ? 'Upload cover image' : 'Upload gallery images'
         }
         className="rw-button rw-button-blue mt-4"
         errorClassName="rw-button rw-button-blue rw-button-error"

@@ -268,24 +268,12 @@ const PostForm = (props: PostFormProps) => {
                   }}
                   validation={{ required: true }}
                 />
-                <Label
-                  name="addPhotos"
-                  className="rw-label m-0"
-                  errorClassName="rw-label rw-label-error"
-                >
-                  Add photo gallery to this article
-                </Label>
-
-                <FieldError name="addPhotos" className="rw-field-error" />
-              </div>
-
-              {addPhotos && (
                 <UploadGallery
                   folder={folder}
                   setFolder={setFolder}
                   setPhotoGallery={setPhotoGallery}
                 />
-              )}
+              </div>
             </>
           )}
 
