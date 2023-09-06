@@ -20,9 +20,9 @@ const BlogLoader = () => <BlogLayout skeleton />
 
 const Routes = () => {
   const { currentUser } = useAuth()
-
   const requiredRolesAdminPosts = ['ADMIN', 'MODERATOR']
-  const adminRedirect = (currentUser?.roles as Role[]).some((role) => requiredRolesAdminPosts.includes(role)) ? '/admin/posts' : '/admin/profile/self'
+  const roles = (currentUser?.roles || []) as Role[]
+  const adminRedirect = roles.some((role) => requiredRolesAdminPosts.includes(role)) ? '/admin/posts' : '/admin/profile/self'
 
   return (
     <Router useAuth={useAuth}>
