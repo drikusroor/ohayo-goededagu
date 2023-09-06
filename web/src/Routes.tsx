@@ -14,6 +14,7 @@ import ScaffoldLayout from 'src/layouts/ScaffoldLayout'
 import { useAuth } from './auth'
 import AdminDashboardLayout from './layouts/AdminDashboardLayout/AdminDashboardLayout'
 import BlogLayout from './layouts/BlogLayout/BlogLayout'
+import { Role } from './types/role'
 
 const BlogLoader = () => <BlogLayout skeleton />
 
@@ -21,7 +22,7 @@ const Routes = () => {
   const { currentUser } = useAuth()
 
   const requiredRolesAdminPosts = ['ADMIN', 'MODERATOR']
-  const adminRedirect = currentUser?.roles.some((role) => requiredRolesAdminPosts.includes(role)) ? '/admin/posts' : '/admin/profile/self'
+  const adminRedirect = (currentUser?.roles as Role[]).some((role) => requiredRolesAdminPosts.includes(role)) ? '/admin/posts' : '/admin/profile/self'
 
   return (
     <Router useAuth={useAuth}>
