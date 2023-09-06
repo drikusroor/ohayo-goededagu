@@ -23,7 +23,6 @@ import {
   TextField,
   Submit,
   SelectField,
-  CheckboxField,
 } from '@redwoodjs/forms'
 import type { RWGqlError } from '@redwoodjs/forms'
 import { Link, routes } from '@redwoodjs/router'
@@ -247,26 +246,16 @@ const PostForm = (props: PostFormProps) => {
 
           {postType === EPostType.ARTICLE && (
             <>
-              <Upload
-                name="coverImage"
-                multiple={false}
-                setCoverImage={({ public_id, secure_url }) =>
-                  setCoverImage({
-                    imageId: public_id,
-                    url: secure_url,
-                  })
-                }
-              />
-              <div className="my-2 flex flex-row items-center">
-                <CheckboxField
-                  name="addPhotos"
-                  defaultValue={addPhotos}
-                  className="rw-input mb-1"
-                  errorClassName="rw-input rw-input-error"
-                  onChange={() => {
-                    setAddPhotos(addPhotos ? false : true)
-                  }}
-                  validation={{ required: true }}
+              <div className="mt-4">
+                <Upload
+                  name="coverImage"
+                  multiple={false}
+                  handleUpload={([{ public_id, secure_url }]) =>
+                    setCoverImage({
+                      imageId: public_id,
+                      url: secure_url,
+                    })
+                  }
                 />
                 <UploadGallery
                   folder={folder}
@@ -290,7 +279,7 @@ const PostForm = (props: PostFormProps) => {
               <Upload
                 name="coverImage"
                 multiple={false}
-                setCoverImage={({ public_id, secure_url }) =>
+                handleUpload={([{ public_id, secure_url }]) =>
                   setCoverImage({
                     imageId: public_id,
                     url: secure_url,

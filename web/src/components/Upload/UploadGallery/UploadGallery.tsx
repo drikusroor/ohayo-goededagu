@@ -41,7 +41,7 @@ const UploadGallery = ({
           name="photoGallery"
           multiple={true}
           folder={folder}
-          setPhotoGallery={setPhotoGallery}
+          handleUpload={setPhotoGallery}
         />
       )}
     </>

@@ -35,19 +35,10 @@ interface IUploadProps {
   name: string
   multiple?: boolean
   folder?: string
-  setCoverImage?: (value: ICloudinaryUploadResultInfo) => void
-  setPhotoGallery?: (value) => void
-  setProfilePicture?: (value) => void
+  handleUpload: (value: ICloudinaryUploadResultInfo[]) => void
 }
 
-const Upload = ({
-  name,
-  multiple,
-  folder,
-  setCoverImage,
-  setPhotoGallery,
-  setProfilePicture,
-}: IUploadProps) => {
+const Upload = ({ name, multiple, folder, handleUpload }: IUploadProps) => {
   const widget = cloudinary.createUploadWidget(
     {
       cloudName: 'dl5elpdjy',
@@ -66,12 +57,10 @@ const Upload = ({
       }
 
       const images = result.info.files.map((image) => image.uploadInfo)
-      if (name === 'profilePicture') {
-        setProfilePicture(images[0] as ICloudinaryUploadResultInfo)
-      } else if (name === 'coverImage') {
-        setCoverImage(images[0] as ICloudinaryUploadResultInfo)
-      } else if (name === 'photoGallery') {
-        setPhotoGallery(images as ICloudinaryUploadResultInfo)
+      if (name === 'photoGallery') {
+        handleUpload(images as ICloudinaryUploadResultInfo[])
+      } else {
+        handleUpload(images[0] as ICloudinaryUploadResultInfo[])
       }
     }
   )
@@ -84,11 +73,21 @@ const Upload = ({
     <>
       <Button
         id="upload_widget"
-        title="Upload files"
+        title={
+          name === 'coverImage'
+            ? 'Upload cover image'
+            : name === 'avatar'
+            ? 'Upload avatar'
+            : 'Upload gallery images'
+        }
         onClick={onClickUpload}
         text="Upload image"
         defaultValue={
-          name === 'coverImage' ? 'Upload cover image' : 'Upload gallery images'
+          name === 'coverImage'
+            ? 'Upload cover image'
+            : name === 'avatar'
+            ? 'Upload avatar'
+            : 'Upload gallery images'
         }
         className="rw-button rw-button-blue mt-4"
         errorClassName="rw-button rw-button-blue rw-button-error"
