@@ -4,13 +4,12 @@ import { navigate, routes } from '@redwoodjs/router'
 
 import { EPostDisplayType } from 'src/types/post-display-type.enum'
 
-import { EPostType } from '../../ArticleTypeIcon/ArticleTypeIcon'
-
-import ArticleArticle from './ArticleArticle'
-import ArticleChotto from './ArticleChotto'
-import ArticleHaiku from './ArticleHaiku'
-import ArticlePhotoGallery from './ArticlePhotoGallery'
-import ArticleVideo from './ArticleVideo'
+import { EPostType } from '../../../ArticleTypeIcon/ArticleTypeIcon'
+import ArticleArticle from '../ArticleArticle/ArticleArticle'
+import ArticleChotto from '../ArticleChotto/ArticleChotto'
+import ArticleHaiku from '../ArticleHaiku/ArticleHaiku'
+import ArticlePhotoGallery from '../ArticlePhotoGallery/ArticlePhotoGallery'
+import ArticleVideo from '../ArticleVideo/ArticleVideo'
 
 interface Props {
   article: Post

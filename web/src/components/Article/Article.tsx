@@ -14,11 +14,11 @@ import Button from '../Button/Button'
 import Comment from '../Comment/Comment'
 import CommentForm from '../CommentForm/CommentForm'
 
-import ArticleArticle from './components/ArticleArticle'
-import ArticleChotto from './components/ArticleChotto'
-import ArticleHaiku from './components/ArticleHaiku'
-import ArticlePhotoGallery from './components/ArticlePhotoGallery'
-import ArticleVideo from './components/ArticleVideo'
+import ArticleArticle from './components/ArticleArticle/ArticleArticle'
+import ArticleChotto from './components/ArticleChotto/ArticleChotto'
+import ArticleHaiku from './components/ArticleHaiku/ArticleHaiku'
+import ArticlePhotoGallery from './components/ArticlePhotoGallery/ArticlePhotoGallery'
+import ArticleVideo from './components/ArticleVideo/ArticleVideo'
 import { hotScore } from './helpers/sort-comments'
 
 interface Props {

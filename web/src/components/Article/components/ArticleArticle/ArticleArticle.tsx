@@ -13,8 +13,8 @@ import { EPostDisplayType } from 'src/types/post-display-type.enum'
 
 import ArticleTypeIcon, {
   EPostType,
-} from '../../ArticleTypeIcon/ArticleTypeIcon'
-import Avatar from '../../Avatar/Avatar'
+} from '../../../ArticleTypeIcon/ArticleTypeIcon'
+import Avatar from '../../../Avatar/Avatar'
 
 interface Props {
   article: Post

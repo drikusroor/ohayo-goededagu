@@ -9,7 +9,7 @@ import { EPostDisplayType } from 'src/types/post-display-type.enum'
 
 import ArticleTypeIcon, {
   EPostType,
-} from '../../ArticleTypeIcon/ArticleTypeIcon'
+} from '../../../ArticleTypeIcon/ArticleTypeIcon'
 
 interface Props {
   article: Post
