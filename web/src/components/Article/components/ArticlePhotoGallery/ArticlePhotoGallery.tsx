@@ -10,6 +10,7 @@ import ArticleTypeIcon, {
 import Avatar from 'src/components/Avatar/Avatar'
 import Button from 'src/components/Button/Button'
 import PhotoGrid from 'src/components/PhotoGrid/PhotoGrid'
+import { formatCreatedDate } from 'src/lib/formatters'
 import { EPostDisplayType } from 'src/types/post-display-type.enum'
 
 interface Props {
@@ -59,25 +60,7 @@ const ArticlePhotoGallery = ({ article, displayType, date }: Props) => {
                     <span className="text-sm text-slate-300" title={authorName}>
                       {authorName}
                     </span>
-                    <span
-                      className="text-sm text-slate-300"
-                      title={new Date(article.createdAt).toLocaleString(
-                        'nl-NL',
-                        {
-                          hour: '2-digit',
-                          minute: '2-digit',
-                        }
-                      )}
-                    >
-                      {' '}
-                      {new Date(article.createdAt).toLocaleDateString(
-                        'nl-NL'
-                      )}{' '}
-                      {new Date(article.createdAt).toLocaleTimeString('nl-NL', {
-                        hour: '2-digit',
-                        minute: '2-digit',
-                      })}
-                    </span>
+                    {formatCreatedDate(article.createdAt)}
                   </div>
                 </div>
                 {article?.comments?.length > 0 && (

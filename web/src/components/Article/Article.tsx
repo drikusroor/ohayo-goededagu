@@ -57,7 +57,6 @@ const Article = ({ article }: Props) => {
           <ArticleArticle
             article={article}
             displayType={EPostDisplayType.FULL}
-            date={formattedDate}
           />
         )}
 

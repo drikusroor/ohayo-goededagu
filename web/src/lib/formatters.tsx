@@ -1,5 +1,6 @@
 import React from 'react'
 
+import { text } from '@fortawesome/fontawesome-svg-core'
 import humanize from 'humanize-string'
 
 const MAX_STRING_LENGTH = 150
@@ -55,4 +56,29 @@ export const timeTag = (dateTime?: string) => {
 
 export const checkboxInputTag = (checked: boolean) => {
   return <input type="checkbox" checked={checked} disabled />
+}
+
+export const formatCreatedDate = (dateCreated: string, color?: string) => {
+  const textColor = color ? color : 'text-slate-300'
+
+  return (
+    <span
+      className={`text-sm ${textColor}`}
+      title={new Date(dateCreated).toLocaleString('nl-NL', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+      })}
+    >
+      {new Date(dateCreated).toLocaleString('nl-NL', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+      })}
+    </span>
+  )
 }
