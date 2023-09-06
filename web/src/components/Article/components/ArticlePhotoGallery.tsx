@@ -24,6 +24,10 @@ const ArticlePhotoGallery = ({ article, displayType, date }: Props) => {
 
   const previewGallery = article?.photoGallery?.slice(0, 5)
 
+  if (!article) {
+    throw new Error('Could not load article')
+  }
+
   return (
     <>
       {displayType === EPostDisplayType.PREVIEW && (
