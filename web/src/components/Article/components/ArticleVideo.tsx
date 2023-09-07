@@ -9,6 +9,7 @@ import ArticleTypeIcon, {
 } from 'src/components/ArticleTypeIcon/ArticleTypeIcon'
 import AvatarTimestamp from 'src/components/Avatar/AvatarTimestamp/AvatarTimestamp'
 import Button from 'src/components/Button/Button'
+import DisplayDatetime from 'src/components/DisplayDatetime/DisplayDatetime'
 import RenderBody from 'src/components/RenderBody/RenderBody'
 import Video from 'src/components/Video/Video'
 import { EPostDisplayType } from 'src/types/post-display-type.enum'
@@ -78,7 +79,11 @@ const ArticleVideo = ({ article, displayType, date }: Props) => {
 
             <div className="flex flex-row items-center gap-2">
               <span className="text-sm text-slate-500">{authorName}</span>
-              <span className="text-sm text-slate-500"> | {date}</span>
+              <DisplayDatetime
+                datetime={article.createdAt}
+                hideDate={false}
+                className="text-sm text-slate-500"
+              />
             </div>
           </header>
           <Video embedUrl={article?.videoPost?.videoUrl} />
