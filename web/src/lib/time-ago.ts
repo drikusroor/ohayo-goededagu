@@ -37,4 +37,8 @@ export function dateToTimeAgo(date: Date): string {
   }
 }
 
+export function dateStringToTimeAgo(date: string): string {
+  return dateToTimeAgo(new Date(date))
+}
+
 export default dateToTimeAgo
