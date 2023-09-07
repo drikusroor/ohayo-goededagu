@@ -8,6 +8,7 @@ import { toast } from '@redwoodjs/web/toast'
 
 import { useAuth } from 'src/auth'
 import { QUERY as FindArticleQuery } from 'src/components/ArticleCell'
+import dateStringToLocalizedDateString from 'src/lib/localized-date'
 
 import Avatar from '../Avatar/Avatar'
 import Button from '../Button/Button'
@@ -144,14 +145,7 @@ export default ({ comment }: ICommentProps) => {
               : 'Anonymous'}
           </span>
           <span className="ml-2 text-sm text-slate-500">
-            |{' '}
-            {new Date(comment.createdAt).toLocaleString('nl-NL', {
-              day: '2-digit',
-              month: '2-digit',
-              year: 'numeric',
-              hour: '2-digit',
-              minute: '2-digit',
-            })}
+            | {dateStringToLocalizedDateString(comment.createdAt)}
           </span>
         </div>
         <div className="ml-auto">

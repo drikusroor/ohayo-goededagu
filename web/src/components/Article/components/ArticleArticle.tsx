@@ -6,6 +6,8 @@ import { Link, routes } from '@redwoodjs/router'
 import ArticleCommentCountBadge from 'src/components/ArticleCommentCountBadge/ArticleCommentCountBadge'
 import Button from 'src/components/Button/Button'
 import RenderBody from 'src/components/RenderBody/RenderBody'
+import dateStringToLocalizedDateString from 'src/lib/localized-date'
+import { dateStringToTimeAgo } from 'src/lib/time-ago'
 import { EPostDisplayType } from 'src/types/post-display-type.enum'
 
 import ArticleTypeIcon, {
@@ -63,19 +65,9 @@ const ArticleArticle = ({ article, displayType, date }: Props) => {
                   </span>
                   <span
                     className="text-sm text-slate-300"
-                    title={new Date(article.createdAt).toLocaleString('nl-NL', {
-                      hour: '2-digit',
-                      minute: '2-digit',
-                    })}
+                    title={dateStringToLocalizedDateString(article.createdAt)}
                   >
-                    {' '}
-                    {new Date(article.createdAt).toLocaleDateString(
-                      'nl-NL'
-                    )}{' '}
-                    {new Date(article.createdAt).toLocaleTimeString('nl-NL', {
-                      hour: '2-digit',
-                      minute: '2-digit',
-                    })}
+                    {dateStringToTimeAgo(article.createdAt)}
                   </span>
                 </div>
               </div>

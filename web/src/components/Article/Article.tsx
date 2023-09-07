@@ -6,6 +6,7 @@ import type { Post } from 'types/graphql'
 import { Link, routes } from '@redwoodjs/router'
 
 import { useAuth } from 'src/auth'
+import dateStringToLocalizedDateString from 'src/lib/localized-date'
 import { EPostDisplayType } from 'src/types/post-display-type.enum'
 
 import { EPostType } from '../ArticleTypeIcon/ArticleTypeIcon'
@@ -27,13 +28,7 @@ const Article = ({ article }: Props) => {
   const { currentUser } = useAuth()
   const isUserAuthor = article?.user?.id === currentUser?.id
 
-  const formattedDate = new Date(article.createdAt).toLocaleString('nl-NL', {
-    day: '2-digit',
-    month: '2-digit',
-    year: 'numeric',
-    hour: '2-digit',
-    minute: '2-digit',
-  })
+  const formattedDate = dateStringToLocalizedDateString(article.createdAt)
 
   const sortedComments = useMemo(() => {
     if (article.comments) {
