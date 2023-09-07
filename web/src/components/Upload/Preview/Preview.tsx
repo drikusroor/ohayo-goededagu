@@ -3,15 +3,13 @@ import {
   BsFillCircleFill,
   BsJournalRichtext,
   BsViewList,
-  BsViewStacked,
 } from 'react-icons/bs'
 import { Post, Profile } from 'types/graphql'
-
-import { Label } from '@redwoodjs/forms'
 
 import Article from 'src/components/Article/Article'
 import ArticlePreview from 'src/components/Article/components/ArticlePreview'
 import { classNames } from 'src/lib/class-names'
+import dateStringToLocalizedDateString from 'src/lib/localized-date'
 
 import { EPostType } from '../../ArticleTypeIcon/ArticleTypeIcon'
 import Button from '../../Button/Button'
@@ -37,13 +35,9 @@ const Preview = ({
 }: Props) => {
   const [blogRollPreview, setBlogRollPreview] = React.useState<boolean>(false)
 
-  const formattedCurrentDate = new Date().toLocaleString('nl-NL', {
-    day: '2-digit',
-    month: '2-digit',
-    year: 'numeric',
-    hour: '2-digit',
-    minute: '2-digit',
-  })
+  const formattedCurrentDate = dateStringToLocalizedDateString(
+    new Date().toString()
+  )
 
   const url = {
     url: coverImage,

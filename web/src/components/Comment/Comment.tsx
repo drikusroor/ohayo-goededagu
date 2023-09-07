@@ -11,6 +11,7 @@ import { QUERY as FindArticleQuery } from 'src/components/ArticleCell'
 
 import Avatar from '../Avatar/Avatar'
 import Button from '../Button/Button'
+import DisplayDatetime from '../DisplayDatetime/DisplayDatetime'
 import RenderBody from '../RenderBody/RenderBody'
 import Thumbs from '../Thumbs/Thumbs'
 
@@ -143,16 +144,10 @@ export default ({ comment }: ICommentProps) => {
               ? comment.user.email
               : 'Anonymous'}
           </span>
-          <span className="ml-2 text-sm text-slate-500">
-            |{' '}
-            {new Date(comment.createdAt).toLocaleString('nl-NL', {
-              day: '2-digit',
-              month: '2-digit',
-              year: 'numeric',
-              hour: '2-digit',
-              minute: '2-digit',
-            })}
-          </span>
+          <DisplayDatetime
+            datetime={comment.createdAt}
+            className="ml-2 text-sm text-slate-500"
+          />
         </div>
         <div className="ml-auto">
           <Thumbs

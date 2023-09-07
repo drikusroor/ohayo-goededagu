@@ -1,6 +1,7 @@
 import { Post } from 'types/graphql'
 
 import Avatar from 'src/components/Avatar/Avatar'
+import DisplayDatetime from 'src/components/DisplayDatetime/DisplayDatetime'
 
 interface Props {
   article: Post
@@ -24,19 +25,11 @@ const AvatarTimestamp = ({ article }: Props) => {
         >
           {authorName}
         </span>
-        <span
-          className="ml-2 text-sm text-slate-500"
-          title={new Date(article.createdAt).toLocaleString('nl-NL', {
-            hour: '2-digit',
-            minute: '2-digit',
-          })}
-        >
-          | {new Date(article.createdAt).toLocaleDateString('nl-NL')}{' '}
-          {new Date(article.createdAt).toLocaleTimeString('nl-NL', {
-            hour: '2-digit',
-            minute: '2-digit',
-          })}
-        </span>
+
+        <DisplayDatetime
+          datetime={article.createdAt}
+          className="text-sm text-slate-500"
+        />
       </div>
     </div>
   )

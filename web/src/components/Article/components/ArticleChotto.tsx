@@ -4,6 +4,7 @@ import { Link, routes } from '@redwoodjs/router'
 
 import ArticleCommentCountBadge from 'src/components/ArticleCommentCountBadge/ArticleCommentCountBadge'
 import AvatarTimestamp from 'src/components/Avatar/AvatarTimestamp/AvatarTimestamp'
+import DisplayDatetime from 'src/components/DisplayDatetime/DisplayDatetime'
 import RenderBody from 'src/components/RenderBody/RenderBody'
 import { EPostDisplayType } from 'src/types/post-display-type.enum'
 
@@ -67,7 +68,11 @@ const ArticleChotto = ({ article, displayType, date }: Props) => {
 
             <div className="flex flex-row items-center gap-2">
               <span className="text-sm text-slate-500">{authorName}</span>
-              <span className="text-sm text-slate-500"> | {date}</span>
+              <DisplayDatetime
+                datetime={article.createdAt}
+                className="text-sm text-slate-500"
+                showDate={true}
+              />
             </div>
           </header>
           <RenderBody body={article.body} />
