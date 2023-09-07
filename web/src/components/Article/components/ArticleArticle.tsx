@@ -107,7 +107,7 @@ const ArticleArticle = ({ article, displayType }: Props) => {
                 <span className="text-sm text-slate-200">{authorName}</span>
                 <DisplayDatetime
                   datetime={article.createdAt}
-                  hideDate={false}
+                  showDate={true}
                   className="text-sm text-slate-200"
                 />
               </div>

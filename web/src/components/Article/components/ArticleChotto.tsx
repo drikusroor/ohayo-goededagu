@@ -71,7 +71,7 @@ const ArticleChotto = ({ article, displayType, date }: Props) => {
               <DisplayDatetime
                 datetime={article.createdAt}
                 className="text-sm text-slate-500"
-                hideDate={false}
+                showDate={true}
               />
             </div>
           </header>

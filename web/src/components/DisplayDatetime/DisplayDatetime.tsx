@@ -6,16 +6,16 @@ import { dateStringToTimeAgo } from 'src/lib/time-ago'
 
 interface IDisplayDatetimeProps {
   datetime: string
-  hideDate?: boolean
-  hideTimeago?: boolean
+  showDate?: boolean
+  showTimeago?: boolean
   containerClassName?: string
   className?: string
 }
 
 const DisplayDatetime = ({
   datetime,
-  hideDate = true,
-  hideTimeago = false,
+  showDate = false,
+  showTimeago = true,
   containerClassName = '',
   className = '',
 }: IDisplayDatetimeProps) => {
@@ -30,8 +30,8 @@ const DisplayDatetime = ({
   if (!className) {
     className = classNames(
       'text-sm text-slate-500',
-      hideDate && 'hidden md:inline',
-      hideTimeago && 'hidden sm:inline'
+      !showDate && 'hidden md:inline',
+      !showTimeago && 'hidden sm:inline'
     )
   }
 
@@ -40,8 +40,8 @@ const DisplayDatetime = ({
       className={`flex flex-row items-center gap-2 ${containerClassName}`}
       title={formattedDate}
     >
-      {!hideDate && <span className={className}>{formattedDate}</span>}
-      {!hideTimeago && <span className={className}>{timeAgo}</span>}
+      {showDate && <span className={className}>{formattedDate}</span>}
+      {showTimeago && <span className={className}>{timeAgo}</span>}
     </div>
   )
 }

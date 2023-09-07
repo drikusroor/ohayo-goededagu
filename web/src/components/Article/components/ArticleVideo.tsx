@@ -81,7 +81,7 @@ const ArticleVideo = ({ article, displayType, date }: Props) => {
               <span className="text-sm text-slate-500">{authorName}</span>
               <DisplayDatetime
                 datetime={article.createdAt}
-                hideDate={false}
+                showDate={true}
                 className="text-sm text-slate-500"
               />
             </div>
