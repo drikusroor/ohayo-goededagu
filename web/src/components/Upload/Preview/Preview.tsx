@@ -3,11 +3,8 @@ import {
   BsFillCircleFill,
   BsJournalRichtext,
   BsViewList,
-  BsViewStacked,
 } from 'react-icons/bs'
 import { Post, Profile } from 'types/graphql'
-
-import { Label } from '@redwoodjs/forms'
 
 import Article from 'src/components/Article/Article'
 import ArticlePreview from 'src/components/Article/components/ArticlePreview'
