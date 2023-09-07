@@ -6,9 +6,15 @@ const Video = ({ embedUrl = '' }) => {
   const formattedEmbedUrl = useMemo(() => {
     if (!embedUrl) return null
 
+    const isDriveUrl = embedUrl.includes('drive.google')
+
     const videoId = extractVideoID(embedUrl)
     if (!videoId) return null
-    return `https://www.youtube.com/embed/${videoId}`
+    if (isDriveUrl) {
+      return `https://drive.google.com/file/d/${videoId}/preview`
+    } else {
+      return `https://www.youtube.com/embed/${videoId}`
+    }
   }, [embedUrl])
 
   if (!formattedEmbedUrl) return null
@@ -18,7 +24,7 @@ const Video = ({ embedUrl = '' }) => {
       <iframe
         src={formattedEmbedUrl}
         className="h-full w-full"
-        title="YouTube video player"
+        title="Video player"
         frameBorder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         allowFullScreen

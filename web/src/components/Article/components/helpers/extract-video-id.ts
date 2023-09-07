@@ -22,6 +22,14 @@ function extractVideoID(url: string): string | null {
     result = regex.exec(url)
   }
 
+  // Google Drive's URL
+  if (!result) {
+    regex =
+      /^https?:\/\/(?:www\.)?drive.google.com\/file\/d\/([a-zA-Z0-9_-]{33})/
+    result = regex.exec(url)
+    console.log('result', result)
+  }
+
   return result && result[1] ? result[1] : null
 }
 
