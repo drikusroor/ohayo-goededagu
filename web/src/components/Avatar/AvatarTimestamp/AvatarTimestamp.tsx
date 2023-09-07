@@ -1,8 +1,7 @@
 import { Post } from 'types/graphql'
 
 import Avatar from 'src/components/Avatar/Avatar'
-import dateStringToLocalizedDateString from 'src/lib/localized-date'
-import { dateStringToTimeAgo } from 'src/lib/time-ago'
+import DisplayDatetime from 'src/components/DisplayDatetime/DisplayDatetime'
 
 interface Props {
   article: Post
@@ -26,12 +25,11 @@ const AvatarTimestamp = ({ article }: Props) => {
         >
           {authorName}
         </span>
-        <span
+
+        <DisplayDatetime
+          datetime={article.createdAt}
           className="ml-2 text-sm text-slate-500"
-          title={dateStringToLocalizedDateString(article.createdAt)}
-        >
-          | {dateStringToTimeAgo(article.createdAt)}
-        </span>
+        />
       </div>
     </div>
   )

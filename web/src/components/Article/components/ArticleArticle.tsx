@@ -5,9 +5,8 @@ import { Link, routes } from '@redwoodjs/router'
 
 import ArticleCommentCountBadge from 'src/components/ArticleCommentCountBadge/ArticleCommentCountBadge'
 import Button from 'src/components/Button/Button'
+import DisplayDatetime from 'src/components/DisplayDatetime/DisplayDatetime'
 import RenderBody from 'src/components/RenderBody/RenderBody'
-import dateStringToLocalizedDateString from 'src/lib/localized-date'
-import { dateStringToTimeAgo } from 'src/lib/time-ago'
 import { EPostDisplayType } from 'src/types/post-display-type.enum'
 
 import ArticleTypeIcon, {
@@ -18,10 +17,9 @@ import Avatar from '../../Avatar/Avatar'
 interface Props {
   article: Post
   displayType: EPostDisplayType
-  date?: string
 }
 
-const ArticleArticle = ({ article, displayType, date }: Props) => {
+const ArticleArticle = ({ article, displayType }: Props) => {
   const { coverImage } = article
 
   const authorName =
@@ -63,12 +61,10 @@ const ArticleArticle = ({ article, displayType, date }: Props) => {
                   <span className="text-sm text-slate-300" title={authorName}>
                     {authorName}
                   </span>
-                  <span
+                  <DisplayDatetime
                     className="text-sm text-slate-300"
-                    title={dateStringToLocalizedDateString(article.createdAt)}
-                  >
-                    {dateStringToTimeAgo(article.createdAt)}
-                  </span>
+                    datetime={article.createdAt}
+                  />
                 </div>
               </div>
               {article?.comments?.length > 0 && (
@@ -109,7 +105,11 @@ const ArticleArticle = ({ article, displayType, date }: Props) => {
               </div>
               <div className="flex flex-row items-center gap-2 pb-2">
                 <span className="text-sm text-slate-200">{authorName}</span>
-                <span className="text-sm text-slate-200"> | {date}</span>
+                <DisplayDatetime
+                  datetime={article.createdAt}
+                  hideDate={false}
+                  className="text-sm text-slate-200"
+                />
               </div>
             </div>
           </section>
