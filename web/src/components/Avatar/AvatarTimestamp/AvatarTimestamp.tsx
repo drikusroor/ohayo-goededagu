@@ -28,7 +28,7 @@ const AvatarTimestamp = ({ article }: Props) => {
 
         <DisplayDatetime
           datetime={article.createdAt}
-          className="ml-2 text-sm text-slate-500"
+          className="text-sm text-slate-500"
         />
       </div>
     </div>
