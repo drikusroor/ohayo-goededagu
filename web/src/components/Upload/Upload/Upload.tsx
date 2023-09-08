@@ -34,8 +34,7 @@ export interface ICloudinaryUploadResultInfo {
 interface IUploadProps {
   name: string
   multiple?: boolean
-  // folder?: string
-  handleUpload: (value: ICloudinaryUploadResultInfo[]) => void
+  handleUpload: (value) => void
 }
 
 const Upload = ({ name, multiple, handleUpload }: IUploadProps) => {
@@ -43,7 +42,6 @@ const Upload = ({ name, multiple, handleUpload }: IUploadProps) => {
     {
       cloudName: 'dl5elpdjy',
       uploadPreset: 'bcfnswai',
-      // folder: folder ? folder : '',
       multiple: multiple ? multiple : true,
     },
     (error, result) => {

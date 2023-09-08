@@ -35,8 +35,9 @@ import Button from 'src/components/Button/Button'
 import LocationPin from 'src/components/LocationPin/LocationPin'
 import MarkdownEditor from 'src/components/MarkdownEditor/MarkdownEditor'
 import Preview from 'src/components/Upload/Preview/Preview'
-import Upload from 'src/components/Upload/Upload/Upload'
-import UploadGallery from 'src/components/Upload/UploadGallery/UploadGallery'
+import Upload, {
+  ICloudinaryUploadResultInfo,
+} from 'src/components/Upload/Upload/Upload'
 import { classNames } from 'src/lib/class-names'
 
 import VideoForm, { IVideoPostFormData } from './TypeForms/VideoForm'
@@ -95,7 +96,9 @@ const PostForm = (props: PostFormProps) => {
 
   // const [folder, setFolder] = React.useState<string>()
 
-  const [imageGalleries, setImageGalleries] = React.useState<Image>()
+  const [imageGalleries, setImageGalleries] = React.useState<object>(
+    props?.post?.imageGalleries
+  )
 
   const [videoPostFormData, setVideoPostFormData] =
     React.useState<IVideoPostFormData>({
@@ -141,6 +144,18 @@ const PostForm = (props: PostFormProps) => {
 
   const bodyNotRequired =
     postType === EPostType.VIDEO || postType === EPostType.PHOTO_GALLERY
+
+  const handleSetImageGalleries = (images) => {
+    const gallery = []
+    for (const [key, image] of Object.entries(images)) {
+      gallery.push({ imageId: image.public_id, url: image.secure_url })
+    }
+    setImageGalleries({
+      imageGallery: {
+        images: gallery,
+      },
+    })
+  }
 
   return (
     <>
@@ -260,20 +275,26 @@ const PostForm = (props: PostFormProps) => {
                     })
                   }
                 />
-                <UploadGallery
-                  // folder={folder}
-                  // setFolder={setFolder}
-                  setImageGalleries={setImageGalleries}
+                <Upload
+                  name="imageGalleries"
+                  multiple={true}
+                  handleUpload={({ ...images }) => {
+                    handleSetImageGalleries(
+                      images as ICloudinaryUploadResultInfo[]
+                    )
+                  }}
                 />
               </div>
             </>
           )}
 
           {postType === EPostType.PHOTO_GALLERY && (
-            <UploadGallery
-              // folder={folder}
-              // setFolder={setFolder}
-              setImageGalleries={setImageGalleries}
+            <Upload
+              name="imageGalleries"
+              multiple={true}
+              handleUpload={({ ...images }) => {
+                handleSetImageGalleries(images as ICloudinaryUploadResultInfo[])
+              }}
             />
           )}
 

@@ -20,11 +20,16 @@ import PhotoGrid from './PhotoGrid'
 const article = getArticle()
 
 export const full = () => {
-  return <PhotoGrid imageGalleries={article.imageGalleries} />
+  return <PhotoGrid images={article.imageGalleries?.imageGallery?.images} />
 }
 
 export const preview = () => {
-  return <PhotoGrid preview={true} imageGalleries={article.imageGalleries} />
+  return (
+    <PhotoGrid
+      preview={true}
+      images={article.imageGalleries?.imageGallery?.images}
+    />
+  )
 }
 
 export default {

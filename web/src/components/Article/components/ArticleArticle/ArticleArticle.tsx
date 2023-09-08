@@ -122,8 +122,8 @@ const ArticleArticle = ({ article, displayType }: Props) => {
           <div>
             <RenderBody body={article.body} />
           </div>
-          {article?.imageGalleries && (
-            <PhotoGrid imageGalleries={article?.imageGalleries} />
+          {article?.imageGalleries?.imageGallery?.images && (
+            <PhotoGrid images={article?.imageGalleries?.imageGallery?.images} />
           )}
         </>
       )}

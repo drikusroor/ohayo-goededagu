@@ -23,7 +23,7 @@ const ArticlePhotoGallery = ({ article, displayType, date }: Props) => {
   const authorName =
     article.user?.profile?.name || article.user?.name || 'Anonymous'
 
-  const previewGallery = article?.imageGalleries?.slice(0, 5)
+  const previewGallery = article?.imageGalleries?.imageGallery?.images?.slice(0, 5)
 
   if (!article) {
     throw new Error('Could not load article')
@@ -35,7 +35,7 @@ const ArticlePhotoGallery = ({ article, displayType, date }: Props) => {
         <>
           <div className="relative ">
             <PhotoGrid
-              imageGalleries={previewGallery}
+              images={previewGallery}
               preview={true}
               className="block h-full w-full"
             />
@@ -95,8 +95,8 @@ const ArticlePhotoGallery = ({ article, displayType, date }: Props) => {
             </div>
           </header>
           <div> {article.body} </div>
-          {article?.imageGalleries && (
-            <PhotoGrid imageGalleries={article?.imageGalleries} />
+          {article?.imageGalleries?.imageGallery?.images && (
+            <PhotoGrid images={article?.imageGalleries?.imageGallery?.images} />
           )}
         </>
       )}
