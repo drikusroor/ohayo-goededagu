@@ -71,6 +71,17 @@ const PostForm = (props: PostFormProps) => {
       }
     }
 
+    if (imageGalleries && typeof imageGalleries === 'object') {
+      delete data.imageGalleries
+      const { imageGallery } = imageGalleries
+      const { images } = imageGallery
+      data.imageGalleries = {
+        imageGallery: {
+          images: [...images],
+        },
+      }
+    }
+
     props.onSave(data, props?.post?.id)
   }
 

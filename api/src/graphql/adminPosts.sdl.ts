@@ -39,7 +39,7 @@ export const schema = gql`
     videoPost: CreateVideoPostInput
     coverImage: CreateImageInput
     location: String
-    imageGalleries: UpdateImageGalleryOnPostInput
+    imageGalleries: CreateImageGalleryOnPostInput
   }
 
   type Mutation {
