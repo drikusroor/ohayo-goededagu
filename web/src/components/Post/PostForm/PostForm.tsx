@@ -1,3 +1,5 @@
+import { useMemo } from 'react'
+
 import {
   BsFillSendFill,
   BsPencilSquare,
@@ -94,6 +96,42 @@ const PostForm = (props: PostFormProps) => {
     React.useState<IVideoPostFormData>({
       videoUrl: props.post?.videoPost?.videoUrl || '',
     })
+
+  const previewPostData = useMemo(() => {
+    const article = {
+      ...props.post,
+      id: props.post?.id ? props.post?.id : '',
+      title: postTitle,
+      body: postBody,
+      type: postType,
+      createdAt: props.post?.createdAt
+        ? props.post?.createdAt
+        : new Date().toString(),
+      updatedAt: props.post?.createdAt
+        ? props.post?.createdAt
+        : new Date().toString(),
+      coverImage,
+      videoPost: videoPostFormData,
+      comments: [],
+      user: {
+        ...props.post?.user,
+        profile: props.profile ? props.profile : {},
+      },
+      imageGalleries: [],
+      location: postLocation,
+    }
+
+    return article
+  }, [
+    coverImage,
+    postBody,
+    postTitle,
+    postType,
+    props.post,
+    props.profile,
+    videoPostFormData,
+    postLocation,
+  ])
 
   return (
     <>
@@ -213,15 +251,7 @@ const PostForm = (props: PostFormProps) => {
             </div>
           )}
 
-          <Preview
-            profile={props.post?.user?.profile}
-            post={{ ...props.post, location: postLocation }}
-            postType={postType}
-            postTitle={postTitle}
-            postBody={postBody}
-            coverImage={coverImage?.url}
-            videoPost={videoPostFormData}
-          />
+          <Preview post={previewPostData} />
 
           <div className="rw-button-group gap-0">
             <Button

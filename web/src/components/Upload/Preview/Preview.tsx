@@ -4,57 +4,20 @@ import {
   BsJournalRichtext,
   BsViewList,
 } from 'react-icons/bs'
-import { Post, Profile } from 'types/graphql'
+import { Post } from 'types/graphql'
 
 import Article from 'src/components/Article/Article'
 import ArticlePreview from 'src/components/Article/components/ArticlePreview'
 import { classNames } from 'src/lib/class-names'
-import dateStringToLocalizedDateString from 'src/lib/localized-date'
 
-import { EPostType } from '../../ArticleTypeIcon/ArticleTypeIcon'
 import Button from '../../Button/Button'
 
 interface Props {
-  profile: Profile
   post: Post
-  postType: EPostType
-  postTitle: string
-  postBody: string
-  coverImage?: string
-  videoPost: object
 }
 
-const Preview = ({
-  profile,
-  post,
-  coverImage,
-  postType,
-  postTitle,
-  postBody,
-  videoPost,
-}: Props) => {
+const Preview = ({ post }: Props) => {
   const [blogRollPreview, setBlogRollPreview] = React.useState<boolean>(false)
-
-  const url = {
-    url: coverImage,
-  }
-
-  const article = {
-    ...post,
-    id: post?.id ? post?.id : '',
-    title: postTitle,
-    body: postBody,
-    type: postType,
-    createdAt: post?.createdAt ? post?.createdAt : new Date().toString(),
-    updatedAt: post?.createdAt ? post?.createdAt : new Date().toString(),
-    coverImage: url,
-    videoPost: videoPost,
-    comments: [],
-    user: {
-      ...post?.user,
-      profile: profile ? profile : {},
-    },
-  }
 
   return (
     <div className="drop-shadow">
@@ -94,8 +57,8 @@ const Preview = ({
       </div>
 
       <div className="mb-2 rounded rounded-t-none bg-gray-200">
-        {!blogRollPreview && <Article article={article} />}
-        {blogRollPreview && <ArticlePreview article={article} />}
+        {!blogRollPreview && <Article article={post} />}
+        {blogRollPreview && <ArticlePreview article={post} />}
       </div>
     </div>
   )
