@@ -24,6 +24,7 @@ export const QUERY = gql`
         imageId
         url
       }
+      location
       user {
         id
         name
@@ -56,6 +57,7 @@ const UPDATE_POST_MUTATION = gql`
         imageId
         url
       }
+      location
     }
   }
 `
