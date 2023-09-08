@@ -94,8 +94,6 @@ const PostForm = (props: PostFormProps) => {
     props.post?.location
   )
 
-  // const [folder, setFolder] = React.useState<string>()
-
   const [imageGalleries, setImageGalleries] = React.useState<object>(
     props?.post?.imageGalleries
   )
