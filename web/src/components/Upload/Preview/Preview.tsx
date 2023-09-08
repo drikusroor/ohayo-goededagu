@@ -35,10 +35,6 @@ const Preview = ({
 }: Props) => {
   const [blogRollPreview, setBlogRollPreview] = React.useState<boolean>(false)
 
-  const formattedCurrentDate = dateStringToLocalizedDateString(
-    new Date().toString()
-  )
-
   const url = {
     url: coverImage,
   }
@@ -49,8 +45,8 @@ const Preview = ({
     title: postTitle,
     body: postBody,
     type: postType,
-    createdAt: post?.createdAt ? post?.createdAt : formattedCurrentDate,
-    updatedAt: post?.createdAt ? post?.createdAt : formattedCurrentDate,
+    createdAt: post?.createdAt ? post?.createdAt : new Date().toString(),
+    updatedAt: post?.createdAt ? post?.createdAt : new Date().toString(),
     coverImage: url,
     videoPost: videoPost,
     comments: [],

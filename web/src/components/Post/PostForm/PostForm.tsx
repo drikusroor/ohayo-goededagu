@@ -30,7 +30,6 @@ import {
   postTypeOptions,
 } from 'src/components/ArticleTypeIcon/ArticleTypeIcon'
 import Button from 'src/components/Button/Button'
-import GoogleMapsEmbed from 'src/components/GoogleMapsEmbed/GoogleMapsEmbed'
 import LocationPin from 'src/components/LocationPin/LocationPin'
 import MarkdownEditor from 'src/components/MarkdownEditor/MarkdownEditor'
 import Preview from 'src/components/Upload/Preview/Preview'
@@ -216,7 +215,7 @@ const PostForm = (props: PostFormProps) => {
 
           <Preview
             profile={props.post?.user?.profile}
-            post={props.post}
+            post={{ ...props.post, location: postLocation }}
             postType={postType}
             postTitle={postTitle}
             postBody={postBody}
