@@ -6,6 +6,7 @@ import { Link, routes } from '@redwoodjs/router'
 import ArticleCommentCountBadge from 'src/components/ArticleCommentCountBadge/ArticleCommentCountBadge'
 import Button from 'src/components/Button/Button'
 import DisplayDatetime from 'src/components/DisplayDatetime/DisplayDatetime'
+import LocationPin from 'src/components/LocationPin/LocationPin'
 import RenderBody from 'src/components/RenderBody/RenderBody'
 import { EPostDisplayType } from 'src/types/post-display-type.enum'
 
@@ -109,6 +110,10 @@ const ArticleArticle = ({ article, displayType }: Props) => {
                   datetime={article.createdAt}
                   showDate={true}
                   className="text-sm text-slate-200"
+                />
+                <LocationPin
+                  location={article.location}
+                  className="text-white"
                 />
               </div>
             </div>

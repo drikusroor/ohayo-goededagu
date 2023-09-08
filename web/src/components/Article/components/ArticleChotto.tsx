@@ -5,6 +5,7 @@ import { Link, routes } from '@redwoodjs/router'
 import ArticleCommentCountBadge from 'src/components/ArticleCommentCountBadge/ArticleCommentCountBadge'
 import AvatarTimestamp from 'src/components/Avatar/AvatarTimestamp/AvatarTimestamp'
 import DisplayDatetime from 'src/components/DisplayDatetime/DisplayDatetime'
+import LocationPin from 'src/components/LocationPin/LocationPin'
 import RenderBody from 'src/components/RenderBody/RenderBody'
 import { EPostDisplayType } from 'src/types/post-display-type.enum'
 
@@ -73,6 +74,7 @@ const ArticleChotto = ({ article, displayType, date }: Props) => {
                 className="text-sm text-slate-500"
                 showDate={true}
               />
+              <LocationPin location={article.location} />
             </div>
           </header>
           <RenderBody body={article.body} />
