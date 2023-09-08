@@ -30,6 +30,8 @@ import {
   postTypeOptions,
 } from 'src/components/ArticleTypeIcon/ArticleTypeIcon'
 import Button from 'src/components/Button/Button'
+import GoogleMapsEmbed from 'src/components/GoogleMapsEmbed/GoogleMapsEmbed'
+import LocationPin from 'src/components/LocationPin/LocationPin'
 import MarkdownEditor from 'src/components/MarkdownEditor/MarkdownEditor'
 import Preview from 'src/components/Upload/Preview/Preview'
 import Upload from 'src/components/Upload/Upload/Upload'
@@ -160,6 +162,10 @@ const PostForm = (props: PostFormProps) => {
             className="rw-input"
             errorClassName="rw-input rw-input-error"
           />
+
+          <LocationPin location={postLocation} className="mt-2">
+            {postLocation}
+          </LocationPin>
 
           <Label
             name="type"
