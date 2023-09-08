@@ -135,6 +135,12 @@ export default async () => {
         userId: 1,
         type: 'CHOTTO',
         location: 'Dejimamachi, Nagasaki, Japan',
+        coverImage: {
+          create: {
+            imageId: 'b1b9a0c0-9f0a-11eb-8dcd-0242ac130005',
+            url: 'https://cdn.britannica.com/82/152982-050-11159CF4/Daniel-Radcliffe-Rupert-Grint-Emma-Watson-Harry.jpg',
+          },
+        },
       },
     ]
 
