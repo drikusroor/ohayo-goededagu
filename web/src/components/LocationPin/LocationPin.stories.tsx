@@ -22,4 +22,8 @@ export default meta
 
 type Story = StoryObj<typeof LocationPin>
 
-export const Primary: Story = {}
+export const Primary: Story = {
+  args: {
+    location: '42 Wallaby Way, Sydney',
+  },
+}

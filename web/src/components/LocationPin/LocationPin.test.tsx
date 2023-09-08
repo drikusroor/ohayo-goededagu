@@ -7,8 +7,10 @@ import LocationPin from './LocationPin'
 
 describe('LocationPin', () => {
   it('renders successfully', () => {
+    const location = '42 Wallaby Way, Sydney'
+
     expect(() => {
-      render(<LocationPin />)
+      render(<LocationPin location={location} />)
     }).not.toThrow()
   })
 })
