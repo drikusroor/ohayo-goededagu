@@ -122,9 +122,9 @@ const ArticleArticle = ({ article, displayType }: Props) => {
           <div>
             <RenderBody body={article.body} />
           </div>
-          {article?.imageGalleries.map((gallery, index) => (
-            <PhotoGrid key={index} photoGallery={gallery} />
-          ))}
+          {article?.imageGalleries && (
+            <PhotoGrid imageGalleries={article?.imageGalleries} />
+          )}
         </>
       )}
     </>

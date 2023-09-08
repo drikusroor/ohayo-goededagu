@@ -1,12 +1,12 @@
 import { ICloudinaryUploadResultInfo } from '../Upload/Upload/Upload'
 
 interface Props {
-  photoGallery: ICloudinaryUploadResultInfo[]
+  imageGalleries: ICloudinaryUploadResultInfo[]
   preview?: boolean
 }
 
-const PhotoGrid = ({ photoGallery = [], preview }: Props) => {
-  const previewGallery = photoGallery?.slice(0, 5)
+const PhotoGrid = ({ imageGalleries = [], preview }: Props) => {
+  const previewGallery = imageGalleries?.slice(0, 5)
   return (
     <>
       <div className="mt-4 bg-gray-200 p-2">
@@ -26,7 +26,7 @@ const PhotoGrid = ({ photoGallery = [], preview }: Props) => {
                 </>
               )
             })}
-          {photoGallery.map((photo) => {
+          {imageGalleries.map((photo) => {
             return (
               <>
                 <li className="relative h-[300px] grow basis-auto last:flex-initial">

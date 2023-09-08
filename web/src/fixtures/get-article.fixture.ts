@@ -59,7 +59,7 @@ export const getArticle = (overrides = {}) => ({
     posts: [],
     roles: [Role.ADMIN],
   },
-  photoGallery: [
+  imageGalleries: [
     {
       secure_url:
         'https://res.cloudinary.com/dl5elpdjy/image/upload/v1694013700/m7tz9smhnjqhc9jihxn8.jpg',

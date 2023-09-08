@@ -57,11 +57,7 @@ const Upload = ({ name, multiple, folder, handleUpload }: IUploadProps) => {
       }
 
       const images = result.info.files.map((image) => image.uploadInfo)
-      if (name === 'photoGallery') {
-        handleUpload(images as ICloudinaryUploadResultInfo[])
-      } else {
-        handleUpload(images[0] as ICloudinaryUploadResultInfo[])
-      }
+      handleUpload(images as ICloudinaryUploadResultInfo[])
     }
   )
 

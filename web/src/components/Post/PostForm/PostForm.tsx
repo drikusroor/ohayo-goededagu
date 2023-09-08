@@ -93,11 +93,9 @@ const PostForm = (props: PostFormProps) => {
     props.post?.location
   )
 
-  const [addPhotos, setAddPhotos] = React.useState<boolean>()
-
   const [folder, setFolder] = React.useState<string>()
 
-  const [photoGallery, setPhotoGallery] = React.useState<Image>()
+  const [imageGalleries, setImageGalleries] = React.useState<Image>()
 
   const [videoPostFormData, setVideoPostFormData] =
     React.useState<IVideoPostFormData>({
@@ -124,7 +122,7 @@ const PostForm = (props: PostFormProps) => {
         ...props.post?.user,
         profile: props.profile ? props.profile : {},
       },
-      imageGalleries: [photoGallery],
+      imageGalleries,
       location: postLocation,
     }
 
@@ -138,7 +136,7 @@ const PostForm = (props: PostFormProps) => {
     props.profile,
     videoPostFormData,
     postLocation,
-    photoGallery,
+    imageGalleries,
   ])
 
   return (
@@ -260,7 +258,7 @@ const PostForm = (props: PostFormProps) => {
                 <UploadGallery
                   folder={folder}
                   setFolder={setFolder}
-                  setPhotoGallery={setPhotoGallery}
+                  setImageGalleries={setImageGalleries}
                 />
               </div>
             </>
@@ -270,7 +268,7 @@ const PostForm = (props: PostFormProps) => {
             <UploadGallery
               folder={folder}
               setFolder={setFolder}
-              setPhotoGallery={setPhotoGallery}
+              setImageGalleries={setImageGalleries}
             />
           )}
 
