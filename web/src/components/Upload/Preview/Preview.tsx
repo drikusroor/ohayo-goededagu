@@ -61,17 +61,6 @@ const Preview = ({ post }: Props) => {
         </Button>
       </div>
 
-      {type === EPostType.PHOTO_GALLERY && (
-        <div>
-          <ArticlePhotoGallery
-            article={post}
-            displayType={
-              blogRollPreview ? EPostDisplayType.PREVIEW : EPostDisplayType.FULL
-            }
-          />
-        </div>
-      )}
-
       <div className="mb-2 bg-gray-200">
         {!blogRollPreview && <Article article={post} />}
         {blogRollPreview && <ArticlePreview article={post} />}
