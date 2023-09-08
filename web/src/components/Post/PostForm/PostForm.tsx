@@ -93,7 +93,7 @@ const PostForm = (props: PostFormProps) => {
     props.post?.location
   )
 
-  const [folder, setFolder] = React.useState<string>()
+  // const [folder, setFolder] = React.useState<string>()
 
   const [imageGalleries, setImageGalleries] = React.useState<Image>()
 
@@ -261,8 +261,8 @@ const PostForm = (props: PostFormProps) => {
                   }
                 />
                 <UploadGallery
-                  folder={folder}
-                  setFolder={setFolder}
+                  // folder={folder}
+                  // setFolder={setFolder}
                   setImageGalleries={setImageGalleries}
                 />
               </div>
@@ -271,8 +271,8 @@ const PostForm = (props: PostFormProps) => {
 
           {postType === EPostType.PHOTO_GALLERY && (
             <UploadGallery
-              folder={folder}
-              setFolder={setFolder}
+              // folder={folder}
+              // setFolder={setFolder}
               setImageGalleries={setImageGalleries}
             />
           )}

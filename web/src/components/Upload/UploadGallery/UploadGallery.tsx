@@ -3,19 +3,19 @@ import { FieldError, Label, TextField } from '@redwoodjs/forms'
 import Upload from '../Upload/Upload'
 
 interface IUploadProps {
-  folder?: string
-  setFolder?: (value) => void
+  // folder?: string
+  // setFolder?: (value) => void
   setImageGalleries?: (value) => void
 }
 
 const UploadGallery = ({
-  folder,
-  setFolder,
+  // folder,
+  // setFolder,
   setImageGalleries,
 }: IUploadProps) => {
   return (
     <>
-      <Label
+      {/* <Label
         name="folder"
         className="rw-label"
         errorClassName="rw-label rw-label-error"
@@ -34,16 +34,16 @@ const UploadGallery = ({
         validation={{ required: false }}
       />
 
-      <FieldError name="title" className="rw-field-error" />
+      <FieldError name="title" className="rw-field-error" /> */}
 
-      {folder && (
-        <Upload
-          name="imageGalleries"
-          multiple={true}
-          folder={folder}
-          handleUpload={setImageGalleries}
-        />
-      )}
+      {/* {folder && ( */}
+      <Upload
+        name="imageGalleries"
+        multiple={true}
+        // folder={folder}
+        handleUpload={setImageGalleries}
+      />
+      {/* )} */}
     </>
   )
 }

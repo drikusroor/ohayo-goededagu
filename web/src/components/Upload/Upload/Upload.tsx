@@ -34,16 +34,16 @@ export interface ICloudinaryUploadResultInfo {
 interface IUploadProps {
   name: string
   multiple?: boolean
-  folder?: string
+  // folder?: string
   handleUpload: (value: ICloudinaryUploadResultInfo[]) => void
 }
 
-const Upload = ({ name, multiple, folder, handleUpload }: IUploadProps) => {
+const Upload = ({ name, multiple, handleUpload }: IUploadProps) => {
   const widget = cloudinary.createUploadWidget(
     {
       cloudName: 'dl5elpdjy',
       uploadPreset: 'bcfnswai',
-      folder: folder ? folder : '',
+      // folder: folder ? folder : '',
       multiple: multiple ? multiple : true,
     },
     (error, result) => {
@@ -88,7 +88,7 @@ const Upload = ({ name, multiple, folder, handleUpload }: IUploadProps) => {
         className="rw-button rw-button-blue mt-4"
         errorClassName="rw-button rw-button-blue rw-button-error"
       />
-      <FieldError name="upload" className="rw-field-error" />
+      <FieldError name={name} className="rw-field-error" />
     </>
   )
 }
