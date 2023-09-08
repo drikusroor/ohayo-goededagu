@@ -85,6 +85,10 @@ const PostForm = (props: PostFormProps) => {
 
   const [postBody, setPostBody] = React.useState<string>(props.post?.body)
 
+  const [postLocation, setPostLocation] = React.useState<string>(
+    props.post?.location
+  )
+
   const [videoPostFormData, setVideoPostFormData] =
     React.useState<IVideoPostFormData>({
       videoUrl: props.post?.videoPost?.videoUrl || '',
@@ -138,6 +142,24 @@ const PostForm = (props: PostFormProps) => {
           />
 
           <FieldError name="body" className="rw-field-error" />
+
+          <Label
+            name="location"
+            className="rw-label"
+            errorClassName="rw-label rw-label-error"
+          >
+            Location
+          </Label>
+
+          <TextField
+            name="location"
+            value={postLocation}
+            onChange={(e) => {
+              setPostLocation(e.target.value)
+            }}
+            className="rw-input"
+            errorClassName="rw-input rw-input-error"
+          />
 
           <Label
             name="type"
