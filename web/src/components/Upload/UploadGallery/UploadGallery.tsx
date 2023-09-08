@@ -5,13 +5,13 @@ import Upload from '../Upload/Upload'
 interface IUploadProps {
   folder?: string
   setFolder?: (value) => void
-  setPhotoGallery?: (value) => void
+  setImageGalleries?: (value) => void
 }
 
 const UploadGallery = ({
   folder,
   setFolder,
-  setPhotoGallery,
+  setImageGalleries,
 }: IUploadProps) => {
   return (
     <>
@@ -41,7 +41,7 @@ const UploadGallery = ({
           name="imageGalleries"
           multiple={true}
           folder={folder}
-          handleUpload={setPhotoGallery}
+          handleUpload={setImageGalleries}
         />
       )}
     </>

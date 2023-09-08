@@ -139,6 +139,9 @@ const PostForm = (props: PostFormProps) => {
     imageGalleries,
   ])
 
+  const bodyNotRequired =
+    postType === EPostType.VIDEO || postType === EPostType.PHOTO_GALLERY
+
   return (
     <>
       <div className="rw-form-wrapper">
@@ -183,7 +186,9 @@ const PostForm = (props: PostFormProps) => {
             name="body"
             value={postBody}
             onChange={setPostBody}
-            validation={{ required: postType !== EPostType.VIDEO }}
+            validation={{
+              required: !bodyNotRequired,
+            }}
           />
 
           <FieldError name="body" className="rw-field-error" />
