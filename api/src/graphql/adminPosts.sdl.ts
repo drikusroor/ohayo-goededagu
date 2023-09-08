@@ -11,6 +11,7 @@ export const schema = gql`
     videoPost: VideoPost
     coverImage: Image
     location: String
+    imageGalleries: [ImageGalleryOnPost]
   }
 
   type Query {
@@ -27,6 +28,7 @@ export const schema = gql`
     videoPost: CreateVideoPostInput
     coverImage: CreateImageInput
     location: String
+    imageGalleries: CreateImageGalleryOnPostInput
   }
 
   input UpdatePostInput {
@@ -37,6 +39,7 @@ export const schema = gql`
     videoPost: CreateVideoPostInput
     coverImage: CreateImageInput
     location: String
+    imageGalleries: CreateImageGalleryOnPostInput
   }
 
   type Mutation {
