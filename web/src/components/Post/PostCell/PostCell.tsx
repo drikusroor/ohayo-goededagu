@@ -17,6 +17,7 @@ export const QUERY = gql`
         id
         email
       }
+      location
     }
   }
 `

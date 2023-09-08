@@ -52,7 +52,6 @@ const Upload = ({
     },
     (error, result) => {
       if (!error && result && result.event === 'success') {
-        console.log('Done! Here is the image info: ', result.info)
         if (name === 'profilePicture') {
           setProfilePicture(result.info as ICloudinaryUploadResultInfo)
         } else if (name === 'coverImage') {

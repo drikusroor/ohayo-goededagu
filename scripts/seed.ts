@@ -118,12 +118,15 @@ export default async () => {
             },
           ],
         },
+        location:
+          'Shibuya Scramble Crossing, 21 Udagawa-cho, Shibuya City, Tokyo, Japan',
       },
       {
         title: 'Second Post',
         body: `# Exuit corpora\n ## Utraque deae quo pars gestamina subterque de Lorem markdownum saucius te veniam portas arsit tactas. \n\nNon mediis. ipx_newline -= null; if (rate_printer(integrated.exploitVariable(dma + emulation, -1, -2), 554416 * file)) { ripcording = -1; peripheral_e_task = 5; } var maskMarketClock = code_computer_cpl - software_linux_cpu( reimageTouchscreenTerabyte(stringCron)); \n\nSilvis tu satis mentem. Tertius nos etiam sede deieci cuspis habebat disparibus labare inque quicquam! [Dabat certius](http://cornuaultime.net/monstratum-amento.php) mihi. \n\n ## Securi lacrimaeque nupta at ab nascentia imperat Fessis exilio esse videre, nuda Solem quoque pectus est capitis [luctus](http://www.lecti.com/), unius omni. Et caruit ista bracchia urbis nuper.\n\n - Nostra deploratosque gemitu desit\n - Equinis sanguis saepe primum`,
         published: true,
         userId: 1,
+        location: '1 Chome-1-2 Oshiage, Sumida City, Tokyo 131-0045, Japan',
       },
       {
         title: 'Third Post',
@@ -131,6 +134,13 @@ export default async () => {
         published: true,
         userId: 1,
         type: 'CHOTTO',
+        location: 'Dejimamachi, Nagasaki, Japan',
+        coverImage: {
+          create: {
+            imageId: 'b1b9a0c0-9f0a-11eb-8dcd-0242ac130005',
+            url: 'https://cdn.britannica.com/82/152982-050-11159CF4/Daniel-Radcliffe-Rupert-Grint-Emma-Watson-Harry.jpg',
+          },
+        },
       },
     ]
 

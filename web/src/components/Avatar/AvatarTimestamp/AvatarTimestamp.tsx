@@ -2,6 +2,7 @@ import { Post } from 'types/graphql'
 
 import Avatar from 'src/components/Avatar/Avatar'
 import DisplayDatetime from 'src/components/DisplayDatetime/DisplayDatetime'
+import LocationPin from 'src/components/LocationPin/LocationPin'
 
 interface Props {
   article: Post
@@ -30,6 +31,7 @@ const AvatarTimestamp = ({ article }: Props) => {
           datetime={article.createdAt}
           className="text-sm text-slate-500"
         />
+        <LocationPin location={article.location} className="text-white" />
       </div>
     </div>
   )

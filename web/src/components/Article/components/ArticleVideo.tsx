@@ -10,6 +10,7 @@ import ArticleTypeIcon, {
 import AvatarTimestamp from 'src/components/Avatar/AvatarTimestamp/AvatarTimestamp'
 import Button from 'src/components/Button/Button'
 import DisplayDatetime from 'src/components/DisplayDatetime/DisplayDatetime'
+import LocationPin from 'src/components/LocationPin/LocationPin'
 import RenderBody from 'src/components/RenderBody/RenderBody'
 import Video from 'src/components/Video/Video'
 import { EPostDisplayType } from 'src/types/post-display-type.enum'
@@ -84,6 +85,7 @@ const ArticleVideo = ({ article, displayType, date }: Props) => {
                 showDate={true}
                 className="text-sm text-slate-500"
               />
+              <LocationPin location={article.location} className="text-white" />
             </div>
           </header>
           <Video embedUrl={article?.videoPost?.videoUrl} />

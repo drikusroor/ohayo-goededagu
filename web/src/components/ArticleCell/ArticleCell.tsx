@@ -19,6 +19,7 @@ export const QUERY = gql`
       coverImage {
         url
       }
+      location
       user {
         id
         name

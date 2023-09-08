@@ -1,3 +1,5 @@
+import { useMemo } from 'react'
+
 import {
   BsFillSendFill,
   BsPencilSquare,
@@ -30,6 +32,7 @@ import {
   postTypeOptions,
 } from 'src/components/ArticleTypeIcon/ArticleTypeIcon'
 import Button from 'src/components/Button/Button'
+import LocationPin from 'src/components/LocationPin/LocationPin'
 import MarkdownEditor from 'src/components/MarkdownEditor/MarkdownEditor'
 import Preview from 'src/components/Upload/Preview/Preview'
 import Upload from 'src/components/Upload/Upload/Upload'
@@ -85,10 +88,50 @@ const PostForm = (props: PostFormProps) => {
 
   const [postBody, setPostBody] = React.useState<string>(props.post?.body)
 
+  const [postLocation, setPostLocation] = React.useState<string>(
+    props.post?.location
+  )
+
   const [videoPostFormData, setVideoPostFormData] =
     React.useState<IVideoPostFormData>({
       videoUrl: props.post?.videoPost?.videoUrl || '',
     })
+
+  const previewPostData = useMemo(() => {
+    const article = {
+      ...props.post,
+      id: props.post?.id ? props.post?.id : '',
+      title: postTitle,
+      body: postBody,
+      type: postType,
+      createdAt: props.post?.createdAt
+        ? props.post?.createdAt
+        : new Date().toString(),
+      updatedAt: props.post?.createdAt
+        ? props.post?.createdAt
+        : new Date().toString(),
+      coverImage,
+      videoPost: videoPostFormData,
+      comments: [],
+      user: {
+        ...props.post?.user,
+        profile: props.profile ? props.profile : {},
+      },
+      imageGalleries: [],
+      location: postLocation,
+    }
+
+    return article
+  }, [
+    coverImage,
+    postBody,
+    postTitle,
+    postType,
+    props.post,
+    props.profile,
+    videoPostFormData,
+    postLocation,
+  ])
 
   return (
     <>
@@ -140,6 +183,28 @@ const PostForm = (props: PostFormProps) => {
           <FieldError name="body" className="rw-field-error" />
 
           <Label
+            name="location"
+            className="rw-label"
+            errorClassName="rw-label rw-label-error"
+          >
+            Location
+          </Label>
+
+          <TextField
+            name="location"
+            value={postLocation}
+            onChange={(e) => {
+              setPostLocation(e.target.value)
+            }}
+            className="rw-input"
+            errorClassName="rw-input rw-input-error"
+          />
+
+          <LocationPin location={postLocation} className="mt-2">
+            {postLocation}
+          </LocationPin>
+
+          <Label
             name="type"
             className="rw-label"
             errorClassName="rw-label rw-label-error"
@@ -186,15 +251,7 @@ const PostForm = (props: PostFormProps) => {
             </div>
           )}
 
-          <Preview
-            profile={props.post?.user?.profile}
-            post={props.post}
-            postType={postType}
-            postTitle={postTitle}
-            postBody={postBody}
-            coverImage={coverImage?.url}
-            videoPost={videoPostFormData}
-          />
+          <Preview post={previewPostData} />
 
           <div className="rw-button-group gap-0">
             <Button

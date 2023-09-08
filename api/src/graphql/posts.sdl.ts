@@ -12,6 +12,7 @@ export const schema = gql`
     videoPost: VideoPost
     coverImage: Image
     imageGalleries: [ImageGalleryOnPost]!
+    location: String
   }
 
   type Query {

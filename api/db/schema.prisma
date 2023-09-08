@@ -52,6 +52,7 @@ model Post {
   coverImage     Image?               @relation(fields: [coverImageId], references: [id])
   coverImageId   Int?
   imageGalleries ImageGalleryOnPost[]
+  location       String?
 }
 
 model VideoPost {

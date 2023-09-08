@@ -19,6 +19,8 @@ export const standard = defineScenario<Prisma.PostCreateArgs>({
             roles: ['ADMIN', 'MODERATOR', 'USER', 'GUEST'],
           },
         },
+        location:
+          'Shibuya Scramble Crossing, 21 Udagawa-cho, Shibuya City, Tokyo, Japan',
       },
     },
     two: {
@@ -36,6 +38,7 @@ export const standard = defineScenario<Prisma.PostCreateArgs>({
             roles: ['ADMIN', 'MODERATOR', 'USER', 'GUEST'],
           },
         },
+        location: '1 Chome-1-2 Oshiage, Sumida City, Tokyo 131-0045, Japan',
       },
     },
   },
