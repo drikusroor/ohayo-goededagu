@@ -307,21 +307,6 @@ const PostForm = (props: PostFormProps) => {
             />
           )}
 
-          {postType === EPostType.ARTICLE && (
-            <div className="mt-4">
-              <Upload
-                name="coverImage"
-                multiple={false}
-                handleUpload={([{ public_id, secure_url }]) =>
-                  setCoverImage({
-                    imageId: public_id,
-                    url: secure_url,
-                  })
-                }
-              />
-            </div>
-          )}
-
           <Preview post={previewPostData} />
 
           <div className="rw-button-group gap-0">
