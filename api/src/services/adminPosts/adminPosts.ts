@@ -13,7 +13,7 @@ export const adminPost = ({ id }) => {
 }
 
 export const createPost = async ({ input }) => {
-  const { coverImage, videoPost, ...postInput } = input
+  const { imageGalleries, coverImage, videoPost, ...postInput } = input
 
   const created = await db.post.create({
     data: { ...postInput, userId: context.currentUser.id },
@@ -27,6 +27,27 @@ export const createPost = async ({ input }) => {
 
   if (coverImage) {
     await upsertCoverImage(created.id, coverImage)
+  }
+
+  if (imageGalleries && imageGalleries.length > 0) {
+    await Promise.all(
+      imageGalleries.map(async (imageGallery) => {
+        await db.imageGalleryOnPost.create({
+          data: {
+            post: {
+              connect: { id: created.id },
+            },
+            imageGallery: {
+              create: {
+                images: {
+                  create: imageGallery.images,
+                },
+              },
+            },
+          },
+        })
+      })
+    )
   }
 
   return created

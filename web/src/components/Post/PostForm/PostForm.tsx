@@ -10,8 +10,10 @@ import {
   BsSaveFill,
 } from 'react-icons/bs'
 import type {
+  CreateImageGalleryOnPostInput,
   CreateImageInput,
   EditPostById,
+  ImageGalleryOnPost,
   UpdatePostInput,
 } from 'types/graphql'
 
@@ -71,15 +73,15 @@ const PostForm = (props: PostFormProps) => {
       }
     }
 
-    if (imageGalleries && typeof imageGalleries === 'object') {
+    if (imageGalleries && imageGalleries.length) {
       delete data.imageGalleries
-      const { imageGallery } = imageGalleries
+      const [{ imageGallery }] = imageGalleries
       const { images } = imageGallery
-      data.imageGalleries = {
-        imageGallery: {
-          images: [...images],
+      data.imageGalleries = [
+        {
+          images,
         },
-      }
+      ]
     }
 
     props.onSave(data, props?.post?.id)
@@ -105,9 +107,9 @@ const PostForm = (props: PostFormProps) => {
     props.post?.location
   )
 
-  const [imageGalleries, setImageGalleries] = React.useState<object>(
-    props?.post?.imageGalleries
-  )
+  const [imageGalleries, setImageGalleries] = React.useState<
+    ImageGalleryOnPost | CreateImageGalleryOnPostInput
+  >(props?.post?.imageGalleries)
 
   const [videoPostFormData, setVideoPostFormData] =
     React.useState<IVideoPostFormData>({
@@ -154,16 +156,18 @@ const PostForm = (props: PostFormProps) => {
   const bodyNotRequired =
     postType === EPostType.VIDEO || postType === EPostType.PHOTO_GALLERY
 
-  const handleSetImageGalleries = (images) => {
+  const handleSetImageGalleries = (images: ICloudinaryUploadResultInfo[]) => {
     const gallery = []
     for (const [key, image] of Object.entries(images)) {
       gallery.push({ imageId: image.public_id, url: image.secure_url })
     }
-    setImageGalleries({
-      imageGallery: {
-        images: gallery,
+    setImageGalleries([
+      {
+        imageGallery: {
+          images: gallery,
+        },
       },
-    })
+    ])
   }
 
   return (
@@ -288,9 +292,7 @@ const PostForm = (props: PostFormProps) => {
                   name="imageGalleries"
                   multiple={true}
                   handleUpload={({ ...images }) => {
-                    handleSetImageGalleries(
-                      images as ICloudinaryUploadResultInfo[]
-                    )
+                    handleSetImageGalleries(images)
                   }}
                 />
               </div>

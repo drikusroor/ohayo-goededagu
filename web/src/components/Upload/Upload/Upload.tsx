@@ -2,7 +2,7 @@ import { FieldError } from '@redwoodjs/forms'
 
 import Button from 'src/components/Button/Button'
 
-declare const cloudinary: any
+declare const cloudinary: unknown
 
 export interface ICloudinaryUploadResultInfo {
   id: string
@@ -34,7 +34,7 @@ export interface ICloudinaryUploadResultInfo {
 interface IUploadProps {
   name: string
   multiple?: boolean
-  handleUpload: (value) => void
+  handleUpload: (value: ICloudinaryUploadResultInfo[]) => void
 }
 
 const Upload = ({ name, multiple, handleUpload }: IUploadProps) => {
@@ -45,17 +45,20 @@ const Upload = ({ name, multiple, handleUpload }: IUploadProps) => {
       multiple: multiple ? multiple : true,
     },
     (error, result) => {
+      console.log(error, result)
+
+      if (error) {
+        console.log('Error uploading image: ', error)
+      }
+
       if (!error && result && result.event === 'success') {
         console.log('Done! Here is the image info: ', result.info)
       }
 
-      if (error && !result?.event) {
-        console.log('Error uploading image: ', error)
-        return
+      if (result?.info?.files) {
+        const images = result.info.files.map((image) => image.uploadInfo)
+        handleUpload(images as ICloudinaryUploadResultInfo[])
       }
-
-      const images = result.info.files.map((image) => image.uploadInfo)
-      handleUpload(images as ICloudinaryUploadResultInfo[])
     }
   )
 
