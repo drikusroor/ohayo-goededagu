@@ -49,6 +49,12 @@ const Upload = ({
       cloudName: 'dl5elpdjy',
       uploadPreset: 'bcfnswai',
       multiple: multiple ? multiple : true,
+      folder:
+        name === 'profilePicture'
+          ? 'Profile pictures'
+          : name === 'coverImage'
+          ? 'Cover images'
+          : '',
     },
     (error, result) => {
       if (!error && result && result.event === 'success') {

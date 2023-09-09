@@ -34,6 +34,7 @@ import {
 import Button from 'src/components/Button/Button'
 import LocationPin from 'src/components/LocationPin/LocationPin'
 import MarkdownEditor from 'src/components/MarkdownEditor/MarkdownEditor'
+import MediaLibrary from 'src/components/MediaLibrary/MediaLibrary'
 import Preview from 'src/components/Upload/Preview/Preview'
 import Upload from 'src/components/Upload/Upload/Upload'
 import { classNames } from 'src/lib/class-names'
@@ -251,6 +252,14 @@ const PostForm = (props: PostFormProps) => {
             </div>
           )}
 
+          <MediaLibrary
+            handleMediaLibrary={({ public_id, secure_url }) =>
+              setCoverImage({
+                imageId: public_id,
+                url: secure_url,
+              })
+            }
+          />
           <Preview post={previewPostData} />
 
           <div className="rw-button-group gap-0">
