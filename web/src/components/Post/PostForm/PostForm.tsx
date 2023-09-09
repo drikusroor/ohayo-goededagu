@@ -252,14 +252,19 @@ const PostForm = (props: PostFormProps) => {
             </div>
           )}
 
-          <MediaLibrary
-            handleMediaLibrary={({ public_id, secure_url }) =>
-              setCoverImage({
-                imageId: public_id,
-                url: secure_url,
-              })
-            }
-          />
+          {/* TODO: Change this to setImageGalleries */}
+          <div className="mt-4">
+            <MediaLibrary
+              name="coverImage"
+              handleMediaLibrary={({ public_id, secure_url }) =>
+                setCoverImage({
+                  imageId: public_id,
+                  url: secure_url,
+                })
+              }
+            />
+          </div>
+
           <Preview post={previewPostData} />
 
           <div className="rw-button-group gap-0">

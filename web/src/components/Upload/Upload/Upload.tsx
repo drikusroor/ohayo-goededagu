@@ -78,7 +78,7 @@ const Upload = ({
         title="Upload files"
         className="rw-button rw-button-blue"
         onClick={onClickUpload}
-        text="Upload image"
+        text={name === 'coverImage' ? 'Upload cover image' : 'Upload image'}
       />
       <FieldError name="upload" className="rw-field-error" />
     </>

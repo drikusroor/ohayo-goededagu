@@ -26,10 +26,11 @@ export interface ICloudinaryMediaLibraryAsset {
 }
 
 interface IMediaLibraryProps {
+  name: string
   handleMediaLibrary: (value: ICloudinaryMediaLibraryAsset) => void
 }
 
-const MediaLibrary = ({ handleMediaLibrary }: IMediaLibraryProps) => {
+const MediaLibrary = ({ name, handleMediaLibrary }: IMediaLibraryProps) => {
   const onClickOpen = () => {
     window.ml = cloudinary.openMediaLibrary(
       {
@@ -57,7 +58,11 @@ const MediaLibrary = ({ handleMediaLibrary }: IMediaLibraryProps) => {
         title="Media library"
         className="rw-button rw-button-blue"
         onClick={onClickOpen}
-        text="Open Media Library"
+        text={
+          name === 'coverImage'
+            ? 'Select from Media Library'
+            : 'Open Media Library'
+        }
       />
       <FieldError name="upload" className="rw-field-error" />
     </>
