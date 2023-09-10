@@ -25,10 +25,12 @@
   },
   "packageManager": "yarn@3.5.1",
   "dependencies": {
+    "@babel/plugin-transform-runtime": "^7.22.15",
     "@fortawesome/fontawesome-svg-core": "^6.4.0",
     "@fortawesome/free-regular-svg-icons": "^6.4.0",
     "@fortawesome/free-solid-svg-icons": "^6.4.0",
     "@fortawesome/react-fontawesome": "latest",
+    "babel-plugin-graphql-tag": "^3.3.0",
     "cloudinary": "^1.37.3",
     "react-icons": "^4.10.1"
   }

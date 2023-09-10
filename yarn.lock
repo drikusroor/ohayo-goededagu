@@ -1460,6 +1460,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/plugin-transform-runtime@npm:^7.22.15":
+  version: 7.22.15
+  resolution: "@babel/plugin-transform-runtime@npm:7.22.15"
+  dependencies:
+    "@babel/helper-module-imports": ^7.22.15
+    "@babel/helper-plugin-utils": ^7.22.5
+    babel-plugin-polyfill-corejs2: ^0.4.5
+    babel-plugin-polyfill-corejs3: ^0.8.3
+    babel-plugin-polyfill-regenerator: ^0.5.2
+    semver: ^6.3.1
+  peerDependencies:
+    "@babel/core": ^7.0.0-0
+  checksum: a01c4bc83c720e55367de978ab5c93ed6e27cd0f5e932c3628df6aed4331ee876868a3bf9a8c588aecf1ae2894dd5a6ffb21362af19b232d9fd2e836af431828
+  languageName: node
+  linkType: hard
+
 "@babel/plugin-transform-shorthand-properties@npm:^7.0.0, @babel/plugin-transform-shorthand-properties@npm:^7.22.5":
   version: 7.22.5
   resolution: "@babel/plugin-transform-shorthand-properties@npm:7.22.5"
@@ -9512,7 +9528,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"babel-plugin-graphql-tag@npm:3.3.0":
+"babel-plugin-graphql-tag@npm:3.3.0, babel-plugin-graphql-tag@npm:^3.3.0":
   version: 3.3.0
   resolution: "babel-plugin-graphql-tag@npm:3.3.0"
   dependencies:
@@ -21643,6 +21659,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "root-workspace-0b6124@workspace:."
   dependencies:
+    "@babel/plugin-transform-runtime": ^7.22.15
     "@fortawesome/fontawesome-svg-core": ^6.4.0
     "@fortawesome/free-regular-svg-icons": ^6.4.0
     "@fortawesome/free-solid-svg-icons": ^6.4.0
@@ -21650,6 +21667,7 @@ __metadata:
     "@redwoodjs/auth-dbauth-setup": 6.2.0
     "@redwoodjs/cli-storybook": 6.2.0
     "@redwoodjs/core": 6.2.0
+    babel-plugin-graphql-tag: ^3.3.0
     cloudinary: ^1.37.3
     prettier-plugin-tailwindcss: ^0.3.0
     react-icons: ^4.10.1
