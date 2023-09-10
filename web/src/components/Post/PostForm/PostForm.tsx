@@ -158,7 +158,7 @@ const PostForm = (props: PostFormProps) => {
 
   const handleSetImageGalleries = (images: ICloudinaryUploadResultInfo[]) => {
     const gallery = []
-    for (const [key, image] of Object.entries(images)) {
+    for (const [_key, image] of Object.entries(images)) {
       gallery.push({ imageId: image.public_id, url: image.secure_url })
     }
     setImageGalleries([
