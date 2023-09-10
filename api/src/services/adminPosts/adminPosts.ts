@@ -2,6 +2,8 @@ import { ForbiddenError } from '@redwoodjs/graphql-server'
 
 import { db } from 'src/lib/db'
 
+import upsertImageGalleriesOnPost from './helpers/upsert-image-galleries-on-post'
+
 export const adminPosts = () => {
   return db.post.findMany({ where: { userId: context.currentUser.id } })
 }
@@ -29,32 +31,15 @@ export const createPost = async ({ input }) => {
     await upsertCoverImage(created.id, coverImage)
   }
 
-  if (imageGalleries && imageGalleries.length > 0) {
-    await Promise.all(
-      imageGalleries.map(async (imageGallery) => {
-        await db.imageGalleryOnPost.create({
-          data: {
-            post: {
-              connect: { id: created.id },
-            },
-            imageGallery: {
-              create: {
-                images: {
-                  create: imageGallery.images,
-                },
-              },
-            },
-          },
-        })
-      })
-    )
+  if (imageGalleries.length > 0) {
+    upsertImageGalleriesOnPost(created.id, imageGalleries)
   }
 
   return created
 }
 
 export const updatePost = async ({ id, input }) => {
-  const { videoPost, coverImage, ...postInput } = input
+  const { imageGalleries = [], videoPost, coverImage, ...postInput } = input
 
   const post = await db.post.findUnique({ where: { id } })
 
@@ -77,6 +62,10 @@ export const updatePost = async ({ id, input }) => {
 
   if (coverImage) {
     await upsertCoverImage(id, coverImage)
+  }
+
+  if (imageGalleries.length > 0) {
+    upsertImageGalleriesOnPost(id, imageGalleries)
   }
 
   return updated

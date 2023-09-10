@@ -37,6 +37,7 @@ export const QUERY = gql`
       imageGalleries {
         id
         imageGallery {
+          id
           name
           description
           images {

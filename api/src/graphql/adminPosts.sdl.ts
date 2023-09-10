@@ -44,6 +44,7 @@ export const schema = gql`
 
   input UpsertImageGalleryOnCreatePostInput {
     id: Int
+    imageGalleryId: Int
     images: [CreateImageInput]
   }
 

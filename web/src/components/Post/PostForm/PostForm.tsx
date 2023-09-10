@@ -10,10 +10,8 @@ import {
   BsSaveFill,
 } from 'react-icons/bs'
 import type {
-  CreateImageGalleryOnPostInput,
   CreateImageInput,
   EditPostById,
-  ImageGalleryOnPost,
   UpdatePostInput,
 } from 'types/graphql'
 
@@ -75,13 +73,25 @@ const PostForm = (props: PostFormProps) => {
 
     if (imageGalleries && imageGalleries.length) {
       delete data.imageGalleries
-      const [{ imageGallery }] = imageGalleries
-      const { images } = imageGallery
-      data.imageGalleries = [
-        {
-          images,
-        },
-      ]
+
+      data.imageGalleries = imageGalleries.map((galleryOnPost) => {
+        const { id, imageGallery } = galleryOnPost
+        const { images, id: imageGalleryId } = imageGallery
+        return {
+          id,
+          imageGalleryId,
+          images: images.map((image) => {
+            const { id, imageId, url } = image
+            return {
+              id,
+              imageId,
+              url,
+            }
+          }),
+        }
+      })
+
+      console.log('data.imageGalleries', data.imageGalleries)
     }
 
     props.onSave(data, props?.post?.id)
@@ -107,9 +117,9 @@ const PostForm = (props: PostFormProps) => {
     props.post?.location
   )
 
-  const [imageGalleries, setImageGalleries] = React.useState<
-    ImageGalleryOnPost | CreateImageGalleryOnPostInput
-  >(props?.post?.imageGalleries)
+  const [imageGalleries, setImageGalleries] = React.useState(
+    props?.post?.imageGalleries
+  )
 
   const [videoPostFormData, setVideoPostFormData] =
     React.useState<IVideoPostFormData>({
