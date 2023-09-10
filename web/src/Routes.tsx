@@ -38,6 +38,12 @@ const Routes = () => {
             <Route path="/admin/posts/{id:Int}" page={PostPostPage} name="post" />
             <Route path="/admin/posts" page={PostPostsPage} name="posts" />
           </Set>
+          <Set wrap={ScaffoldLayout} title="ImageGalleries" titleTo="imageGalleries" buttonLabel="New ImageGallery" buttonTo="newImageGallery">
+            <Route path="/image-galleries/new" page={ImageGalleryNewImageGalleryPage} name="newImageGallery" />
+            <Route path="/image-galleries/{id:Int}/edit" page={ImageGalleryEditImageGalleryPage} name="editImageGallery" />
+            <Route path="/image-galleries/{id:Int}" page={ImageGalleryImageGalleryPage} name="imageGallery" />
+            <Route path="/image-galleries" page={ImageGalleryImageGalleriesPage} name="imageGalleries" />
+          </Set>
           <Set wrap={ScaffoldLayout} title="Profile" titleTo="profileSelf" buttonLabel="New Profile" buttonTo="newProfile">
             <Route path="/admin/profile/new" page={ProfileNewProfilePage} name="newProfile" />
             <Route path="/admin/profile/self" page={ProfileProfileSelfPage} name="profileSelf" />
