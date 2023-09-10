@@ -117,7 +117,7 @@ model ImageGalleryImage {
   imageId        String
   url            String
   imageGalleryId Int
-  imageGallery   ImageGallery @relation(fields: [imageGalleryId], references: [id])
+  imageGallery   ImageGallery @relation(fields: [imageGalleryId], references: [id], onDelete: Cascade)
 }
 
 model ImageGallery {
@@ -133,7 +133,7 @@ model ImageGalleryOnPost {
   id             Int          @id @default(autoincrement())
   createdAt      DateTime     @default(now())
   imageGalleryId Int
-  imageGallery   ImageGallery @relation(fields: [imageGalleryId], references: [id])
+  imageGallery   ImageGallery @relation(fields: [imageGalleryId], references: [id], onDelete: Cascade)
   postId         Int
   post           Post         @relation(fields: [postId], references: [id])
 }
