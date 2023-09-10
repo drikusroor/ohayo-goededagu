@@ -75,11 +75,11 @@ export const Success = ({
     {
       onCompleted: () => {
         toast.success('Image deleted')
-        navigate(routes.editImageGallery({ id: imageGallery.id }))
       },
       onError: (error) => {
         toast.error(error.message)
       },
+      refetchQueries: [{ query: QUERY, variables: { id: imageGallery.id } }],
     }
   )
 
@@ -88,6 +88,12 @@ export const Success = ({
     id: EditImageGalleryById['imageGallery']['id']
   ) => {
     updateImageGallery({ variables: { id, input } })
+  }
+
+  const onDeleteImageGalleryImage = (id: number) => {
+    if (confirm('Are you sure you want to delete this image?')) {
+      deleteImageGalleryImage({ variables: { id } })
+    }
   }
 
   return (
@@ -114,13 +120,20 @@ export const Success = ({
               <Button
                 color="monza-red"
                 className='flex flex-row items-center gap-2 mt-2'
-                onClick={() => deleteImageGalleryImage({ variables: { id: image.id } })}
+                onClick={() => onDeleteImageGalleryImage(image.id)}
               >
                 <BsTrash />
                 Delete
               </Button>
             </div>
           ))}
+          {imageGallery?.images?.length === 0 && (
+            <div>
+              <p className="text-gray-500">
+                No images.
+              </p>
+            </div>
+          )}
         </div>
       </div>
     </div>
