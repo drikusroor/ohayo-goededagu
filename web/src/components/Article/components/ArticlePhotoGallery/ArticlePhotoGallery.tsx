@@ -23,7 +23,9 @@ const ArticlePhotoGallery = ({ article, displayType, date }: Props) => {
   const authorName =
     article.user?.profile?.name || article.user?.name || 'Anonymous'
 
-  const galleries = article.imageGalleries.reduce((acc, galleryOnPost) => {
+  const { imageGalleries = [] } = article
+
+  const galleries = imageGalleries.reduce((acc, galleryOnPost) => {
     const { imageGallery } = galleryOnPost
     if (imageGallery) {
       return [...acc, imageGallery]
