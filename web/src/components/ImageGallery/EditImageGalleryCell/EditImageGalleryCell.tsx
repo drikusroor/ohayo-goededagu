@@ -9,6 +9,8 @@ import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
 import ImageGalleryForm from 'src/components/ImageGallery/ImageGalleryForm'
+import Button from 'src/components/Button/Button'
+import { BsTrash } from 'react-icons/bs'
 
 export const QUERY = gql`
   query EditImageGalleryById($id: Int!) {
@@ -17,6 +19,10 @@ export const QUERY = gql`
       createdAt
       name
       description
+      images {
+        id
+        url
+      }
     }
   }
 `
@@ -30,6 +36,14 @@ const UPDATE_IMAGE_GALLERY_MUTATION = gql`
       createdAt
       name
       description
+    }
+  }
+`
+
+const DELETE_IMAGE_GALLERY_IMAGE_MUTATION = gql`
+  mutation DeleteImageGalleryImageMutation($id: Int!) {
+    deleteImageGalleryImage(id: $id) {
+      id
     }
   }
 `
@@ -49,6 +63,19 @@ export const Success = ({
       onCompleted: () => {
         toast.success('ImageGallery updated')
         navigate(routes.imageGalleries())
+      },
+      onError: (error) => {
+        toast.error(error.message)
+      },
+    }
+  )
+
+  const [deleteImageGalleryImage, { loading: deleteLoading }] = useMutation(
+    DELETE_IMAGE_GALLERY_IMAGE_MUTATION,
+    {
+      onCompleted: () => {
+        toast.success('Image deleted')
+        navigate(routes.editImageGallery({ id: imageGallery.id }))
       },
       onError: (error) => {
         toast.error(error.message)
@@ -77,6 +104,24 @@ export const Success = ({
           error={error}
           loading={loading}
         />
+      </div>
+      <div className="rw-segment-main">
+        <h2 className="text-xl font-semibold">Images</h2>
+        <div className="grid grid-cols-3 gap-4">
+          {imageGallery?.images?.map((image) => (
+            <div>
+              <img src={image.url} alt={imageGallery.name} key={image.id} />
+              <Button
+                color="monza-red"
+                className='flex flex-row items-center gap-2 mt-2'
+                onClick={() => deleteImageGalleryImage({ variables: { id: image.id } })}
+              >
+                <BsTrash />
+                Delete
+              </Button>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   )
