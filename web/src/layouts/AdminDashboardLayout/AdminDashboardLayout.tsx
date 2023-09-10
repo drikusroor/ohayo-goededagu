@@ -6,6 +6,7 @@ import {
   BsFillJournalBookmarkFill,
   BsFillPersonFill,
   BsFillPersonVcardFill,
+  BsImages,
   BsJournals,
   BsPersonCheckFill,
 } from 'react-icons/bs'
@@ -43,6 +44,13 @@ const menuItems: MenuItem[] = [
     activeRoutePattern: '/my-posts',
     roles: ['ADMIN', 'MODERATOR'],
     icon: <BsFillJournalBookmarkFill />,
+  },
+  {
+    name: 'Image Galleries',
+    path: '/admin/image-galleries',
+    activeRoutePattern: '/image-galleries',
+    roles: ['ADMIN', 'MODERATOR'],
+    icon: <BsImages />,
   },
   {
     name: 'Account',
