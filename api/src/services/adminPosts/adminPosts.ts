@@ -15,7 +15,7 @@ export const adminPost = ({ id }) => {
 }
 
 export const createPost = async ({ input }) => {
-  const { imageGalleries, coverImage, videoPost, ...postInput } = input
+  const { imageGalleries = [], coverImage, videoPost, ...postInput } = input
 
   const created = await db.post.create({
     data: { ...postInput, userId: context.currentUser.id },
