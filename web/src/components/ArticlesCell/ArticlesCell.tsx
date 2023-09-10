@@ -31,6 +31,18 @@ export const QUERY = gql`
         id
       }
       location
+      imageGalleries {
+        id
+        imageGallery {
+          name
+          description
+          images {
+            id
+            url
+            imageId
+          }
+        }
+      }
     }
   }
 `

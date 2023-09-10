@@ -7,6 +7,7 @@ interface Props {
 
 const PhotoGrid = ({ images = [], preview }: Props) => {
   const previewGallery = images?.slice(0, 5)
+
   return (
     <>
       <div className="mt-4 bg-gray-200 p-2">

@@ -7,11 +7,8 @@ import {
 import { Post } from 'types/graphql'
 
 import Article from 'src/components/Article/Article'
-import ArticlePhotoGallery from 'src/components/Article/components/ArticlePhotoGallery/ArticlePhotoGallery'
 import ArticlePreview from 'src/components/Article/components/ArticlePreview/ArticlePreview'
-import { EPostType } from 'src/components/ArticleTypeIcon/ArticleTypeIcon'
 import { classNames } from 'src/lib/class-names'
-import { EPostDisplayType } from 'src/types/post-display-type.enum'
 
 import Button from '../../Button/Button'
 
@@ -20,8 +17,6 @@ interface Props {
 }
 
 const Preview = ({ post }: Props) => {
-  const { type } = post
-
   const [blogRollPreview, setBlogRollPreview] = React.useState<boolean>(false)
 
   return (

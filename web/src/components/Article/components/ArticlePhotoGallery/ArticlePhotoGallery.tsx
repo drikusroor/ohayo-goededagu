@@ -23,7 +23,13 @@ const ArticlePhotoGallery = ({ article, displayType, date }: Props) => {
   const authorName =
     article.user?.profile?.name || article.user?.name || 'Anonymous'
 
-  const previewGallery = article?.imageGalleries?.imageGallery?.images?.slice(0, 5)
+  const galleries = article.imageGalleries.reduce((acc, galleryOnPost) => {
+    const { imageGallery } = galleryOnPost
+    if (imageGallery) {
+      return [...acc, imageGallery]
+    }
+    return acc
+  }, [])
 
   if (!article) {
     throw new Error('Could not load article')
@@ -34,11 +40,14 @@ const ArticlePhotoGallery = ({ article, displayType, date }: Props) => {
       {displayType === EPostDisplayType.PREVIEW && (
         <>
           <div className="relative ">
-            <PhotoGrid
-              images={previewGallery}
-              preview={true}
-              className="block h-full w-full"
-            />
+            {galleries.map((gallery) => (
+              <PhotoGrid
+                key={gallery.id}
+                images={gallery.images}
+                preview={true}
+                className="block h-full w-full"
+              />
+            ))}
             <div className="font-3xl absolute bottom-0 z-10 mx-auto h-full w-full max-w-screen-xl bg-gray-600 bg-opacity-50 px-4 py-20 text-center text-white text-opacity-100 md:py-24 lg:py-56">
               <div className="flex flex-row items-center justify-center gap-2 pb-2">
                 <div>
@@ -95,9 +104,14 @@ const ArticlePhotoGallery = ({ article, displayType, date }: Props) => {
             </div>
           </header>
           <div> {article.body} </div>
-          {article?.imageGalleries?.imageGallery?.images && (
-            <PhotoGrid images={article?.imageGalleries?.imageGallery?.images} />
-          )}
+          {galleries.map((gallery) => (
+            <PhotoGrid
+              key={gallery.id}
+              images={gallery.images}
+              preview={false}
+              className="block h-full w-full"
+            />
+          ))}
         </>
       )}
     </>
