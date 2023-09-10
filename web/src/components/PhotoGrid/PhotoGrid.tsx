@@ -1,7 +1,7 @@
-import { ICloudinaryUploadResultInfo } from '../Upload/Upload/Upload'
+import { Image } from 'types/graphql'
 
 interface Props {
-  images: ICloudinaryUploadResultInfo[]
+  images: Image[]
   preview?: boolean
 }
 
@@ -15,24 +15,6 @@ const PhotoGrid = ({ images = [], preview }: Props) => {
           {preview &&
             previewGallery.map((photo) => {
               return (
-                <>
-                  <li
-                    className="relative h-[300px] grow basis-auto last:flex-initial"
-                    key={photo.imageId}
-                  >
-                    <img
-                      className="h-full w-full rounded-md object-cover align-middle"
-                      key={photo.imageId}
-                      src={photo.url}
-                      alt={photo.imageId}
-                    />
-                  </li>
-                </>
-              )
-            })}
-          {images.map((photo) => {
-            return (
-              <>
                 <li
                   className="relative h-[300px] grow basis-auto last:flex-initial"
                   key={photo.imageId}
@@ -44,7 +26,21 @@ const PhotoGrid = ({ images = [], preview }: Props) => {
                     alt={photo.imageId}
                   />
                 </li>
-              </>
+              )
+            })}
+          {images.map((photo) => {
+            return (
+              <li
+                className="relative h-[300px] grow basis-auto last:flex-initial"
+                key={photo.imageId}
+              >
+                <img
+                  className="h-full w-full rounded-md object-cover align-middle"
+                  key={photo.imageId}
+                  src={photo.url}
+                  alt={photo.imageId}
+                />
+              </li>
             )
           })}
         </ul>
