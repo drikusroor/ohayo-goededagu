@@ -40,9 +40,9 @@ const ArticlePhotoGallery = ({ article, displayType, date }: Props) => {
       {displayType === EPostDisplayType.PREVIEW && (
         <>
           <div className="relative ">
-            {galleries.map((gallery) => (
+            {galleries.map((gallery, index) => (
               <PhotoGrid
-                key={gallery.id}
+                key={index}
                 images={gallery.images}
                 preview={true}
                 className="block h-full w-full"
@@ -104,9 +104,9 @@ const ArticlePhotoGallery = ({ article, displayType, date }: Props) => {
             </div>
           </header>
           <div> {article.body} </div>
-          {galleries.map((gallery) => (
+          {galleries.map((gallery, index) => (
             <PhotoGrid
-              key={gallery.id}
+              key={index}
               images={gallery.images}
               preview={false}
               className="block h-full w-full"
