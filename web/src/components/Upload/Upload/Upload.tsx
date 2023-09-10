@@ -45,8 +45,6 @@ const Upload = ({ name, multiple, handleUpload }: IUploadProps) => {
       multiple: multiple ? multiple : true,
     },
     (error, result) => {
-      console.log(error, result)
-
       if (error) {
         console.log('Error uploading image: ', error)
       }
