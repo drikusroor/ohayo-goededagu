@@ -2,7 +2,7 @@ import type { ArticlesQuery } from 'types/graphql'
 
 import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
 
-import ArticlePreview from '../Article/components/ArticlePreview'
+import ArticlePreview from '../Article/components/ArticlePreview/ArticlePreview'
 import { EPostType } from '../ArticleTypeIcon/ArticleTypeIcon'
 import Skeleton from '../Skeleton/Skeleton'
 
@@ -31,6 +31,18 @@ export const QUERY = gql`
         id
       }
       location
+      imageGalleries {
+        id
+        imageGallery {
+          name
+          description
+          images {
+            id
+            url
+            imageId
+          }
+        }
+      }
     }
   }
 `

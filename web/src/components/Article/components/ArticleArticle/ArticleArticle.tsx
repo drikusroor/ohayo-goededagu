@@ -7,13 +7,14 @@ import ArticleCommentCountBadge from 'src/components/ArticleCommentCountBadge/Ar
 import Button from 'src/components/Button/Button'
 import DisplayDatetime from 'src/components/DisplayDatetime/DisplayDatetime'
 import LocationPin from 'src/components/LocationPin/LocationPin'
+import PhotoGrid from 'src/components/PhotoGrid/PhotoGrid'
 import RenderBody from 'src/components/RenderBody/RenderBody'
 import { EPostDisplayType } from 'src/types/post-display-type.enum'
 
 import ArticleTypeIcon, {
   EPostType,
-} from '../../ArticleTypeIcon/ArticleTypeIcon'
-import Avatar from '../../Avatar/Avatar'
+} from '../../../ArticleTypeIcon/ArticleTypeIcon'
+import Avatar from '../../../Avatar/Avatar'
 
 interface Props {
   article: Post
@@ -121,6 +122,9 @@ const ArticleArticle = ({ article, displayType }: Props) => {
           <div>
             <RenderBody body={article.body} />
           </div>
+          {article?.imageGalleries?.imageGallery?.images && (
+            <PhotoGrid images={article?.imageGalleries?.imageGallery?.images} />
+          )}
         </>
       )}
     </>

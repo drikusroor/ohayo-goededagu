@@ -7,7 +7,7 @@ import {
 import { Post } from 'types/graphql'
 
 import Article from 'src/components/Article/Article'
-import ArticlePreview from 'src/components/Article/components/ArticlePreview'
+import ArticlePreview from 'src/components/Article/components/ArticlePreview/ArticlePreview'
 import { classNames } from 'src/lib/class-names'
 
 import Button from '../../Button/Button'
@@ -56,7 +56,7 @@ const Preview = ({ post }: Props) => {
         </Button>
       </div>
 
-      <div className="mb-2 rounded rounded-t-none bg-gray-200">
+      <div className="mb-2 bg-gray-200">
         {!blogRollPreview && <Article article={post} />}
         {blogRollPreview && <ArticlePreview article={post} />}
       </div>

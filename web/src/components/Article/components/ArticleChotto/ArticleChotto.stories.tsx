@@ -51,6 +51,6 @@ export const previewNoComments = () => {
 }
 
 export default {
-  title: 'Components/ArticleChotto',
+  title: 'Articles/ArticleChotto',
   component: ArticleChotto,
 } as ComponentMeta<typeof ArticleChotto>

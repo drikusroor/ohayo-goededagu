@@ -16,12 +16,12 @@ import type { ComponentMeta } from '@storybook/react'
 import getArticle from 'src/fixtures/get-article.fixture'
 import { EPostDisplayType } from 'src/types/post-display-type.enum'
 
-import ArticleArticle from './ArticleArticle'
+import ArticleHaiku from './ArticleHaiku'
 
 export const full = () => {
   return (
     <div className="p-8">
-      <ArticleArticle
+      <ArticleHaiku
         article={getArticle()}
         displayType={EPostDisplayType.FULL}
       />
@@ -32,7 +32,7 @@ export const full = () => {
 export const preview = () => {
   return (
     <div className="p-8">
-      <ArticleArticle
+      <ArticleHaiku
         article={getArticle()}
         displayType={EPostDisplayType.PREVIEW}
       />
@@ -45,15 +45,12 @@ export const previewNoComments = () => {
 
   return (
     <div className="p-8">
-      <ArticleArticle
-        article={article}
-        displayType={EPostDisplayType.PREVIEW}
-      />
+      <ArticleHaiku article={article} displayType={EPostDisplayType.PREVIEW} />
     </div>
   )
 }
 
 export default {
-  title: 'Components/ArticleArticle',
-  component: ArticleArticle,
-} as ComponentMeta<typeof ArticleArticle>
+  title: 'Articles/ArticleHaiku',
+  component: ArticleHaiku,
+} as ComponentMeta<typeof ArticleHaiku>

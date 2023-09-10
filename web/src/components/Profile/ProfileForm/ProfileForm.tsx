@@ -30,7 +30,6 @@ const ProfileForm = (props: ProfileFormProps) => {
       }
       data.avatar = profilePicture
     }
-
     props.onSave(data)
   }
 
@@ -96,7 +95,7 @@ const ProfileForm = (props: ProfileFormProps) => {
         <FieldError name="bio" className="rw-field-error" />
 
         <Label
-          name="profilePicture"
+          name="avatar"
           className="rw-label"
           errorClassName="rw-label rw-label-error"
         >
@@ -105,11 +104,10 @@ const ProfileForm = (props: ProfileFormProps) => {
 
         <div className="mt-4 flex flex-row items-center gap-4">
           <Upload
-            name="profilePicture"
+            name="avatar"
             multiple={false}
-            setProfilePicture={({ secure_url }) =>
-              setProfilePicture(secure_url)
-            }
+            // folder="Avatar"
+            handleUpload={({ secure_url }) => setProfilePicture(secure_url)}
           />
 
           {profilePicture && (
