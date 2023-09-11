@@ -11,6 +11,11 @@ export const QUERY = gql`
       createdAt
       name
       description
+      images {
+        id
+        imageId
+        url
+      }
     }
   }
 `
