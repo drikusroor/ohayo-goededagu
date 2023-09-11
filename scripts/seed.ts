@@ -3,6 +3,8 @@ import { db } from 'api/src/lib/db'
 
 import { hashPassword } from '@redwoodjs/auth-dbauth-api'
 
+import getImageGalleriesCreateCommand from './helpers/create-image-galleries-command'
+
 export default async () => {
   try {
     //
@@ -94,30 +96,7 @@ export default async () => {
         body: 'This is my first post',
         published: true,
         userId: 1,
-        imageGalleries: {
-          create: [
-            {
-              imageGallery: {
-                create: {
-                  name: 'First Gallery',
-                  description: 'This is the first gallery',
-                  images: {
-                    create: [
-                      {
-                        imageId: 'b1b9a0c0-9f0a-11eb-8dcd-0242ac130003',
-                        url: 'https://picsum.photos/seed/1/200/300',
-                      },
-                      {
-                        imageId: 'b1b9a0c0-9f0a-11eb-8dcd-0242ac130004',
-                        url: 'https://picsum.photos/seed/2/200/300',
-                      },
-                    ],
-                  },
-                },
-              },
-            },
-          ],
-        },
+        imageGalleries: getImageGalleriesCreateCommand({ galleriesAmount: 2 }),
         location:
           'Shibuya Scramble Crossing, 21 Udagawa-cho, Shibuya City, Tokyo, Japan',
       },
@@ -135,6 +114,19 @@ export default async () => {
         userId: 1,
         type: 'CHOTTO',
         location: 'Dejimamachi, Nagasaki, Japan',
+      },
+      {
+        title: 'Fourth Post (photo gallery)',
+        body: 'This is my fourth post, with a photo gallery',
+        published: true,
+        userId: 1,
+        imageGalleries: getImageGalleriesCreateCommand({
+          galleriesAmount: 1,
+          imagesAmount: 13,
+        }),
+        location:
+          'Shibuya Scramble Crossing, 21 Udagawa-cho, Shibuya City, Tokyo, Japan',
+        type: 'PHOTO_GALLERY',
       },
     ]
 

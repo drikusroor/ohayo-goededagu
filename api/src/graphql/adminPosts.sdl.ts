@@ -46,6 +46,7 @@ export const schema = gql`
     id: Int
     imageGalleryId: Int
     images: [CreateImageInput]
+    name: String
   }
 
   type Mutation {
