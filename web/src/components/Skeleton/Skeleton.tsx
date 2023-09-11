@@ -1,3 +1,5 @@
+import { classNames } from 'src/lib/class-names'
+
 interface ISkeletonProps {
   className?: string
   width?: number
@@ -11,18 +13,16 @@ const Skeleton = ({
   width,
   height,
   circle = false,
-  count = 1,
 }: ISkeletonProps) => {
-  const skeletonClasses = `bg-gray-200 animate-pulse ${className}`
+  const skeletonClasses = `bg-gray-200 animate-pulse ${className} h-8`
 
-  return Array.from({ length: count }, (_, i) => (
+  return (
     <div
-      key={i}
       role="status"
-      className={skeletonClasses}
-      style={{ width, height, borderRadius: circle ? '50%' : '0' }}
+      className={classNames(circle ? 'rounded-full' : '', skeletonClasses)}
+      style={{ width, height }}
     />
-  ))
+  )
 }
 
 export default Skeleton

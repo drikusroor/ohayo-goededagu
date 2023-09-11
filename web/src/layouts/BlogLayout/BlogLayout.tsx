@@ -20,25 +20,36 @@ const BlogLayout = ({ children, skeleton }: BlogLayoutProps) => {
       <>
         <header className="w-full pb-5 text-center">
           <div className={`mx-auto w-32`}>
-            <Skeleton circle={true} height={128} width={128} />
+            <Skeleton
+              circle={true}
+              height={128}
+              width={128}
+              className="rounded-t-sm shadow-lg"
+            />
           </div>
-          <h1 className="pt-3 text-3xl font-bold">
-            <Skeleton width={200} />
+          <h1 className="flex h-12 justify-center gap-2 pt-3 text-3xl font-bold">
+            <Skeleton width={300} className="rounded" />
+            <Skeleton width={300} className="rounded" />
           </h1>
-          <Skeleton width={100} />
+          <Skeleton width={100} className="mx-auto mt-2 rounded" />
           <nav>
             <ul className="mt-3 flex justify-center gap-5">
               <li>
-                <Skeleton width={50} />
+                <Skeleton width={50} className="rounded" />
               </li>
               <li>
-                <Skeleton width={150} />
+                <Skeleton width={50} className="rounded" />
+              </li>
+              <li>
+                <Skeleton width={150} className="rounded" />
               </li>
             </ul>
           </nav>
         </header>
-        <main className="max-w-screen mx-auto p-4 md:max-w-7xl">
-          <Skeleton count={5} />
+        <main className="max-w-screen mx-auto flex flex-col gap-8 p-4 md:max-w-7xl">
+          <Skeleton className="h-96 w-full rounded" />
+          <Skeleton className="h-96 w-full rounded" />
+          <Skeleton className="h-96 w-full rounded" />
         </main>
       </>
     )
