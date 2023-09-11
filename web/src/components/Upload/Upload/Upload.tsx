@@ -47,8 +47,8 @@ const Upload = ({ name, multiple, handleUpload }: IUploadProps) => {
 
   const widget = cloudinary.createUploadWidget(
     {
-      cloudName: 'dl5elpdjy',
-      uploadPreset: 'bcfnswai',
+      cloudName: process.env.CLOUD_NAME,
+      uploadPreset: process.env.UPLOAD_PRESET,
       multiple: multiple ? multiple : true,
       folder: defaultFolder,
     },

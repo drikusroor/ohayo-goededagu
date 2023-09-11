@@ -15,9 +15,9 @@ const MediaLibrary = ({ name, handleMediaLibrary }: IMediaLibraryProps) => {
   const onClickOpen = () => {
     window.ml = cloudinary.openMediaLibrary(
       {
-        cloud_name: 'dl5elpdjy',
-        api_key: '929416121543777',
-        username: 'nreliasar@gmail.com',
+        cloud_name: process.env.CLOUD_NAME,
+        api_key: process.env.API_KEY,
+        username: process.env.USERNAME,
       },
       {
         insertHandler: function (data) {

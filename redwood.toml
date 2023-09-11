@@ -9,7 +9,7 @@
   title = "Ohayo Goededagu | おはよ グデダギュ"
   port = 8910
   apiUrl = "/.netlify/functions"
-  includeEnvironmentVariables = [] # any ENV vars that should be available to the web side, see https://redwoodjs.com/docs/environment-variables#web
+  includeEnvironmentVariables = ['CLOUD_NAME', 'API_KEY', 'USERNAME', 'UPLOAD_PRESET'] # any ENV vars that should be available to the web side, see https://redwoodjs.com/docs/environment-variables#web
 [api]
   port = 8911
 [browser]
