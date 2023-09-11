@@ -113,7 +113,7 @@ export const Success = ({
       </div>
       <div className="rw-segment-main">
         <h2 className="text-xl font-semibold">Images</h2>
-        <div className="grid grid-cols-3 gap-4">
+        <div className="mt-4 grid grid-cols-3 gap-4">
           {imageGallery?.images?.map((image) => (
             <div key={image.id}>
               <img src={image.url} alt={imageGallery.name} key={image.id} />
