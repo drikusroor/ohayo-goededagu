@@ -22,10 +22,10 @@ const ImageModal = ({info}: Props) => {
         <div className='flex flex-col gap-2'>
           <img id="modalImage" className="h-full w-fit rounded-md" src={info?.url} key={info?.id} alt={info?.id} />
           {info?.title && (
-          <span className="text-xl">{info?.title}</span>
+            <span className="text-xl">{info?.title}</span>
           )}
           {info?.description && (
-          <span>{info?.description}</span>
+            <span>{info?.description}</span>
           )}
         </div>
       </div>
