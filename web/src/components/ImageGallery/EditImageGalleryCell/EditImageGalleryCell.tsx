@@ -1,3 +1,4 @@
+import { BsTrash } from 'react-icons/bs'
 import type {
   EditImageGalleryById,
   UpdateImageGalleryInput,
@@ -8,9 +9,8 @@ import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
-import ImageGalleryForm from 'src/components/ImageGallery/ImageGalleryForm'
 import Button from 'src/components/Button/Button'
-import { BsTrash } from 'react-icons/bs'
+import ImageGalleryForm from 'src/components/ImageGallery/ImageGalleryForm'
 
 export const QUERY = gql`
   query EditImageGalleryById($id: Int!) {
@@ -115,11 +115,11 @@ export const Success = ({
         <h2 className="text-xl font-semibold">Images</h2>
         <div className="grid grid-cols-3 gap-4">
           {imageGallery?.images?.map((image) => (
-            <div>
+            <div key={image.id}>
               <img src={image.url} alt={imageGallery.name} key={image.id} />
               <Button
                 color="monza-red"
-                className='flex flex-row items-center gap-2 mt-2'
+                className="mt-2 flex flex-row items-center gap-2"
                 onClick={() => onDeleteImageGalleryImage(image.id)}
               >
                 <BsTrash />
@@ -129,9 +129,7 @@ export const Success = ({
           ))}
           {imageGallery?.images?.length === 0 && (
             <div>
-              <p className="text-gray-500">
-                No images.
-              </p>
+              <p className="text-gray-500">No images.</p>
             </div>
           )}
         </div>
