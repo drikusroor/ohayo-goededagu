@@ -9,6 +9,8 @@ import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
 import ImageGalleryForm from 'src/components/ImageGallery/ImageGalleryForm'
+import Button from 'src/components/Button/Button'
+import { BsTrash } from 'react-icons/bs'
 
 export const QUERY = gql`
   query EditImageGalleryById($id: Int!) {
@@ -17,6 +19,10 @@ export const QUERY = gql`
       createdAt
       name
       description
+      images {
+        id
+        url
+      }
     }
   }
 `
@@ -30,6 +36,14 @@ const UPDATE_IMAGE_GALLERY_MUTATION = gql`
       createdAt
       name
       description
+    }
+  }
+`
+
+const DELETE_IMAGE_GALLERY_IMAGE_MUTATION = gql`
+  mutation DeleteImageGalleryImageMutation($id: Int!) {
+    deleteImageGalleryImage(id: $id) {
+      id
     }
   }
 `
@@ -56,11 +70,30 @@ export const Success = ({
     }
   )
 
+  const [deleteImageGalleryImage, { loading: deleteLoading }] = useMutation(
+    DELETE_IMAGE_GALLERY_IMAGE_MUTATION,
+    {
+      onCompleted: () => {
+        toast.success('Image deleted')
+      },
+      onError: (error) => {
+        toast.error(error.message)
+      },
+      refetchQueries: [{ query: QUERY, variables: { id: imageGallery.id } }],
+    }
+  )
+
   const onSave = (
     input: UpdateImageGalleryInput,
     id: EditImageGalleryById['imageGallery']['id']
   ) => {
     updateImageGallery({ variables: { id, input } })
+  }
+
+  const onDeleteImageGalleryImage = (id: number) => {
+    if (confirm('Are you sure you want to delete this image?')) {
+      deleteImageGalleryImage({ variables: { id } })
+    }
   }
 
   return (
@@ -77,6 +110,31 @@ export const Success = ({
           error={error}
           loading={loading}
         />
+      </div>
+      <div className="rw-segment-main">
+        <h2 className="text-xl font-semibold">Images</h2>
+        <div className="grid grid-cols-3 gap-4">
+          {imageGallery?.images?.map((image) => (
+            <div>
+              <img src={image.url} alt={imageGallery.name} key={image.id} />
+              <Button
+                color="monza-red"
+                className='flex flex-row items-center gap-2 mt-2'
+                onClick={() => onDeleteImageGalleryImage(image.id)}
+              >
+                <BsTrash />
+                Delete
+              </Button>
+            </div>
+          ))}
+          {imageGallery?.images?.length === 0 && (
+            <div>
+              <p className="text-gray-500">
+                No images.
+              </p>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   )
