@@ -27,7 +27,7 @@ export interface ICloudinaryMediaLibraryAsset {
 
 interface IMediaLibraryProps {
   name: string
-  handleMediaLibrary: (value: ICloudinaryMediaLibraryAsset) => void
+  handleMediaLibrary: (value: ICloudinaryMediaLibraryAsset[]) => void
 }
 
 const MediaLibrary = ({ name, handleMediaLibrary }: IMediaLibraryProps) => {
@@ -40,11 +40,10 @@ const MediaLibrary = ({ name, handleMediaLibrary }: IMediaLibraryProps) => {
       },
       {
         insertHandler: function (data) {
-          console.log('data', data)
           data.assets.forEach((asset: ICloudinaryMediaLibraryAsset) => {
             console.log('Inserted asset:', JSON.stringify(asset, null, 2))
-            handleMediaLibrary(asset as ICloudinaryMediaLibraryAsset)
           })
+          handleMediaLibrary(data.assets as ICloudinaryMediaLibraryAsset[])
         },
       },
       document.getElementById('media_library_widget')
@@ -56,13 +55,9 @@ const MediaLibrary = ({ name, handleMediaLibrary }: IMediaLibraryProps) => {
       <Button
         id="media_library_widget"
         title="Media library"
-        className="rw-button rw-button-blue"
+        className="rw-button rw-button-blue mt-4"
         onClick={onClickOpen}
-        text={
-          name === 'coverImage'
-            ? 'Select from Media Library'
-            : 'Open Media Library'
-        }
+        text='Select from Media Library'
       />
       <FieldError name="upload" className="rw-field-error" />
     </>

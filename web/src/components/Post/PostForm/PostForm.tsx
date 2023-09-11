@@ -167,7 +167,7 @@ const PostForm = (props: PostFormProps) => {
     postType === EPostType.VIDEO || postType === EPostType.PHOTO_GALLERY
 
   const handleSetImageGalleries = (images: ICloudinaryUploadResultInfo[]) => {
-    const gallery = []
+        const gallery = []
     for (const [_key, image] of Object.entries(images)) {
       gallery.push({ imageId: image.public_id, url: image.secure_url })
     }
@@ -287,7 +287,8 @@ const PostForm = (props: PostFormProps) => {
 
           {postType === EPostType.ARTICLE && (
             <>
-              <div className="mt-4">
+              <span className="rw-label"> Cover image </span>
+              <div className='flex flex-row flex-wrap gap-2'>
                 <Upload
                   name="coverImage"
                   multiple={false}
@@ -298,6 +299,18 @@ const PostForm = (props: PostFormProps) => {
                     })
                   }
                 />
+                <MediaLibrary
+                  name="coverImage"
+                  handleMediaLibrary={([{ public_id, secure_url }]) =>
+                    setCoverImage({
+                      imageId: public_id,
+                      url: secure_url,
+                    })
+                  }
+                />
+                </div>
+                <span className="rw-label"> Image Gallery </span>
+                <div className='flex flex-row flex-wrap gap-2'>
                 <Upload
                   name="imageGalleries"
                   multiple={true}
@@ -305,32 +318,36 @@ const PostForm = (props: PostFormProps) => {
                     handleSetImageGalleries(images)
                   }}
                 />
+                <MediaLibrary
+                  name="imageGalleries"
+                  handleMediaLibrary={({ ...images }) => {
+                    handleSetImageGalleries(images as ICloudinaryUploadResultInfo[])
+                  }}
+                />
               </div>
             </>
           )}
 
           {postType === EPostType.PHOTO_GALLERY && (
-            <Upload
-              name="imageGalleries"
-              multiple={true}
-              handleUpload={({ ...images }) => {
-                handleSetImageGalleries(images as ICloudinaryUploadResultInfo[])
-              }}
-            />
+            <>
+              <span className="rw-label"> Image Gallery </span>
+              <div className='flex flex-row flex-wrap gap-2'>
+                <Upload
+                  name="imageGalleries"
+                  multiple={true}
+                  handleUpload={({ ...images }) => {
+                    handleSetImageGalleries(images as ICloudinaryUploadResultInfo[])
+                  }}
+                />
+                <MediaLibrary
+                name="imageGalleries"
+                handleMediaLibrary={({ ...images }) => {
+                  handleSetImageGalleries(images as ICloudinaryUploadResultInfo[])
+                }}
+              />
+            </div>
+          </>
           )}
-
-          {/* TODO: Change this to setImageGalleries */}
-          <div className="mt-4">
-            <MediaLibrary
-              name="coverImage"
-              handleMediaLibrary={({ public_id, secure_url }) =>
-                setCoverImage({
-                  imageId: public_id,
-                  url: secure_url,
-                })
-              }
-            />
-          </div>
 
           <Preview post={previewPostData} />
 
