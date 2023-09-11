@@ -41,7 +41,7 @@ const ArticlePhotoGallery = ({ article, displayType, date }: Props) => {
     <>
       {displayType === EPostDisplayType.PREVIEW && (
         <>
-          <div className="relative ">
+          <div className="relative">
             {galleries.map((gallery, index) => (
               <PhotoGrid
                 key={index}
