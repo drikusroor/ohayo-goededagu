@@ -1,11 +1,8 @@
 interface Props {
-  url: string
-  id: string
-  title?: string
-  description?: string
+  info: object
 }
 
-const ImageModal = ({url, id, title, description}: Props) => {
+const ImageModal = ({info}: Props) => {
   const closeModal = () => {
     document.getElementById("modal").style.display = "none"
   }
@@ -23,12 +20,12 @@ const ImageModal = ({url, id, title, description}: Props) => {
           closeModal()
         }}>
         <div className='flex flex-col gap-2'>
-          <img id="modalImage" className="h-full w-fit rounded-md" src={url} key={id} alt={id} />
-          {title && (
-          <span className="text-xl">{title}</span>
+          <img id="modalImage" className="h-full w-fit rounded-md" src={info?.url} key={info?.id} alt={info?.id} />
+          {info?.title && (
+          <span className="text-xl">{info?.title}</span>
           )}
-          {description && (
-          <span>{description}</span>
+          {info?.description && (
+          <span>{info?.description}</span>
           )}
         </div>
       </div>

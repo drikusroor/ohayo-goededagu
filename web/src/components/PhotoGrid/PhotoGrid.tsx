@@ -12,8 +12,12 @@ interface IPhotoGridProps extends React.HTMLAttributes<HTMLDivElement> {
 const PhotoGrid = ({ className, images = [], preview }: IPhotoGridProps) => {
   const previewGallery = images?.slice(0, 4)
 
-  const [modalUrl, setModalUrl] = React.useState<string>()
-  const [modalId, setModalId] = React.useState<string>()
+  const [modalInfo, setModalInfo] = React.useState<object>({
+    url: String,
+    id: String,
+    title: String,
+    description: String,
+  })
 
   const openModal = () => {
     document.getElementById('modal').style.display = 'block'
@@ -27,7 +31,7 @@ const PhotoGrid = ({ className, images = [], preview }: IPhotoGridProps) => {
             previewGallery.map((photo) => {
               return (
                 <li
-                  className="relative grow basis-auto last:flex-initial lg:h-[300px]"
+                  className="relative h-[300px] grow basis-auto last:flex-initial"
                   key={photo.imageId}
                 >
                   <img
@@ -49,13 +53,20 @@ const PhotoGrid = ({ className, images = [], preview }: IPhotoGridProps) => {
                   >
                     <img
                       className="h-full w-full rounded-md object-cover align-middle"
+                      className="h-full w-full cursor-pointer rounded-md object-cover align-middle"
                       key={photo.imageId}
                       src={photo.url}
                       alt={photo.imageId}
                       onClick={() => {
                         openModal()
-                        setModalUrl(photo.url)
-                        setModalId(photo.imageId)
+                        setModalInfo({
+                          url: photo.url,
+                          id: photo.imageId,
+                          title: photo?.name ? photo?.name : '',
+                          description: photo?.description
+                            ? photo?.description
+                            : '',
+                        })
                       }}
                     />
                   </li>
