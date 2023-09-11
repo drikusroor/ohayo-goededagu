@@ -42,6 +42,7 @@ import Upload, {
 import { classNames } from 'src/lib/class-names'
 
 import VideoForm, { IVideoPostFormData } from './TypeForms/VideoForm'
+import UploadList from 'src/components/UploadList/UploadList'
 
 type FormPost = NonNullable<EditPostById['post']>
 
@@ -125,6 +126,8 @@ const PostForm = (props: PostFormProps) => {
     React.useState<IVideoPostFormData>({
       videoUrl: props.post?.videoPost?.videoUrl || '',
     })
+
+  const [uploadedImages, setUploadedImages] = React.useState<Image>()
 
   const previewPostData = useMemo(() => {
     const article = {
@@ -288,7 +291,7 @@ const PostForm = (props: PostFormProps) => {
           {postType === EPostType.ARTICLE && (
             <>
               <span className="rw-label">Cover image</span>
-              <div className='flex flex-row flex-wrap gap-2'>
+              <div className='flex flex-row flex-wrap gap-2 b-2'>
                 <Upload
                   name="coverImage"
                   multiple={false}
@@ -298,6 +301,9 @@ const PostForm = (props: PostFormProps) => {
                       url: secure_url,
                     })
                   }
+                  setUploadedImages={([...images]) => {
+                    setUploadedImages(images as ICloudinaryUploadResultInfo[])
+                  }}
                 />
                 <MediaLibrary
                   name="coverImage"
@@ -307,15 +313,21 @@ const PostForm = (props: PostFormProps) => {
                       url: secure_url,
                     })
                   }
+                  setUploadedImages={([...images]) => {
+                    setUploadedImages(images as ICloudinaryUploadResultInfo[])
+                  }}
                 />
-                </div>
-                <span className="rw-label">Image Gallery</span>
-                <div className='flex flex-row flex-wrap gap-2'>
+              </div>
+              <span className="rw-label">Image Gallery</span>
+              <div className='flex flex-row flex-wrap gap-2'>
                 <Upload
                   name="imageGalleries"
                   multiple={true}
                   handleUpload={({ ...images }) => {
                     handleSetImageGalleries(images as ICloudinaryUploadResultInfo[])
+                  }}
+                  setUploadedImages={([...images]) => {
+                    setUploadedImages(images)
                   }}
                 />
                 <MediaLibrary
@@ -323,8 +335,13 @@ const PostForm = (props: PostFormProps) => {
                   handleMediaLibrary={({ ...images }) => {
                     handleSetImageGalleries(images as ICloudinaryUploadResultInfo[])
                   }}
+                  setUploadedImages={([...images]) => {
+                    setUploadedImages(images as ICloudinaryUploadResultInfo[])
+                  }}
                 />
               </div>
+              <UploadList
+                images={uploadedImages} />
             </>
           )}
 
@@ -338,14 +355,21 @@ const PostForm = (props: PostFormProps) => {
                   handleUpload={({ ...images }) => {
                     handleSetImageGalleries(images as ICloudinaryUploadResultInfo[])
                   }}
+                  setUploadedImages={({...images}) => {
+                    setUploadedImages(images)
+                  }}
                 />
                 <MediaLibrary
                 name="imageGalleries"
                 handleMediaLibrary={({ ...images }) => {
                   handleSetImageGalleries(images as ICloudinaryUploadResultInfo[])
                 }}
+                setUploadedImages={({...images}) => {
+                  setUploadedImages(images)
+                }}
               />
             </div>
+
           </>
           )}
 

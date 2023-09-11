@@ -2,16 +2,17 @@ import { FieldError } from '@redwoodjs/forms'
 
 import Button from 'src/components/Button/Button'
 import { ICloudinaryUploadResultInfo } from '../Upload/Upload/Upload'
+import UploadList from '../UploadList/UploadList'
 
 declare const cloudinary: unknown
 
 interface IMediaLibraryProps {
   name: string
   handleMediaLibrary: (value: ICloudinaryUploadResultInfo[]) => void
+  setUploadedImages: (value: ICloudinaryUploadResultInfo[]) => void
 }
 
-const MediaLibrary = ({ name, handleMediaLibrary }: IMediaLibraryProps) => {
-
+const MediaLibrary = ({ name, handleMediaLibrary, setUploadedImages }: IMediaLibraryProps) => {
   const onClickOpen = () => {
     window.ml = cloudinary.openMediaLibrary(
       {
@@ -21,6 +22,7 @@ const MediaLibrary = ({ name, handleMediaLibrary }: IMediaLibraryProps) => {
       },
       {
         insertHandler: function (data) {
+          setUploadedImages(data.assets)
           handleMediaLibrary(data.assets as ICloudinaryUploadResultInfo[])
         },
       },
