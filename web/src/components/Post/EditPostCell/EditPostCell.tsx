@@ -34,6 +34,19 @@ export const QUERY = gql`
           avatar
         }
       }
+      imageGalleries {
+        id
+        imageGallery {
+          id
+          name
+          description
+          images {
+            id
+            url
+            imageId
+          }
+        }
+      }
     }
     profile: profileSelf {
       avatar

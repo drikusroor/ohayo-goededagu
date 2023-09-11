@@ -16,13 +16,19 @@ import type { ComponentMeta } from '@storybook/react'
 import getArticle from 'src/fixtures/get-article.fixture'
 import { EPostDisplayType } from 'src/types/post-display-type.enum'
 
-import ArticleHaiku from './ArticleHaiku'
+import ArticleVideo from './ArticleVideo'
+
+const articleVideoData = getArticle({
+  videoPost: {
+    videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+  },
+})
 
 export const full = () => {
   return (
     <div className="p-8">
-      <ArticleHaiku
-        article={getArticle()}
+      <ArticleVideo
+        article={articleVideoData}
         displayType={EPostDisplayType.FULL}
       />
     </div>
@@ -32,8 +38,8 @@ export const full = () => {
 export const preview = () => {
   return (
     <div className="p-8">
-      <ArticleHaiku
-        article={getArticle()}
+      <ArticleVideo
+        article={articleVideoData}
         displayType={EPostDisplayType.PREVIEW}
       />
     </div>
@@ -41,16 +47,17 @@ export const preview = () => {
 }
 
 export const previewNoComments = () => {
-  const article = getArticle({ comments: [] })
-
   return (
     <div className="p-8">
-      <ArticleHaiku article={article} displayType={EPostDisplayType.PREVIEW} />
+      <ArticleVideo
+        article={articleVideoData}
+        displayType={EPostDisplayType.PREVIEW}
+      />
     </div>
   )
 }
 
 export default {
-  title: 'Components/ArticleHaiku',
-  component: ArticleHaiku,
-} as ComponentMeta<typeof ArticleHaiku>
+  title: 'Articles/ArticleVideo',
+  component: ArticleVideo,
+} as ComponentMeta<typeof ArticleVideo>

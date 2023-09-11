@@ -1,7 +1,7 @@
 import { icon } from '@fortawesome/fontawesome-svg-core'
 import { IconBase } from 'react-icons/lib'
 
-interface ButtonProps {
+interface IButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   onClick?: () => void
   id?: string
   className?: string
@@ -21,9 +21,10 @@ const Button = ({
   text = '',
   title = '',
   children,
+  disabled,
   type = 'button',
   variant: variant = 'filled',
-}: ButtonProps) => {
+}: IButtonProps) => {
   const theme = color ? color : 'cobalt-blue'
   const buttonColors =
     variant === 'filled'
@@ -35,6 +36,7 @@ const Button = ({
       type={type}
       aria-label={text}
       title={title ? title : text ? text : ''}
+      disabled={disabled}
       className={`block rounded px-3 py-2 font-semibold uppercase
       ${buttonColors}
       ${className}

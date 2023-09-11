@@ -39,9 +39,6 @@ export const Post: PostRelationResolvers = {
     return null
   },
   imageGalleries: (_obj, { root }) => {
-    if (root.type === 'ARTICLE') {
-      return db.imageGalleryOnPost.findMany({ where: { postId: root?.id } })
-    }
-    return []
+    return db.imageGalleryOnPost.findMany({ where: { postId: root?.id } })
   },
 }

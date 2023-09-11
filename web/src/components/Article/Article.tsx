@@ -14,10 +14,11 @@ import Button from '../Button/Button'
 import Comment from '../Comment/Comment'
 import CommentForm from '../CommentForm/CommentForm'
 
-import ArticleArticle from './components/ArticleArticle'
-import ArticleChotto from './components/ArticleChotto'
-import ArticleHaiku from './components/ArticleHaiku'
-import ArticleVideo from './components/ArticleVideo'
+import ArticleArticle from './components/ArticleArticle/ArticleArticle'
+import ArticleChotto from './components/ArticleChotto/ArticleChotto'
+import ArticleHaiku from './components/ArticleHaiku/ArticleHaiku'
+import ArticlePhotoGallery from './components/ArticlePhotoGallery/ArticlePhotoGallery'
+import ArticleVideo from './components/ArticleVideo/ArticleVideo'
 import { hotScore } from './helpers/sort-comments'
 
 interface Props {
@@ -56,7 +57,6 @@ const Article = ({ article }: Props) => {
           <ArticleArticle
             article={article}
             displayType={EPostDisplayType.FULL}
-            date={formattedDate}
           />
         )}
 
@@ -78,6 +78,14 @@ const Article = ({ article }: Props) => {
 
         {article.type === EPostType.HAIKU && (
           <ArticleHaiku
+            article={article}
+            displayType={EPostDisplayType.FULL}
+            date={formattedDate}
+          />
+        )}
+
+        {article.type === EPostType.PHOTO_GALLERY && (
+          <ArticlePhotoGallery
             article={article}
             displayType={EPostDisplayType.FULL}
             date={formattedDate}

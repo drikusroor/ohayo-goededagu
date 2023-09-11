@@ -16,19 +16,13 @@ import type { ComponentMeta } from '@storybook/react'
 import getArticle from 'src/fixtures/get-article.fixture'
 import { EPostDisplayType } from 'src/types/post-display-type.enum'
 
-import ArticleVideo from './ArticleVideo'
-
-const articleVideoData = getArticle({
-  videoPost: {
-    videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
-  },
-})
+import ArticlePhotoGallery from './ArticlePhotoGallery'
 
 export const full = () => {
   return (
     <div className="p-8">
-      <ArticleVideo
-        article={articleVideoData}
+      <ArticlePhotoGallery
+        article={getArticle()}
         displayType={EPostDisplayType.FULL}
       />
     </div>
@@ -38,8 +32,8 @@ export const full = () => {
 export const preview = () => {
   return (
     <div className="p-8">
-      <ArticleVideo
-        article={articleVideoData}
+      <ArticlePhotoGallery
+        article={getArticle()}
         displayType={EPostDisplayType.PREVIEW}
       />
     </div>
@@ -47,10 +41,12 @@ export const preview = () => {
 }
 
 export const previewNoComments = () => {
+  const article = getArticle({ comments: [] })
+
   return (
     <div className="p-8">
-      <ArticleVideo
-        article={articleVideoData}
+      <ArticlePhotoGallery
+        article={article}
         displayType={EPostDisplayType.PREVIEW}
       />
     </div>
@@ -58,6 +54,6 @@ export const previewNoComments = () => {
 }
 
 export default {
-  title: 'Components/ArticleVideo',
-  component: ArticleVideo,
-} as ComponentMeta<typeof ArticleVideo>
+  title: 'Articles/ArticlePhotoGallery',
+  component: ArticlePhotoGallery,
+} as ComponentMeta<typeof ArticlePhotoGallery>

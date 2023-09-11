@@ -129,6 +129,6 @@ export const articleHaikuPreviewWithCoverImage = () => {
 }
 
 export default {
-  title: 'Components/ArticlePreview',
+  title: 'Articles/ArticlePreview',
   component: ArticlePreview,
 } as ComponentMeta<typeof ArticlePreview>

@@ -2,7 +2,7 @@ import { FieldError } from '@redwoodjs/forms'
 
 import Button from 'src/components/Button/Button'
 
-declare const cloudinary: any
+declare const cloudinary: unknown
 
 export interface ICloudinaryUploadResultInfo {
   id: string
@@ -34,16 +34,10 @@ export interface ICloudinaryUploadResultInfo {
 interface IUploadProps {
   name: string
   multiple?: boolean
-  setCoverImage?: (value: ICloudinaryUploadResultInfo) => void
-  setProfilePicture?: (value: ICloudinaryUploadResultInfo) => void
+  handleUpload: (value: ICloudinaryUploadResultInfo[]) => void
 }
 
-const Upload = ({
-  name,
-  multiple,
-  setCoverImage,
-  setProfilePicture,
-}: IUploadProps) => {
+const Upload = ({ name, multiple, handleUpload }: IUploadProps) => {
   const widget = cloudinary.createUploadWidget(
     {
       cloudName: 'dl5elpdjy',
@@ -57,12 +51,17 @@ const Upload = ({
           : '',
     },
     (error, result) => {
+      if (error) {
+        console.log('Error uploading image: ', error)
+      }
+
       if (!error && result && result.event === 'success') {
-        if (name === 'profilePicture') {
-          setProfilePicture(result.info as ICloudinaryUploadResultInfo)
-        } else if (name === 'coverImage') {
-          setCoverImage(result.info as ICloudinaryUploadResultInfo)
-        }
+        console.log('Done! Here is the image info: ', result.info)
+      }
+
+      if (result?.info?.files) {
+        const images = result.info.files.map((image) => image.uploadInfo)
+        handleUpload(images as ICloudinaryUploadResultInfo[])
       }
     }
   )
@@ -75,12 +74,32 @@ const Upload = ({
     <>
       <Button
         id="upload_widget"
-        title="Upload files"
-        className="rw-button rw-button-blue"
+        title={
+          name === 'coverImage'
+            ? 'Upload cover image'
+            : name === 'avatar'
+            ? 'Upload avatar'
+            : 'Upload gallery images'
+        }
         onClick={onClickUpload}
-        text={name === 'coverImage' ? 'Upload cover image' : 'Upload image'}
+        text={
+          name === 'coverImage'
+            ? 'Upload cover image'
+            : name === 'avatar'
+            ? 'Upload avatar'
+            : 'Upload gallery images'
+        }
+        defaultValue={
+          name === 'coverImage'
+            ? 'Upload cover image'
+            : name === 'avatar'
+            ? 'Upload avatar'
+            : 'Upload gallery images'
+        }
+        className="rw-button rw-button-blue mt-4"
+        errorClassName="rw-button rw-button-blue rw-button-error"
       />
-      <FieldError name="upload" className="rw-field-error" />
+      <FieldError name={name} className="rw-field-error" />
     </>
   )
 }
