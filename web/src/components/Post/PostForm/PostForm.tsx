@@ -34,6 +34,7 @@ import {
 import Button from 'src/components/Button/Button'
 import LocationPin from 'src/components/LocationPin/LocationPin'
 import MarkdownEditor from 'src/components/MarkdownEditor/MarkdownEditor'
+import MediaLibrary from 'src/components/MediaLibrary/MediaLibrary'
 import Preview from 'src/components/Upload/Preview/Preview'
 import Upload, {
   ICloudinaryUploadResultInfo,
@@ -286,7 +287,8 @@ const PostForm = (props: PostFormProps) => {
 
           {postType === EPostType.ARTICLE && (
             <>
-              <div className="mt-4">
+              <span className="rw-label">Cover image</span>
+              <div className='flex flex-row flex-wrap gap-2'>
                 <Upload
                   name="coverImage"
                   multiple={false}
@@ -297,11 +299,29 @@ const PostForm = (props: PostFormProps) => {
                     })
                   }
                 />
+                <MediaLibrary
+                  name="coverImage"
+                  handleMediaLibrary={([{ public_id, secure_url }]) =>
+                    setCoverImage({
+                      imageId: public_id,
+                      url: secure_url,
+                    })
+                  }
+                />
+                </div>
+                <span className="rw-label">Image Gallery</span>
+                <div className='flex flex-row flex-wrap gap-2'>
                 <Upload
                   name="imageGalleries"
                   multiple={true}
                   handleUpload={({ ...images }) => {
-                    handleSetImageGalleries(images)
+                    handleSetImageGalleries(images as ICloudinaryUploadResultInfo[])
+                  }}
+                />
+                <MediaLibrary
+                  name="imageGalleries"
+                  handleMediaLibrary={({ ...images }) => {
+                    handleSetImageGalleries(images as ICloudinaryUploadResultInfo[])
                   }}
                 />
               </div>
@@ -309,13 +329,24 @@ const PostForm = (props: PostFormProps) => {
           )}
 
           {postType === EPostType.PHOTO_GALLERY && (
-            <Upload
-              name="imageGalleries"
-              multiple={true}
-              handleUpload={({ ...images }) => {
-                handleSetImageGalleries(images as ICloudinaryUploadResultInfo[])
-              }}
-            />
+            <>
+              <span className="rw-label">Image Gallery</span>
+              <div className='flex flex-row flex-wrap gap-2'>
+                <Upload
+                  name="imageGalleries"
+                  multiple={true}
+                  handleUpload={({ ...images }) => {
+                    handleSetImageGalleries(images as ICloudinaryUploadResultInfo[])
+                  }}
+                />
+                <MediaLibrary
+                name="imageGalleries"
+                handleMediaLibrary={({ ...images }) => {
+                  handleSetImageGalleries(images as ICloudinaryUploadResultInfo[])
+                }}
+              />
+            </div>
+          </>
           )}
 
           <Preview post={previewPostData} />

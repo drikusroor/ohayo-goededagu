@@ -14,7 +14,11 @@
   },
   "eslintConfig": {
     "extends": "@redwoodjs/eslint-config",
-    "root": true
+    "root": true,
+    "env": {
+      "browser": true,
+      "node": true
+    }
   },
   "engines": {
     "node": "=18.x",

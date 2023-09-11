@@ -12,6 +12,7 @@ import type { RWGqlError } from '@redwoodjs/forms'
 
 import Avatar from 'src/components/Avatar/Avatar'
 import Upload from 'src/components/Upload/Upload/Upload'
+import MediaLibrary from 'src/components/MediaLibrary/MediaLibrary'
 
 type FormProfile = NonNullable<FindProfileSelf['profile']>
 
@@ -106,8 +107,12 @@ const ProfileForm = (props: ProfileFormProps) => {
           <Upload
             name="avatar"
             multiple={false}
-            // folder="Avatar"
-            handleUpload={({ secure_url }) => setProfilePicture(secure_url)}
+            handleUpload={([{ secure_url }]) => setProfilePicture(secure_url)}
+          />
+
+          <MediaLibrary
+            name="avatar"
+            handleMediaLibrary={([{ secure_url }]) => setProfilePicture(secure_url)}
           />
 
           {profilePicture && (
