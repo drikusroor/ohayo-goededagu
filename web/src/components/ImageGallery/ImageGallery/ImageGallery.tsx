@@ -69,7 +69,11 @@ const ImageGallery = ({ imageGallery }: Props) => {
         </table>
       </div>
 
-      <PhotoGrid className="mt-3" images={imageGallery.images} />
+      {imageGallery?.images?.length > 0 ? (
+        <PhotoGrid className="mt-3" images={imageGallery.images} />
+      ) : (
+        <div className="rw-text-center mt-4">No images found.</div>
+      )}
 
       <nav className="rw-button-group">
         <Link
