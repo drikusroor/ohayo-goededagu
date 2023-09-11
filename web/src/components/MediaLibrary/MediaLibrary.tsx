@@ -1,36 +1,17 @@
 import { FieldError } from '@redwoodjs/forms'
 
 import Button from 'src/components/Button/Button'
+import { ICloudinaryUploadResultInfo } from '../Upload/Upload/Upload'
 
-declare const cloudinary: any
-
-export interface ICloudinaryMediaLibraryAsset {
-  public_id: string
-  resource_type: string
-  type: string
-  format: string
-  version: number
-  url: string
-  secure_url: string
-  width: number
-  height: number
-  bytes: number
-  duration: string
-  tags: string[]
-  metadata: []
-  created_at: Date
-  access_mode: string
-  access_control: string[]
-  created_by: string
-  uploaded_by: string
-}
+declare const cloudinary: unknown
 
 interface IMediaLibraryProps {
   name: string
-  handleMediaLibrary: (value: ICloudinaryMediaLibraryAsset[]) => void
+  handleMediaLibrary: (value: ICloudinaryUploadResultInfo[]) => void
 }
 
 const MediaLibrary = ({ name, handleMediaLibrary }: IMediaLibraryProps) => {
+
   const onClickOpen = () => {
     window.ml = cloudinary.openMediaLibrary(
       {
@@ -40,10 +21,7 @@ const MediaLibrary = ({ name, handleMediaLibrary }: IMediaLibraryProps) => {
       },
       {
         insertHandler: function (data) {
-          data.assets.forEach((asset: ICloudinaryMediaLibraryAsset) => {
-            console.log('Inserted asset:', JSON.stringify(asset, null, 2))
-          })
-          handleMediaLibrary(data.assets as ICloudinaryMediaLibraryAsset[])
+          handleMediaLibrary(data.assets as ICloudinaryUploadResultInfo[])
         },
       },
       document.getElementById('media_library_widget')

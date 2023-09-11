@@ -167,7 +167,7 @@ const PostForm = (props: PostFormProps) => {
     postType === EPostType.VIDEO || postType === EPostType.PHOTO_GALLERY
 
   const handleSetImageGalleries = (images: ICloudinaryUploadResultInfo[]) => {
-        const gallery = []
+    const gallery = []
     for (const [_key, image] of Object.entries(images)) {
       gallery.push({ imageId: image.public_id, url: image.secure_url })
     }
@@ -287,7 +287,7 @@ const PostForm = (props: PostFormProps) => {
 
           {postType === EPostType.ARTICLE && (
             <>
-              <span className="rw-label"> Cover image </span>
+              <span className="rw-label">Cover image</span>
               <div className='flex flex-row flex-wrap gap-2'>
                 <Upload
                   name="coverImage"
@@ -309,13 +309,13 @@ const PostForm = (props: PostFormProps) => {
                   }
                 />
                 </div>
-                <span className="rw-label"> Image Gallery </span>
+                <span className="rw-label">Image Gallery</span>
                 <div className='flex flex-row flex-wrap gap-2'>
                 <Upload
                   name="imageGalleries"
                   multiple={true}
                   handleUpload={({ ...images }) => {
-                    handleSetImageGalleries(images)
+                    handleSetImageGalleries(images as ICloudinaryUploadResultInfo[])
                   }}
                 />
                 <MediaLibrary
@@ -330,7 +330,7 @@ const PostForm = (props: PostFormProps) => {
 
           {postType === EPostType.PHOTO_GALLERY && (
             <>
-              <span className="rw-label"> Image Gallery </span>
+              <span className="rw-label">Image Gallery</span>
               <div className='flex flex-row flex-wrap gap-2'>
                 <Upload
                   name="imageGalleries"

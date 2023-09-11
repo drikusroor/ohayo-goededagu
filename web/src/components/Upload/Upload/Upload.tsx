@@ -38,17 +38,19 @@ interface IUploadProps {
 }
 
 const Upload = ({ name, multiple, handleUpload }: IUploadProps) => {
+  const defaultFolder =
+  name === 'profilePicture'
+    ? 'Profile pictures'
+    : name === 'coverImage'
+    ? 'Cover images'
+    : ''
+
   const widget = cloudinary.createUploadWidget(
     {
       cloudName: 'dl5elpdjy',
       uploadPreset: 'bcfnswai',
       multiple: multiple ? multiple : true,
-      folder:
-        name === 'profilePicture'
-          ? 'Profile pictures'
-          : name === 'coverImage'
-          ? 'Cover images'
-          : '',
+      folder: defaultFolder,
     },
     (error, result) => {
       if (error) {
@@ -70,32 +72,21 @@ const Upload = ({ name, multiple, handleUpload }: IUploadProps) => {
     widget.open()
   }
 
+  const uploadName =
+    name === 'coverImage'
+      ? 'Upload cover image'
+      : name === 'avatar'
+      ? 'Upload avatar'
+      : 'Upload gallery images'
+
   return (
     <>
       <Button
         id="upload_widget"
-        title={
-          name === 'coverImage'
-            ? 'Upload cover image'
-            : name === 'avatar'
-            ? 'Upload avatar'
-            : 'Upload gallery images'
-        }
+        title={uploadName}
         onClick={onClickUpload}
-        text={
-          name === 'coverImage'
-            ? 'Upload cover image'
-            : name === 'avatar'
-            ? 'Upload avatar'
-            : 'Upload gallery images'
-        }
-        defaultValue={
-          name === 'coverImage'
-            ? 'Upload cover image'
-            : name === 'avatar'
-            ? 'Upload avatar'
-            : 'Upload gallery images'
-        }
+        text={uploadName}
+        defaultValue={uploadName}
         className="rw-button rw-button-blue mt-4"
         errorClassName="rw-button rw-button-blue rw-button-error"
       />
