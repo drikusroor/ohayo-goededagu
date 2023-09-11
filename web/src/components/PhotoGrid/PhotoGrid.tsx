@@ -31,11 +31,16 @@ const PhotoGrid = ({ className, images = [], preview }: IPhotoGridProps) => {
             previewGallery.map((photo) => {
               return (
                 <li
-                  className="relative h-[300px] grow basis-auto last:flex-initial"
+                  className="relative grow basis-auto last:flex-initial lg:h-[300px]"
                   key={photo.imageId}
-                  src={photo.url}
-                  alt={photo.imageId}
-                />
+                >
+                  <img
+                    className="h-full w-full rounded-md object-cover align-middle"
+                    key={photo.imageId}
+                    src={photo.url}
+                    alt={photo.imageId}
+                  />
+                </li>
               )
             })}
           {!preview &&
@@ -46,6 +51,7 @@ const PhotoGrid = ({ className, images = [], preview }: IPhotoGridProps) => {
                   key={photo.imageId}
                 >
                   <img
+                    className="h-full w-full rounded-md object-cover align-middle"
                     className="h-full w-full cursor-pointer rounded-md object-cover align-middle"
                     key={photo.imageId}
                     src={photo.url}
