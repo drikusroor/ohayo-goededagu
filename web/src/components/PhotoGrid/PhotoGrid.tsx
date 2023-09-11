@@ -29,7 +29,7 @@ const PhotoGrid = ({ className, images = [], preview }: IPhotoGridProps) => {
               </li>
             )
           })}
-        {images.map((photo) => {
+        {!preview && images.map((photo) => {
           return (
             <li
               className="relative h-[300px] grow basis-auto last:flex-initial"
