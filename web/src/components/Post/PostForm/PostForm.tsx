@@ -76,10 +76,11 @@ const PostForm = (props: PostFormProps) => {
 
       data.imageGalleries = imageGalleries.map((galleryOnPost) => {
         const { id, imageGallery } = galleryOnPost
-        const { images, id: imageGalleryId } = imageGallery
+        const { name, images, id: imageGalleryId } = imageGallery
         return {
           id,
           imageGalleryId,
+          name: name ? name : data.title,
           images: images.map((image) => {
             const { id, imageId, url } = image
             return {
@@ -90,7 +91,6 @@ const PostForm = (props: PostFormProps) => {
           }),
         }
       })
-
     }
 
     props.onSave(data, props?.post?.id)
