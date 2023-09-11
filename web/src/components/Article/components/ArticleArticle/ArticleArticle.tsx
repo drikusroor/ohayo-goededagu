@@ -24,6 +24,10 @@ interface Props {
 const ArticleArticle = ({ article, displayType }: Props) => {
   const { coverImage } = article
 
+  const images = article.imageGalleries.map((gallery) => {
+    return gallery.imageGallery.images
+  })
+
   const authorName =
     article?.user?.profile?.name || article?.user?.name || 'Anonymous'
 
@@ -122,8 +126,8 @@ const ArticleArticle = ({ article, displayType }: Props) => {
           <div>
             <RenderBody body={article.body} />
           </div>
-          {article?.imageGalleries?.imageGallery?.images && (
-            <PhotoGrid images={article?.imageGalleries?.imageGallery?.images} />
+          {images && (
+            <PhotoGrid images={images[0]} />
           )}
         </>
       )}

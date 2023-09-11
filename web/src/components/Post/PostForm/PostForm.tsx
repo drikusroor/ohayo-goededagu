@@ -91,7 +91,6 @@ const PostForm = (props: PostFormProps) => {
         }
       })
 
-      console.log('data.imageGalleries', data.imageGalleries)
     }
 
     props.onSave(data, props?.post?.id)
