@@ -24,6 +24,16 @@ interface Props {
 const ArticleArticle = ({ article, displayType }: Props) => {
   const { coverImage } = article
 
+  const { imageGalleries = [] } = article
+
+  const galleries = imageGalleries.reduce((acc, galleryOnPost) => {
+    const { imageGallery } = galleryOnPost
+    if (imageGallery) {
+      return [...acc, imageGallery]
+    }
+    return acc
+  }, [])
+
   const authorName =
     article?.user?.profile?.name || article?.user?.name || 'Anonymous'
 
@@ -122,9 +132,14 @@ const ArticleArticle = ({ article, displayType }: Props) => {
           <div>
             <RenderBody body={article.body} />
           </div>
-          {article?.imageGalleries?.imageGallery?.images && (
-            <PhotoGrid images={article?.imageGalleries?.imageGallery?.images} />
-          )}
+          {galleries && galleries.map((gallery, index) => (
+            <PhotoGrid
+              key={index}
+              images={gallery.images}
+              preview={false}
+              className="block h-full w-full"
+            />
+          ))}
         </>
       )}
     </>

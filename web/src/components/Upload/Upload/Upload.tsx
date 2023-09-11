@@ -76,7 +76,13 @@ const Upload = ({ name, multiple, handleUpload }: IUploadProps) => {
             : 'Upload gallery images'
         }
         onClick={onClickUpload}
-        text="Upload image"
+        text={
+          name === 'coverImage'
+            ? 'Upload cover image'
+            : name === 'avatar'
+            ? 'Upload avatar'
+            : 'Upload gallery images'
+        }
         defaultValue={
           name === 'coverImage'
             ? 'Upload cover image'

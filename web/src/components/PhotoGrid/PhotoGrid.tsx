@@ -11,7 +11,7 @@ const PhotoGrid = ({ className, images = [], preview }: IPhotoGridProps) => {
   const previewGallery = images?.slice(0, 5)
 
   return (
-    <div className={classNames('mt-4 bg-gray-200 p-2', className)}>
+    <div className={classNames('bg-gray-200 p-2 rounded-md', className)}>
       <ul className="flex flex-wrap gap-4">
         {preview &&
           previewGallery.map((photo) => {
@@ -29,7 +29,7 @@ const PhotoGrid = ({ className, images = [], preview }: IPhotoGridProps) => {
               </li>
             )
           })}
-        {images.map((photo) => {
+        {!preview && images.map((photo) => {
           return (
             <li
               className="relative h-[300px] grow basis-auto last:flex-initial"
