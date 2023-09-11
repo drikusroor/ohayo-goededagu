@@ -15,6 +15,8 @@ function upsertImageGalleriesOnPost(
     // imageGalleryId is the id of the imageGallery record
     const { id = 0, imageGalleryId = 0 } = imageGallery
 
+    const { name, images } = imageGallery
+
     await db.imageGalleryOnPost.upsert({
       where: {
         id,
@@ -25,8 +27,9 @@ function upsertImageGalleriesOnPost(
         },
         imageGallery: {
           create: {
+            name,
             images: {
-              create: imageGallery.images,
+              create: images,
             },
           },
         },
@@ -35,8 +38,9 @@ function upsertImageGalleriesOnPost(
         imageGallery: {
           upsert: {
             create: {
+              name,
               images: {
-                create: imageGallery.images,
+                create: images,
               },
             },
             update: {
