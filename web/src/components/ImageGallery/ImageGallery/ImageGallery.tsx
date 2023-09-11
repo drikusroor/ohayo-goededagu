@@ -1,13 +1,14 @@
-import { Link, routes, navigate } from '@redwoodjs/router'
-import { useMutation } from '@redwoodjs/web'
-import { toast } from '@redwoodjs/web/toast'
-
-import { timeTag } from 'src/lib/formatters'
-
 import type {
   DeleteImageGalleryMutationVariables,
   FindImageGalleryById,
 } from 'types/graphql'
+
+import { Link, routes, navigate } from '@redwoodjs/router'
+import { useMutation } from '@redwoodjs/web'
+import { toast } from '@redwoodjs/web/toast'
+
+import PhotoGrid from 'src/components/PhotoGrid/PhotoGrid'
+import { timeTag } from 'src/lib/formatters'
 
 const DELETE_IMAGE_GALLERY_MUTATION = gql`
   mutation DeleteImageGalleryMutation($id: Int!) {
@@ -67,6 +68,9 @@ const ImageGallery = ({ imageGallery }: Props) => {
           </tbody>
         </table>
       </div>
+
+      <PhotoGrid className="mt-3" images={imageGallery.images} />
+
       <nav className="rw-button-group">
         <Link
           to={routes.editImageGallery({ id: imageGallery.id })}
