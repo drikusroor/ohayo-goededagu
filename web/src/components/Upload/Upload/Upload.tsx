@@ -1,6 +1,7 @@
 import { FieldError } from '@redwoodjs/forms'
 
 import Button from 'src/components/Button/Button'
+import UploadList from 'src/components/UploadList/UploadList'
 
 declare const cloudinary: unknown
 
@@ -35,9 +36,10 @@ interface IUploadProps {
   name: string
   multiple?: boolean
   handleUpload: (value: ICloudinaryUploadResultInfo[]) => void
+  setUploadedImages: (value: ICloudinaryUploadResultInfo[]) => void
 }
 
-const Upload = ({ name, multiple, handleUpload }: IUploadProps) => {
+const Upload = ({ name, multiple, handleUpload, setUploadedImages }: IUploadProps) => {
   const defaultFolder =
   name === 'profilePicture'
     ? 'Profile pictures'
@@ -63,6 +65,7 @@ const Upload = ({ name, multiple, handleUpload }: IUploadProps) => {
 
       if (result?.info?.files) {
         const images = result.info.files.map((image) => image.uploadInfo)
+        setUploadedImages(images)
         handleUpload(images as ICloudinaryUploadResultInfo[])
       }
     }
