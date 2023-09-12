@@ -2,6 +2,7 @@ import { useCallback } from 'react'
 
 import {
   BsBoxArrowUp,
+  BsChatLeft,
   BsFillHouseFill,
   BsFillJournalBookmarkFill,
   BsFillPersonFill,
@@ -51,6 +52,13 @@ const menuItems: MenuItem[] = [
     activeRoutePattern: '/image-galleries',
     roles: ['ADMIN', 'MODERATOR'],
     icon: <BsImages />,
+  },
+  {
+    name: 'Comments',
+    path: '/admin/comments',
+    activeRoutePattern: '/comments',
+    roles: ['ADMIN', 'MODERATOR'],
+    icon: <BsChatLeft />,
   },
   {
     name: 'Account',

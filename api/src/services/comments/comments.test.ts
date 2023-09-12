@@ -29,16 +29,10 @@ describe('comments', () => {
   })
 
   scenario('creates a comment', async (scenario: StandardScenario) => {
-    mockCurrentUser({
-      id: scenario.comment.two.userId,
-      roles: ['USER'],
-      email: 'info@example.com',
-      name: 'Peter Pippeling',
-    })
-
     const result = await createComment({
       input: {
         body: 'String',
+        userId: scenario.comment.two.userId,
         postId: scenario.comment.two.postId,
       },
     })
@@ -59,22 +53,11 @@ describe('comments', () => {
   })
 
   scenario('deletes a comment', async (scenario: StandardScenario) => {
-    mockCurrentUser({
-      id: scenario.comment.one.userId,
-      roles: ['USER'],
-      email: 'info@example.com',
-      name: 'Peter Pippeling',
-    })
-
-    const before = await comment({ id: scenario.comment.one.id })
-
     const original = (await deleteComment({
       id: scenario.comment.one.id,
     })) as Comment
     const result = await comment({ id: original.id })
 
-    expect(before.deleted).toEqual(false)
-    expect(original.deleted).toEqual(true)
-    expect(result.deleted).toEqual(true)
+    expect(result).toEqual(null)
   })
 })

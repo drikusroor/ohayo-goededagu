@@ -11,8 +11,8 @@ import { EPostDisplayType } from 'src/types/post-display-type.enum'
 
 import { EPostType } from '../ArticleTypeIcon/ArticleTypeIcon'
 import Button from '../Button/Button'
-import Comment from '../Comment/Comment'
 import CommentForm from '../CommentForm/CommentForm'
+import Comment from '../UserComment/Comment'
 
 import ArticleArticle from './components/ArticleArticle/ArticleArticle'
 import ArticleChotto from './components/ArticleChotto/ArticleChotto'
