@@ -11,8 +11,8 @@ import {
 import type { RWGqlError } from '@redwoodjs/forms'
 
 import Avatar from 'src/components/Avatar/Avatar'
-import Upload from 'src/components/Upload/Upload/Upload'
 import MediaLibrary from 'src/components/MediaLibrary/MediaLibrary'
+import Upload from 'src/components/Upload/Upload/Upload'
 
 type FormProfile = NonNullable<FindProfileSelf['profile']>
 
@@ -35,7 +35,7 @@ const ProfileForm = (props: ProfileFormProps) => {
   }
 
   const [profilePicture, setProfilePicture] = React.useState<string>(
-    props.profile.avatar
+    props.profile?.avatar || ''
   )
 
   return (
@@ -112,7 +112,9 @@ const ProfileForm = (props: ProfileFormProps) => {
 
           <MediaLibrary
             name="avatar"
-            handleMediaLibrary={([{ secure_url }]) => setProfilePicture(secure_url)}
+            handleMediaLibrary={([{ secure_url }]) =>
+              setProfilePicture(secure_url)
+            }
           />
 
           {profilePicture && (
