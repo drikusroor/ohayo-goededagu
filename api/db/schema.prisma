@@ -25,6 +25,7 @@ model User {
   comments            Comment[]
   thumbs              Thumb[]
   UserAction          UserAction[]
+  lastLogin           DateTime?
 }
 
 model Profile {
