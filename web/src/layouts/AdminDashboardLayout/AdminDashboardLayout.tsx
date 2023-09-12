@@ -62,8 +62,8 @@ const menuItems: MenuItem[] = [
   },
   {
     name: 'Account',
-    path: '/admin/account',
-    activeRoutePattern: '/account',
+    path: '/admin/account/edit',
+    activeRoutePattern: '/account/edit',
     icon: <BsFillPersonFill />,
   },
   {
