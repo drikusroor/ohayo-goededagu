@@ -12,18 +12,20 @@ generator client {
 // to create migrations for them and apply to your dev DB.
 // TODO: Please remove the following example:
 model User {
-  id                  Int       @id @default(autoincrement())
-  email               String    @unique
+  id                  Int          @id @default(autoincrement())
+  email               String       @unique
   name                String?
   hashedPassword      String
   salt                String
   resetToken          String?
   resetTokenExpiresAt DateTime?
   posts               Post[]
-  roles               Role[]    @default([GUEST])
+  roles               Role[]       @default([GUEST])
   profile             Profile?
   comments            Comment[]
   thumbs              Thumb[]
+  UserAction          UserAction[]
+  lastLoginAt         DateTime?
 }
 
 model Profile {
@@ -136,4 +138,18 @@ model ImageGalleryOnPost {
   imageGallery   ImageGallery @relation(fields: [imageGalleryId], references: [id], onDelete: Cascade)
   postId         Int
   post           Post         @relation(fields: [postId], references: [id])
+}
+
+model UserAction {
+  id        Int            @id @default(autoincrement())
+  createdAt DateTime       @default(now())
+  user      User           @relation(fields: [userId], references: [id])
+  userId    Int
+  action    UserActionType
+  target    String?
+  targetId  String?
+}
+
+enum UserActionType {
+  LOGIN
 }

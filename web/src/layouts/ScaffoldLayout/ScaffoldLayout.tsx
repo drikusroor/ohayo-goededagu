@@ -25,12 +25,10 @@ const ScaffoldLayout = ({
             {title}
           </Link>
         </h1>
-        {buttonTo && (
-          <div className="flex gap-2">
-            <Link to={routes[buttonTo]()} className="rw-button rw-button-green">
-              <div className="rw-button-icon">+</div> {buttonLabel ?? 'New'}
-            </Link>
-          </div>
+        {buttonLabel && buttonTo && (
+          <Link to={routes[buttonTo]()} className="rw-button rw-button-green">
+            <div className="rw-button-icon">+</div> {buttonLabel}
+          </Link>
         )}
       </header>
       <main className="rw-main">{children}</main>

@@ -61,7 +61,11 @@ const Routes = () => {
             <Route path="/admin/account" page={AccountAccountPage} name="account" />
           </Set>
           <Set wrap={ScaffoldLayout} title="Moderate Users" titleTo="userModeration">
-            <Route path="/user-moderation" page={UserModerationPage} name="userModeration" />
+            <Route path="/admin/user-moderation" page={UserModerationPage} name="userModeration" />
+          </Set>
+          <Set wrap={ScaffoldLayout} title="UserActions" titleTo="userActions">
+            <Route path="/admin/user-actions/{id:Int}" page={UserActionUserActionPage} name="userAction" />
+            <Route path="/admin/user-actions" page={UserActionUserActionsPage} name="userActions" />
           </Set>
         </Set>
       </Private>
