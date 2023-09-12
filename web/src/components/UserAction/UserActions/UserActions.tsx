@@ -7,6 +7,7 @@ import { Link, routes } from '@redwoodjs/router'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
+import DisplayDatetime from 'src/components/DisplayDatetime/DisplayDatetime'
 import { QUERY } from 'src/components/UserAction/UserActionsCell'
 import { formatEnum, timeTag, truncate } from 'src/lib/formatters'
 
@@ -39,6 +40,10 @@ const UserActionsList = ({ userActions }: FindUserActions) => {
     }
   }
 
+  const getUserName = (user) => {
+    return user.profile?.name || user.email
+  }
+
   return (
     <div className="rw-segment rw-table-wrapper-responsive">
       <table className="rw-table">
@@ -57,8 +62,24 @@ const UserActionsList = ({ userActions }: FindUserActions) => {
           {userActions.map((userAction) => (
             <tr key={userAction.id}>
               <td>{truncate(userAction.id)}</td>
-              <td>{timeTag(userAction.createdAt)}</td>
-              <td>{truncate(userAction.userId)}</td>
+              <td>
+                <DisplayDatetime datetime={userAction.createdAt} showDate />
+              </td>
+              <td>
+                <Link
+                  to={
+                    userAction.user.profile
+                      ? routes.profile({
+                          id: userAction.user.profile.id,
+                        })
+                      : routes.userAction({ id: userAction.id })
+                  }
+                  title={'Show user ' + userAction.userId + ' detail'}
+                  className="text-blue-500 hover:text-blue-800"
+                >
+                  {getUserName(userAction.user)}
+                </Link>
+              </td>
               <td>{formatEnum(userAction.action)}</td>
               <td>{truncate(userAction.target)}</td>
               <td>{truncate(userAction.targetId)}</td>

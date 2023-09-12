@@ -7,6 +7,7 @@ import { Link, routes, navigate } from '@redwoodjs/router'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
+import DisplayDatetime from 'src/components/DisplayDatetime/DisplayDatetime'
 import { formatEnum, timeTag } from 'src/lib/formatters'
 
 const DELETE_USER_ACTION_MUTATION = gql`
@@ -38,6 +39,10 @@ const UserAction = ({ userAction }: Props) => {
     }
   }
 
+  const getUserName = (user) => {
+    return user.profile?.name || user.email
+  }
+
   return (
     <>
       <div className="rw-segment">
@@ -54,11 +59,27 @@ const UserAction = ({ userAction }: Props) => {
             </tr>
             <tr>
               <th>Created at</th>
-              <td>{timeTag(userAction.createdAt)}</td>
+              <td>
+                <DisplayDatetime datetime={userAction.createdAt} showDate />
+              </td>
             </tr>
             <tr>
               <th>User id</th>
-              <td>{userAction.userId}</td>
+              <td>
+                <Link
+                  to={
+                    userAction.user.profile
+                      ? routes.profile({
+                          id: userAction.user.profile.id,
+                        })
+                      : routes.userAction({ id: userAction.id })
+                  }
+                  title={'Show user ' + userAction.userId + ' detail'}
+                  className="text-blue-500 hover:text-blue-800"
+                >
+                  {getUserName(userAction.user)}
+                </Link>
+              </td>
             </tr>
             <tr>
               <th>Action</th>
