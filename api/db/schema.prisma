@@ -146,8 +146,8 @@ model UserAction {
   user      User           @relation(fields: [userId], references: [id])
   userId    Int
   action    UserActionType
-  target    String
-  targetId  String
+  target    String?
+  targetId  String?
 }
 
 enum UserActionType {
