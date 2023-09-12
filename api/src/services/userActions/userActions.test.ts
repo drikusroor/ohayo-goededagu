@@ -33,18 +33,11 @@ describe('userActions', () => {
 
   scenario('creates a userAction', async (scenario: StandardScenario) => {
     const result = await createUserAction({
-      input: {
-        userId: scenario.userAction.two.userId,
-        action: 'LOGIN',
-        target: 'String',
-        targetId: 'String',
-      },
+      input: { userId: scenario.userAction.two.userId, action: 'LOGIN' },
     })
 
     expect(result.userId).toEqual(scenario.userAction.two.userId)
     expect(result.action).toEqual('LOGIN')
-    expect(result.target).toEqual('String')
-    expect(result.targetId).toEqual('String')
   })
 
   scenario('updates a userAction', async (scenario: StandardScenario) => {

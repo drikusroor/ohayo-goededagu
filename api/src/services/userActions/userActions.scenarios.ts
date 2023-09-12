@@ -6,11 +6,9 @@ export const standard = defineScenario<Prisma.UserActionCreateArgs>({
     one: {
       data: {
         action: 'LOGIN',
-        target: 'String',
-        targetId: 'String',
         user: {
           create: {
-            email: 'String3763657',
+            email: 'String1532930',
             hashedPassword: 'String',
             salt: 'String',
           },
@@ -20,11 +18,9 @@ export const standard = defineScenario<Prisma.UserActionCreateArgs>({
     two: {
       data: {
         action: 'LOGIN',
-        target: 'String',
-        targetId: 'String',
         user: {
           create: {
-            email: 'String3779568',
+            email: 'String6160504',
             hashedPassword: 'String',
             salt: 'String',
           },

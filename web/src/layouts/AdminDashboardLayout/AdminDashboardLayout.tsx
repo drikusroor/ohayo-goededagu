@@ -3,6 +3,7 @@ import { useCallback } from 'react'
 import {
   BsBoxArrowUp,
   BsChatLeft,
+  BsFillCalendarEventFill,
   BsFillHouseFill,
   BsFillJournalBookmarkFill,
   BsFillPersonFill,
@@ -74,10 +75,17 @@ const menuItems: MenuItem[] = [
   },
   {
     name: 'Moderate Users',
-    path: '/user-moderation',
+    path: '/admin/user-moderation',
     activeRoutePattern: '/user-moderation',
     roles: ['ADMIN', 'MODERATOR'],
     icon: <BsPersonCheckFill />,
+  },
+  {
+    name: 'User Actions',
+    path: '/admin/user-actions',
+    activeRoutePattern: '/user-actions',
+    roles: ['ADMIN', 'MODERATOR'],
+    icon: <BsFillCalendarEventFill />,
   },
 ]
 

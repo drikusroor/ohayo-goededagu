@@ -5,8 +5,8 @@ export const schema = gql`
     user: User!
     userId: Int!
     action: UserActionType!
-    target: String!
-    targetId: String!
+    target: String
+    targetId: String
   }
 
   enum UserActionType {
@@ -21,8 +21,8 @@ export const schema = gql`
   input CreateUserActionInput {
     userId: Int!
     action: UserActionType!
-    target: String!
-    targetId: String!
+    target: String
+    targetId: String
   }
 
   input UpdateUserActionInput {
