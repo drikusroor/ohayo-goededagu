@@ -6,6 +6,7 @@ export const schema = gql`
     posts: [Post]!
     profile: Profile
     roles: [Role!]!
+    lastLoginAt: DateTime
   }
 
   type UserWithHashedPassword {

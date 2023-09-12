@@ -12,6 +12,8 @@ import {
 } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/dist/toast'
 
+import DisplayDatetime from '../DisplayDatetime/DisplayDatetime'
+
 export const QUERY = gql`
   query FindUserModerationQuery {
     users {
@@ -19,6 +21,7 @@ export const QUERY = gql`
       email
       name
       roles
+      lastLoginAt
     }
   }
 `
@@ -104,6 +107,7 @@ export const Success = ({
               <th>Email</th>
               <th>Name</th>
               <th>Roles</th>
+              <th>Last Login</th>
               <th>&nbsp;</th>
             </tr>
           </thead>
@@ -116,6 +120,13 @@ export const Success = ({
                   {user.roles.map((role) => (
                     <UserRole key={role} role={role} />
                   ))}
+                </td>
+                <td>
+                  {user.lastLoginAt ? (
+                    <DisplayDatetime datetime={user.lastLoginAt} />
+                  ) : (
+                    <span>Never</span>
+                  )}
                 </td>
                 <td>
                   {user.roles.join() === 'GUEST' && (
