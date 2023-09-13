@@ -1,14 +1,15 @@
+import type {
+  DeleteCommentMutationVariables,
+  FindComments,
+} from 'types/graphql'
+
 import { Link, routes } from '@redwoodjs/router'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
 import { QUERY } from 'src/components/Comment/CommentsCell'
+import DisplayDatetime from 'src/components/DisplayDatetime/DisplayDatetime'
 import { checkboxInputTag, timeTag, truncate } from 'src/lib/formatters'
-
-import type {
-  DeleteCommentMutationVariables,
-  FindComments,
-} from 'types/graphql'
 
 const DELETE_COMMENT_MUTATION = gql`
   mutation DeleteCommentMutation($id: Int!) {
@@ -59,7 +60,9 @@ const CommentsList = ({ comments }: FindComments) => {
             <tr key={comment.id}>
               <td>{truncate(comment.id)}</td>
               <td>{truncate(comment.body)}</td>
-              <td>{timeTag(comment.createdAt)}</td>
+              <td>
+                <DisplayDatetime datetime={comment.createdAt} showDate />
+              </td>
               <td>{truncate(comment.userId)}</td>
               <td>{truncate(comment.postId)}</td>
               <td>{truncate(comment.parentId)}</td>
