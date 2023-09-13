@@ -10,7 +10,7 @@ declare const cloudinary: unknown
 interface IMediaLibraryProps {
   name: string
   handleMediaLibrary: (value: ICloudinaryUploadResultInfo[]) => void
-  setUploadedImages: (value: ICloudinaryUploadResultInfo[]) => void
+  setUploadedImages?: (value: ICloudinaryUploadResultInfo[]) => void
 }
 
 const MediaLibrary = ({ name, handleMediaLibrary, setUploadedImages }: IMediaLibraryProps) => {
@@ -23,7 +23,9 @@ const MediaLibrary = ({ name, handleMediaLibrary, setUploadedImages }: IMediaLib
       },
       {
         insertHandler: function (data) {
-          setUploadedImages(data.assets as ICloudinaryUploadResultInfo[])
+          if (name !== 'avatar') {
+            setUploadedImages(data.assets as ICloudinaryUploadResultInfo[])
+          }
           handleMediaLibrary(data.assets as ICloudinaryUploadResultInfo[])
         },
       },

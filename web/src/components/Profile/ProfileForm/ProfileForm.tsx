@@ -37,6 +37,7 @@ const ProfileForm = (props: ProfileFormProps) => {
   const [profilePicture, setProfilePicture] = React.useState<string>(
     props.profile?.avatar || ''
   )
+  console.log('profile', profilePicture)
 
   return (
     <div className="rw-form-wrapper">

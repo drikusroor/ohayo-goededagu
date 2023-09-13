@@ -37,7 +37,7 @@ interface IUploadProps {
   folder?: string
   multiple?: boolean
   handleUpload: (value: ICloudinaryUploadResultInfo[]) => void
-  setUploadedImages: (value: ICloudinaryUploadResultInfo[]) => void
+  setUploadedImages?: (value: ICloudinaryUploadResultInfo[]) => void
 }
 
 const Upload = ({ name, folder, multiple, handleUpload, setUploadedImages }: IUploadProps) => {
@@ -66,7 +66,9 @@ const Upload = ({ name, folder, multiple, handleUpload, setUploadedImages }: IUp
 
       if (result?.info?.files) {
         const images = result.info.files.map((image) => image.uploadInfo)
-        setUploadedImages(images)
+        if (name !== 'avatar') {
+          setUploadedImages(images as ICloudinaryUploadResultInfo[])
+        }
         handleUpload(images as ICloudinaryUploadResultInfo[])
       }
     }

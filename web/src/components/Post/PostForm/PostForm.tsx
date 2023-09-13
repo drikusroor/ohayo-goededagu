@@ -330,7 +330,7 @@ const PostForm = (props: PostFormProps) => {
                     )
                   }}
                   setUploadedImages={([...images]) => {
-                    setUploadedImages(images)
+                    setUploadedImages(images as ICloudinaryUploadResultInfo[])
                   }}
                 />
                 <MediaLibrary
@@ -363,8 +363,8 @@ const PostForm = (props: PostFormProps) => {
                       images as ICloudinaryUploadResultInfo[]
                     )
                   }}
-                  setUploadedImages={({...images}) => {
-                    setUploadedImages(images)
+                  setUploadedImages={([...images]) => {
+                    setUploadedImages(images as ICloudinaryUploadResultInfo[])
                   }}
                 />
                 <MediaLibrary
@@ -372,8 +372,8 @@ const PostForm = (props: PostFormProps) => {
                 handleMediaLibrary={({ ...images }) => {
                   handleSetImageGalleries(images as ICloudinaryUploadResultInfo[])
                 }}
-                setUploadedImages={({...images}) => {
-                  setUploadedImages(images)
+                setUploadedImages={([...images]) => {
+                  setUploadedImages(images as ICloudinaryUploadResultInfo[])
                 }}
               />
             </div>
