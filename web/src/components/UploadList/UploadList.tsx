@@ -5,7 +5,6 @@ interface IUploadListProps {
 }
 
 const UploadList = ({ images }: IUploadListProps) => {
-  console.log('images', images)
   const title = (photo) => {
     if (photo.context) {
       return photo.context.custom.caption
