@@ -7,11 +7,13 @@ import type {
 
 import { db } from 'src/lib/db'
 
-export const comments: QueryResolvers['comments'] = ({
-  orderBy,
-}: {
-  orderBy: CommentOrderByInput
-}) => {
+export const comments: QueryResolvers['comments'] = (
+  {
+    orderBy,
+  }: {
+    orderBy: CommentOrderByInput
+  } = { orderBy: { createdAt: 'asc' } }
+) => {
   return db.comment.findMany({
     orderBy,
   })

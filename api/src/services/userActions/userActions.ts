@@ -7,11 +7,13 @@ import type {
 
 import { db } from 'src/lib/db'
 
-export const userActions: QueryResolvers['userActions'] = ({
-  orderBy,
-}: {
-  orderBy: UserActionOrderByInput
-}) => {
+export const userActions: QueryResolvers['userActions'] = (
+  {
+    orderBy,
+  }: {
+    orderBy: UserActionOrderByInput
+  } = { orderBy: { createdAt: 'asc' } }
+) => {
   return db.userAction.findMany({
     orderBy,
   })
