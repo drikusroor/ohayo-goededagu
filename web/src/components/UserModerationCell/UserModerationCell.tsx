@@ -22,6 +22,10 @@ export const QUERY = gql`
       name
       roles
       lastLoginAt
+      profile {
+        id
+        name
+      }
     }
   }
 `
@@ -87,6 +91,10 @@ export const Success = ({
     }
   )
 
+  const getUserName = (user) => {
+    return user.profile?.name || user.name || user.email
+  }
+
   const approveGuest = async (id: number) => {
     await updateUserRoles({
       variables: {
@@ -115,7 +123,8 @@ export const Success = ({
             {users.map((user) => (
               <tr key={user.id}>
                 <td>{user.email}</td>
-                <td>{user.name}</td>
+                <td>
+                  {getUserName(user)}</td>
                 <td>
                   {user.roles.map((role) => (
                     <UserRole key={role} role={role} />
