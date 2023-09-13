@@ -375,7 +375,8 @@ const PostForm = (props: PostFormProps) => {
                 }}
               />
             </div>
-
+            <UploadList
+                images={uploadedImages} />
           </>
           )}
 

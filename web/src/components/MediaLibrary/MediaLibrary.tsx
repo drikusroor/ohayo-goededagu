@@ -8,11 +8,12 @@ import UploadList from '../UploadList/UploadList'
 declare const cloudinary: unknown
 
 interface IMediaLibraryProps {
+  name: string
   handleMediaLibrary: (value: ICloudinaryUploadResultInfo[]) => void
   setUploadedImages: (value: ICloudinaryUploadResultInfo[]) => void
 }
 
-const MediaLibrary = ({ handleMediaLibrary, setUploadedImages }: IMediaLibraryProps) => {
+const MediaLibrary = ({ name, handleMediaLibrary, setUploadedImages }: IMediaLibraryProps) => {
   const onClickOpen = () => {
     window.ml = cloudinary.openMediaLibrary(
       {
