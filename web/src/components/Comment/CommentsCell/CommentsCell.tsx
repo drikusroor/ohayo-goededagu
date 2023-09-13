@@ -7,7 +7,7 @@ import Comments from 'src/components/Comment/Comments'
 
 export const QUERY = gql`
   query FindComments {
-    comments {
+    comments(orderBy: { createdAt: desc }) {
       id
       body
       createdAt
