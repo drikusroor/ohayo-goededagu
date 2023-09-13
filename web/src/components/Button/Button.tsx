@@ -1,7 +1,4 @@
-import { icon } from '@fortawesome/fontawesome-svg-core'
-import { IconBase } from 'react-icons/lib'
-
-interface IButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
+interface IButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   onClick?: () => void
   id?: string
   className?: string

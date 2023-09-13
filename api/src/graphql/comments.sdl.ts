@@ -21,8 +21,10 @@ export const schema = gql`
 
   input CreateCommentInput {
     body: String!
+    userId: Int!
     postId: Int!
     parentId: Int
+    deleted: Boolean!
   }
 
   input UpdateCommentInput {
@@ -30,18 +32,12 @@ export const schema = gql`
     userId: Int
     postId: Int
     parentId: Int
-  }
-
-  input DeleteCommentInput {
-    id: Int!
+    deleted: Boolean
   }
 
   type Mutation {
-    createComment(input: CreateCommentInput!): Comment!
-      @requireAuth(roles: ["ADMIN", "MODERATOR", "USER"])
-    updateComment(id: Int!, input: UpdateCommentInput!): Comment!
-      @requireAuth(roles: ["ADMIN", "MODERATOR", "USER"])
-    deleteComment(id: Int!): Comment!
-      @requireAuth(roles: ["ADMIN", "MODERATOR", "USER"])
+    createComment(input: CreateCommentInput!): Comment! @requireAuth
+    updateComment(id: Int!, input: UpdateCommentInput!): Comment! @requireAuth
+    deleteComment(id: Int!): Comment! @requireAuth
   }
 `

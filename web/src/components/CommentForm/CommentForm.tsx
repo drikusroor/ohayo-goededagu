@@ -17,7 +17,7 @@ import { QUERY as FindArticleQuery } from 'src/components/ArticleCell'
 import MarkdownEditor from '../MarkdownEditor/MarkdownEditor'
 
 const CREATE_COMMENT = gql`
-  mutation CreateCommentMutation($input: CreateCommentInput!) {
+  mutation UserCreateCommentMutation($input: CreateCommentInput!) {
     createComment(input: $input) {
       id
       body

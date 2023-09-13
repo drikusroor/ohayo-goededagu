@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "UserAction" ALTER COLUMN "target" DROP NOT NULL,
+ALTER COLUMN "targetId" DROP NOT NULL;

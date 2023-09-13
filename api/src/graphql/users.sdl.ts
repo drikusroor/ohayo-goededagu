@@ -3,10 +3,20 @@ export const schema = gql`
     id: Int!
     email: String!
     name: String
-    # hashedPassword: String!
-    # salt: String!
-    # resetToken: String
-    # resetTokenExpiresAt: DateTime
+    posts: [Post]!
+    profile: Profile
+    roles: [Role!]!
+    lastLoginAt: DateTime
+  }
+
+  type UserWithHashedPassword {
+    id: Int!
+    email: String!
+    name: String
+    hashedPassword: String!
+    salt: String!
+    resetToken: String
+    resetTokenExpiresAt: DateTime
     posts: [Post]!
     profile: Profile
     roles: [Role!]!
@@ -45,10 +55,19 @@ export const schema = gql`
     name: String
   }
 
+  input UpdateUserPasswordInput {
+    currentPassword: String!
+    newPassword: String!
+    confirmNewPassword: String!
+  }
+
   type Mutation {
     updateUserProfile(input: UpdateUserProfileInput!): User! @requireAuth
     updateUserRoles(input: UpdateUserRolesInput!): User!
       @requireAuth(roles: ["ADMIN", "MODERATOR"])
+    updateUserPassword(
+      input: UpdateUserPasswordInput!
+    ): UserWithHashedPassword! @requireAuth
   }
 
   enum Role {

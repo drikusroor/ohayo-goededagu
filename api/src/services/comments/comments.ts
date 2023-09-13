@@ -16,34 +16,11 @@ export const comment: QueryResolvers['comment'] = ({ id }) => {
   })
 }
 
-export const createComment: MutationResolvers['createComment'] = async ({
+export const createComment: MutationResolvers['createComment'] = ({
   input,
 }) => {
-  if (!input.postId) {
-    throw new Error('Post ID is required for Comment')
-  }
-
-  if (input.parentId) {
-    const parentComment = await db.comment.findUnique({
-      where: { id: input.parentId },
-    })
-
-    // check if post id is the same as parent post id
-    if (parentComment && parentComment.postId !== input.postId) {
-      throw new Error('Post ID does not match parent post ID')
-    }
-
-    // if parent already has a parent, throw error
-    if (parentComment && parentComment.parentId) {
-      throw new Error('Parent comment cannot have a parent')
-    }
-  }
-
   return db.comment.create({
-    data: {
-      ...input,
-      userId: context.currentUser.id,
-    },
+    data: input,
   })
 }
 
@@ -57,27 +34,10 @@ export const updateComment: MutationResolvers['updateComment'] = ({
   })
 }
 
-export const deleteComment: MutationResolvers['deleteComment'] = async ({
-  id,
-}) => {
-  await verifyOwnership({ id })
-
-  return db.comment.update({
+export const deleteComment: MutationResolvers['deleteComment'] = ({ id }) => {
+  return db.comment.delete({
     where: { id },
-    data: { deleted: true },
   })
-}
-
-const verifyOwnership = async ({ id }) => {
-  const comment = await db.comment.findUnique({ where: { id } })
-
-  if (!comment) {
-    throw new Error(`Comment with ID ${id} not found`)
-  }
-
-  if (comment.userId !== context.currentUser.id) {
-    throw new Error(`User does not own comment with ID ${id}`)
-  }
 }
 
 export const Comment: CommentRelationResolvers = {

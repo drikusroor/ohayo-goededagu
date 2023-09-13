@@ -44,6 +44,12 @@ const Routes = () => {
             <Route path="/admin/image-galleries/{id:Int}" page={ImageGalleryImageGalleryPage} name="imageGallery" />
             <Route path="/admin/image-galleries" page={ImageGalleryImageGalleriesPage} name="imageGalleries" />
           </Set>
+          <Set wrap={ScaffoldLayout} title="Comments" titleTo="comments" buttonLabel="New Comment" buttonTo="newComment">
+            <Route path="/admin/comments/new" page={CommentNewCommentPage} name="newComment" />
+            <Route path="/admin/comments/{id:Int}/edit" page={CommentEditCommentPage} name="editComment" />
+            <Route path="/admin/comments/{id:Int}" page={CommentCommentPage} name="comment" />
+            <Route path="/admin/comments" page={CommentCommentsPage} name="comments" />
+          </Set>
           <Set wrap={ScaffoldLayout} title="Profile" titleTo="profileSelf" buttonLabel="New Profile" buttonTo="newProfile">
             <Route path="/admin/profile/new" page={ProfileNewProfilePage} name="newProfile" />
             <Route path="/admin/profile/self" page={ProfileProfileSelfPage} name="profileSelf" />
@@ -55,7 +61,11 @@ const Routes = () => {
             <Route path="/admin/account" page={AccountAccountPage} name="account" />
           </Set>
           <Set wrap={ScaffoldLayout} title="Moderate Users" titleTo="userModeration">
-            <Route path="/user-moderation" page={UserModerationPage} name="userModeration" />
+            <Route path="/admin/user-moderation" page={UserModerationPage} name="userModeration" />
+          </Set>
+          <Set wrap={ScaffoldLayout} title="UserActions" titleTo="userActions">
+            <Route path="/admin/user-actions/{id:Int}" page={UserActionUserActionPage} name="userAction" />
+            <Route path="/admin/user-actions" page={UserActionUserActionsPage} name="userActions" />
           </Set>
         </Set>
       </Private>

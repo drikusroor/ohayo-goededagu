@@ -6,6 +6,7 @@ import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
 import EditAccountForm from '../EditAccountForm/EditAccountForm'
+import UpdatePasswordForm from '../UpdatePasswordForm/UpdatePasswordForm'
 
 export const QUERY = gql`
   query FindAccountForEditQuery($id: Int!) {
@@ -20,6 +21,14 @@ const UPDATE_USER_PROFILE_MUTATION = gql`
   mutation UpdateUserProfileMutation($input: UpdateUserProfileInput!) {
     updateUserProfile(input: $input) {
       name
+    }
+  }
+`
+
+const UPDATE_USER_PASSWORD_MUTATION = gql`
+  mutation UpdateUserPasswordMutation($input: UpdateUserPasswordInput!) {
+    updateUserPassword(input: $input) {
+      id
     }
   }
 `
@@ -46,6 +55,19 @@ export const Success = ({ user }: CellSuccessProps<EditUserProfileById>) => {
     }
   )
 
+  const [
+    updateUserPassword,
+    { loading: loadingPassword, error: errorPassword },
+  ] = useMutation(UPDATE_USER_PASSWORD_MUTATION, {
+    onCompleted: () => {
+      toast.success('Password updated')
+      navigate(routes.account())
+    },
+    onError: (error) => {
+      toast.error(error.message)
+    },
+  })
+
   const onSave = (
     input: UpdateUserProfileInput,
     id: EditUserProfileById['user']['id']
@@ -53,19 +75,42 @@ export const Success = ({ user }: CellSuccessProps<EditUserProfileById>) => {
     updateUserProfile({ variables: { id, input } })
   }
 
+  const onSubmitUpdatePasswordForm = (input: {
+    currentPassword: string
+    newPassword: string
+    confirmNewPassword: string
+  }) => {
+    updateUserPassword({ variables: { input } })
+  }
+
   return (
-    <div className="rw-segment">
-      <header className="rw-segment-header">
-        <h2 className="rw-heading rw-heading-secondary">Edit Account</h2>
-      </header>
-      <div className="rw-segment-main">
-        <EditAccountForm
-          user={user}
-          onSave={onSave}
-          error={error}
-          loading={loading}
-        />
+    <>
+      <div className="rw-segment">
+        <header className="rw-segment-header">
+          <h2 className="rw-heading rw-heading-secondary">Edit Account</h2>
+        </header>
+        <div className="rw-segment-main">
+          <EditAccountForm
+            user={user}
+            onSave={onSave}
+            error={error}
+            loading={loading}
+          />
+        </div>
       </div>
-    </div>
+      <div className="rw-segment mt-5">
+        <header className="rw-segment-header">
+          <h2 className="rw-heading rw-heading-secondary">Update Password</h2>
+        </header>
+
+        <div className="rw-segment-main">
+          <UpdatePasswordForm
+            onSubmit={onSubmitUpdatePasswordForm}
+            loading={loadingPassword}
+            error={errorPassword}
+          />
+        </div>
+      </div>
+    </>
   )
 }

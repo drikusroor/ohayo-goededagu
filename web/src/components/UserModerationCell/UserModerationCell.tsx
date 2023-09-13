@@ -1,4 +1,4 @@
-import { BsCheck2Circle } from 'react-icons/bs'
+import { BsCheck2Circle, BsX } from 'react-icons/bs'
 import type {
   FindUserModerationQuery,
   FindUserModerationQueryVariables,
@@ -12,6 +12,11 @@ import {
 } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/dist/toast'
 
+import { Role } from 'src/types/role'
+
+import Button from '../Button/Button'
+import DisplayDatetime from '../DisplayDatetime/DisplayDatetime'
+
 export const QUERY = gql`
   query FindUserModerationQuery {
     users {
@@ -19,6 +24,11 @@ export const QUERY = gql`
       email
       name
       roles
+      lastLoginAt
+      profile {
+        id
+        name
+      }
     }
   }
 `
@@ -84,12 +94,27 @@ export const Success = ({
     }
   )
 
+  const getUserName = (user) => {
+    return user.profile?.name || user.name || 'No name'
+  }
+
   const approveGuest = async (id: number) => {
     await updateUserRoles({
       variables: {
         input: {
           id,
-          roles: ['GUEST', 'USER'],
+          roles: [Role.GUEST, Role.USER],
+        },
+      },
+    })
+  }
+
+  const unApproveUser = async (id: number) => {
+    await updateUserRoles({
+      variables: {
+        input: {
+          id,
+          roles: [Role.GUEST],
         },
       },
     })
@@ -104,6 +129,8 @@ export const Success = ({
               <th>Email</th>
               <th>Name</th>
               <th>Roles</th>
+              <th>Last Login</th>
+              <th>&nbsp;</th>
               <th>&nbsp;</th>
             </tr>
           </thead>
@@ -111,15 +138,22 @@ export const Success = ({
             {users.map((user) => (
               <tr key={user.id}>
                 <td>{user.email}</td>
-                <td>{user.name}</td>
+                <td>{getUserName(user)}</td>
                 <td>
                   {user.roles.map((role) => (
                     <UserRole key={role} role={role} />
                   ))}
                 </td>
                 <td>
-                  {user.roles.join() === 'GUEST' && (
-                    <button
+                  {user.lastLoginAt ? (
+                    <DisplayDatetime datetime={user.lastLoginAt} />
+                  ) : (
+                    <span>Never</span>
+                  )}
+                </td>
+                <td>
+                  {user.roles.join() === Role.GUEST && (
+                    <Button
                       className={`flex flex-row items-center gap-2 rounded bg-green-500 p-2 font-bold text-white hover:bg-green-700 ${
                         loading ? 'animate-bounce cursor-wait opacity-50' : ''
                       }`}
@@ -128,8 +162,23 @@ export const Success = ({
                     >
                       <BsCheck2Circle />
                       Approve
-                    </button>
+                    </Button>
                   )}
+                  {user.roles.includes(Role.GUEST) &&
+                    user.roles.includes(Role.USER) &&
+                    !user.roles.includes(Role.ADMIN) &&
+                    !user.roles.includes(Role.MODERATOR) && (
+                      <Button
+                        className={`flex flex-row items-center gap-2 rounded bg-red-500 p-2 font-bold text-white hover:bg-red-700 ${
+                          loading ? 'animate-bounce cursor-wait opacity-50' : ''
+                        }`}
+                        disabled={loading}
+                        onClick={() => unApproveUser(user.id)}
+                      >
+                        <BsX />
+                        Unapprove
+                      </Button>
+                    )}
                 </td>
               </tr>
             ))}

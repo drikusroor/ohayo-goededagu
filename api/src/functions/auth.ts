@@ -50,7 +50,27 @@ export const handler = async (
     // didn't validate their email yet), throw an error and it will be returned
     // by the `logIn()` function from `useAuth()` in the form of:
     // `{ message: 'Error message' }`
-    handler: (user) => {
+    handler: async (user) => {
+      await db.userAction.create({
+        data: {
+          user: {
+            connect: {
+              id: user.id,
+            },
+          },
+          action: 'LOGIN',
+        },
+      })
+
+      await db.user.update({
+        where: {
+          id: user.id,
+        },
+        data: {
+          lastLoginAt: new Date(),
+        },
+      })
+
       return user
     },
 
