@@ -1,4 +1,4 @@
-import { BsCheck2Circle } from 'react-icons/bs'
+import { BsCheck2Circle, BsX } from 'react-icons/bs'
 import type {
   FindUserModerationQuery,
   FindUserModerationQueryVariables,
@@ -12,8 +12,10 @@ import {
 } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/dist/toast'
 
-import DisplayDatetime from '../DisplayDatetime/DisplayDatetime'
+import { Role } from 'src/types/role'
+
 import Button from '../Button/Button'
+import DisplayDatetime from '../DisplayDatetime/DisplayDatetime'
 
 export const QUERY = gql`
   query FindUserModerationQuery {
@@ -101,7 +103,18 @@ export const Success = ({
       variables: {
         input: {
           id,
-          roles: ['GUEST', 'USER'],
+          roles: [Role.GUEST, Role.USER],
+        },
+      },
+    })
+  }
+
+  const unApproveUser = async (id: number) => {
+    await updateUserRoles({
+      variables: {
+        input: {
+          id,
+          roles: [Role.GUEST],
         },
       },
     })
@@ -118,14 +131,14 @@ export const Success = ({
               <th>Roles</th>
               <th>Last Login</th>
               <th>&nbsp;</th>
+              <th>&nbsp;</th>
             </tr>
           </thead>
           <tbody>
             {users.map((user) => (
               <tr key={user.id}>
                 <td>{user.email}</td>
-                <td>
-                  {getUserName(user)}</td>
+                <td>{getUserName(user)}</td>
                 <td>
                   {user.roles.map((role) => (
                     <UserRole key={role} role={role} />
@@ -139,7 +152,7 @@ export const Success = ({
                   )}
                 </td>
                 <td>
-                  {user.roles.join() === 'GUEST' ? (
+                  {user.roles.join() === Role.GUEST && (
                     <Button
                       className={`flex flex-row items-center gap-2 rounded bg-green-500 p-2 font-bold text-white hover:bg-green-700 ${
                         loading ? 'animate-bounce cursor-wait opacity-50' : ''
@@ -150,14 +163,22 @@ export const Success = ({
                       <BsCheck2Circle />
                       Approve
                     </Button>
-                  )
-                      :
-                      <Button className={`flex flex-row items-center gap-2 rounded bg-green-500 p-2 font-bold text-white hover:bg-green-500 opacity-50 cursor-not-allowed`}>
-                      <BsCheck2Circle />
-                      Approved
-                    </Button>
-
-                }
+                  )}
+                  {user.roles.includes(Role.GUEST) &&
+                    user.roles.includes(Role.USER) &&
+                    !user.roles.includes(Role.ADMIN) &&
+                    !user.roles.includes(Role.MODERATOR) && (
+                      <Button
+                        className={`flex flex-row items-center gap-2 rounded bg-red-500 p-2 font-bold text-white hover:bg-red-700 ${
+                          loading ? 'animate-bounce cursor-wait opacity-50' : ''
+                        }`}
+                        disabled={loading}
+                        onClick={() => unApproveUser(user.id)}
+                      >
+                        <BsX />
+                        Unapprove
+                      </Button>
+                    )}
                 </td>
               </tr>
             ))}
