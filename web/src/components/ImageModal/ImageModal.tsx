@@ -2,31 +2,40 @@ interface Props {
   info: object
 }
 
-const ImageModal = ({info}: Props) => {
+const ImageModal = ({ info }: Props) => {
   const closeModal = () => {
-    document.getElementById("modal").style.display = "none"
+    document.getElementById('modal').style.display = 'none'
   }
 
   return (
-    <div id="modal" className='hidden fixed pt-2.5 left-0 top-0 w-full h-full overflow-auto bg-black bg-opacity-70 text-white'>
+    <div
+      id="modal"
+      className="fixed left-0 top-0 hidden h-full w-full overflow-auto bg-black bg-opacity-70 pt-2.5 text-white"
+    >
       <span
-        className='text-white absolute top-20 right-6 font-bold text-4xl cursor-pointer'
+        className="absolute right-6 top-20 cursor-pointer text-4xl font-bold text-white"
         onClick={() => {
           closeModal()
-        }}>&times;</span>
+        }}
+      >
+        &times;
+      </span>
       <div
-        className='flex justify-center py-20 px-20 items-center h-full w-full'
+        className="flex h-full w-full items-center justify-center px-20 py-20"
         onClick={() => {
           closeModal()
-        }}>
-        <div className='flex flex-col gap-2'>
-          <img id="modalImage" className="h-full w-fit rounded-md" src={info?.url} key={info?.id} alt={info?.id} />
-          {info?.title && (
-            <span className="text-xl">{info?.title}</span>
-          )}
-          {info?.description && (
-            <span>{info?.description}</span>
-          )}
+        }}
+      >
+        <div className="flex flex-col gap-2">
+          <img
+            id="modalImage"
+            className="h-full w-fit rounded-md"
+            src={info?.url}
+            key={info?.id}
+            alt={info?.id}
+          />
+          {info?.title && <span className="text-xl">{info?.title}</span>}
+          {info?.description && <span>{info?.description}</span>}
         </div>
       </div>
     </div>

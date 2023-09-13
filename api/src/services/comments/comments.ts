@@ -2,12 +2,21 @@ import type {
   QueryResolvers,
   MutationResolvers,
   CommentRelationResolvers,
+  CommentOrderByInput,
 } from 'types/graphql'
 
 import { db } from 'src/lib/db'
 
-export const comments: QueryResolvers['comments'] = () => {
-  return db.comment.findMany()
+export const comments: QueryResolvers['comments'] = (
+  {
+    orderBy,
+  }: {
+    orderBy: CommentOrderByInput
+  } = { orderBy: { createdAt: 'asc' } }
+) => {
+  return db.comment.findMany({
+    orderBy,
+  })
 }
 
 export const comment: QueryResolvers['comment'] = ({ id }) => {

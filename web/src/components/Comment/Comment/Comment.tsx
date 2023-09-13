@@ -1,13 +1,13 @@
+import type {
+  DeleteCommentMutationVariables,
+  FindCommentById,
+} from 'types/graphql'
+
 import { Link, routes, navigate } from '@redwoodjs/router'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
 import { checkboxInputTag, timeTag } from 'src/lib/formatters'
-
-import type {
-  DeleteCommentMutationVariables,
-  FindCommentById,
-} from 'types/graphql'
 
 const DELETE_COMMENT_MUTATION = gql`
   mutation DeleteCommentMutation($id: Int!) {

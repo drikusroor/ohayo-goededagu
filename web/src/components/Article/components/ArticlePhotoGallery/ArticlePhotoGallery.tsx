@@ -83,7 +83,7 @@ const ArticlePhotoGallery = ({ article, displayType, date }: Props) => {
                 >
                   <Button className="flex max-w-fit items-center justify-end gap-2 px-4 py-3 text-xs">
                     <span className="hidden sm:inline-block">
-                      Zie alle foto's
+                      Zie alle foto&apos;s
                     </span>
                     <BsArrowRightCircle />
                   </Button>

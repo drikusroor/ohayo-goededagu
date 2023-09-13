@@ -2,12 +2,21 @@ import type {
   QueryResolvers,
   MutationResolvers,
   UserActionRelationResolvers,
+  UserActionOrderByInput,
 } from 'types/graphql'
 
 import { db } from 'src/lib/db'
 
-export const userActions: QueryResolvers['userActions'] = () => {
-  return db.userAction.findMany()
+export const userActions: QueryResolvers['userActions'] = (
+  {
+    orderBy,
+  }: {
+    orderBy: UserActionOrderByInput
+  } = { orderBy: { createdAt: 'asc' } }
+) => {
+  return db.userAction.findMany({
+    orderBy,
+  })
 }
 
 export const userAction: QueryResolvers['userAction'] = ({ id }) => {

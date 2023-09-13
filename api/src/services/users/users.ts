@@ -5,7 +5,7 @@ import type {
   UserRelationResolvers,
 } from 'types/graphql'
 
-import { validate, validateWith, validateWithSync } from '@redwoodjs/api'
+import { validate } from '@redwoodjs/api'
 import { hashPassword } from '@redwoodjs/auth-dbauth-api'
 
 import { db } from 'src/lib/db'

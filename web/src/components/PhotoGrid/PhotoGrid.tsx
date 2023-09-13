@@ -51,7 +51,6 @@ const PhotoGrid = ({ className, images = [], preview }: IPhotoGridProps) => {
                   key={photo.imageId}
                 >
                   <img
-                    className="h-full w-full rounded-md object-cover align-middle"
                     className="h-full w-full cursor-pointer rounded-md object-cover align-middle"
                     key={photo.imageId}
                     src={photo.url}

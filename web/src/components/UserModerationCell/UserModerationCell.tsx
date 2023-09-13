@@ -81,7 +81,7 @@ export const Success = ({
   FindUserModerationQuery,
   FindUserModerationQueryVariables
 >) => {
-  const [updateUserRoles, { loading, error }] = useMutation(
+  const [updateUserRoles, { loading }] = useMutation(
     UPDATE_USER_ROLES_MUTATION,
     {
       onCompleted: () => {

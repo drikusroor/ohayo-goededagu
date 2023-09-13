@@ -70,7 +70,7 @@ export const Success = ({
     }
   )
 
-  const [deleteImageGalleryImage, { loading: deleteLoading }] = useMutation(
+  const [deleteImageGalleryImage] = useMutation(
     DELETE_IMAGE_GALLERY_IMAGE_MUTATION,
     {
       onCompleted: () => {

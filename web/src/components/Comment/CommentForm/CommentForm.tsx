@@ -1,3 +1,5 @@
+import type { EditCommentById, UpdateCommentInput } from 'types/graphql'
+
 import {
   Form,
   FormError,
@@ -8,8 +10,6 @@ import {
   CheckboxField,
   Submit,
 } from '@redwoodjs/forms'
-
-import type { EditCommentById, UpdateCommentInput } from 'types/graphql'
 import type { RWGqlError } from '@redwoodjs/forms'
 
 type FormComment = NonNullable<EditCommentById['comment']>

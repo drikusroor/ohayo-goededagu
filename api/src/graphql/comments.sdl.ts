@@ -15,8 +15,23 @@ export const schema = gql`
   }
 
   type Query {
-    comments: [Comment!]! @requireAuth
+    comments(orderBy: CommentOrderByInput): [Comment!]! @requireAuth
     comment(id: Int!): Comment @requireAuth
+  }
+
+  enum SortOrder {
+    asc
+    desc
+  }
+
+  input CommentOrderByInput {
+    id: SortOrder
+    body: SortOrder
+    createdAt: SortOrder
+    userId: SortOrder
+    postId: SortOrder
+    parentId: SortOrder
+    deleted: SortOrder
   }
 
   input CreateCommentInput {

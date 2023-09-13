@@ -1,5 +1,3 @@
-import type { User } from '@prisma/client'
-
 import { users } from './users'
 import type { StandardScenario } from './users.scenarios'
 
