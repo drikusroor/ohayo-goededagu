@@ -322,6 +322,7 @@ const PostForm = (props: PostFormProps) => {
               <div className="flex flex-row flex-wrap gap-2">
                 <Upload
                   name="imageGalleries"
+                  folder={postTitle}
                   multiple={true}
                   handleUpload={({ ...images }) => {
                     handleSetImageGalleries(
@@ -355,6 +356,7 @@ const PostForm = (props: PostFormProps) => {
               <div className="flex flex-row flex-wrap gap-2">
                 <Upload
                   name="imageGalleries"
+                  folder={postTitle}
                   multiple={true}
                   handleUpload={({ ...images }) => {
                     handleSetImageGalleries(

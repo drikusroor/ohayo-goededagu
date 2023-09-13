@@ -34,15 +34,16 @@ export interface ICloudinaryUploadResultInfo {
 
 interface IUploadProps {
   name: string
+  folder?: string
   multiple?: boolean
   handleUpload: (value: ICloudinaryUploadResultInfo[]) => void
   setUploadedImages: (value: ICloudinaryUploadResultInfo[]) => void
 }
 
-const Upload = ({ name, multiple, handleUpload, setUploadedImages }: IUploadProps) => {
+const Upload = ({ name, folder, multiple, handleUpload, setUploadedImages }: IUploadProps) => {
   const defaultFolder =
-    name === 'profilePicture'
-      ? 'Profile pictures'
+    name === 'avatar'
+      ? 'Avatars'
       : name === 'coverImage'
       ? 'Cover images'
       : ''
@@ -52,7 +53,7 @@ const Upload = ({ name, multiple, handleUpload, setUploadedImages }: IUploadProp
       cloudName: process.env.CLOUD_NAME,
       uploadPreset: process.env.UPLOAD_PRESET,
       multiple: multiple ? multiple : true,
-      folder: defaultFolder,
+      folder: folder ? folder : defaultFolder,
     },
     (error, result) => {
       if (error) {
