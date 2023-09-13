@@ -4,6 +4,8 @@ export const schema = gql`
     createdAt: DateTime!
     imageId: String!
     url: String!
+    title: String
+    description: String
     postId: Int!
     Post: [Post]!
   }

@@ -60,7 +60,7 @@ const PhotoGrid = ({ className, images = [], preview }: IPhotoGridProps) => {
                       setModalInfo({
                         url: photo.url,
                         id: photo.imageId,
-                        title: photo?.name ? photo?.name : '',
+                        title: photo?.title ? photo?.title : '',
                         description: photo?.description
                           ? photo?.description
                           : '',

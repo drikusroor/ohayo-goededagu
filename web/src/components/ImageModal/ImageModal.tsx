@@ -10,7 +10,7 @@ const ImageModal = ({ info }: Props) => {
   return (
     <div
       id="modal"
-      className="fixed left-0 top-0 hidden h-full w-full overflow-auto bg-black bg-opacity-70 pt-2.5 text-white"
+      className="fixed left-0 top-0 hidden h-full w-full overflow-auto bg-black bg-opacity-70 pt-2.5 text-white z-50"
     >
       <span
         className="absolute right-6 top-20 cursor-pointer text-4xl font-bold text-white"
