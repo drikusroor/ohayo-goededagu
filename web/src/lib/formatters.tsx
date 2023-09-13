@@ -1,6 +1,5 @@
 import React from 'react'
 
-import { text } from '@fortawesome/fontawesome-svg-core'
 import humanize from 'humanize-string'
 
 const MAX_STRING_LENGTH = 150

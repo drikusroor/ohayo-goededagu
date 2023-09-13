@@ -1,9 +1,5 @@
 import { Label, InputField } from '@redwoodjs/forms'
 
-import ArticleVideo from 'src/components/Article/components/ArticleVideo/ArticleVideo'
-import Video from 'src/components/Video/Video'
-import { EPostDisplayType } from 'src/types/post-display-type.enum'
-
 export interface IVideoPostFormData {
   videoUrl: string
 }

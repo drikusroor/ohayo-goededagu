@@ -66,9 +66,7 @@ const ArticleHaiku = ({ article, displayType, date }: Props) => {
             </h1>
 
             <div className="flex flex-row items-center gap-2">
-              <span className="text-sm text-slate-500">
-                {article.user.profile?.name || article.user.name || 'Anonymous'}
-              </span>
+              <span className="text-sm text-slate-500">{authorName}</span>
               <span className="text-sm text-slate-500"> | {date}</span>
             </div>
           </header>

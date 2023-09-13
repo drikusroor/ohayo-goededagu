@@ -11,7 +11,7 @@ interface IMediaLibraryProps {
   handleMediaLibrary: (value: ICloudinaryUploadResultInfo[]) => void
 }
 
-const MediaLibrary = ({ name, handleMediaLibrary }: IMediaLibraryProps) => {
+const MediaLibrary = ({ handleMediaLibrary }: IMediaLibraryProps) => {
   const onClickOpen = () => {
     window.ml = cloudinary.openMediaLibrary(
       {

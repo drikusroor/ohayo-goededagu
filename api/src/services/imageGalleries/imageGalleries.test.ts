@@ -3,8 +3,6 @@ import type { ImageGallery } from '@prisma/client'
 import {
   imageGalleries,
   imageGallery,
-  createImageGallery,
-  updateImageGallery,
   deleteImageGallery,
 } from './imageGalleries'
 import type { StandardScenario } from './imageGalleries.scenarios'
