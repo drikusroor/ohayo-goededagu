@@ -4,7 +4,6 @@ import {
   userActions,
   userAction,
   createUserAction,
-  updateUserAction,
   deleteUserAction,
 } from './userActions'
 import type { StandardScenario } from './userActions.scenarios'
@@ -37,18 +36,6 @@ describe('userActions', () => {
     })
 
     expect(result.userId).toEqual(scenario.userAction.two.userId)
-    expect(result.action).toEqual('LOGIN')
-  })
-
-  scenario('updates a userAction', async (scenario: StandardScenario) => {
-    const original = (await userAction({
-      id: scenario.userAction.one.id,
-    })) as UserAction
-    const result = await updateUserAction({
-      id: original.id,
-      input: { action: 'LOGIN' },
-    })
-
     expect(result.action).toEqual('LOGIN')
   })
 
