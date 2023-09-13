@@ -14,8 +14,8 @@ export const schema = gql`
   }
 
   type Query {
-    userActions: [UserAction!]! @requireAuth
-    userAction(id: Int!): UserAction @requireAuth
+    userActions: [UserAction!]! @requireAuth(roles: ["ADMIN", "MODERATOR"])
+    userAction(id: Int!): UserAction @requireAuth(roles: ["ADMIN", "MODERATOR"])
   }
 
   input CreateUserActionInput {
@@ -25,17 +25,9 @@ export const schema = gql`
     targetId: String
   }
 
-  input UpdateUserActionInput {
-    userId: Int
-    action: UserActionType
-    target: String
-    targetId: String
-  }
-
   type Mutation {
     createUserAction(input: CreateUserActionInput!): UserAction! @requireAuth
-    updateUserAction(id: Int!, input: UpdateUserActionInput!): UserAction!
-      @requireAuth
-    deleteUserAction(id: Int!): UserAction! @requireAuth
+    deleteUserAction(id: Int!): UserAction!
+      @requireAuth(roles: ["ADMIN", "MODERATOR"])
   }
 `
