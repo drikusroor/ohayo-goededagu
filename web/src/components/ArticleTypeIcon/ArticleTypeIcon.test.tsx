@@ -1,15 +1,6 @@
-import {
-  BsJournalRichtext,
-  BsFilm,
-  BsSticky,
-  BsImages,
-  BsBrush,
-  BsQuestion,
-} from 'react-icons/bs'
-
 import { render } from '@redwoodjs/testing/web'
 
-import { getIcon, EPostType } from './ArticleTypeIcon'
+import { EPostType } from './ArticleTypeIcon'
 import ArticleTypeIcon from './ArticleTypeIcon'
 
 //   Improve this test with help from the Redwood Testing Doc:

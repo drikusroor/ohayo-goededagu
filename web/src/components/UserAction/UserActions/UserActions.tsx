@@ -9,7 +9,7 @@ import { toast } from '@redwoodjs/web/toast'
 
 import DisplayDatetime from 'src/components/DisplayDatetime/DisplayDatetime'
 import { QUERY } from 'src/components/UserAction/UserActionsCell'
-import { formatEnum, timeTag, truncate } from 'src/lib/formatters'
+import { formatEnum, truncate } from 'src/lib/formatters'
 
 const DELETE_USER_ACTION_MUTATION = gql`
   mutation DeleteUserActionMutation($id: Int!) {

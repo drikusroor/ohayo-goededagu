@@ -1,13 +1,6 @@
 import { useRef, useState } from 'react'
 
-import {
-  Form,
-  FormError,
-  Label,
-  TextAreaField,
-  Submit,
-  SubmitHandler,
-} from '@redwoodjs/forms'
+import { Form, FormError, Submit, SubmitHandler } from '@redwoodjs/forms'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 

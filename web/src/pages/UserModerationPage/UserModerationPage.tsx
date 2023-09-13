@@ -7,7 +7,6 @@ const UserModerationPage = () => {
     <>
       <MetaTags title="UserModeration" description="UserModeration page" />
 
-      <h1>Moderate Users</h1>
       <UserModerationCell />
     </>
   )

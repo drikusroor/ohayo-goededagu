@@ -19,7 +19,7 @@ interface Props {
   date?: string
 }
 
-const ArticleChotto = ({ article, displayType, date }: Props) => {
+const ArticleChotto = ({ article, displayType }: Props) => {
   const authorName =
     article?.user?.profile?.name || article?.user?.name || 'Anonymous'
 

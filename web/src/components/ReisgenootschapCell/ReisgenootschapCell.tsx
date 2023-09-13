@@ -1,7 +1,6 @@
 import type {
   FindReisgenootschapQuery,
   FindReisgenootschapQueryVariables,
-  Role,
 } from 'types/graphql'
 
 import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'

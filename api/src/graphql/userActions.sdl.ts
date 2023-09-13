@@ -14,8 +14,18 @@ export const schema = gql`
   }
 
   type Query {
-    userActions: [UserAction!]! @requireAuth(roles: ["ADMIN", "MODERATOR"])
+    userActions(orderBy: UserActionOrderByInput): [UserAction!]!
+      @requireAuth(roles: ["ADMIN", "MODERATOR"])
     userAction(id: Int!): UserAction @requireAuth(roles: ["ADMIN", "MODERATOR"])
+  }
+
+  enum SortOrder {
+    asc
+    desc
+  }
+
+  input UserActionOrderByInput {
+    createdAt: SortOrder
   }
 
   input CreateUserActionInput {

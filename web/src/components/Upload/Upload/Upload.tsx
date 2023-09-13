@@ -41,11 +41,11 @@ interface IUploadProps {
 
 const Upload = ({ name, multiple, handleUpload, setUploadedImages }: IUploadProps) => {
   const defaultFolder =
-  name === 'profilePicture'
-    ? 'Profile pictures'
-    : name === 'coverImage'
-    ? 'Cover images'
-    : ''
+    name === 'profilePicture'
+      ? 'Profile pictures'
+      : name === 'coverImage'
+      ? 'Cover images'
+      : ''
 
   const widget = cloudinary.createUploadWidget(
     {

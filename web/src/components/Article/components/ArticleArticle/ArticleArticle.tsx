@@ -132,14 +132,15 @@ const ArticleArticle = ({ article, displayType }: Props) => {
           <div>
             <RenderBody body={article.body} />
           </div>
-          {galleries && galleries.map((gallery, index) => (
-            <PhotoGrid
-              key={index}
-              images={gallery.images}
-              preview={false}
-              className="block h-full w-full"
-            />
-          ))}
+          {galleries &&
+            galleries.map((gallery, index) => (
+              <PhotoGrid
+                key={index}
+                images={gallery.images}
+                preview={false}
+                className="block h-full w-full"
+              />
+            ))}
         </>
       )}
     </>

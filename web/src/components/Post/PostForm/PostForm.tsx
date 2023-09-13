@@ -319,12 +319,14 @@ const PostForm = (props: PostFormProps) => {
                 />
               </div>
               <span className="rw-label">Image Gallery</span>
-              <div className='flex flex-row flex-wrap gap-2'>
+              <div className="flex flex-row flex-wrap gap-2">
                 <Upload
                   name="imageGalleries"
                   multiple={true}
                   handleUpload={({ ...images }) => {
-                    handleSetImageGalleries(images as ICloudinaryUploadResultInfo[])
+                    handleSetImageGalleries(
+                      images as ICloudinaryUploadResultInfo[]
+                    )
                   }}
                   setUploadedImages={([...images]) => {
                     setUploadedImages(images)
@@ -333,7 +335,9 @@ const PostForm = (props: PostFormProps) => {
                 <MediaLibrary
                   name="imageGalleries"
                   handleMediaLibrary={({ ...images }) => {
-                    handleSetImageGalleries(images as ICloudinaryUploadResultInfo[])
+                    handleSetImageGalleries(
+                      images as ICloudinaryUploadResultInfo[]
+                    )
                   }}
                   setUploadedImages={([...images]) => {
                     setUploadedImages(images as ICloudinaryUploadResultInfo[])
@@ -348,12 +352,14 @@ const PostForm = (props: PostFormProps) => {
           {postType === EPostType.PHOTO_GALLERY && (
             <>
               <span className="rw-label">Image Gallery</span>
-              <div className='flex flex-row flex-wrap gap-2'>
+              <div className="flex flex-row flex-wrap gap-2">
                 <Upload
                   name="imageGalleries"
                   multiple={true}
                   handleUpload={({ ...images }) => {
-                    handleSetImageGalleries(images as ICloudinaryUploadResultInfo[])
+                    handleSetImageGalleries(
+                      images as ICloudinaryUploadResultInfo[]
+                    )
                   }}
                   setUploadedImages={({...images}) => {
                     setUploadedImages(images)

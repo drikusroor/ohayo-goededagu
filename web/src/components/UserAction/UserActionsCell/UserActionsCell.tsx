@@ -7,7 +7,7 @@ import UserActions from 'src/components/UserAction/UserActions'
 
 export const QUERY = gql`
   query FindUserActions {
-    userActions {
+    userActions(orderBy: { createdAt: desc }) {
       id
       createdAt
       userId
