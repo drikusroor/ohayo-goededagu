@@ -23,7 +23,7 @@ const MediaLibrary = ({ name, handleMediaLibrary, setUploadedImages }: IMediaLib
       },
       {
         insertHandler: function (data) {
-          setUploadedImages(data.assets)
+          setUploadedImages(data.assets as ICloudinaryUploadResultInfo[])
           handleMediaLibrary(data.assets as ICloudinaryUploadResultInfo[])
         },
       },
