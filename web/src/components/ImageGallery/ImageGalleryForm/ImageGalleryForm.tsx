@@ -1,3 +1,8 @@
+import type {
+  EditImageGalleryById,
+  UpdateImageGalleryInput,
+} from 'types/graphql'
+
 import {
   Form,
   FormError,
@@ -6,11 +11,6 @@ import {
   TextField,
   Submit,
 } from '@redwoodjs/forms'
-
-import type {
-  EditImageGalleryById,
-  UpdateImageGalleryInput,
-} from 'types/graphql'
 import type { RWGqlError } from '@redwoodjs/forms'
 
 type FormImageGallery = NonNullable<EditImageGalleryById['imageGallery']>

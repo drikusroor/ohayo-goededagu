@@ -1,14 +1,14 @@
+import type {
+  DeleteImageGalleryMutationVariables,
+  FindImageGalleries,
+} from 'types/graphql'
+
 import { Link, routes } from '@redwoodjs/router'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
 import { QUERY } from 'src/components/ImageGallery/ImageGalleriesCell'
 import { timeTag, truncate } from 'src/lib/formatters'
-
-import type {
-  DeleteImageGalleryMutationVariables,
-  FindImageGalleries,
-} from 'types/graphql'
 
 const DELETE_IMAGE_GALLERY_MUTATION = gql`
   mutation DeleteImageGalleryMutation($id: Int!) {

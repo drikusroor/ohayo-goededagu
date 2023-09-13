@@ -1,6 +1,7 @@
 import { FieldError } from '@redwoodjs/forms'
 
 import Button from 'src/components/Button/Button'
+
 import { ICloudinaryUploadResultInfo } from '../Upload/Upload/Upload'
 
 declare const cloudinary: unknown
@@ -11,7 +12,6 @@ interface IMediaLibraryProps {
 }
 
 const MediaLibrary = ({ name, handleMediaLibrary }: IMediaLibraryProps) => {
-
   const onClickOpen = () => {
     window.ml = cloudinary.openMediaLibrary(
       {
@@ -35,7 +35,7 @@ const MediaLibrary = ({ name, handleMediaLibrary }: IMediaLibraryProps) => {
         title="Media library"
         className="rw-button rw-button-blue mt-4"
         onClick={onClickOpen}
-        text='Select from Media Library'
+        text="Select from Media Library"
       />
       <FieldError name="upload" className="rw-field-error" />
     </>
