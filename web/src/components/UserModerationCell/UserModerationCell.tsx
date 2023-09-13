@@ -92,7 +92,7 @@ export const Success = ({
   )
 
   const getUserName = (user) => {
-    return user.profile?.name || user.name || user.email
+    return user.profile?.name || user.name || 'No name'
   }
 
   const approveGuest = async (id: number) => {
