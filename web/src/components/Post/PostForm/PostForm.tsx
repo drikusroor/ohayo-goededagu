@@ -169,6 +169,8 @@ const PostForm = (props: PostFormProps) => {
   const bodyNotRequired =
     postType === EPostType.VIDEO || postType === EPostType.PHOTO_GALLERY
 
+  const showImageGalleryButtons = postType === EPostType.ARTICLE || postType === EPostType.PHOTO_GALLERY
+
   const handleSetImageGalleries = (images: ICloudinaryUploadResultInfo[]) => {
     const gallery = []
     for (const [_key, image] of Object.entries(images)) {
@@ -318,6 +320,11 @@ const PostForm = (props: PostFormProps) => {
                   }}
                 />
               </div>
+            </>
+          )}
+
+          {showImageGalleryButtons && (
+            <>
               <span className="rw-label">Image Gallery</span>
               <div className="flex flex-row flex-wrap gap-2">
                 <Upload
@@ -348,38 +355,6 @@ const PostForm = (props: PostFormProps) => {
               <UploadList
                 images={uploadedImages} />
             </>
-          )}
-
-          {postType === EPostType.PHOTO_GALLERY && (
-            <>
-              <span className="rw-label">Image Gallery</span>
-              <div className="flex flex-row flex-wrap gap-2">
-                <Upload
-                  name="imageGalleries"
-                  folder={postTitle}
-                  multiple={true}
-                  handleUpload={({ ...images }) => {
-                    handleSetImageGalleries(
-                      images as ICloudinaryUploadResultInfo[]
-                    )
-                  }}
-                  setUploadedImages={([...images]) => {
-                    setUploadedImages(images as ICloudinaryUploadResultInfo[])
-                  }}
-                />
-                <MediaLibrary
-                name="imageGalleries"
-                handleMediaLibrary={({ ...images }) => {
-                  handleSetImageGalleries(images as ICloudinaryUploadResultInfo[])
-                }}
-                setUploadedImages={([...images]) => {
-                  setUploadedImages(images as ICloudinaryUploadResultInfo[])
-                }}
-              />
-            </div>
-            <UploadList
-                images={uploadedImages} />
-          </>
           )}
 
           <Preview post={previewPostData} />
