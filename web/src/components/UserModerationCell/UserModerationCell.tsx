@@ -13,6 +13,7 @@ import {
 import { toast } from '@redwoodjs/web/dist/toast'
 
 import DisplayDatetime from '../DisplayDatetime/DisplayDatetime'
+import Button from '../Button/Button'
 
 export const QUERY = gql`
   query FindUserModerationQuery {
@@ -138,8 +139,8 @@ export const Success = ({
                   )}
                 </td>
                 <td>
-                  {user.roles.join() === 'GUEST' && (
-                    <button
+                  {user.roles.join() === 'GUEST' ? (
+                    <Button
                       className={`flex flex-row items-center gap-2 rounded bg-green-500 p-2 font-bold text-white hover:bg-green-700 ${
                         loading ? 'animate-bounce cursor-wait opacity-50' : ''
                       }`}
@@ -148,8 +149,15 @@ export const Success = ({
                     >
                       <BsCheck2Circle />
                       Approve
-                    </button>
-                  )}
+                    </Button>
+                  )
+                      :
+                      <Button className={`flex flex-row items-center gap-2 rounded bg-green-500 p-2 font-bold text-white hover:bg-green-500 opacity-50 cursor-not-allowed`}>
+                      <BsCheck2Circle />
+                      Approved
+                    </Button>
+
+                }
                 </td>
               </tr>
             ))}
