@@ -9,7 +9,7 @@ import { toast } from '@redwoodjs/web/toast'
 
 import { QUERY } from 'src/components/Comment/CommentsCell'
 import DisplayDatetime from 'src/components/DisplayDatetime/DisplayDatetime'
-import { checkboxInputTag, timeTag, truncate } from 'src/lib/formatters'
+import { checkboxInputTag, truncate } from 'src/lib/formatters'
 
 const DELETE_COMMENT_MUTATION = gql`
   mutation DeleteCommentMutation($id: Int!) {
@@ -64,7 +64,15 @@ const CommentsList = ({ comments }: FindComments) => {
                 <DisplayDatetime datetime={comment.createdAt} showDate />
               </td>
               <td>{truncate(comment.userId)}</td>
-              <td>{truncate(comment.postId)}</td>
+              <td>
+                <Link
+                  to={routes.article({ id: comment.postId })}
+                  title={'Show post ' + comment.postId + ' detail'}
+                  className="flex flex-row items-center gap-2 text-blue-500 underline hover:text-blue-700"
+                >
+                  {truncate(comment.postId)}
+                </Link>
+              </td>
               <td>{truncate(comment.parentId)}</td>
               <td>{checkboxInputTag(comment.deleted)}</td>
               <td>
