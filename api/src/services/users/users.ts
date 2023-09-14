@@ -8,6 +8,7 @@ import type {
 import { validate } from '@redwoodjs/api'
 import { hashPassword } from '@redwoodjs/auth-dbauth-api'
 
+import { sendEmail } from 'src/functions/send-email'
 import { db } from 'src/lib/db'
 
 export const users: QueryResolvers['users'] = () => {
@@ -138,6 +139,33 @@ export const updateUserPassword = async ({
     },
     where: { id: context.currentUser.id },
   })
+}
+
+export const emailUser = async () => {
+  const user = await db.user.findUnique({
+    where: { id: context.currentUser.id },
+  })
+
+  if (!user) {
+    throw new Error('User not found')
+  }
+
+  const userEmailAddress = user?.email
+
+  if (!userEmailAddress) {
+    throw new Error('User email address not found')
+  }
+
+  const info = await sendEmail({
+    to: user.email,
+    subject: 'Test email',
+    text: 'This is a test email',
+    html: '<p>This is a test email</p>',
+  })
+
+  console.log(info)
+
+  return user
 }
 
 export const User: UserRelationResolvers = {
