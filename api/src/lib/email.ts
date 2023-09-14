@@ -11,17 +11,17 @@ export async function sendEmail({ to, subject, text, html }: Options) {
   console.log('Sending email to:', to)
 
   const transporter = nodemailer.createTransport({
-    host: 'smtp-relay.sendinblue.com',
+    host: process.env.SMTP_HOST,
     port: 587,
     secure: false,
     auth: {
-      user: 'drikusroor@icloud.com',
-      pass: process.env.SEND_IN_BLUE_KEY,
+      user: process.env.SMTP_USERNAME,
+      pass: process.env.SMTP_PASSWORD,
     },
   })
 
   const info = await transporter.sendMail({
-    from: '"noreply@ohayo-goededagu.nl',
+    from: '"Ohayo Noreplyo" <noreply@ohayo-goededagu.nl>',
     to: Array.isArray(to) ? to : [to], // list of receivers
     subject,
     text,

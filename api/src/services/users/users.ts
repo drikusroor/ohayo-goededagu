@@ -8,8 +8,8 @@ import type {
 import { validate } from '@redwoodjs/api'
 import { hashPassword } from '@redwoodjs/auth-dbauth-api'
 
-import { sendEmail } from 'src/functions/send-email'
 import { db } from 'src/lib/db'
+import { sendEmail } from 'src/lib/email'
 
 export const users: QueryResolvers['users'] = () => {
   return db.user.findMany()
@@ -156,14 +156,14 @@ export const emailUser = async () => {
     throw new Error('User email address not found')
   }
 
+  console.log('Sending email to:', userEmailAddress)
+
   const info = await sendEmail({
     to: user.email,
     subject: 'Test email',
     text: 'This is a test email',
     html: '<p>This is a test email</p>',
   })
-
-  console.log(info)
 
   return user
 }
