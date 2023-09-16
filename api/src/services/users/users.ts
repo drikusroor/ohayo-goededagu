@@ -47,7 +47,7 @@ export const updateUserProfile = ({ input }) => {
   })
 }
 
-export const updateUserRoles = ({ input }) => {
+export const updateUserRoles = async ({ input }) => {
   if (!context.currentUser) {
     throw new Error('User not authenticated')
   }
@@ -59,12 +59,20 @@ export const updateUserRoles = ({ input }) => {
     throw new Error('User not authorized')
   }
 
-  const user = db.user.findUnique({
+  const user = await db.user.findUnique({
     where: { id: input.id },
   })
 
   if (!user) {
     throw new Error('User not found')
+  }
+
+  if (
+    user.roles.includes('ADMIN') &&
+    !input.roles.includes('ADMIN') &&
+    user.id === context.currentUser.id
+  ) {
+    throw new Error('User not authorized')
   }
 
   return db.user.update({

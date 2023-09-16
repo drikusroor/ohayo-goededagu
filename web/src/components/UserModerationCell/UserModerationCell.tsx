@@ -1,7 +1,8 @@
-import { BsCheck2Circle, BsX } from 'react-icons/bs'
+import { BsCheck2Circle, BsPlus, BsX } from 'react-icons/bs'
 import type {
   FindUserModerationQuery,
   FindUserModerationQueryVariables,
+  User,
 } from 'types/graphql'
 
 import { navigate, routes } from '@redwoodjs/router'
@@ -12,6 +13,7 @@ import {
 } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/dist/toast'
 
+import { useAuth } from 'src/auth'
 import { Role } from 'src/types/role'
 
 import Button from '../Button/Button'
@@ -81,6 +83,8 @@ export const Success = ({
   FindUserModerationQuery,
   FindUserModerationQueryVariables
 >) => {
+  const { currentUser } = useAuth()
+
   const [updateUserRoles, { loading }] = useMutation(
     UPDATE_USER_ROLES_MUTATION,
     {
@@ -120,6 +124,34 @@ export const Success = ({
     })
   }
 
+  const addRole = async (user: User, role: Role) => {
+    const { id } = user
+
+    await updateUserRoles({
+      variables: {
+        input: {
+          id,
+          roles: [...user.roles, role],
+        },
+      },
+    })
+  }
+
+  const removeRole = async (user: User, role: Role) => {
+    const { id } = user
+
+    await updateUserRoles({
+      variables: {
+        input: {
+          id,
+          roles: user.roles.filter((r) => r !== role),
+        },
+      },
+    })
+  }
+
+  const roles = [Role.GUEST, Role.USER, Role.MODERATOR, Role.ADMIN]
+
   return (
     <main className="rw-main">
       <div className="rw-segment rw-table-wrapper-responsive">
@@ -130,7 +162,6 @@ export const Success = ({
               <th>Name</th>
               <th>Roles</th>
               <th>Last Login</th>
-              <th>&nbsp;</th>
               <th>&nbsp;</th>
             </tr>
           </thead>
@@ -152,33 +183,50 @@ export const Success = ({
                   )}
                 </td>
                 <td>
-                  {user.roles.join() === Role.GUEST && (
-                    <Button
-                      className={`flex flex-row items-center gap-2 rounded bg-green-500 p-2 font-bold text-white hover:bg-green-700 ${
-                        loading ? 'animate-bounce cursor-wait opacity-50' : ''
-                      }`}
-                      disabled={loading}
-                      onClick={() => approveGuest(user.id)}
-                    >
-                      <BsCheck2Circle />
-                      Approve
-                    </Button>
-                  )}
-                  {user.roles.includes(Role.GUEST) &&
-                    user.roles.includes(Role.USER) &&
-                    !user.roles.includes(Role.ADMIN) &&
-                    !user.roles.includes(Role.MODERATOR) && (
+                  <div className="flex flex-row flex-wrap gap-2">
+                    {user.roles.join() === Role.GUEST && (
                       <Button
-                        className={`flex flex-row items-center gap-2 rounded bg-red-500 p-2 font-bold text-white hover:bg-red-700 ${
+                        className={`flex flex-row items-center gap-2 rounded bg-green-500 p-2 font-bold text-white hover:bg-green-700 ${
                           loading ? 'animate-bounce cursor-wait opacity-50' : ''
                         }`}
                         disabled={loading}
-                        onClick={() => unApproveUser(user.id)}
+                        onClick={() => approveGuest(user.id)}
                       >
-                        <BsX />
-                        Unapprove
+                        <BsCheck2Circle />
+                        Approve
                       </Button>
                     )}
+
+                    {user.roles.join() !== Role.GUEST && (
+                      <div className="flex flex-row gap-0 rounded">
+                        {[
+                          roles.map((role) => (
+                            <Button
+                              key={role}
+                              className={`flex flex-row items-center gap-2 rounded-none ${
+                                user.roles.includes(role)
+                                  ? 'bg-gray-700'
+                                  : 'bg-gray-500'
+                              } px-4 py-2 text-sm font-bold text-white hover:bg-gray-700`}
+                              disabled={
+                                loading ||
+                                (currentUser.id === user.id &&
+                                  role === Role.ADMIN)
+                              }
+                              onClick={() =>
+                                user.roles.includes(role)
+                                  ? removeRole(user as User, role)
+                                  : addRole(user as User, role)
+                              }
+                            >
+                              {user.roles.includes(role) ? <BsX /> : <BsPlus />}
+                              {role}
+                            </Button>
+                          )),
+                        ]}
+                      </div>
+                    )}
+                  </div>
                 </td>
               </tr>
             ))}
