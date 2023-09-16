@@ -21,7 +21,15 @@ export const handler = async (
     // You could use this return value to, for example, show the email
     // address in a toast message so the user will know it worked and where
     // to look for the email.
-    handler: (user) => {
+    handler: async (user) => {
+      // Send email to user with password reset link
+      sendEmail({
+        to: user.email,
+        subject: 'Password Reset',
+        html: `<a href="https://ohayo-goededagu.nl/reset-password?resetToken=${user.resetToken}">Reset Password</a>`,
+        text: `Reset Password: https://ohayo-goededagu.nl/reset-password?resetToken=${user.resetToken}`,
+      })
+
       return user
     },
 
