@@ -3,6 +3,7 @@ import type { APIGatewayProxyEvent, Context } from 'aws-lambda'
 import { DbAuthHandler, DbAuthHandlerOptions } from '@redwoodjs/auth-dbauth-api'
 
 import { db } from 'src/lib/db'
+import { sendEmail } from 'src/lib/email'
 
 export const handler = async (
   event: APIGatewayProxyEvent,
@@ -28,6 +29,18 @@ export const handler = async (
         subject: 'Password Reset',
         html: `<a href="https://ohayo-goededagu.nl/reset-password?resetToken=${user.resetToken}">Reset Password</a>`,
         text: `Reset Password: https://ohayo-goededagu.nl/reset-password?resetToken=${user.resetToken}`,
+      })
+
+      await db.userAction.create({
+        data: {
+          user: {
+            connect: {
+              id: user.id,
+            },
+          },
+          targetId: user.resetToken ? user.resetToken.slice(-4) : '',
+          action: 'FORGOT_PASSWORD',
+        },
       })
 
       return user
