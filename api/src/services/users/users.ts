@@ -47,6 +47,35 @@ export const updateUserProfile = ({ input }) => {
   })
 }
 
+export const deleteUser = async ({ id }) => {
+  if (!context.currentUser) {
+    throw new Error('User not authenticated')
+  }
+
+  if (
+    !context.currentUser.roles.includes('ADMIN') &&
+    !context.currentUser.roles.includes('MODERATOR')
+  ) {
+    throw new Error('User not authorized')
+  }
+
+  const user = await db.user.findUnique({
+    where: { id },
+  })
+
+  if (!user) {
+    throw new Error('User not found')
+  }
+
+  if (user.roles.includes('ADMIN') && user.id === context.currentUser.id) {
+    throw new Error('User not authorized')
+  }
+
+  return db.user.delete({
+    where: { id },
+  })
+}
+
 export const updateUserRoles = async ({ input }) => {
   if (!context.currentUser) {
     throw new Error('User not authenticated')

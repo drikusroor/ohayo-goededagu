@@ -1,11 +1,10 @@
-import { BsCheck2Circle, BsPlus, BsX } from 'react-icons/bs'
+import { BsCheck2Circle, BsPlus, BsTrash, BsX } from 'react-icons/bs'
 import type {
   FindUserModerationQuery,
   FindUserModerationQueryVariables,
   User,
 } from 'types/graphql'
 
-import { navigate, routes } from '@redwoodjs/router'
 import {
   type CellSuccessProps,
   type CellFailureProps,
@@ -40,6 +39,14 @@ const UPDATE_USER_ROLES_MUTATION = gql`
     updateUserRoles(input: $input) {
       id
       roles
+    }
+  }
+`
+
+const DELETE_USER_MUTATION = gql`
+  mutation DeleteUserMutation($id: Int!) {
+    deleteUser(id: $id) {
+      id
     }
   }
 `
@@ -84,19 +91,30 @@ export const Success = ({
   FindUserModerationQueryVariables
 >) => {
   const { currentUser } = useAuth()
+  const roles = [Role.GUEST, Role.USER, Role.MODERATOR, Role.ADMIN]
 
   const [updateUserRoles, { loading }] = useMutation(
     UPDATE_USER_ROLES_MUTATION,
     {
       onCompleted: () => {
         toast.success('User roles updated')
-        navigate(routes.userModeration())
       },
       onError: (error) => {
         toast.error(error.message)
       },
+      refetchQueries: [{ query: QUERY }],
     }
   )
+
+  const [deleteUser] = useMutation(DELETE_USER_MUTATION, {
+    onCompleted: () => {
+      toast.success('User deleted')
+    },
+    onError: (error) => {
+      toast.error(error.message)
+    },
+    refetchQueries: [{ query: QUERY }],
+  })
 
   const getUserName = (user) => {
     return user.profile?.name || user.name || 'No name'
@@ -113,18 +131,7 @@ export const Success = ({
     })
   }
 
-  const unApproveUser = async (id: number) => {
-    await updateUserRoles({
-      variables: {
-        input: {
-          id,
-          roles: [Role.GUEST],
-        },
-      },
-    })
-  }
-
-  const addRole = async (user: User, role: Role) => {
+  const addUserRole = async (user: User, role: Role) => {
     const { id } = user
 
     await updateUserRoles({
@@ -137,7 +144,7 @@ export const Success = ({
     })
   }
 
-  const removeRole = async (user: User, role: Role) => {
+  const removeUserRole = async (user: User, role: Role) => {
     const { id } = user
 
     await updateUserRoles({
@@ -150,7 +157,17 @@ export const Success = ({
     })
   }
 
-  const roles = [Role.GUEST, Role.USER, Role.MODERATOR, Role.ADMIN]
+  const onClickDeleteUser = (user: User) => {
+    const { id } = user
+
+    if (confirm('Are you sure you want to delete user ' + user.email + '?')) {
+      deleteUser({
+        variables: {
+          id,
+        },
+      })
+    }
+  }
 
   return (
     <main className="rw-main">
@@ -162,6 +179,7 @@ export const Success = ({
               <th>Name</th>
               <th>Roles</th>
               <th>Last Login</th>
+              <th>&nbsp;</th>
               <th>&nbsp;</th>
             </tr>
           </thead>
@@ -215,8 +233,8 @@ export const Success = ({
                               }
                               onClick={() =>
                                 user.roles.includes(role)
-                                  ? removeRole(user as User, role)
-                                  : addRole(user as User, role)
+                                  ? removeUserRole(user as User, role)
+                                  : addUserRole(user as User, role)
                               }
                             >
                               {user.roles.includes(role) ? <BsX /> : <BsPlus />}
@@ -227,6 +245,21 @@ export const Success = ({
                       </div>
                     )}
                   </div>
+                </td>
+                <td>
+                  {user.id !== currentUser.id ? (
+                    <Button
+                      className="flex flex-row items-center gap-2 rounded bg-red-500 px-4 py-2 font-bold text-white hover:bg-red-700"
+                      onClick={() => onClickDeleteUser(user as User)}
+                    >
+                      <BsTrash />
+                      Delete
+                    </Button>
+                  ) : (
+                    <span className="text-sm text-gray-500">
+                      Can't delete yourself
+                    </span>
+                  )}
                 </td>
               </tr>
             ))}
