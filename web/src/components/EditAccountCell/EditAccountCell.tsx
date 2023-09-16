@@ -1,3 +1,4 @@
+import { BsEnvelope } from 'react-icons/bs'
 import type { UpdateUserProfileInput, EditUserProfileById } from 'types/graphql'
 
 import { navigate, routes } from '@redwoodjs/router'
@@ -5,6 +6,7 @@ import { useMutation } from '@redwoodjs/web'
 import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
+import Button from '../Button/Button'
 import EditAccountForm from '../EditAccountForm/EditAccountForm'
 import UpdatePasswordForm from '../UpdatePasswordForm/UpdatePasswordForm'
 
@@ -28,6 +30,14 @@ const UPDATE_USER_PROFILE_MUTATION = gql`
 const UPDATE_USER_PASSWORD_MUTATION = gql`
   mutation UpdateUserPasswordMutation($input: UpdateUserPasswordInput!) {
     updateUserPassword(input: $input) {
+      id
+    }
+  }
+`
+
+const EMAIL_USER_MUTATION = gql`
+  mutation EmailUserMutation {
+    emailUser {
       id
     }
   }
@@ -65,6 +75,12 @@ export const Success = ({ user }: CellSuccessProps<EditUserProfileById>) => {
     },
     onError: (error) => {
       toast.error(error.message)
+    },
+  })
+
+  const [emailUser] = useMutation(EMAIL_USER_MUTATION, {
+    onCompleted: () => {
+      toast.success('Email sent')
     },
   })
 
@@ -109,6 +125,22 @@ export const Success = ({ user }: CellSuccessProps<EditUserProfileById>) => {
             loading={loadingPassword}
             error={errorPassword}
           />
+        </div>
+      </div>
+
+      <div className="rw-segment mt-5">
+        <header className="rw-segment-header">
+          <h2 className="rw-heading rw-heading-secondary">Send test email</h2>
+        </header>
+
+        <div className="rw-segment-main">
+          <Button
+            onClick={emailUser}
+            className="rw-button rw-button-blue flex items-center gap-2 py-2 text-base transition-colors sm:text-sm"
+          >
+            <BsEnvelope />
+            Send email
+          </Button>
         </div>
       </div>
     </>

@@ -68,6 +68,7 @@ export const schema = gql`
     updateUserPassword(
       input: UpdateUserPasswordInput!
     ): UserWithHashedPassword! @requireAuth
+    emailUser: User! @requireAuth
   }
 
   enum Role {
