@@ -1,0 +1,2 @@
+-- AlterEnum
+ALTER TYPE "UserActionType" ADD VALUE 'FORGOT_PASSWORD';
