@@ -68,12 +68,6 @@ const menuItems: MenuItem[] = [
     icon: <BsFillPersonFill />,
   },
   {
-    name: 'Profile',
-    path: '/admin/profile/self',
-    activeRoutePattern: '/profile',
-    icon: <BsFillPersonVcardFill />,
-  },
-  {
     name: 'Moderate Users',
     path: '/admin/user-moderation',
     activeRoutePattern: '/user-moderation',
