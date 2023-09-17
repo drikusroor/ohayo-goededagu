@@ -1,10 +1,10 @@
-import { BsCheck2Circle, BsX } from 'react-icons/bs'
+import { BsCheck2Circle, BsPlus, BsTrash, BsX } from 'react-icons/bs'
 import type {
   FindUserModerationQuery,
   FindUserModerationQueryVariables,
+  User,
 } from 'types/graphql'
 
-import { navigate, routes } from '@redwoodjs/router'
 import {
   type CellSuccessProps,
   type CellFailureProps,
@@ -12,6 +12,7 @@ import {
 } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/dist/toast'
 
+import { useAuth } from 'src/auth'
 import { Role } from 'src/types/role'
 
 import Button from '../Button/Button'
@@ -38,6 +39,14 @@ const UPDATE_USER_ROLES_MUTATION = gql`
     updateUserRoles(input: $input) {
       id
       roles
+    }
+  }
+`
+
+const DELETE_USER_MUTATION = gql`
+  mutation DeleteUserMutation($id: Int!) {
+    deleteUser(id: $id) {
+      id
     }
   }
 `
@@ -81,18 +90,31 @@ export const Success = ({
   FindUserModerationQuery,
   FindUserModerationQueryVariables
 >) => {
+  const { currentUser } = useAuth()
+  const roles = [Role.GUEST, Role.USER, Role.MODERATOR, Role.ADMIN]
+
   const [updateUserRoles, { loading }] = useMutation(
     UPDATE_USER_ROLES_MUTATION,
     {
       onCompleted: () => {
         toast.success('User roles updated')
-        navigate(routes.userModeration())
       },
       onError: (error) => {
         toast.error(error.message)
       },
+      refetchQueries: [{ query: QUERY }],
     }
   )
+
+  const [deleteUser] = useMutation(DELETE_USER_MUTATION, {
+    onCompleted: () => {
+      toast.success('User deleted')
+    },
+    onError: (error) => {
+      toast.error(error.message)
+    },
+    refetchQueries: [{ query: QUERY }],
+  })
 
   const getUserName = (user) => {
     return user.profile?.name || user.name || 'No name'
@@ -109,15 +131,42 @@ export const Success = ({
     })
   }
 
-  const unApproveUser = async (id: number) => {
+  const addUserRole = async (user: User, role: Role) => {
+    const { id } = user
+
     await updateUserRoles({
       variables: {
         input: {
           id,
-          roles: [Role.GUEST],
+          roles: [...user.roles, role],
         },
       },
     })
+  }
+
+  const removeUserRole = async (user: User, role: Role) => {
+    const { id } = user
+
+    await updateUserRoles({
+      variables: {
+        input: {
+          id,
+          roles: user.roles.filter((r) => r !== role),
+        },
+      },
+    })
+  }
+
+  const onClickDeleteUser = (user: User) => {
+    const { id } = user
+
+    if (confirm('Are you sure you want to delete user ' + user.email + '?')) {
+      deleteUser({
+        variables: {
+          id,
+        },
+      })
+    }
   }
 
   return (
@@ -152,33 +201,65 @@ export const Success = ({
                   )}
                 </td>
                 <td>
-                  {user.roles.join() === Role.GUEST && (
-                    <Button
-                      className={`flex flex-row items-center gap-2 rounded bg-green-500 p-2 font-bold text-white hover:bg-green-700 ${
-                        loading ? 'animate-bounce cursor-wait opacity-50' : ''
-                      }`}
-                      disabled={loading}
-                      onClick={() => approveGuest(user.id)}
-                    >
-                      <BsCheck2Circle />
-                      Approve
-                    </Button>
-                  )}
-                  {user.roles.includes(Role.GUEST) &&
-                    user.roles.includes(Role.USER) &&
-                    !user.roles.includes(Role.ADMIN) &&
-                    !user.roles.includes(Role.MODERATOR) && (
+                  <div className="flex flex-row flex-wrap gap-2">
+                    {user.roles.join() === Role.GUEST && (
                       <Button
-                        className={`flex flex-row items-center gap-2 rounded bg-red-500 p-2 font-bold text-white hover:bg-red-700 ${
+                        className={`flex flex-row items-center gap-2 rounded bg-green-500 p-2 font-bold text-white hover:bg-green-700 ${
                           loading ? 'animate-bounce cursor-wait opacity-50' : ''
                         }`}
                         disabled={loading}
-                        onClick={() => unApproveUser(user.id)}
+                        onClick={() => approveGuest(user.id)}
                       >
-                        <BsX />
-                        Unapprove
+                        <BsCheck2Circle />
+                        Approve
                       </Button>
                     )}
+
+                    {user.roles.join() !== Role.GUEST && (
+                      <div className="flex flex-row gap-0 rounded">
+                        {[
+                          roles.map((role) => (
+                            <Button
+                              key={role}
+                              className={`flex flex-row items-center gap-2 rounded-none ${
+                                user.roles.includes(role)
+                                  ? 'bg-gray-700'
+                                  : 'bg-gray-500'
+                              } px-4 py-2 text-sm font-bold text-white hover:bg-gray-700`}
+                              disabled={
+                                loading ||
+                                (currentUser.id === user.id &&
+                                  role === Role.ADMIN)
+                              }
+                              onClick={() =>
+                                user.roles.includes(role)
+                                  ? removeUserRole(user as User, role)
+                                  : addUserRole(user as User, role)
+                              }
+                            >
+                              {user.roles.includes(role) ? <BsX /> : <BsPlus />}
+                              {role}
+                            </Button>
+                          )),
+                        ]}
+                      </div>
+                    )}
+                  </div>
+                </td>
+                <td>
+                  {user.id !== currentUser.id ? (
+                    <Button
+                      className="flex flex-row items-center gap-2 rounded bg-red-500 px-4 py-2 font-bold text-white hover:bg-red-700"
+                      onClick={() => onClickDeleteUser(user as User)}
+                    >
+                      <BsTrash />
+                      Delete
+                    </Button>
+                  ) : (
+                    <span className="text-sm text-gray-500">
+                      Can&apos;t delete yourself
+                    </span>
+                  )}
                 </td>
               </tr>
             ))}

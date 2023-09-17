@@ -35,6 +35,7 @@ const Button = ({
       title={title ? title : text ? text : ''}
       disabled={disabled}
       className={`block rounded px-3 py-2 font-semibold uppercase
+      ${disabled ? 'cursor-not-allowed opacity-50' : ''}
       ${buttonColors}
       ${className}
       `}

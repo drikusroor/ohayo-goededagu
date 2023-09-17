@@ -35,6 +35,13 @@ describe('UserModerationCell', () => {
   // 2. Add test: expect(screen.getByText('Hello, world')).toBeInTheDocument()
 
   it('renders Success successfully', async () => {
+    mockCurrentUser({
+      id: 1,
+      name: 'test',
+      email: 'admin@example.com',
+      roles: ['ADMIN'],
+    })
+
     expect(() => {
       render(<Success users={standard().users} />)
     }).not.toThrow()
