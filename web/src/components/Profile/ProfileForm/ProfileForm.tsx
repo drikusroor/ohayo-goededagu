@@ -12,7 +12,9 @@ import type { RWGqlError } from '@redwoodjs/forms'
 
 import Avatar from 'src/components/Avatar/Avatar'
 import MediaLibrary from 'src/components/MediaLibrary/MediaLibrary'
-import Upload from 'src/components/Upload/Upload/Upload'
+import Upload, {
+  ICloudinaryUploadResultInfo,
+} from 'src/components/Upload/Upload/Upload'
 
 type FormProfile = NonNullable<FindProfileSelf['profile']>
 
@@ -37,6 +39,18 @@ const ProfileForm = (props: ProfileFormProps) => {
   const [profilePicture, setProfilePicture] = React.useState<string>(
     props.profile?.avatar || ''
   )
+
+  const handleUpload = (value: ICloudinaryUploadResultInfo[]) => {
+    const [{ secure_url }] = value
+
+    setProfilePicture(secure_url)
+  }
+
+  const handleMediaLibraryResponse = (value: ICloudinaryUploadResultInfo[]) => {
+    const [{ secure_url }] = value
+
+    setProfilePicture(secure_url)
+  }
 
   return (
     <div className="rw-form-wrapper">
@@ -104,17 +118,11 @@ const ProfileForm = (props: ProfileFormProps) => {
         </Label>
 
         <div className="mt-4 flex flex-row items-center gap-4">
-          <Upload
-            name="avatar"
-            multiple={false}
-            handleUpload={([{ secure_url }]) => setProfilePicture(secure_url)}
-          />
+          <Upload name="avatar" multiple={false} handleUpload={handleUpload} />
 
           <MediaLibrary
             name="avatar"
-            handleMediaLibrary={([{ secure_url }]) =>
-              setProfilePicture(secure_url)
-            }
+            handleMediaLibrary={handleMediaLibraryResponse}
           />
 
           {profilePicture && (

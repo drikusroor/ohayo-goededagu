@@ -1,7 +1,6 @@
 import { render } from '@redwoodjs/testing/web'
-
-import { Loading, Empty, Failure, Success } from './UserModerationCell'
-import { standard } from './UserModerationCell.mock'
+import { Loading, Empty, Failure, Success } from './ViewProfileCell'
+import { standard } from './ViewProfileCell.mock'
 
 // Generated boilerplate tests do not account for all circumstances
 // and can fail without adjustments, e.g. Float and DateTime types.
@@ -9,7 +8,7 @@ import { standard } from './UserModerationCell.mock'
 //        https://redwoodjs.com/docs/testing#testing-cells
 // https://redwoodjs.com/docs/testing#jest-expect-type-considerations
 
-describe('UserModerationCell', () => {
+describe('ViewProfileCell', () => {
   it('renders Loading successfully', () => {
     expect(() => {
       render(<Loading />)
@@ -35,15 +34,8 @@ describe('UserModerationCell', () => {
   // 2. Add test: expect(screen.getByText('Hello, world')).toBeInTheDocument()
 
   it('renders Success successfully', async () => {
-    mockCurrentUser({
-      id: 1,
-      name: 'test',
-      email: 'admin@example.com',
-      roles: ['ADMIN'],
-    })
-
     expect(() => {
-      render(<Success users={standard().users} />)
+      render(<Success viewProfile={standard().viewProfile} />)
     }).not.toThrow()
   })
 })

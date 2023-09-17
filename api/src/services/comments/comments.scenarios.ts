@@ -9,9 +9,9 @@ export const standard = defineScenario<Prisma.CommentCreateArgs>({
         body: 'String',
         user: {
           create: {
-            email: 'String8255715',
-            hashedPassword: 'String',
-            salt: 'String',
+            email: 'info@example.com',
+            hashedPassword: 'uiowfojweofjoiwjef',
+            salt: 'wpijefoiwjeoifjwe',
           },
         },
         post: {
@@ -19,9 +19,9 @@ export const standard = defineScenario<Prisma.CommentCreateArgs>({
             title: 'String',
             user: {
               create: {
-                email: 'String1210598',
-                hashedPassword: 'String',
-                salt: 'String',
+                email: 'knalvis@example.com',
+                hashedPassword: 'woiefjoiwjeoifj',
+                salt: 'wpioefjoiwjef',
               },
             },
           },
@@ -33,9 +33,9 @@ export const standard = defineScenario<Prisma.CommentCreateArgs>({
         body: 'String',
         user: {
           create: {
-            email: 'String2910522',
-            hashedPassword: 'String',
-            salt: 'String',
+            email: 'zopie@exapmle.com',
+            hashedPassword: 'wpoiejfoijweif',
+            salt: 'pwoief0jweoif',
           },
         },
         post: {
@@ -43,9 +43,9 @@ export const standard = defineScenario<Prisma.CommentCreateArgs>({
             title: 'String',
             user: {
               create: {
-                email: 'String1315158',
-                hashedPassword: 'String',
-                salt: 'String',
+                email: 'zpdos@exapmle.com',
+                hashedPassword: 'poiwejfiojwef',
+                salt: 'woiefjowjef',
               },
             },
           },

@@ -1,11 +1,10 @@
 import { FieldError } from '@redwoodjs/forms'
 
 import Button from 'src/components/Button/Button'
+import { ICloudinary } from 'src/types/cloudinary'
 
 import { ICloudinaryUploadResultInfo } from '../Upload/Upload/Upload'
 import UploadList from '../UploadList/UploadList'
-
-declare const cloudinary: unknown
 
 interface IMediaLibraryProps {
   name: string
@@ -15,7 +14,7 @@ interface IMediaLibraryProps {
 
 const MediaLibrary = ({ name, handleMediaLibrary, setUploadedImages }: IMediaLibraryProps) => {
   const onClickOpen = () => {
-    window.ml = cloudinary.openMediaLibrary(
+    window.ml = (window.cloudinary as ICloudinary).openMediaLibrary(
       {
         cloud_name: process.env.CLOUD_NAME,
         api_key: process.env.API_KEY,

@@ -36,10 +36,10 @@ export const schema = gql`
 
   input CreateCommentInput {
     body: String!
-    userId: Int!
+    userId: Int
     postId: Int!
     parentId: Int
-    deleted: Boolean!
+    deleted: Boolean
   }
 
   input UpdateCommentInput {

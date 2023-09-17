@@ -54,12 +54,21 @@ export default async () => {
         email: 'drikusroor@gmail.com',
         password: 'Test1234!',
         roles: ['GUEST', 'USER', 'MODERATOR', 'ADMIN'],
+        profile: {
+          create: {
+            bio: 'I am a software developer',
+            avatar:
+              'https://thumbs.dreamstime.com/b/cat-as-mailman-post-delivery-service-postman-illustration-generative-ai-cat-as-mailman-mail-post-delivery-service-postman-268937340.jpg',
+            name: 'Drikus Roor',
+            japaneseName: 'ドリクス ルール',
+          },
+        },
       },
       { name: 'john', email: 'john@example.com', password: 'secret1' },
       { name: 'jane', email: 'jane@example.com', password: 'secret2' },
       {
         name: 'naomi',
-        email: 'nreliasar@gmail.com@gmail.com',
+        email: 'nreliasar@gmail.com',
         password: 'Test1234!',
         roles: ['GUEST', 'USER', 'MODERATOR', 'ADMIN'],
       },
@@ -86,6 +95,7 @@ export default async () => {
           hashedPassword,
           salt,
           roles: user.roles,
+          profile: user.profile,
         },
       })
     }

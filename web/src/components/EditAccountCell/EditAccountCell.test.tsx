@@ -9,6 +9,11 @@ import { standard } from './EditAccountCell.mock'
 //        https://redwoodjs.com/docs/testing#testing-cells
 // https://redwoodjs.com/docs/testing#jest-expect-type-considerations
 
+window.cloudinary = {
+  createUploadWidget: jest.fn(),
+  openMediaLibrary: jest.fn(),
+}
+
 describe('EditAccountCell', () => {
   it('renders Loading successfully', () => {
     expect(() => {
@@ -28,15 +33,9 @@ describe('EditAccountCell', () => {
     }).not.toThrow()
   })
 
-  // When you're ready to test the actual output of your component render
-  // you could test that, for example, certain text is present:
-  //
-  // 1. import { screen } from '@redwoodjs/testing/web'
-  // 2. Add test: expect(screen.getByText('Hello, world')).toBeInTheDocument()
-
   it('renders Success successfully', async () => {
     expect(() => {
-      render(<Success editAccount={standard().editAccount} />)
+      render(<Success user={standard().editAccount} />)
     }).not.toThrow()
   })
 })

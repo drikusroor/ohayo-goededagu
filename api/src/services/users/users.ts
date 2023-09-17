@@ -9,6 +9,7 @@ import { validate } from '@redwoodjs/api'
 import { hashPassword } from '@redwoodjs/auth-dbauth-api'
 
 import { db } from 'src/lib/db'
+import { sendEmail } from 'src/lib/email'
 
 export const users: QueryResolvers['users'] = () => {
   return db.user.findMany()
@@ -33,6 +34,29 @@ export const user: QueryResolvers['user'] = ({ id }) => {
   })
 }
 
+export const updateUser = ({ id, input }) => {
+  if (!context.currentUser) {
+    throw new Error('User not authenticated')
+  }
+
+  const { email } = input
+
+  if (
+    !context.currentUser.roles.includes('ADMIN') &&
+    !context.currentUser.roles.includes('MODERATOR') &&
+    context.currentUser.id !== id
+  ) {
+    throw new Error('User not authorized')
+  }
+
+  return db.user.update({
+    data: {
+      email,
+    },
+    where: { id },
+  })
+}
+
 export const updateUserProfile = ({ input }) => {
   if (!context.currentUser) {
     throw new Error('User not authenticated')
@@ -40,13 +64,25 @@ export const updateUserProfile = ({ input }) => {
 
   const id = context.currentUser.id
 
-  return db.user.update({
-    data: input,
-    where: { id },
+  return db.profile.upsert({
+    create: {
+      ...input,
+      user: {
+        connect: {
+          id,
+        },
+      },
+    },
+    update: {
+      ...input,
+    },
+    where: {
+      userId: id,
+    },
   })
 }
 
-export const updateUserRoles = ({ input }) => {
+export const deleteUser = async ({ id }) => {
   if (!context.currentUser) {
     throw new Error('User not authenticated')
   }
@@ -58,12 +94,49 @@ export const updateUserRoles = ({ input }) => {
     throw new Error('User not authorized')
   }
 
-  const user = db.user.findUnique({
+  const user = await db.user.findUnique({
+    where: { id },
+  })
+
+  if (!user) {
+    throw new Error('User not found')
+  }
+
+  if (user.roles.includes('ADMIN') && user.id === context.currentUser.id) {
+    throw new Error('User not authorized')
+  }
+
+  return db.user.delete({
+    where: { id },
+  })
+}
+
+export const updateUserRoles = async ({ input }) => {
+  if (!context.currentUser) {
+    throw new Error('User not authenticated')
+  }
+
+  if (
+    !context.currentUser.roles.includes('ADMIN') &&
+    !context.currentUser.roles.includes('MODERATOR')
+  ) {
+    throw new Error('User not authorized')
+  }
+
+  const user = await db.user.findUnique({
     where: { id: input.id },
   })
 
   if (!user) {
     throw new Error('User not found')
+  }
+
+  if (
+    user.roles.includes('ADMIN') &&
+    !input.roles.includes('ADMIN') &&
+    user.id === context.currentUser.id
+  ) {
+    throw new Error('User not authorized')
   }
 
   return db.user.update({
@@ -138,6 +211,33 @@ export const updateUserPassword = async ({
     },
     where: { id: context.currentUser.id },
   })
+}
+
+export const emailUser = async () => {
+  const user = await db.user.findUnique({
+    where: { id: context.currentUser.id },
+  })
+
+  if (!user) {
+    throw new Error('User not found')
+  }
+
+  const userEmailAddress = user?.email
+
+  if (!userEmailAddress) {
+    throw new Error('User email address not found')
+  }
+
+  console.log('Sending email to:', userEmailAddress)
+
+  const info = await sendEmail({
+    to: user.email,
+    subject: 'Test email',
+    text: 'This is a test email',
+    html: '<p>This is a test email</p>',
+  })
+
+  return user
 }
 
 export const User: UserRelationResolvers = {

@@ -134,6 +134,7 @@ export default ({ comment }: ICommentProps) => {
           src={comment.user?.profile?.avatar}
           alt={comment.user.name}
           name={comment.user.name || comment.user.email}
+          userId={comment.user.id}
         />
 
         <div>
@@ -146,7 +147,7 @@ export default ({ comment }: ICommentProps) => {
           </span>
           <DisplayDatetime
             datetime={comment.createdAt}
-            className="ml-2 text-sm text-slate-500"
+            className="text-sm text-slate-500"
           />
         </div>
         <div className="ml-auto">

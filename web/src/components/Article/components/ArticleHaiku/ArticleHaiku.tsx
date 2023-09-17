@@ -66,7 +66,13 @@ const ArticleHaiku = ({ article, displayType, date }: Props) => {
             </h1>
 
             <div className="flex flex-row items-center gap-2">
-              <span className="text-sm text-slate-500">{authorName}</span>
+              <Link
+                to={routes.viewProfile({ id: article.user.id })}
+                className="text-sm text-slate-500 hover:underline"
+                title={`View ${authorName}'s profile`}
+              >
+                {authorName}
+              </Link>
               <span className="text-sm text-slate-500"> | {date}</span>
             </div>
           </header>

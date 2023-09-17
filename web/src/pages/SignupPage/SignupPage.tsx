@@ -4,10 +4,10 @@ import { useEffect } from 'react'
 import {
   Form,
   Label,
-  TextField,
   PasswordField,
   FieldError,
   Submit,
+  EmailField,
 } from '@redwoodjs/forms'
 import { Link, navigate, routes } from '@redwoodjs/router'
 import { MetaTags } from '@redwoodjs/web'
@@ -32,7 +32,7 @@ const SignupPage = () => {
 
   const onSubmit = async (data: Record<string, string>) => {
     const response = await signUp({
-      username: data.username,
+      username: data.username.toLowerCase(),
       password: data.password,
     })
 
@@ -68,7 +68,7 @@ const SignupPage = () => {
                   >
                     E-mail
                   </Label>
-                  <TextField
+                  <EmailField
                     name="username"
                     className="rw-input"
                     errorClassName="rw-input rw-input-error"
