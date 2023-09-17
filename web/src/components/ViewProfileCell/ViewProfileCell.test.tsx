@@ -1,4 +1,5 @@
 import { render } from '@redwoodjs/testing/web'
+
 import { Loading, Empty, Failure, Success } from './ViewProfileCell'
 import { standard } from './ViewProfileCell.mock'
 
@@ -35,7 +36,7 @@ describe('ViewProfileCell', () => {
 
   it('renders Success successfully', async () => {
     expect(() => {
-      render(<Success viewProfile={standard().viewProfile} />)
+      render(<Success user={standard().user} />)
     }).not.toThrow()
   })
 })
