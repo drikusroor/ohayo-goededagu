@@ -186,7 +186,7 @@ info@ohayo-goededagu.nl
     handler: ({ username, hashedPassword, salt, userAttributes }) => {
       return db.user.create({
         data: {
-          email: username,
+          email: username.toLowerCase(),
           hashedPassword: hashedPassword,
           salt: salt,
           profile: {
