@@ -257,7 +257,7 @@ export const Success = ({
                     </Button>
                   ) : (
                     <span className="text-sm text-gray-500">
-                      Can't delete yourself
+                      Can&apos;t delete yourself
                     </span>
                   )}
                 </td>
