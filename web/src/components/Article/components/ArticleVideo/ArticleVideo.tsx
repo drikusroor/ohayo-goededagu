@@ -21,7 +21,7 @@ interface Props {
   date?: string
 }
 
-const ArticleVideo = ({ article, displayType, date }: Props) => {
+const ArticleVideo = ({ article, displayType }: Props) => {
   const authorName =
     article.user?.profile?.name || article.user?.name || 'Anonymous'
 

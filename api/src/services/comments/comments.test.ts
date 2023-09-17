@@ -29,6 +29,13 @@ describe('comments', () => {
   })
 
   scenario('creates a comment', async (scenario: StandardScenario) => {
+    mockCurrentUser({
+      id: scenario.comment.two.userId,
+      name: 'Admin User',
+      email: 'info@example.com',
+      roles: ['ADMIN'],
+    })
+
     const result = await createComment({
       input: {
         body: 'String',

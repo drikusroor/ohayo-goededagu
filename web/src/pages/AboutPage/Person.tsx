@@ -11,7 +11,7 @@ const Person = ({ name, imgSrc, quote, story }: Props) => {
       <img
         alt={`Foto van ${name}`}
         src={imgSrc}
-        className="flex items-center justify-center rounded-full bg-slate-300"
+        className="h-48 w-48 items-center justify-center rounded-full bg-slate-300 object-cover"
         loading="lazy"
         width="200"
         height="200"
