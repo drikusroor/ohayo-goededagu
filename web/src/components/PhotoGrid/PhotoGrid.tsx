@@ -14,7 +14,8 @@ const PhotoGrid = ({ className, images = [], preview }: IPhotoGridProps) => {
 
   const [modalInfo, setModalInfo] = React.useState<object>({
     url: String,
-    id: String,
+    id: Number,
+    imageId: String,
     title: String,
     description: String,
   })
@@ -52,19 +53,34 @@ const PhotoGrid = ({ className, images = [], preview }: IPhotoGridProps) => {
                 >
                   <img
                     className="h-full w-full cursor-pointer rounded-md object-cover align-middle"
-                    key={photo.imageId}
+                    key={photo.id}
                     src={photo.url}
                     alt={photo.imageId}
+                    role="button"
+                    tabIndex={0}
                     onClick={() => {
-                      openModal()
                       setModalInfo({
                         url: photo.url,
-                        id: photo.imageId,
+                        id: photo.id,
+                        imageId: photo.imageId,
                         title: photo?.name ? photo?.name : '',
                         description: photo?.description
                           ? photo?.description
                           : '',
                       })
+                      openModal()
+                    }}
+                    onKeyDown={() => {
+                      setModalInfo({
+                        url: photo.url,
+                        id: photo.id,
+                        imageId: photo.imageId,
+                        title: photo?.name ? photo?.name : '',
+                        description: photo?.description
+                          ? photo?.description
+                          : '',
+                      })
+                      openModal()
                     }}
                   />
                 </li>

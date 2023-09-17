@@ -1,5 +1,4 @@
 import { BsXLg } from 'react-icons/bs'
-import { Image } from 'types/graphql'
 
 import Button from '../Button/Button'
 
