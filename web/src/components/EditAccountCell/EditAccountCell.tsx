@@ -14,15 +14,17 @@ export const QUERY = gql`
   query FindAccountForEditQuery($id: Int!) {
     user(id: $id) {
       id
+      email
       name
     }
   }
 `
 
-const UPDATE_USER_PROFILE_MUTATION = gql`
-  mutation UpdateUserProfileMutation($input: UpdateUserProfileInput!) {
-    updateUserProfile(input: $input) {
-      name
+const UPDATE_USER_MUTATION = gql`
+  mutation UpdateUserMutation($id: Int!, $input: UpdateUserInput!) {
+    updateUser(id: $id, input: $input) {
+      id
+      email
     }
   }
 `
@@ -52,18 +54,15 @@ export const Failure = ({ error }: CellFailureProps) => (
 )
 
 export const Success = ({ user }: CellSuccessProps<EditUserProfileById>) => {
-  const [updateUserProfile, { loading, error }] = useMutation(
-    UPDATE_USER_PROFILE_MUTATION,
-    {
-      onCompleted: () => {
-        toast.success('User profile updated')
-        navigate(routes.account())
-      },
-      onError: (error) => {
-        toast.error(error.message)
-      },
-    }
-  )
+  const [updateUser, { loading, error }] = useMutation(UPDATE_USER_MUTATION, {
+    onCompleted: () => {
+      toast.success('User updated')
+      navigate(routes.account())
+    },
+    onError: (error) => {
+      toast.error(error.message)
+    },
+  })
 
   const [
     updateUserPassword,
@@ -86,9 +85,9 @@ export const Success = ({ user }: CellSuccessProps<EditUserProfileById>) => {
 
   const onSave = (
     input: UpdateUserProfileInput,
-    id: EditUserProfileById['user']['id']
+    id: EditUserById['user']['id']
   ) => {
-    updateUserProfile({ variables: { id, input } })
+    updateUser({ variables: { id, input } })
   }
 
   const onSubmitUpdatePasswordForm = (input: {

@@ -34,6 +34,29 @@ export const user: QueryResolvers['user'] = ({ id }) => {
   })
 }
 
+export const updateUser = ({ id, input }) => {
+  if (!context.currentUser) {
+    throw new Error('User not authenticated')
+  }
+
+  const { email } = input
+
+  if (
+    !context.currentUser.roles.includes('ADMIN') &&
+    !context.currentUser.roles.includes('MODERATOR') &&
+    context.currentUser.id !== id
+  ) {
+    throw new Error('User not authorized')
+  }
+
+  return db.user.update({
+    data: {
+      email,
+    },
+    where: { id },
+  })
+}
+
 export const updateUserProfile = ({ input }) => {
   if (!context.currentUser) {
     throw new Error('User not authenticated')
