@@ -154,7 +154,7 @@ const AdminDashboardLayout = ({ children }: AdminDashboardLayoutProps) => {
         {isAuthenticated ? (
           <div className="flex items-center justify-between bg-slate-500 p-1 text-white lg:p-3">
             <span className="hidden lg:block">
-              Logged in as {currentUser.email.split('@')[0]}
+              Logged in as {currentUser.email}
             </span>
             <Button
               onClick={logOut}

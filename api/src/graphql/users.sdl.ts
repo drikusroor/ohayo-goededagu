@@ -53,6 +53,9 @@ export const schema = gql`
 
   input UpdateUserProfileInput {
     name: String
+    japaneseName: String
+    bio: String
+    avatar: String
   }
 
   input UpdateUserPasswordInput {

@@ -64,9 +64,21 @@ export const updateUserProfile = ({ input }) => {
 
   const id = context.currentUser.id
 
-  return db.user.update({
-    data: input,
-    where: { id },
+  return db.profile.upsert({
+    create: {
+      ...input,
+      user: {
+        connect: {
+          id,
+        },
+      },
+    },
+    update: {
+      ...input,
+    },
+    where: {
+      userId: id,
+    },
   })
 }
 

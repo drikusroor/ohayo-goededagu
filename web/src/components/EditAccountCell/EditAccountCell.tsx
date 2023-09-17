@@ -8,6 +8,7 @@ import { toast } from '@redwoodjs/web/toast'
 
 import Button from '../Button/Button'
 import EditAccountForm from '../EditAccountForm/EditAccountForm'
+import ProfileForm from '../Profile/ProfileForm/ProfileForm'
 import UpdatePasswordForm from '../UpdatePasswordForm/UpdatePasswordForm'
 
 export const QUERY = gql`
@@ -16,6 +17,15 @@ export const QUERY = gql`
       id
       email
       name
+      profile {
+        id
+        bio
+        createdAt
+        updatedAt
+        avatar
+        name
+        japaneseName
+      }
     }
   }
 `
@@ -25,6 +35,14 @@ const UPDATE_USER_MUTATION = gql`
     updateUser(id: $id, input: $input) {
       id
       email
+    }
+  }
+`
+
+const UPDATE_USER_PROFILE_MUTATION = gql`
+  mutation UpdateUserProfileMutation($input: UpdateUserProfileInput!) {
+    updateUserProfile(input: $input) {
+      id
     }
   }
 `
@@ -57,12 +75,26 @@ export const Success = ({ user }: CellSuccessProps<EditUserProfileById>) => {
   const [updateUser, { loading, error }] = useMutation(UPDATE_USER_MUTATION, {
     onCompleted: () => {
       toast.success('User updated')
-      navigate(routes.account())
     },
     onError: (error) => {
       toast.error(error.message)
     },
+    refetchQueries: [{ query: QUERY }],
+    awaitRefetchQueries: true,
   })
+
+  const [updateUserProfile, { loading: loadingProfile, error: errorProfile }] =
+    useMutation(UPDATE_USER_PROFILE_MUTATION, {
+      onCompleted: () => {
+        toast.success('Profile updated')
+        navigate(routes.account())
+      },
+      onError: (error) => {
+        toast.error(error.message)
+      },
+      refetchQueries: [{ query: QUERY }],
+      awaitRefetchQueries: true,
+    })
 
   const [
     updateUserPassword,
@@ -70,11 +102,12 @@ export const Success = ({ user }: CellSuccessProps<EditUserProfileById>) => {
   ] = useMutation(UPDATE_USER_PASSWORD_MUTATION, {
     onCompleted: () => {
       toast.success('Password updated')
-      navigate(routes.account())
     },
     onError: (error) => {
       toast.error(error.message)
     },
+    refetchQueries: [{ query: QUERY }],
+    awaitRefetchQueries: true,
   })
 
   const [emailUser] = useMutation(EMAIL_USER_MUTATION, {
@@ -83,11 +116,12 @@ export const Success = ({ user }: CellSuccessProps<EditUserProfileById>) => {
     },
   })
 
-  const onSave = (
-    input: UpdateUserProfileInput,
-    id: EditUserById['user']['id']
-  ) => {
+  const onSave = (input: UpdateUserInput, id: EditUserById['user']['id']) => {
     updateUser({ variables: { id, input } })
+  }
+
+  const onSubmitProfileForm = (input: UpdateUserProfileInput) => {
+    updateUserProfile({ variables: { input } })
   }
 
   const onSubmitUpdatePasswordForm = (input: {
@@ -113,6 +147,22 @@ export const Success = ({ user }: CellSuccessProps<EditUserProfileById>) => {
           />
         </div>
       </div>
+
+      <div className="rw-segment mt-5">
+        <header className="rw-segment-header">
+          <h2 className="rw-heading rw-heading-secondary">Update Profile</h2>
+        </header>
+
+        <div className="rw-segment-main">
+          <ProfileForm
+            profile={user.profile}
+            onSave={onSubmitProfileForm}
+            loading={loadingProfile}
+            error={errorProfile}
+          />
+        </div>
+      </div>
+
       <div className="rw-segment mt-5">
         <header className="rw-segment-header">
           <h2 className="rw-heading rw-heading-secondary">Update Password</h2>
