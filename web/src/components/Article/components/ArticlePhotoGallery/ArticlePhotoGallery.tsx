@@ -42,14 +42,12 @@ const ArticlePhotoGallery = ({ article, displayType, date }: Props) => {
       {displayType === EPostDisplayType.PREVIEW && (
         <>
           <div className="relative">
-            {galleries.map((gallery, index) => (
-              <PhotoGrid
-                key={index}
-                images={gallery.images}
-                preview={true}
-                className="block h-full w-full"
-              />
-            ))}
+            <PhotoGrid
+              key={galleries[0]}
+              images={galleries[0].images}
+              preview={true}
+              className="block h-full w-full"
+            />
             <div className="font-3xl lg:min-h-48 min-h-20 md:min-h-24 absolute bottom-0 mx-auto flex h-full w-full flex-col justify-center rounded-md bg-gray-600 bg-opacity-50 px-4 text-center text-white text-opacity-100">
               <div className="flex flex-row items-center justify-center gap-2 pb-2">
                 <div>
