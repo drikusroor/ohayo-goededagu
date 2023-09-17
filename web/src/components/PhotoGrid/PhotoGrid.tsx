@@ -45,45 +45,48 @@ const PhotoGrid = ({ className, images = [], preview }: IPhotoGridProps) => {
               )
             })}
           {!preview &&
-            images.map((photo) => {
+            images &&
+            images.map((photo, index) => {
               return (
-                <li
-                  className="relative h-[300px] grow basis-auto last:flex-initial"
-                  key={photo.imageId}
-                >
-                  <img
-                    className="h-full w-full cursor-pointer rounded-md object-cover align-middle"
-                    key={photo.id}
-                    src={photo.url}
-                    alt={photo.imageId}
-                    role="button"
-                    tabIndex={0}
-                    onClick={() => {
-                      setModalInfo({
-                        url: photo.url,
-                        id: photo.id,
-                        imageId: photo.imageId,
-                        title: photo?.name ? photo?.name : '',
-                        description: photo?.description
-                          ? photo?.description
-                          : '',
-                      })
-                      openModal()
-                    }}
-                    onKeyDown={() => {
-                      setModalInfo({
-                        url: photo.url,
-                        id: photo.id,
-                        imageId: photo.imageId,
-                        title: photo?.name ? photo?.name : '',
-                        description: photo?.description
-                          ? photo?.description
-                          : '',
-                      })
-                      openModal()
-                    }}
-                  />
-                </li>
+                <>
+                  <li
+                    className="relative h-[300px] grow basis-auto last:flex-initial"
+                    key={photo.imageId}
+                  >
+                    <img
+                      className="h-full w-full cursor-pointer rounded-md object-cover align-middle"
+                      key={index}
+                      src={photo.url}
+                      alt={photo.imageId}
+                      role="button"
+                      tabIndex={0}
+                      onClick={() => {
+                        setModalInfo({
+                          url: photo.url,
+                          id: photo.id,
+                          imageId: photo.imageId,
+                          title: photo?.name ? photo?.name : '',
+                          description: photo?.description
+                            ? photo?.description
+                            : '',
+                        })
+                        openModal()
+                      }}
+                      onKeyDown={() => {
+                        setModalInfo({
+                          url: photo.url,
+                          id: photo.id,
+                          imageId: photo.imageId,
+                          title: photo?.name ? photo?.name : '',
+                          description: photo?.description
+                            ? photo?.description
+                            : '',
+                        })
+                        openModal()
+                      }}
+                    />
+                  </li>
+                </>
               )
             })}
         </ul>
