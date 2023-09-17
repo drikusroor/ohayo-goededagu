@@ -68,6 +68,7 @@ const ArticleArticle = ({ article, displayType }: Props) => {
                   src={article.user?.profile?.avatar}
                   alt={article.user.name}
                   name={article.user.name || article.user.email}
+                  userId={article.user.id}
                 />
                 <div className="flex flex-col items-start">
                   <span className="text-sm text-slate-300" title={authorName}>
@@ -116,7 +117,13 @@ const ArticleArticle = ({ article, displayType }: Props) => {
                 </h1>
               </div>
               <div className="flex flex-row items-center gap-2 pb-2">
-                <span className="text-sm text-slate-200">{authorName}</span>
+                <Link
+                  to={routes.viewProfile({ id: article.user.id })}
+                  className="text-sm text-slate-200 hover:underline"
+                  title={`View ${authorName}'s profile`}
+                >
+                  {authorName}
+                </Link>
                 <DisplayDatetime
                   datetime={article.createdAt}
                   showDate={true}
