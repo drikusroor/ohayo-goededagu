@@ -68,7 +68,7 @@ export default async () => {
       { name: 'jane', email: 'jane@example.com', password: 'secret2' },
       {
         name: 'naomi',
-        email: 'nreliasar@gmail.com@gmail.com',
+        email: 'nreliasar@gmail.com',
         password: 'Test1234!',
         roles: ['GUEST', 'USER', 'MODERATOR', 'ADMIN'],
       },
