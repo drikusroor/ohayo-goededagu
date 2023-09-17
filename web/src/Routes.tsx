@@ -80,6 +80,7 @@ const Routes = () => {
         <Route path="/forgot-password" page={ForgotPasswordPage} name="forgotPassword" />
         <Route path="/reset-password" page={ResetPasswordPage} name="resetPassword" />
         <Route path="/about" page={AboutPage} name="about" />
+        <Route path="/user/{id:Int}" page={ViewProfilePage} name="viewProfile" />
       </Set>
       <Route notfound page={NotFoundPage} />
     </Router>
