@@ -8,14 +8,14 @@ interface Props {
 
 const ImageModal = ({ info }: Props) => {
   const closeModal = () => {
-    document.getElementById('modal').style.display = 'none'
+    document.getElementById(info.id).style.display = 'none'
   }
 
   return (
     <>
       {info && (
         <div
-          id="modal"
+          id={info.id}
           className="fixed left-0 top-0 z-10 hidden h-full w-full overflow-auto bg-black bg-opacity-70 pt-2.5 text-white"
         >
           <Button

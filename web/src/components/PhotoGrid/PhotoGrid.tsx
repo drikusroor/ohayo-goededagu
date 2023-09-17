@@ -21,7 +21,7 @@ const PhotoGrid = ({ className, images = [], preview }: IPhotoGridProps) => {
   })
 
   const openModal = () => {
-    document.getElementById('modal').style.display = 'block'
+    document.getElementById(modalInfo.id).style.display = 'block'
   }
 
   return (
