@@ -32,7 +32,7 @@ const SignupPage = () => {
 
   const onSubmit = async (data: Record<string, string>) => {
     const response = await signUp({
-      username: data.username,
+      username: data.username.toLowerCase(),
       password: data.password,
     })
 
