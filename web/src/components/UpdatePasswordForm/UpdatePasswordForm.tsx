@@ -22,72 +22,74 @@ const UpdatePasswordForm = ({
   error,
 }: IUpdatePasswordFormProps) => {
   return (
-    <Form<UpdateUserPasswordInput>
-      onSubmit={onSubmit}
-      error={error}
-      className="max-w-md"
-    >
-      <FormError
+    <div className="rw-form-wrapper">
+      <Form<UpdateUserPasswordInput>
+        onSubmit={onSubmit}
         error={error}
-        wrapperClassName="rw-form-error-wrapper"
-        titleClassName="rw-form-error-title"
-        listClassName="rw-form-error-list"
-      />
-
-      <Label
-        name="currentPassword"
-        className="rw-label"
-        errorClassName="rw-label rw-label-error"
+        className="max-w-md"
       >
-        Current password
-      </Label>
+        <FormError
+          error={error}
+          wrapperClassName="rw-form-error-wrapper"
+          titleClassName="rw-form-error-title"
+          listClassName="rw-form-error-list"
+        />
 
-      <PasswordField
-        name="currentPassword"
-        className="rw-input"
-        errorClassName="rw-input rw-input-error"
-        validation={{ required: true }}
-      />
+        <Label
+          name="currentPassword"
+          className="rw-label"
+          errorClassName="rw-label rw-label-error"
+        >
+          Current password
+        </Label>
 
-      <Label
-        name="newPassword"
-        className="rw-label"
-        errorClassName="rw-label rw-label-error"
-      >
-        New password
-      </Label>
+        <PasswordField
+          name="currentPassword"
+          className="rw-input"
+          errorClassName="rw-input rw-input-error"
+          validation={{ required: true }}
+        />
 
-      <PasswordField
-        name="newPassword"
-        className="rw-input"
-        errorClassName="rw-input rw-input-error"
-        validation={{ required: true, minLength: 8 }}
-      />
+        <Label
+          name="newPassword"
+          className="rw-label"
+          errorClassName="rw-label rw-label-error"
+        >
+          New password
+        </Label>
 
-      <Label
-        name="confirmNewPassword"
-        className="rw-label"
-        errorClassName="rw-label rw-label-error"
-      >
-        Confirm new password
-      </Label>
+        <PasswordField
+          name="newPassword"
+          className="rw-input"
+          errorClassName="rw-input rw-input-error"
+          validation={{ required: true, minLength: 8 }}
+        />
 
-      <PasswordField
-        name="confirmNewPassword"
-        className="rw-input"
-        errorClassName="rw-input rw-input-error"
-        validation={{ required: true, minLength: 8 }}
-      />
+        <Label
+          name="confirmNewPassword"
+          className="rw-label"
+          errorClassName="rw-label rw-label-error"
+        >
+          Confirm new password
+        </Label>
 
-      <Button
-        type="submit"
-        color="cobalt-blue"
-        disabled={loading}
-        className="mt-4"
-      >
-        Update password
-      </Button>
-    </Form>
+        <PasswordField
+          name="confirmNewPassword"
+          className="rw-input"
+          errorClassName="rw-input rw-input-error"
+          validation={{ required: true, minLength: 8 }}
+        />
+
+        <Button
+          type="submit"
+          color="cobalt-blue"
+          disabled={loading}
+          className="mt-4"
+        >
+          Update password
+        </Button>
+      </Form>
+    </div>
   )
 }
 

@@ -7,6 +7,7 @@ import {
   Label,
   TextField,
   Submit,
+  EmailField,
 } from '@redwoodjs/forms'
 import type { RWGqlError } from '@redwoodjs/forms'
 import { Link, routes } from '@redwoodjs/router'
@@ -24,7 +25,13 @@ interface EditAccountFormProps {
 
 const EditAccountForm = (props: EditAccountFormProps) => {
   const onSubmit = (data: FormAccount) => {
-    props.onSave(data)
+    props.onSave(
+      {
+        ...data,
+        email: data.email.toLowerCase(),
+      },
+      props.user?.id
+    )
   }
 
   return (
@@ -38,24 +45,23 @@ const EditAccountForm = (props: EditAccountFormProps) => {
         />
 
         <Label
-          name="name"
+          name="email"
           className="rw-label"
           errorClassName="rw-label rw-label-error"
         >
-          Name (deprecated, now in profile)
+          Email
         </Label>
 
-        <TextField
-          name="name"
-          disabled
-          defaultValue={props.user?.name}
-          className="rw-input cursor-not-allowed"
-          title="Deprecated. Name is now in profile"
+        <EmailField
+          name="email"
+          className="rw-input"
+          defaultValue={props.user?.email}
+          title="Email"
           errorClassName="rw-input rw-input-error"
           validation={{ required: true }}
         />
 
-        <FieldError name="name" className="rw-field-error" />
+        <FieldError name="email" className="rw-field-error" />
 
         <div className="rw-button-group">
           <Submit disabled={props.loading} className="rw-button rw-button-blue">

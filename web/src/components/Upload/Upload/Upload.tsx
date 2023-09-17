@@ -1,8 +1,7 @@
 import { FieldError } from '@redwoodjs/forms'
 
 import Button from 'src/components/Button/Button'
-
-declare const cloudinary: unknown
+import { ICloudinary } from 'src/types/cloudinary'
 
 export interface ICloudinaryUploadResultInfo {
   id: string
@@ -45,7 +44,7 @@ const Upload = ({ name, multiple, handleUpload }: IUploadProps) => {
       ? 'Cover images'
       : ''
 
-  const widget = cloudinary.createUploadWidget(
+  const widget = (window.cloudinary as ICloudinary).createUploadWidget(
     {
       cloudName: process.env.CLOUD_NAME,
       uploadPreset: process.env.UPLOAD_PRESET,
