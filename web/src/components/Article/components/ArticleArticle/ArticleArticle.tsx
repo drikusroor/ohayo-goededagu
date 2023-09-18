@@ -68,7 +68,7 @@ const ArticleArticle = ({ article, displayType }: Props) => {
                   src={article.user?.profile?.avatar}
                   alt={article.user.name}
                   name={article.user.name || article.user.email}
-                  userId={article.user.id}
+                  userId={article.user?.id}
                 />
                 <div className="flex flex-col items-start">
                   <span className="text-sm text-slate-300" title={authorName}>
@@ -118,7 +118,11 @@ const ArticleArticle = ({ article, displayType }: Props) => {
               </div>
               <div className="flex flex-row items-center gap-2 pb-2">
                 <Link
-                  to={routes.viewProfile({ id: article.user.id })}
+                  to={
+                    article.user?.id
+                      ? routes.viewProfile({ id: article.user?.id })
+                      : '#'
+                  }
                   className="text-sm text-slate-200 hover:underline"
                   title={`View ${authorName}'s profile`}
                 >
