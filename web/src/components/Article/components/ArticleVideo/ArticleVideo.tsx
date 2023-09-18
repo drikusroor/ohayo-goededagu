@@ -32,7 +32,7 @@ const ArticleVideo = ({ article, displayType }: Props) => {
   return (
     <>
       {displayType === EPostDisplayType.PREVIEW && (
-        <PreviewLayout article={article} authorName={authorName} />
+        <PreviewLayout article={article} />
       )}
 
       {displayType === EPostDisplayType.FULL && (
