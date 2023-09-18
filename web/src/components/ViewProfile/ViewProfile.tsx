@@ -17,12 +17,7 @@ const ViewProfile = ({ user }: IViewProfileProps) => {
         <h2 className="text-2xl font-bold">Profile</h2>
         {profile ? (
           <div className="mt-3">
-            <Person
-              name={profile.name}
-              quote={profile.japaneseName}
-              imgSrc={profile.avatar}
-              story={profile.bio}
-            />
+            <Person profile={profile} />
           </div>
         ) : (
           <div className="mt-3 text-slate-500">This user has no profile.</div>

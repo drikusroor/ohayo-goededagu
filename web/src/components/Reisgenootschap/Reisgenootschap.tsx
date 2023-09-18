@@ -1,3 +1,4 @@
+import { Link, navigate, routes } from '@redwoodjs/router'
 import { MetaTags } from '@redwoodjs/web'
 
 import Person from 'src/pages/AboutPage/Person'
@@ -23,13 +24,22 @@ const Reisgenootschap = ({ reisgenootschap = [] }: IReisgenootschapProps) => {
   return (
     <div className="grid gap-4 p-3 md:grid-cols-2 md:p-10">
       {reisgenootschap.map(({ id, profile }) => (
-        <Person
+        <div
+          onClick={() => (id ? navigate(routes.viewProfile({ id: id })) : '#')}
+          onKeyDown={() =>
+            id ? navigate(routes.viewProfile({ id: id })) : '#'
+          }
+          tabIndex={0}
+          role="button"
           key={id}
-          name={profile?.name}
-          quote={profile?.japaneseName}
-          story={profile?.bio}
-          imgSrc={profile?.avatar}
-        />
+        >
+          <Person
+            key={id}
+            id={id}
+            profile={profile}
+            style="cursor-pointer hover:border-black"
+          />
+        </div>
       ))}
     </div>
   )
