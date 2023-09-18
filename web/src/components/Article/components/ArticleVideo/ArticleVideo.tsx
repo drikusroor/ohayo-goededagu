@@ -15,6 +15,8 @@ import RenderBody from 'src/components/RenderBody/RenderBody'
 import Video from 'src/components/Video/Video'
 import { EPostDisplayType } from 'src/types/post-display-type.enum'
 
+import PreviewLayout from '../PreviewLayout/PreviewLayout'
+
 interface Props {
   article: Post
   displayType: EPostDisplayType
@@ -30,44 +32,7 @@ const ArticleVideo = ({ article, displayType }: Props) => {
   return (
     <>
       {displayType === EPostDisplayType.PREVIEW && (
-        <>
-          <header className="mb-3">
-            <div className="mt-4 flex flex-row items-center gap-2 pl-1">
-              <ArticleTypeIcon type={EPostType.VIDEO} />
-              <h2
-                className="text-xl font-semibold text-slate-700 md:text-2xl"
-                title={article.title}
-              >
-                <Link to={routes.article({ id: article.id })}>
-                  {article.title}
-                </Link>
-              </h2>
-            </div>
-          </header>
-
-          <Video embedUrl={article?.videoPost?.videoUrl} />
-
-          <div className="flex flex-row items-center justify-between pt-4">
-            <AvatarTimestamp article={article} />
-            <div className="flex items-center gap-6">
-              {article?.comments?.length > 0 && (
-                <ArticleCommentCountBadge
-                  count={article.comments.length}
-                  variant="dark"
-                />
-              )}
-              {article.body && (
-                <Button
-                  className="flex items-center gap-2 px-4 py-3 text-xs"
-                  onClick={() => navigate(routes.article({ id: article.id }))}
-                >
-                  <span className="hidden sm:inline-block">Lees verder</span>
-                  <BsArrowRightCircle />
-                </Button>
-              )}
-            </div>
-          </div>
-        </>
+        <PreviewLayout article={article} authorName={authorName} />
       )}
 
       {displayType === EPostDisplayType.FULL && (

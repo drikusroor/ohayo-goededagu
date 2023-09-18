@@ -1,7 +1,7 @@
 import { BsArrowRightCircle } from 'react-icons/bs'
 import { Post } from 'types/graphql'
 
-import { Link, routes } from '@redwoodjs/router'
+import { Link, navigate, routes } from '@redwoodjs/router'
 
 import ArticleCommentCountBadge from 'src/components/ArticleCommentCountBadge/ArticleCommentCountBadge'
 import ArticleTypeIcon, {
@@ -12,6 +12,7 @@ import AvatarTimestamp from 'src/components/Avatar/AvatarTimestamp/AvatarTimesta
 import Button from 'src/components/Button/Button'
 import DisplayDatetime from 'src/components/DisplayDatetime/DisplayDatetime'
 import RenderBody from 'src/components/RenderBody/RenderBody'
+import Video from 'src/components/Video/Video'
 
 interface Props {
   article: Post
@@ -22,9 +23,6 @@ const PreviewLayout = ({ article, authorName }: Props) => {
   const hasImage =
     article.type === EPostType.ARTICLE ||
     article.type === EPostType.PHOTO_GALLERY
-
-  console.log('article.type', article.type)
-  console.log('hasImage', hasImage)
 
   return (
     <>
@@ -99,18 +97,37 @@ const PreviewLayout = ({ article, authorName }: Props) => {
               </h2>
             </div>
           </header>
-          <div className="lg:mx-14">
-            <div>
+
+          {article.type === EPostType.VIDEO && (
+            <Video embedUrl={article?.videoPost?.videoUrl} />
+          )}
+
+          <div
+            className={article.type != EPostType.VIDEO ? 'lg:mx-16' : 'lg:mx-0'}
+          >
+            {article.type != EPostType.VIDEO && (
               <div className="justmt-2 line-clamp-5">
                 <RenderBody body={article.body} />
               </div>
-              <div className="flex items-center justify-between pt-4">
-                <AvatarTimestamp article={article} />
+            )}
+
+            <div className="flex items-center justify-between pt-4">
+              <AvatarTimestamp article={article} />
+              <div className="flex items-center gap-6">
                 {article?.comments?.length > 0 && (
                   <ArticleCommentCountBadge
                     count={article.comments.length}
                     variant="dark"
                   />
+                )}
+                {article.type === EPostType.VIDEO && article.body && (
+                  <Button
+                    className="flex items-center gap-2 px-4 py-3 text-xs"
+                    onClick={() => navigate(routes.article({ id: article.id }))}
+                  >
+                    <span className="hidden sm:inline-block">Lees verder</span>
+                    <BsArrowRightCircle />
+                  </Button>
                 )}
               </div>
             </div>
