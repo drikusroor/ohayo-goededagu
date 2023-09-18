@@ -1,12 +1,13 @@
 import type { Post } from 'types/graphql'
 
-import { Link, routes } from '@redwoodjs/router'
+import { Link, navigate, routes } from '@redwoodjs/router'
 
 import DisplayDatetime from 'src/components/DisplayDatetime/DisplayDatetime'
 import LocationPin from 'src/components/LocationPin/LocationPin'
 import PhotoGrid from 'src/components/PhotoGrid/PhotoGrid'
 import RenderBody from 'src/components/RenderBody/RenderBody'
 import Video from 'src/components/Video/Video'
+import Person from 'src/pages/AboutPage/Person'
 
 import ArticleTypeIcon, {
   EPostType,
@@ -125,6 +126,28 @@ const FullLayout = ({ article }: Props) => {
             className="block h-full w-full"
           />
         ))}
+
+      <div
+        onClick={() =>
+          article.user.id
+            ? navigate(routes.viewProfile({ id: article.user.id }))
+            : '#'
+        }
+        onKeyDown={() =>
+          article.user.id
+            ? navigate(routes.viewProfile({ id: article.user.id }))
+            : '#'
+        }
+        tabIndex={0}
+        role="button"
+        key={article.user.id}
+        className="pt-10"
+      >
+        <Person
+          profile={article?.user?.profile}
+          style="cursor-pointer hover:border-black"
+        />
+      </div>
     </>
   )
 }
