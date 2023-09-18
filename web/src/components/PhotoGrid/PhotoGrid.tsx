@@ -1,3 +1,5 @@
+import { useEffect } from 'react'
+
 import { Image } from 'types/graphql'
 
 import { classNames } from 'src/lib/class-names'
@@ -20,9 +22,11 @@ const PhotoGrid = ({ className, images = [], preview }: IPhotoGridProps) => {
     description: String,
   })
 
-  const openModal = () => {
-    document.getElementById(modalInfo.id).style.display = 'block'
-  }
+  useEffect(() => {
+    if (typeof modalInfo.id === 'number') {
+      document.getElementById(modalInfo?.id).style.display = 'block'
+    }
+  }, [modalInfo])
 
   return (
     <>
@@ -70,7 +74,6 @@ const PhotoGrid = ({ className, images = [], preview }: IPhotoGridProps) => {
                             ? photo?.description
                             : '',
                         })
-                        openModal()
                       }}
                       onKeyDown={() => {
                         setModalInfo({
@@ -82,7 +85,6 @@ const PhotoGrid = ({ className, images = [], preview }: IPhotoGridProps) => {
                             ? photo?.description
                             : '',
                         })
-                        openModal()
                       }}
                     />
                   </li>

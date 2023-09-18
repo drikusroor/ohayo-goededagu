@@ -1,6 +1,7 @@
 import { FieldError } from '@redwoodjs/forms'
 
 import Button from 'src/components/Button/Button'
+import UploadList from 'src/components/UploadList/UploadList'
 import { ICloudinary } from 'src/types/cloudinary'
 
 export interface ICloudinaryUploadResultInfo {
@@ -32,24 +33,28 @@ export interface ICloudinaryUploadResultInfo {
 
 interface IUploadProps {
   name: string
+  folder?: string
   multiple?: boolean
   handleUpload: (value: ICloudinaryUploadResultInfo[]) => void
+  setUploadedImages?: (value: ICloudinaryUploadResultInfo[]) => void
 }
 
-const Upload = ({ name, multiple, handleUpload }: IUploadProps) => {
+const Upload = ({
+  name,
+  folder,
+  multiple,
+  handleUpload,
+  setUploadedImages,
+}: IUploadProps) => {
   const defaultFolder =
-    name === 'profilePicture'
-      ? 'Profile pictures'
-      : name === 'coverImage'
-      ? 'Cover images'
-      : ''
+    name === 'avatar' ? 'Avatars' : name === 'coverImage' ? 'Cover images' : ''
 
   const widget = (window.cloudinary as ICloudinary).createUploadWidget(
     {
       cloudName: process.env.CLOUD_NAME,
       uploadPreset: process.env.UPLOAD_PRESET,
       multiple: multiple ? multiple : true,
-      folder: defaultFolder,
+      folder: folder ? folder : defaultFolder,
     },
     (error, result) => {
       if (error) {
@@ -62,6 +67,9 @@ const Upload = ({ name, multiple, handleUpload }: IUploadProps) => {
 
       if (result?.info?.files) {
         const images = result.info.files.map((image) => image.uploadInfo)
+        if (name !== 'avatar') {
+          setUploadedImages(images as ICloudinaryUploadResultInfo[])
+        }
         handleUpload(images as ICloudinaryUploadResultInfo[])
       }
     }

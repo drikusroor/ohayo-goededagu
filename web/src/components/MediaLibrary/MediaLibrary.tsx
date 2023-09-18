@@ -4,13 +4,19 @@ import Button from 'src/components/Button/Button'
 import { ICloudinary } from 'src/types/cloudinary'
 
 import { ICloudinaryUploadResultInfo } from '../Upload/Upload/Upload'
+import UploadList from '../UploadList/UploadList'
 
 interface IMediaLibraryProps {
   name: string
   handleMediaLibrary: (value: ICloudinaryUploadResultInfo[]) => void
+  setUploadedImages?: (value: ICloudinaryUploadResultInfo[]) => void
 }
 
-const MediaLibrary = ({ handleMediaLibrary }: IMediaLibraryProps) => {
+const MediaLibrary = ({
+  name,
+  handleMediaLibrary,
+  setUploadedImages,
+}: IMediaLibraryProps) => {
   const onClickOpen = () => {
     window.ml = (window.cloudinary as ICloudinary).openMediaLibrary(
       {
@@ -20,6 +26,9 @@ const MediaLibrary = ({ handleMediaLibrary }: IMediaLibraryProps) => {
       },
       {
         insertHandler: function (data) {
+          if (name !== 'avatar') {
+            setUploadedImages(data.assets as ICloudinaryUploadResultInfo[])
+          }
           handleMediaLibrary(data.assets as ICloudinaryUploadResultInfo[])
         },
       },

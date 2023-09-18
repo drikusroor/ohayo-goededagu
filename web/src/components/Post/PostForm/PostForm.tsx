@@ -39,6 +39,7 @@ import Preview from 'src/components/Upload/Preview/Preview'
 import Upload, {
   ICloudinaryUploadResultInfo,
 } from 'src/components/Upload/Upload/Upload'
+import UploadList from 'src/components/UploadList/UploadList'
 import { classNames } from 'src/lib/class-names'
 
 import VideoForm, { IVideoPostFormData } from './TypeForms/VideoForm'
@@ -126,6 +127,8 @@ const PostForm = (props: PostFormProps) => {
       videoUrl: props.post?.videoPost?.videoUrl || '',
     })
 
+  const [uploadedImages, setUploadedImages] = React.useState<Image>()
+
   const previewPostData = useMemo(() => {
     const article = {
       ...props.post,
@@ -166,10 +169,18 @@ const PostForm = (props: PostFormProps) => {
   const bodyNotRequired =
     postType === EPostType.VIDEO || postType === EPostType.PHOTO_GALLERY
 
+  const showImageGalleryButtons =
+    postType === EPostType.ARTICLE || postType === EPostType.PHOTO_GALLERY
+
   const handleSetImageGalleries = (images: ICloudinaryUploadResultInfo[]) => {
     const gallery = []
     for (const [_key, image] of Object.entries(images)) {
-      gallery.push({ imageId: image.public_id, url: image.secure_url })
+      gallery.push({
+        imageId: image.public_id,
+        url: image.secure_url,
+        title: image?.context?.custom?.caption,
+        description: image?.context?.custom?.alt,
+      })
     }
     setImageGalleries([
       {
@@ -288,7 +299,7 @@ const PostForm = (props: PostFormProps) => {
           {postType === EPostType.ARTICLE && (
             <>
               <span className="rw-label">Cover image</span>
-              <div className="flex flex-row flex-wrap gap-2">
+              <div className="b-2 flex flex-row flex-wrap gap-2">
                 <Upload
                   name="coverImage"
                   multiple={false}
@@ -298,6 +309,9 @@ const PostForm = (props: PostFormProps) => {
                       url: secure_url,
                     })
                   }
+                  setUploadedImages={([...images]) => {
+                    setUploadedImages(images as ICloudinaryUploadResultInfo[])
+                  }}
                 />
                 <MediaLibrary
                   name="coverImage"
@@ -307,42 +321,29 @@ const PostForm = (props: PostFormProps) => {
                       url: secure_url,
                     })
                   }
-                />
-              </div>
-              <span className="rw-label">Image Gallery</span>
-              <div className="flex flex-row flex-wrap gap-2">
-                <Upload
-                  name="imageGalleries"
-                  multiple={true}
-                  handleUpload={({ ...images }) => {
-                    handleSetImageGalleries(
-                      images as ICloudinaryUploadResultInfo[]
-                    )
-                  }}
-                />
-                <MediaLibrary
-                  name="imageGalleries"
-                  handleMediaLibrary={({ ...images }) => {
-                    handleSetImageGalleries(
-                      images as ICloudinaryUploadResultInfo[]
-                    )
+                  setUploadedImages={([...images]) => {
+                    setUploadedImages(images as ICloudinaryUploadResultInfo[])
                   }}
                 />
               </div>
             </>
           )}
 
-          {postType === EPostType.PHOTO_GALLERY && (
+          {showImageGalleryButtons && (
             <>
               <span className="rw-label">Image Gallery</span>
               <div className="flex flex-row flex-wrap gap-2">
                 <Upload
                   name="imageGalleries"
+                  folder={postTitle}
                   multiple={true}
                   handleUpload={({ ...images }) => {
                     handleSetImageGalleries(
                       images as ICloudinaryUploadResultInfo[]
                     )
+                  }}
+                  setUploadedImages={([...images]) => {
+                    setUploadedImages(images as ICloudinaryUploadResultInfo[])
                   }}
                 />
                 <MediaLibrary
@@ -352,8 +353,12 @@ const PostForm = (props: PostFormProps) => {
                       images as ICloudinaryUploadResultInfo[]
                     )
                   }}
+                  setUploadedImages={([...images]) => {
+                    setUploadedImages(images as ICloudinaryUploadResultInfo[])
+                  }}
                 />
               </div>
+              <UploadList images={uploadedImages} />
             </>
           )}
 
