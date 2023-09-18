@@ -13,6 +13,8 @@ import PhotoGrid from 'src/components/PhotoGrid/PhotoGrid'
 import { formatCreatedDate } from 'src/lib/formatters'
 import { EPostDisplayType } from 'src/types/post-display-type.enum'
 
+import PreviewLayout from '../PreviewLayout/PreviewLayout'
+
 interface Props {
   article: Post
   displayType: EPostDisplayType
@@ -49,6 +51,10 @@ const ArticlePhotoGallery = ({ article, displayType, date }: Props) => {
               className="block h-full w-full"
             />
             <div className="font-3xl lg:min-h-48 min-h-20 md:min-h-24 absolute bottom-0 mx-auto flex h-full w-full flex-col justify-center rounded-md bg-gray-600 bg-opacity-50 px-4 text-center text-white text-opacity-100">
+              <PreviewLayout article={article} authorName={authorName} />
+            </div>
+
+            {/* <div className="font-3xl lg:min-h-48 min-h-20 md:min-h-24 absolute bottom-0 mx-auto flex h-full w-full flex-col justify-center rounded-md bg-gray-600 bg-opacity-50 px-4 text-center text-white text-opacity-100">
               <div className="flex flex-row items-center justify-center gap-2 pb-2">
                 <div>
                   <ArticleTypeIcon type={article.type as EPostType} />
@@ -88,7 +94,7 @@ const ArticlePhotoGallery = ({ article, displayType, date }: Props) => {
                   </Button>
                 </Link>
               </div>
-            </div>
+            </div> */}
           </div>
         </>
       )}
