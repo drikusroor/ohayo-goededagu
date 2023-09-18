@@ -1,3 +1,5 @@
+import { useEffect } from 'react'
+
 import { Image } from 'types/graphql'
 
 import { classNames } from 'src/lib/class-names'
