@@ -28,8 +28,8 @@ const Preview = ({ post }: Props) => {
             setBlogRollPreview(false)
           }}
           className={classNames(
-            'flex items-center gap-2 rounded-b-none rounded-r-none !text-gray-700 hover:bg-gray-200',
-            !blogRollPreview ? 'bg-gray-200' : 'bg-gray-300 shadow-inner'
+            'flex items-center gap-2 rounded-b-none rounded-r-none !text-gray-700 hover:bg-gray-100',
+            !blogRollPreview ? 'bg-gray-100' : 'bg-gray-200 shadow-inner'
           )}
           title="Preview Full Article"
           aria-label="Preview Full Article"
@@ -44,8 +44,8 @@ const Preview = ({ post }: Props) => {
             setBlogRollPreview(true)
           }}
           className={classNames(
-            'flex items-center gap-2 rounded-b-none rounded-l-none !text-gray-700 hover:bg-gray-200',
-            blogRollPreview ? 'bg-gray-200' : 'bg-gray-300 shadow-inner'
+            'flex items-center gap-2 rounded-b-none rounded-l-none !text-gray-700 hover:bg-gray-100',
+            blogRollPreview ? 'bg-gray-100' : 'bg-gray-200 shadow-inner'
           )}
           title="Preview Blog Roll"
           aria-label="Preview Blog Roll"
@@ -56,7 +56,7 @@ const Preview = ({ post }: Props) => {
         </Button>
       </div>
 
-      <div className="mb-2 bg-gray-200">
+      <div className="mb-2 bg-gray-100">
         {!blogRollPreview && <Article article={post} />}
         {blogRollPreview && <ArticlePreview article={post} />}
       </div>
