@@ -39,10 +39,10 @@ import Preview from 'src/components/Upload/Preview/Preview'
 import Upload, {
   ICloudinaryUploadResultInfo,
 } from 'src/components/Upload/Upload/Upload'
+import UploadList from 'src/components/UploadList/UploadList'
 import { classNames } from 'src/lib/class-names'
 
 import VideoForm, { IVideoPostFormData } from './TypeForms/VideoForm'
-import UploadList from 'src/components/UploadList/UploadList'
 
 type FormPost = NonNullable<EditPostById['post']>
 
@@ -169,12 +169,18 @@ const PostForm = (props: PostFormProps) => {
   const bodyNotRequired =
     postType === EPostType.VIDEO || postType === EPostType.PHOTO_GALLERY
 
-  const showImageGalleryButtons = postType === EPostType.ARTICLE || postType === EPostType.PHOTO_GALLERY
+  const showImageGalleryButtons =
+    postType === EPostType.ARTICLE || postType === EPostType.PHOTO_GALLERY
 
   const handleSetImageGalleries = (images: ICloudinaryUploadResultInfo[]) => {
     const gallery = []
     for (const [_key, image] of Object.entries(images)) {
-      gallery.push({ imageId: image.public_id, url: image.secure_url, title: image?.context?.custom?.caption, description: image?.context?.custom?.alt  })
+      gallery.push({
+        imageId: image.public_id,
+        url: image.secure_url,
+        title: image?.context?.custom?.caption,
+        description: image?.context?.custom?.alt,
+      })
     }
     setImageGalleries([
       {
@@ -293,7 +299,7 @@ const PostForm = (props: PostFormProps) => {
           {postType === EPostType.ARTICLE && (
             <>
               <span className="rw-label">Cover image</span>
-              <div className='flex flex-row flex-wrap gap-2 b-2'>
+              <div className="b-2 flex flex-row flex-wrap gap-2">
                 <Upload
                   name="coverImage"
                   multiple={false}
@@ -352,8 +358,7 @@ const PostForm = (props: PostFormProps) => {
                   }}
                 />
               </div>
-              <UploadList
-                images={uploadedImages} />
+              <UploadList images={uploadedImages} />
             </>
           )}
 
