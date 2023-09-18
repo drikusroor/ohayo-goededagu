@@ -6,6 +6,7 @@ import DisplayDatetime from 'src/components/DisplayDatetime/DisplayDatetime'
 import LocationPin from 'src/components/LocationPin/LocationPin'
 import PhotoGrid from 'src/components/PhotoGrid/PhotoGrid'
 import RenderBody from 'src/components/RenderBody/RenderBody'
+import Video from 'src/components/Video/Video'
 
 import ArticleTypeIcon, {
   EPostType,
@@ -102,14 +103,19 @@ const FullLayout = ({ article }: Props) => {
                 showDate={true}
                 className="text-sm text-slate-500"
               />
+              <LocationPin location={article.location} />
             </div>
           </header>
         </>
       )}
 
       <div>
+        {article.videoPost != null && (
+          <Video embedUrl={article?.videoPost?.videoUrl} />
+        )}
         <RenderBody body={article.body} />
       </div>
+
       {galleries &&
         galleries.map((gallery, index) => (
           <PhotoGrid
