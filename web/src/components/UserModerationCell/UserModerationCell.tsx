@@ -253,10 +253,10 @@ export const Success = ({
                       onClick={() => onClickDeleteUser(user as User)}
                     >
                       <BsTrash />
-                      Delete
+                      <span className="hidden lg:inline-block"> Delete </span>
                     </Button>
                   ) : (
-                    <span className="text-sm text-gray-500">
+                    <span className="text-sm text-gray-500 ">
                       Can&apos;t delete yourself
                     </span>
                   )}

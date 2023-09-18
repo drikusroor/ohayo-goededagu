@@ -1,24 +1,11 @@
-import {
-  BsFillPencilFill,
-  BsFillTrash3Fill,
-  BsPencilSquare,
-  BsSearch,
-  BsSendFill,
-} from 'react-icons/bs'
 import type { DeletePostMutationVariables, FindPosts } from 'types/graphql'
 
 import { routes, navigate } from '@redwoodjs/router'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
-import { useAuth } from 'src/auth'
-import ArticleTypeIcon, {
-  EPostType,
-} from 'src/components/ArticleTypeIcon/ArticleTypeIcon'
-import Button from 'src/components/Button/Button'
 import { QUERY } from 'src/components/Post/PostsCell'
-import RenderBody from 'src/components/RenderBody/RenderBody'
-import { timeTag, truncate } from 'src/lib/formatters'
+import DashboardTable from 'src/components/Table/DashboardTable'
 
 const DELETE_POST_MUTATION = gql`
   mutation DeletePostMutation($id: Int!) {
@@ -29,8 +16,6 @@ const DELETE_POST_MUTATION = gql`
 `
 
 const PostsList = ({ posts }: FindPosts) => {
-  const { currentUser } = useAuth()
-
   const [deletePost] = useMutation(DELETE_POST_MUTATION, {
     onCompleted: () => {
       toast.success('Post deleted')
@@ -59,87 +44,29 @@ const PostsList = ({ posts }: FindPosts) => {
     }
   }
 
+  const headers = [
+    'Id',
+    'Title',
+    'Body',
+    'Type',
+    'Published',
+    'Author',
+    'Created at',
+    '',
+    '',
+    '',
+  ]
+
   return (
-    <div className="rw-segment rw-table-wrapper-responsive">
-      <table className="rw-table">
-        <thead>
-          <tr>
-            <th>Id</th>
-            <th>Title</th>
-            <th>Body</th>
-            <th>Type</th>
-            <th>Published</th>
-            <th>Author</th>
-            <th>Created at</th>
-            <th>&nbsp;</th>
-            <th>&nbsp;</th>
-            <th>&nbsp;</th>
-          </tr>
-        </thead>
-        <tbody>
-          {posts.map((post) => (
-            <tr key={post.id}>
-              <td>{truncate(post.id)}</td>
-              <td>{truncate(post.title)}</td>
-              <td>
-                <RenderBody body={truncate(post.body)} />
-              </td>
-              <td>
-                <ArticleTypeIcon type={post.type as EPostType} />
-              </td>
-              <td>{post.published ? <BsSendFill /> : <BsPencilSquare />}</td>
-              <td>{post?.user?.name}</td>
-              <td>{timeTag(post.createdAt)}</td>
-              <td>
-                <nav className="rw-table-actions">
-                  <Button
-                    title={'Show post' + post.id}
-                    onClick={() => onNavigatePost(post)}
-                    className="rw-button flex items-center gap-2 text-base transition-colors sm:text-sm"
-                    color="rw-gray"
-                    icon={BsSearch}
-                    variant="outlined"
-                  >
-                    <BsSearch />
-                    <span className="hidden lg:inline-block">Show</span>
-                  </Button>
-                </nav>
-              </td>
-              <td>
-                <nav className="rw-table-actions">
-                  <Button
-                    title={'Edit post' + post.id}
-                    onClick={() => onNavigateEditPost(post)}
-                    className="rw-button rw-button-blue flex items-center gap-2 text-base transition-colors sm:text-sm"
-                    color="cobalt-blue"
-                    variant="outlined"
-                  >
-                    <BsFillPencilFill />
-                    <span className="hidden lg:inline-block">Edit</span>
-                  </Button>
-                </nav>
-              </td>
-              <td>
-                <nav className="rw-table-actions">
-                  {post?.user?.name === currentUser?.name && (
-                    <Button
-                      title={'Delete post ' + post.id}
-                      onClick={() => onDeleteClick(post.id)}
-                      className="rw-button rw-button-red flex items-center gap-2 text-base transition-colors sm:text-sm"
-                      color="monza-red"
-                      variant="outlined"
-                    >
-                      <BsFillTrash3Fill />
-                      <span className="hidden lg:inline-block">Delete</span>
-                    </Button>
-                  )}
-                </nav>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+    <>
+      <DashboardTable
+        headers={headers}
+        data={posts}
+        onShow={(post) => onNavigatePost(post)}
+        onEdit={(post) => onNavigateEditPost(post)}
+        onDelete={(postId) => onDeleteClick(postId)}
+      />
+    </>
   )
 }
 
