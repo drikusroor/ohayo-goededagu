@@ -14,13 +14,14 @@ const PhotoGrid = ({ className, images = [], preview }: IPhotoGridProps) => {
 
   const [modalInfo, setModalInfo] = React.useState<object>({
     url: String,
-    id: String,
+    id: Number,
+    imageId: String,
     title: String,
     description: String,
   })
 
   const openModal = () => {
-    document.getElementById('modal').style.display = 'block'
+    document.getElementById(modalInfo.id).style.display = 'block'
   }
 
   return (
@@ -44,30 +45,48 @@ const PhotoGrid = ({ className, images = [], preview }: IPhotoGridProps) => {
               )
             })}
           {!preview &&
-            images.map((photo) => {
+            images &&
+            images.map((photo, index) => {
               return (
-                <li
-                  className="relative h-[300px] grow basis-auto last:flex-initial"
-                  key={photo.imageId}
-                >
-                  <img
-                    className="h-full w-full cursor-pointer rounded-md object-cover align-middle"
+                <>
+                  <li
+                    className="relative h-[300px] grow basis-auto last:flex-initial"
                     key={photo.imageId}
-                    src={photo.url}
-                    alt={photo.imageId}
-                    onClick={() => {
-                      openModal()
-                      setModalInfo({
-                        url: photo.url,
-                        id: photo.imageId,
-                        title: photo?.name ? photo?.name : '',
-                        description: photo?.description
-                          ? photo?.description
-                          : '',
-                      })
-                    }}
-                  />
-                </li>
+                  >
+                    <img
+                      className="h-full w-full cursor-pointer rounded-md object-cover align-middle"
+                      key={index}
+                      src={photo.url}
+                      alt={photo.imageId}
+                      role="button"
+                      tabIndex={0}
+                      onClick={() => {
+                        setModalInfo({
+                          url: photo.url,
+                          id: photo.id,
+                          imageId: photo.imageId,
+                          title: photo?.name ? photo?.name : '',
+                          description: photo?.description
+                            ? photo?.description
+                            : '',
+                        })
+                        openModal()
+                      }}
+                      onKeyDown={() => {
+                        setModalInfo({
+                          url: photo.url,
+                          id: photo.id,
+                          imageId: photo.imageId,
+                          title: photo?.name ? photo?.name : '',
+                          description: photo?.description
+                            ? photo?.description
+                            : '',
+                        })
+                        openModal()
+                      }}
+                    />
+                  </li>
+                </>
               )
             })}
         </ul>
