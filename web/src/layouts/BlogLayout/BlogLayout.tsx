@@ -63,7 +63,7 @@ const BlogLayout = ({ children, skeleton }: BlogLayoutProps) => {
           <div className="fixed top-0 z-20 flex w-full items-center justify-between bg-slate-900 p-3 text-white">
             <div className="flex items-center gap-2">
               <Link
-                className="flex items-center gap-2 rounded bg-green-800 px-4 py-3 font-semibold uppercase text-white transition hover:bg-cobalt-blue-500 hover:filter sm:text-xs"
+                className="flex items-center gap-2 rounded bg-green-800 px-4 py-3 font-semibold uppercase text-white transition hover:bg-green-700 hover:filter sm:text-xs"
                 to={routes.home()}
               >
                 <BsHouse />
@@ -127,6 +127,11 @@ const BlogLayout = ({ children, skeleton }: BlogLayoutProps) => {
             <li>
               <Link className="rw-button" to={routes.vlog()}>
                 Vlog
+              </Link>
+            </li>
+            <li>
+              <Link className="rw-button" to={routes.galleries()}>
+                Pics
               </Link>
             </li>
             <li>
