@@ -66,6 +66,7 @@ model PostThumb {
   userId    Int
   post      Post     @relation(fields: [postId], references: [id])
   postId    Int
+  up        Boolean
 }
 
 model VideoPost {
