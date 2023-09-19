@@ -52,6 +52,9 @@ const PostsList = ({ posts }: FindPosts) => {
     'Published',
     'Author',
     'Created at',
+    'Show',
+    'Edit',
+    'Delete',
   ]
 
   return (

@@ -39,7 +39,15 @@ const ImageGalleriesList = ({ imageGalleries }: FindImageGalleries) => {
     }
   }
 
-  const headers = ['Id', 'Created at', 'Name', 'Description']
+  const headers = [
+    'Id',
+    'Created at',
+    'Name',
+    'Description',
+    'Show',
+    'Edit',
+    'Delete',
+  ]
 
   return (
     <DashboardTable

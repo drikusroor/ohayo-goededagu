@@ -338,7 +338,6 @@
 }
 .rw-table-actions {
   display: flex;
-  justify-content: flex-end;
   align-items: center;
   height: 17px;
   padding-right: 0.25rem;
