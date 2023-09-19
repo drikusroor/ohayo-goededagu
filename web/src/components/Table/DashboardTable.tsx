@@ -54,11 +54,7 @@ const DashboardTable = ({ headers, data, onDelete, onEdit, onShow }: Props) => {
                 <>
                   {header === 'Id' && <td>{truncate(item.id)}</td>}
                   {header === 'Title' && <td>{truncate(item.title)}</td>}
-                  {header === 'Body' && (
-                    <td>
-                      <RenderBody body={truncate(item.body)} />
-                    </td>
-                  )}
+                  {header === 'Body' && <td>{truncate(item.body)}</td>}
                   {header === 'Type' && (
                     <td>
                       <ArticleTypeIcon type={item.type as EPostType} />
