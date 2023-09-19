@@ -1,12 +1,16 @@
 import { useRef, useState } from 'react'
 
+import { Comment } from 'types/graphql'
+
 import { Form, FormError, Submit, SubmitHandler } from '@redwoodjs/forms'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
 import { useAuth } from 'src/auth'
 import { QUERY as FindArticleQuery } from 'src/components/ArticleCell'
+import { classNames } from 'src/lib/class-names'
 
+import Button from '../Button/Button'
 import MarkdownEditor from '../MarkdownEditor/MarkdownEditor'
 
 const CREATE_COMMENT = gql`
@@ -15,6 +19,7 @@ const CREATE_COMMENT = gql`
       id
       body
       createdAt
+      parentId
     }
   }
 `
@@ -27,9 +32,11 @@ interface FormValues {
 
 interface Props {
   postId: number
+  replyToComment?: Comment
+  onCancel?: () => void
 }
 
-const CommentForm = ({ postId }: Props) => {
+const CommentForm = ({ postId, replyToComment, onCancel }: Props) => {
   const { currentUser } = useAuth()
 
   const formRef = useRef<HTMLFormElement>(null)
@@ -44,6 +51,7 @@ const CommentForm = ({ postId }: Props) => {
     onCompleted: () => {
       toast.success('Thank you for your comment!')
       setBody('')
+      onCancel?.()
     },
     refetchQueries: [
       { query: FindArticleQuery, variables: { id: postId, $id: postId } },
@@ -51,7 +59,9 @@ const CommentForm = ({ postId }: Props) => {
   })
 
   const onSubmit: SubmitHandler<FormValues> = (input) => {
-    createComment({ variables: { input: { postId, ...input } } })
+    const parentId = replyToComment?.id
+
+    createComment({ variables: { input: { postId, ...input, parentId } } })
   }
 
   // ctrl/cmd + enter to submit
@@ -79,8 +89,12 @@ const CommentForm = ({ postId }: Props) => {
   }
 
   return (
-    <div className="max-w-xl">
-      <h3 className="text-lg font-light text-gray-600">Leave a Comment</h3>
+    <div
+      className={classNames(
+        'max-w-xl',
+        replyToComment && '-mt-4 bg-slate-100 p-2 pt-4'
+      )}
+    >
       <Form className="mt-3 w-full" onSubmit={onSubmit} ref={formRef}>
         <FormError
           error={error}
@@ -101,14 +115,24 @@ const CommentForm = ({ postId }: Props) => {
           value={body}
           onKeyDown={onKeyDown}
         />
-
-        <Submit
-          disabled={loading}
-          title={loading ? 'Saving...' : 'Submit'}
-          className="mt-4 block rounded bg-blue-500 px-3 py-2 text-xs font-semibold uppercase tracking-wide text-white disabled:opacity-50"
-        >
-          Submit
-        </Submit>
+        <div className="flex flex-row gap-2">
+          <Submit
+            disabled={loading}
+            title={loading ? 'Saving...' : 'Submit'}
+            className="mt-4 block rounded bg-cobalt-blue-500 px-3 py-2 text-xs font-semibold uppercase tracking-wide text-white disabled:opacity-50"
+          >
+            Submit
+            {replyToComment && <span> reply</span>}
+          </Submit>
+          {replyToComment && (
+            <Button
+              className="mt-4 block rounded bg-monza-red-500 px-3 py-2 text-xs font-semibold uppercase tracking-wide text-white disabled:opacity-50"
+              onClick={onCancel}
+            >
+              Cancel
+            </Button>
+          )}
+        </div>
       </Form>
     </div>
   )

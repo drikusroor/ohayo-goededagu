@@ -21,6 +21,7 @@ const Button = ({
   disabled,
   type = 'button',
   variant: variant = 'filled',
+  ...props
 }: IButtonProps) => {
   const theme = color ? color : 'cobalt-blue'
   const buttonColors =
@@ -40,6 +41,7 @@ const Button = ({
       ${className}
       `}
       onClick={onClick}
+      {...props}
     >
       {text}
       {children}

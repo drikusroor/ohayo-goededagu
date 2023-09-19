@@ -3,6 +3,10 @@
 const config = {
   rootDir: '../',
   preset: '@redwoodjs/testing/config/jest/web',
+  moduleNameMapper: {
+    'react-markdown':
+      '<rootDir>/node_modules/react-markdown/react-markdown.min.js',
+  },
 }
 
 module.exports = config

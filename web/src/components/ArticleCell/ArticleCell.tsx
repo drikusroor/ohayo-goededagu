@@ -32,6 +32,7 @@ export const QUERY = gql`
         body
         createdAt
         postId
+        parentId
         deleted
         user {
           id

@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 
-import { BsTrash } from 'react-icons/bs'
+import { BsReplyFill, BsTrash } from 'react-icons/bs'
 import type { Comment } from 'types/graphql'
 
 import { useMutation } from '@redwoodjs/web'
@@ -17,6 +17,7 @@ import Thumbs from '../Thumbs/Thumbs'
 
 interface ICommentProps {
   comment: Comment
+  onClickReply?: (comment: Comment) => void
 }
 
 const CREATE_UPDATE_OR_DELETE_THUMB = gql`
@@ -38,7 +39,7 @@ const DELETE_COMMENT = gql`
   }
 `
 
-export default ({ comment }: ICommentProps) => {
+export default ({ comment, onClickReply }: ICommentProps) => {
   const { currentUser } = useAuth()
 
   const [deleteFadeOut, setDeleteFadeOut] = useState(false)
@@ -125,7 +126,7 @@ export default ({ comment }: ICommentProps) => {
 
   return (
     <div
-      className={`rounded-lg bg-slate-100 p-4 transition-opacity ${ratingOpacity} group relative ${
+      className={`z-10 rounded-lg bg-slate-100 p-4 transition-opacity ${ratingOpacity} group relative ${
         deleteFadeOut ? 'animate-fade-out' : ''
       }`}
     >
@@ -150,7 +151,20 @@ export default ({ comment }: ICommentProps) => {
             className="text-sm text-slate-500"
           />
         </div>
-        <div className="ml-auto">
+        <div className="ml-auto flex flex-row items-center gap-2">
+          {onClickReply && (
+            <Button
+              data-testid="replyButton"
+              onClick={() => onClickReply(comment)}
+              className="user-select-none flex flex-row items-center gap-1"
+              title="Reply"
+              variant="outlined"
+            >
+              <BsReplyFill />
+              Reply
+            </Button>
+          )}
+
           <Thumbs
             thumbs={comment.thumbs}
             entityId={comment.id}

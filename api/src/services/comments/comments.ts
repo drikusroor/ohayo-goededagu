@@ -41,11 +41,6 @@ export const createComment: MutationResolvers['createComment'] = async ({
     if (parentComment && parentComment.postId !== input.postId) {
       throw new Error('Post ID does not match parent post ID')
     }
-
-    // if parent already has a parent, throw error
-    if (parentComment && parentComment.parentId) {
-      throw new Error('Parent comment cannot have a parent')
-    }
   }
 
   return db.comment.create({

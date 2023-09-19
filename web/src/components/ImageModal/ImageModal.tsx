@@ -16,7 +16,7 @@ const ImageModal = ({ info }: Props) => {
       {info && (
         <div
           id={info.id}
-          className="fixed left-0 top-0 z-10 hidden h-full w-full overflow-auto bg-black bg-opacity-70 pt-2.5 text-white"
+          className="fixed left-0 top-0 z-30 hidden h-full w-full overflow-auto bg-black bg-opacity-70 pt-2.5 text-white"
         >
           <Button
             className="absolute right-6 top-20 cursor-pointer bg-transparent text-4xl font-bold text-white hover:bg-transparent hover:text-slate-300"
