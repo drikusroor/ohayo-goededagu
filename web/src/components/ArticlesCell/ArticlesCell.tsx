@@ -49,6 +49,7 @@ export const QUERY = gql`
 
 interface Props {
   vlog?: boolean
+  gallery?: boolean
   articles: CellSuccessProps<ArticlesQuery>
 }
 
@@ -68,9 +69,15 @@ export const Failure = ({ error }: CellFailureProps) => (
   <div style={{ color: 'red' }}>Error: {error?.message}</div>
 )
 
-export const Success = ({ articles, vlog }: Props) => {
+export const Success = ({ articles, vlog, gallery }: Props) => {
   const vlogs = articles.filter((article) => {
     if (article.type === EPostType.VIDEO) {
+      return article
+    }
+  })
+
+  const galleries = articles.filter((article) => {
+    if (article.type === EPostType.PHOTO_GALLERY) {
       return article
     }
   })
@@ -79,6 +86,16 @@ export const Success = ({ articles, vlog }: Props) => {
     return (
       <ul className="flex flex-col justify-center gap-6 p-3 md:gap-12 md:p-10">
         {vlogs.map((article) => {
+          return <ArticlePreview key={article.id} article={article} />
+        })}
+      </ul>
+    )
+  }
+
+  if (gallery) {
+    return (
+      <ul className="flex flex-col justify-center gap-6 p-3 md:gap-12 md:p-10">
+        {galleries.map((article) => {
           return <ArticlePreview key={article.id} article={article} />
         })}
       </ul>
