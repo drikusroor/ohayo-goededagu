@@ -1,20 +1,26 @@
 import { useMemo } from 'react'
 
+import type { PostThumb as TPhostThumb, Thumb as TThumb } from 'types/graphql'
+
 import { useAuth } from 'src/auth'
+import { classNames } from 'src/lib/class-names'
 
 import Thumb from '../Thumb/Thumb'
 
 export interface IThumbProps {
-  thumbs: Thumbs[]
-  entityId: number
+  thumbs: TThumb[] | TPhostThumb[]
   onThumb: (up: boolean) => void
   disabled?: boolean
+  className?: string
 }
 
 const Thumbs = (props: IThumbProps) => {
   const { currentUser } = useAuth()
 
-  // useMemo to filter up and down thumbs
+  const { onThumb } = props
+
+  const { className = '' } = props
+
   const upThumbs = useMemo(() => {
     return props.thumbs.filter((thumb) => thumb.up)
   }, [props.thumbs])
@@ -36,19 +42,19 @@ const Thumbs = (props: IThumbProps) => {
   }, [props.thumbs, currentUser])
 
   return (
-    <div className="flex gap-2">
+    <div className={classNames('flex gap-2', className)}>
       <Thumb
         up={true}
         count={upCount}
         active={currentUserThumb?.up}
-        onClick={() => props.onThumb(true)}
+        onClick={() => onThumb(true)}
         disabled={props.disabled}
       />
       <Thumb
         up={false}
         count={downCount}
         active={currentUserThumb?.up === false}
-        onClick={() => props.onThumb(false)}
+        onClick={() => onThumb(false)}
         disabled={props.disabled}
       />
     </div>

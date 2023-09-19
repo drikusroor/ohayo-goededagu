@@ -167,7 +167,6 @@ export default ({ comment, onClickReply }: ICommentProps) => {
 
           <Thumbs
             thumbs={comment.thumbs}
-            entityId={comment.id}
             onThumb={handleThumbClick}
             disabled={thumbsDisabled}
           />

@@ -12,6 +12,12 @@ export const schema = gql`
   type Query {
     postThumbs: [PostThumb!]! @requireAuth
     postThumb(id: Int!): PostThumb @requireAuth
+    postThumbsByPostId(postId: Int!): [PostThumb!]! @requireAuth
+  }
+
+  input CreateUpdateOrDeletePostThumbInput {
+    postId: Int!
+    up: Boolean!
   }
 
   input CreatePostThumbInput {
@@ -29,5 +35,8 @@ export const schema = gql`
     updatePostThumb(id: Int!, input: UpdatePostThumbInput!): PostThumb!
       @requireAuth
     deletePostThumb(id: Int!): PostThumb! @requireAuth
+    createUpdateOrDeletePostThumb(
+      input: CreateUpdateOrDeletePostThumbInput!
+    ): PostThumb! @requireAuth
   }
 `
