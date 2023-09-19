@@ -31,11 +31,6 @@ export const QUERY = gql`
           id
         }
       }
-      postThumbs {
-        id
-        userId
-        up
-      }
       comments {
         id
         body
@@ -55,6 +50,12 @@ export const QUERY = gql`
           id
           userId
           up
+          user {
+            email
+            profile {
+              name
+            }
+          }
         }
       }
       imageGalleries {

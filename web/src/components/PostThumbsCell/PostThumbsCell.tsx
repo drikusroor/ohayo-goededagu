@@ -18,6 +18,12 @@ export const QUERY = gql`
       userId
       postId
       up
+      user {
+        email
+        profile {
+          name
+        }
+      }
     }
     post(id: $postId) {
       id

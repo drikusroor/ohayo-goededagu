@@ -1,3 +1,5 @@
+import { useMemo } from 'react'
+
 import { classNames } from 'src/lib/class-names'
 
 import Button from '../Button/Button'
@@ -8,9 +10,19 @@ interface IThumbProps {
   count: number
   onClick: () => void
   disabled?: boolean
+  names: string[]
 }
 
-const Thumb = ({ up, active, count, onClick, disabled }: IThumbProps) => {
+const Thumb = ({
+  up,
+  active,
+  count,
+  names = [],
+  onClick,
+  disabled,
+}: IThumbProps) => {
+  const title = useMemo(() => names.map((n) => `- ${n}`).join('\n'), [names])
+
   return (
     <Button
       onClick={disabled ? undefined : onClick}
@@ -19,6 +31,7 @@ const Thumb = ({ up, active, count, onClick, disabled }: IThumbProps) => {
         'transition-filter',
         disabled ? 'cursor-not-allowed grayscale' : ''
       )}
+      title={title}
     >
       {up ? '👍' : '👎'} {count}
     </Button>

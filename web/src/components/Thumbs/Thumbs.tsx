@@ -4,6 +4,7 @@ import type { PostThumb as TPhostThumb, Thumb as TThumb } from 'types/graphql'
 
 import { useAuth } from 'src/auth'
 import { classNames } from 'src/lib/class-names'
+import { getUserName } from 'src/lib/get-user-name'
 
 import Thumb from '../Thumb/Thumb'
 
@@ -49,6 +50,7 @@ const Thumbs = (props: IThumbProps) => {
         active={currentUserThumb?.up}
         onClick={() => onThumb(true)}
         disabled={props.disabled}
+        names={upThumbs.map((thumb) => getUserName(thumb.user))}
       />
       <Thumb
         up={false}
@@ -56,6 +58,7 @@ const Thumbs = (props: IThumbProps) => {
         active={currentUserThumb?.up === false}
         onClick={() => onThumb(false)}
         disabled={props.disabled}
+        names={downThumbs.map((thumb) => getUserName(thumb.user))}
       />
     </div>
   )
