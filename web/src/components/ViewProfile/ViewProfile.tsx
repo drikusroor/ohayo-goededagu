@@ -1,3 +1,5 @@
+import { useMemo } from 'react'
+
 import { User } from 'types/graphql'
 
 import Person from 'src/pages/AboutPage/Person'
@@ -11,18 +13,23 @@ interface IViewProfileProps {
 const ViewProfile = ({ user }: IViewProfileProps) => {
   const { profile, posts = [] } = user
 
+  const sortedPosts = useMemo(() => {
+    if (posts) {
+      return [...posts].sort((a, b) => {
+        if (new Date(a.createdAt) > new Date(b.createdAt)) return -1
+        if (new Date(a.createdAt) < new Date(b.createdAt)) return 1
+        return 0
+      })
+    }
+  }, [posts])
+
   return (
     <div className="grid max-w-6xl gap-8">
       <div className="max-w-2xl">
         <h2 className="text-2xl font-bold">Profile</h2>
         {profile ? (
           <div className="mt-3">
-            <Person
-              name={profile.name}
-              quote={profile.japaneseName}
-              imgSrc={profile.avatar}
-              story={profile.bio}
-            />
+            <Person profile={profile} />
           </div>
         ) : (
           <div className="mt-3 text-slate-500">This user has no profile.</div>
@@ -32,8 +39,10 @@ const ViewProfile = ({ user }: IViewProfileProps) => {
         <h2 className="text-2xl font-bold">Posts ({posts.length})</h2>
 
         <div className="mt-3 grid gap-4">
-          {posts.length > 0 ? (
-            posts.map((post) => <ArticlePreview key={post.id} article={post} />)
+          {sortedPosts.length > 0 ? (
+            sortedPosts.map((post) => (
+              <ArticlePreview key={post.id} article={post} />
+            ))
           ) : (
             <div className="text-slate-500">This user has no posts.</div>
           )}

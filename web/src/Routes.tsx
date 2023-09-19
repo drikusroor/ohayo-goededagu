@@ -38,13 +38,13 @@ const Routes = () => {
             <Route path="/admin/posts/{id:Int}" page={PostPostPage} name="post" />
             <Route path="/admin/posts" page={PostPostsPage} name="posts" />
           </Set>
-          <Set wrap={ScaffoldLayout} title="ImageGalleries" titleTo="imageGalleries" buttonLabel="New ImageGallery" buttonTo="newImageGallery">
+          <Set wrap={ScaffoldLayout} title="ImageGalleries" titleTo="imageGalleries">
             <Route path="/admin/image-galleries/new" page={ImageGalleryNewImageGalleryPage} name="newImageGallery" />
             <Route path="/admin/image-galleries/{id:Int}/edit" page={ImageGalleryEditImageGalleryPage} name="editImageGallery" />
             <Route path="/admin/image-galleries/{id:Int}" page={ImageGalleryImageGalleryPage} name="imageGallery" />
             <Route path="/admin/image-galleries" page={ImageGalleryImageGalleriesPage} name="imageGalleries" />
           </Set>
-          <Set wrap={ScaffoldLayout} title="Comments" titleTo="comments" buttonLabel="New Comment" buttonTo="newComment">
+          <Set wrap={ScaffoldLayout} title="Comments" titleTo="comments">
             <Route path="/admin/comments/new" page={CommentNewCommentPage} name="newComment" />
             <Route path="/admin/comments/{id:Int}/edit" page={CommentEditCommentPage} name="editComment" />
             <Route path="/admin/comments/{id:Int}" page={CommentCommentPage} name="comment" />

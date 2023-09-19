@@ -25,6 +25,10 @@ export const QUERY = gql`
         name
         profile {
           name
+          japaneseName
+          avatar
+          bio
+          id
         }
       }
       comments {
