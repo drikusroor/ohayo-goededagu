@@ -1,4 +1,4 @@
-import { BsBoxArrowUp, BsPersonCircle, BsTools } from 'react-icons/bs'
+import { BsBoxArrowUp, BsHouse, BsPersonCircle, BsTools } from 'react-icons/bs'
 
 import { Link, routes } from '@redwoodjs/router'
 import { Toaster } from '@redwoodjs/web/dist/toast'
@@ -62,6 +62,13 @@ const BlogLayout = ({ children, skeleton }: BlogLayoutProps) => {
         {isAuthenticated && currentUser && (
           <div className="fixed top-0 z-20 flex w-full items-center justify-between bg-slate-900 p-3 text-white">
             <div className="flex items-center gap-2">
+              <Link
+                className="flex items-center gap-2 rounded bg-green-800 px-4 py-3 font-semibold uppercase text-white transition hover:bg-cobalt-blue-500 hover:filter sm:text-xs"
+                to={routes.home()}
+              >
+                <BsHouse />
+                <span className="hidden sm:block">Home</span>
+              </Link>
               <Link
                 className="flex items-center gap-2 rounded bg-cobalt-blue-600 px-4 py-3 font-semibold uppercase text-white transition hover:bg-cobalt-blue-500 hover:filter sm:text-xs"
                 to={routes.admin()}
