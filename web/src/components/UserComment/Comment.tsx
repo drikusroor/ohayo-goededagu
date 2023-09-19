@@ -126,13 +126,10 @@ export default ({ comment, onClickReply }: ICommentProps) => {
 
   return (
     <div
-      className={`rounded-lg bg-slate-100 p-4 transition-opacity ${ratingOpacity} group relative ${
+      className={`z-10 rounded-lg bg-slate-100 p-4 transition-opacity ${ratingOpacity} group relative ${
         deleteFadeOut ? 'animate-fade-out' : ''
       }`}
     >
-      {comment.parentId && (
-        <div className="absolute -top-4 h-4 w-1 -translate-x-1/2 transform bg-slate-400"></div>
-      )}
       <div className="flex flex-row items-center gap-4">
         <Avatar
           src={comment.user?.profile?.avatar}
@@ -155,16 +152,18 @@ export default ({ comment, onClickReply }: ICommentProps) => {
           />
         </div>
         <div className="ml-auto flex flex-row items-center gap-2">
-          <Button
-            data-testid="replyButton"
-            onClick={() => onClickReply(comment)}
-            className="user-select-none flex flex-row items-center gap-1"
-            title="Reply"
-            variant="outlined"
-          >
-            <BsReplyFill />
-            Reply
-          </Button>
+          {onClickReply && (
+            <Button
+              data-testid="replyButton"
+              onClick={() => onClickReply(comment)}
+              className="user-select-none flex flex-row items-center gap-1"
+              title="Reply"
+              variant="outlined"
+            >
+              <BsReplyFill />
+              Reply
+            </Button>
+          )}
 
           <Thumbs
             thumbs={comment.thumbs}

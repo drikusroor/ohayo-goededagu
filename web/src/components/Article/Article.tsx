@@ -1,24 +1,25 @@
 import { useMemo } from 'react'
 
 import { BsPencil } from 'react-icons/bs'
-import type { Post } from 'types/graphql'
+import type { Comment as TComment, Post } from 'types/graphql'
 
 import { Link, routes } from '@redwoodjs/router'
 
 import { useAuth } from 'src/auth'
+import { classNames } from 'src/lib/class-names'
 import dateStringToLocalizedDateString from 'src/lib/localized-date'
 import { EPostDisplayType } from 'src/types/post-display-type.enum'
 
 import { EPostType } from '../ArticleTypeIcon/ArticleTypeIcon'
 import Button from '../Button/Button'
 import CommentForm from '../CommentForm/CommentForm'
-import Comment from '../UserComment/Comment'
 
 import ArticleArticle from './components/ArticleArticle/ArticleArticle'
 import ArticleChotto from './components/ArticleChotto/ArticleChotto'
 import ArticleHaiku from './components/ArticleHaiku/ArticleHaiku'
 import ArticlePhotoGallery from './components/ArticlePhotoGallery/ArticlePhotoGallery'
 import ArticleVideo from './components/ArticleVideo/ArticleVideo'
+import { RecursiveComment } from './components/RecursiveComment/RecursiveComment'
 import { hotScore } from './helpers/sort-comments'
 
 interface Props {
@@ -49,6 +50,8 @@ const Article = ({ article }: Props) => {
       })
     }
   }, [article.comments])
+
+  const [replyToComment, setReplyToComment] = React.useState<TComment>()
 
   return (
     <article className="flex flex-col gap-24 p-3 md:p-10">
@@ -112,11 +115,20 @@ const Article = ({ article }: Props) => {
           <h2 className="mt-5 text-2xl font-light text-gray-600">Comments</h2>
           <ul className="mt-3 max-w-xl">
             {sortedComments.length > 0 ? (
-              sortedComments.map((comment) => (
-                <li key={comment.id} className="mb-4">
-                  <Comment comment={comment} />
-                </li>
-              ))
+              sortedComments
+                .filter((c) => !c.parentId)
+                .map((comment) => (
+                  <li key={comment.id} className="mb-4">
+                    <RecursiveComment
+                      comment={comment}
+                      comments={sortedComments}
+                      replyToComment={replyToComment}
+                      setReplyToComment={setReplyToComment}
+                      article={article}
+                      level={0}
+                    />
+                  </li>
+                ))
             ) : (
               <div className="flex flex-col gap-2 rounded-md bg-gray-100 p-3">
                 <p className=" text-gray-500">No comments yet. 🙃</p>
@@ -125,7 +137,7 @@ const Article = ({ article }: Props) => {
             )}
           </ul>
           <div className="mt-5">
-            <CommentForm postId={article.id} />
+            {!replyToComment && <CommentForm postId={article.id} />}
           </div>
         </div>
       )}
