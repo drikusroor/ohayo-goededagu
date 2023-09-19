@@ -6,6 +6,7 @@ export const schema = gql`
     userId: Int!
     post: Post!
     postId: Int!
+    up: Boolean!
   }
 
   type Query {

@@ -41,4 +41,7 @@ export const Post: PostRelationResolvers = {
   imageGalleries: (_obj, { root }) => {
     return db.imageGalleryOnPost.findMany({ where: { postId: root?.id } })
   },
+  postThumbs: (_obj, { root }) => {
+    return db.postThumb.findMany({ where: { postId: root?.id } })
+  },
 }

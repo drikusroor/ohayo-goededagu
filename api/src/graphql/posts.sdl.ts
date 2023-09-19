@@ -13,6 +13,7 @@ export const schema = gql`
     coverImage: Image
     imageGalleries: [ImageGalleryOnPost]!
     location: String
+    postThumbs: [PostThumb]!
   }
 
   type Query {
