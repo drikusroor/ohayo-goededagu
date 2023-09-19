@@ -17,6 +17,7 @@ import { Role } from 'src/types/role'
 
 import Button from '../Button/Button'
 import DisplayDatetime from '../DisplayDatetime/DisplayDatetime'
+import DashboardTable from '../Table/DashboardTable'
 
 export const QUERY = gql`
   query FindUserModerationQuery {
