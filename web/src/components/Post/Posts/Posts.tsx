@@ -52,9 +52,6 @@ const PostsList = ({ posts }: FindPosts) => {
     'Published',
     'Author',
     'Created at',
-    '',
-    '',
-    '',
   ]
 
   return (

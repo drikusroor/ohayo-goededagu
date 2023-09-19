@@ -24,6 +24,15 @@ interface Props {
 
 const DashboardTable = ({ headers, data, onDelete, onEdit, onShow }: Props) => {
   const { currentUser } = useAuth()
+  headers.push('', '', '')
+
+  const showDelete = (item) => {
+    if (item.__typename === 'Post' && item?.user?.name === currentUser?.name) {
+      return true
+    } else if (item.__typename !== 'Post') {
+      return true
+    }
+  }
 
   return (
     <div className="rw-segment rw-table-wrapper-responsive">
@@ -36,25 +45,43 @@ const DashboardTable = ({ headers, data, onDelete, onEdit, onShow }: Props) => {
           </tr>
         </thead>
         <tbody>
-          {data.map((post) => (
-            <tr key={post.id}>
-              <td>{truncate(post.id)}</td>
-              <td>{truncate(post.title)}</td>
-              <td>
-                <RenderBody body={truncate(post.body)} />
-              </td>
-              <td>
-                <ArticleTypeIcon type={post.type as EPostType} />
-              </td>
-              <td>{post.published ? <BsSendFill /> : <BsPencilSquare />}</td>
-              <td>{post?.user?.name}</td>
-              <td>{timeTag(post.createdAt)}</td>
+          {data.map((item) => (
+            <tr key={item.id}>
+              {headers.map((header) => (
+                <>
+                  {header === 'Id' && <td>{truncate(item.id)}</td>}
+                  {header === 'Title' && <td>{truncate(item.title)}</td>}
+                  {header === 'Body' && (
+                    <td>
+                      <RenderBody body={truncate(item.body)} />
+                    </td>
+                  )}
+                  {header === 'Type' && (
+                    <td>
+                      <ArticleTypeIcon type={item.type as EPostType} />
+                    </td>
+                  )}
+                  {header === 'Published' && (
+                    <td>
+                      {item.published ? <BsSendFill /> : <BsPencilSquare />}
+                    </td>
+                  )}
+                  {header === 'Author' && <td>{item?.user?.name}</td>}
+                  {header === 'Created at' && (
+                    <td>{timeTag(item.createdAt)}</td>
+                  )}
+                  {header === 'Name' && <td>{truncate(item.name)}</td>}
+                  {header === 'Description' && (
+                    <td>{truncate(item.description)}</td>
+                  )}
+                </>
+              ))}
               <td>
                 <nav className="rw-table-actions">
                   <Button
-                    title={'Show post' + post.id}
-                    onClick={() => onShow(post)}
-                    className="rw-button flex items-center gap-2 text-base transition-colors sm:text-sm"
+                    title={'Show post' + item.id}
+                    onClick={() => onShow(item)}
+                    className="rw-button rw-button-small flex items-center gap-1"
                     color="rw-gray"
                     icon={BsSearch}
                     variant="outlined"
@@ -67,9 +94,9 @@ const DashboardTable = ({ headers, data, onDelete, onEdit, onShow }: Props) => {
               <td>
                 <nav className="rw-table-actions">
                   <Button
-                    title={'Edit post' + post.id}
-                    onClick={() => onEdit(post)}
-                    className="rw-button rw-button-blue flex items-center gap-2 text-base transition-colors sm:text-sm"
+                    title={'Edit post' + item.id}
+                    onClick={() => onEdit(item)}
+                    className="rw-button rw-button-small rw-button-blue flex items-center gap-1"
                     color="cobalt-blue"
                     variant="outlined"
                   >
@@ -80,11 +107,11 @@ const DashboardTable = ({ headers, data, onDelete, onEdit, onShow }: Props) => {
               </td>
               <td>
                 <nav className="rw-table-actions">
-                  {post?.user?.name === currentUser?.name && (
+                  {showDelete(item) && (
                     <Button
-                      title={'Delete post ' + post.id}
-                      onClick={() => onDelete(post.id)}
-                      className="rw-button rw-button-red flex items-center gap-2 text-base transition-colors sm:text-sm"
+                      title={'Delete post ' + item.id}
+                      onClick={() => onDelete(item.id)}
+                      className="rw-button rw-button-small rw-button-red flex items-center gap-1"
                       color="monza-red"
                       variant="outlined"
                     >
