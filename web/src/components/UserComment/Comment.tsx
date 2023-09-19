@@ -130,6 +130,9 @@ export default ({ comment, onClickReply }: ICommentProps) => {
         deleteFadeOut ? 'animate-fade-out' : ''
       }`}
     >
+      {comment.parentId && (
+        <div className="absolute -top-4 h-4 w-1 -translate-x-1/2 transform bg-slate-400"></div>
+      )}
       <div className="flex flex-row items-center gap-4">
         <Avatar
           src={comment.user?.profile?.avatar}
