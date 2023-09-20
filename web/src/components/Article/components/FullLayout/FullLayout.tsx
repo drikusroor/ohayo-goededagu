@@ -70,7 +70,10 @@ const FullLayout = ({ article }: Props) => {
                 showDate={true}
                 className="text-sm text-slate-200"
               />
-              <LocationPin location={article.location} className="text-white" />
+              <LocationPin
+                location={article.location}
+                className="pb-1 text-white"
+              />
             </div>
             <div className="absolute bottom-2 right-2 rounded bg-slate-300 bg-opacity-70 p-1">
               <PostThumbsCell postId={article.id} />
@@ -100,13 +103,16 @@ const FullLayout = ({ article }: Props) => {
                   title={`View ${authorName}'s profile`}
                 >
                   {authorName}
-                </Link>
+                </Link>{' '}
                 <DisplayDatetime
                   datetime={article.createdAt}
                   showDate={true}
                   className="text-sm text-slate-500"
                 />
-                <LocationPin location={article.location} />
+                <LocationPin
+                  location={article.location}
+                  className="pb-1 text-slate-500"
+                />
               </div>
               <PostThumbsCell postId={article.id} />
             </div>

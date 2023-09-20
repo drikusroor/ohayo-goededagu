@@ -45,23 +45,7 @@ const PreviewLayout = ({ article }: Props) => {
             />
           )}
           <div className="flex flex-row items-center justify-center gap-12">
-            <div className="flex flex-row items-center gap-2">
-              <Avatar
-                src={article.user?.profile?.avatar}
-                alt={article.user.name}
-                name={article.user.name || article.user.email}
-                userId={article.user?.id}
-              />
-              <div className="flex flex-col items-start">
-                <span className="text-sm text-slate-300" title={authorName}>
-                  {authorName}
-                </span>
-                <DisplayDatetime
-                  className="text-sm text-slate-300"
-                  datetime={article.createdAt}
-                />
-              </div>
-            </div>
+            <AvatarTimestamp article={article} hasImage={hasImage} />
             {article?.comments?.length > 0 && (
               <ArticleCommentCountBadge count={article.comments.length} />
             )}
@@ -114,7 +98,7 @@ const PreviewLayout = ({ article }: Props) => {
             )}
 
             <div className="flex items-center justify-between pt-4">
-              <AvatarTimestamp article={article} />
+              <AvatarTimestamp article={article} hasImage={hasImage} />
               <div className="flex items-center gap-6">
                 {article?.comments?.length > 0 && (
                   <ArticleCommentCountBadge
