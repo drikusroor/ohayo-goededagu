@@ -1,10 +1,12 @@
 import type { Prisma, PostThumb } from '@prisma/client'
+
 import type { ScenarioData } from '@redwoodjs/testing/api'
 
 export const standard = defineScenario<Prisma.PostThumbCreateArgs>({
   postThumb: {
     one: {
       data: {
+        up: true,
         user: {
           create: {
             email: 'String9857530',
@@ -28,6 +30,7 @@ export const standard = defineScenario<Prisma.PostThumbCreateArgs>({
     },
     two: {
       data: {
+        up: false,
         user: {
           create: {
             email: 'String9064211',
