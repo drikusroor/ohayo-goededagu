@@ -41,7 +41,7 @@ const PreviewLayout = ({ article }: Props) => {
           {article.type === EPostType.ARTICLE && (
             <RenderBody
               body={article.body}
-              className="!prose-invert mx-auto mb-8  line-clamp-3 text-center"
+              className="prose mx-auto mb-8 line-clamp-3 text-center text-[#d1d5db]"
             />
           )}
           <div className="flex flex-row items-center justify-center gap-12">

@@ -116,7 +116,7 @@ const FullLayout = ({ article }: Props) => {
         {article.videoPost != null && (
           <Video embedUrl={article?.videoPost?.videoUrl} />
         )}
-        <RenderBody body={article.body} />
+        <RenderBody body={article.body} className="leading-7 text-[#374151]" />
       </div>
 
       {galleries &&
