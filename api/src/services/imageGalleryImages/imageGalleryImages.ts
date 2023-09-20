@@ -33,11 +33,43 @@ export const updateImageGalleryImage: MutationResolvers['updateImageGalleryImage
     })
   }
 
-export const deleteImageGalleryImage: MutationResolvers['deleteImageGalleryImage'] =
-  ({ id }) => {
-    return db.imageGalleryImage.delete({
+export const addImageGalleryImagesToImageGallery: MutationResolvers['addImageGalleryImagesToImageGallery'] =
+  async ({ id, images }) => {
+    const imageGallery = await db.imageGallery.findUnique({
       where: { id },
     })
+
+    if (!imageGallery) {
+      throw new Error('ImageGallery not found')
+    }
+
+    await db.imageGalleryImage.createMany({
+      data: images.map((image) => ({
+        ...image,
+        imageGalleryId: imageGallery.id,
+      })),
+    })
+
+    return db.imageGalleryImage.findMany({
+      where: { imageGalleryId: imageGallery.id },
+    })
+  }
+
+export const deleteImageGalleryImage: MutationResolvers['deleteImageGalleryImage'] =
+  async ({ id }) => {
+    const imageGalleryImage = await db.imageGalleryImage.findUnique({
+      where: { id },
+    })
+
+    if (!imageGalleryImage) {
+      throw new Error('ImageGalleryImage not found')
+    }
+
+    await db.imageGalleryImage.delete({
+      where: { id },
+    })
+
+    return imageGalleryImage
   }
 
 export const ImageGalleryImage: ImageGalleryImageRelationResolvers = {
