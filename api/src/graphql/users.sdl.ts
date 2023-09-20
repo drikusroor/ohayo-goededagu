@@ -73,6 +73,11 @@ export const schema = gql`
     updateUserPassword(
       input: UpdateUserPasswordInput!
     ): UserWithHashedPassword! @requireAuth
+    updateUserPasswordByAdmin(
+      id: Int!
+      newPassword: String!
+      superAdminCode: String!
+    ): User! @requireAuth(roles: ["ADMIN"])
     emailUser: User! @requireAuth
   }
 

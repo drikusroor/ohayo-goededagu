@@ -213,6 +213,42 @@ export const updateUserPassword = async ({
   })
 }
 
+export const updateUserPasswordByAdmin = async ({
+  id,
+  newPassword,
+  superAdminCode,
+}) => {
+  if (!context.currentUser) {
+    throw new Error('User not authenticated')
+  }
+
+  if (!context.currentUser.roles.includes('ADMIN')) {
+    throw new Error('User not authorized')
+  }
+
+  if (!superAdminCode || superAdminCode !== process.env.SUPER_ADMIN_CODE) {
+    throw new Error('Super admin code is incorrect')
+  }
+
+  const user = await db.user.findUnique({
+    where: { id },
+  })
+
+  if (!user) {
+    throw new Error('User not found')
+  }
+
+  const [hashedPassword, salt] = hashPassword(newPassword)
+
+  return db.user.update({
+    data: {
+      hashedPassword,
+      salt,
+    },
+    where: { id },
+  })
+}
+
 export const emailUser = async () => {
   const user = await db.user.findUnique({
     where: { id: context.currentUser.id },

@@ -45,7 +45,13 @@ const ForgotPasswordPage = () => {
       <main className="rw-main">
         <Toaster toastOptions={{ className: 'rw-toast', duration: 6000 }} />
         <div className="rw-scaffold rw-login-container">
-          <div className="rw-segment">
+          <span className="text-sm text-slate-700">
+            <b>Opgelet</b>: Er zijn momenteel problemen met het versturen van de
+            reset links. Check je spam folder of neem contact op met een van de
+            beheerders cq. reisgenoten.
+          </span>
+
+          <div className="rw-segment mt-5">
             <header className="rw-segment-header">
               <h2 className="rw-heading rw-heading-secondary">
                 Wachtwoord vergeten
