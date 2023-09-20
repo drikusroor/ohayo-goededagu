@@ -28,7 +28,7 @@ export const RecursiveComment = ({
       )}
       <Comment
         comment={comment}
-        onClickReply={level < 2 && setReplyToComment}
+        onClickReply={level < 5 && setReplyToComment}
       />
       {replyToComment?.id === comment.id && (
         <CommentForm
