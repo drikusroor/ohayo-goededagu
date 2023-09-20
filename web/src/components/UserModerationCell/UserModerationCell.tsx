@@ -1,10 +1,11 @@
-import { BsCheck2Circle, BsPlus, BsTrash, BsX } from 'react-icons/bs'
+import { BsCheck2Circle, BsKey, BsPlus, BsTrash, BsX } from 'react-icons/bs'
 import type {
   FindUserModerationQuery,
   FindUserModerationQueryVariables,
   User,
 } from 'types/graphql'
 
+import { Form, PasswordField } from '@redwoodjs/forms'
 import {
   type CellSuccessProps,
   type CellFailureProps,
@@ -17,7 +18,6 @@ import { Role } from 'src/types/role'
 
 import Button from '../Button/Button'
 import DisplayDatetime from '../DisplayDatetime/DisplayDatetime'
-import DashboardTable from '../Table/DashboardTable'
 
 export const QUERY = gql`
   query FindUserModerationQuery {
@@ -40,6 +40,14 @@ const UPDATE_USER_ROLES_MUTATION = gql`
     updateUserRoles(input: $input) {
       id
       roles
+    }
+  }
+`
+
+const UPDATE_USER_PASSWORD_BY_ADMIN_MUTATION = gql`
+  mutation UpdateUserPasswordByAdminMutation($id: Int!, $newPassword: String!) {
+    updateUserPasswordByAdmin(id: $id, newPassword: $newPassword) {
+      id
     }
   }
 `
@@ -94,11 +102,26 @@ export const Success = ({
   const { currentUser } = useAuth()
   const roles = [Role.GUEST, Role.USER, Role.MODERATOR, Role.ADMIN]
 
+  // get super admin user code from
+
   const [updateUserRoles, { loading }] = useMutation(
     UPDATE_USER_ROLES_MUTATION,
     {
       onCompleted: () => {
         toast.success('User roles updated')
+      },
+      onError: (error) => {
+        toast.error(error.message)
+      },
+      refetchQueries: [{ query: QUERY }],
+    }
+  )
+
+  const [updateUserPasswordByAdmin] = useMutation(
+    UPDATE_USER_PASSWORD_BY_ADMIN_MUTATION,
+    {
+      onCompleted: () => {
+        toast.success('User password updated')
       },
       onError: (error) => {
         toast.error(error.message)
@@ -158,6 +181,30 @@ export const Success = ({
     })
   }
 
+  const onResetUserPasswordByAdmin = (
+    user: User,
+    {
+      superAdminCode,
+      newPassword,
+    }: { superAdminCode: string; newPassword: string }
+  ) => {
+    const { id } = user
+
+    if (
+      confirm(
+        'Are you sure you want to reset password for user ' + user.email + '?'
+      )
+    ) {
+      updateUserPasswordByAdmin({
+        variables: {
+          id,
+          newPassword,
+          superAdminCode,
+        },
+      })
+    }
+  }
+
   const onClickDeleteUser = (user: User) => {
     const { id } = user
 
@@ -180,6 +227,7 @@ export const Success = ({
               <th>Name</th>
               <th>Roles</th>
               <th>Last Login</th>
+              <th>&nbsp;</th>
               <th>&nbsp;</th>
               <th>&nbsp;</th>
             </tr>
@@ -246,6 +294,39 @@ export const Success = ({
                       </div>
                     )}
                   </div>
+                </td>
+                <td>
+                  {user.id !== currentUser.id ? (
+                    <Form
+                      onSubmit={(data) =>
+                        onResetUserPasswordByAdmin(user, data)
+                      }
+                    >
+                      <PasswordField
+                        name="superAdminCode"
+                        placeholder="Super admin code"
+                        className="mb-1 w-full rounded p-1"
+                        required
+                      />
+                      <PasswordField
+                        name="newPassword"
+                        placeholder="New password"
+                        className="mb-1 w-full rounded p-1"
+                        required
+                      />
+                      <Button
+                        className="flex flex-row items-center gap-2 whitespace-nowrap rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700"
+                        type="submit"
+                      >
+                        <BsKey />
+                        Reset Password
+                      </Button>
+                    </Form>
+                  ) : (
+                    <span className="text-sm text-gray-500 ">
+                      Can&apos;t reset your own password
+                    </span>
+                  )}
                 </td>
                 <td>
                   {user.id !== currentUser.id ? (
