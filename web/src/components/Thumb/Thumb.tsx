@@ -35,12 +35,12 @@ const Thumb = ({
       onClick={disabled ? undefined : onClick}
       variant={active ? 'filled' : 'outlined'}
       className={classNames(
-        'transition-filter whitespace-nowrap',
+        'transition-filter whitespace-nowrap lg:py-1',
         disabled ? 'cursor-not-allowed grayscale' : ''
       )}
       title={title}
     >
-      <div className="flex flex-row items-center gap-1">
+      <div className="flex flex-row items-center gap-1 ">
         {up && count > 0 ? (
           <BsHandThumbsUpFill />
         ) : up ? (
