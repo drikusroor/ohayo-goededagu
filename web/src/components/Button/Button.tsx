@@ -35,7 +35,7 @@ const Button = ({
       aria-label={text}
       title={title ? title : text ? text : ''}
       disabled={disabled}
-      className={`block rounded px-2 py-1 text-xs font-semibold uppercase lg:px-4 lg:py-3
+      className={`block rounded px-1 py-1 font-semibold uppercase lg:px-2 lg:py-2
       ${disabled ? 'cursor-not-allowed opacity-50' : ''}
       ${buttonColors}
       ${className}

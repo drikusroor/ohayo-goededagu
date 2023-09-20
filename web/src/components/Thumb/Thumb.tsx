@@ -1,5 +1,12 @@
 import { useMemo } from 'react'
 
+import {
+  BsHandThumbsDown,
+  BsHandThumbsDownFill,
+  BsHandThumbsUp,
+  BsHandThumbsUpFill,
+} from 'react-icons/bs'
+
 import { classNames } from 'src/lib/class-names'
 
 import Button from '../Button/Button'
@@ -28,12 +35,23 @@ const Thumb = ({
       onClick={disabled ? undefined : onClick}
       variant={active ? 'filled' : 'outlined'}
       className={classNames(
-        'transition-filter whitespace-nowrap lg:text-base',
+        'transition-filter whitespace-nowrap',
         disabled ? 'cursor-not-allowed grayscale' : ''
       )}
       title={title}
     >
-      {up ? '👍' : '👎'} {count}
+      <div className="flex flex-row items-center gap-1">
+        {up && count > 0 ? (
+          <BsHandThumbsUpFill />
+        ) : up ? (
+          <BsHandThumbsUp />
+        ) : count > 0 ? (
+          <BsHandThumbsDownFill />
+        ) : (
+          <BsHandThumbsDown />
+        )}
+        {count}
+      </div>
     </Button>
   )
 }
