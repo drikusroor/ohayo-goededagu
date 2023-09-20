@@ -1,3 +1,6 @@
+import { useState } from 'react'
+
+import { Form } from '@redwoodjs/forms'
 import { render } from '@redwoodjs/testing/web'
 
 import MarkdownEditor from './MarkdownEditor'
@@ -10,19 +13,21 @@ describe('MarkdownEditor', () => {
     expect(() => {
       const name = 'test'
       const value = 'test'
-      const onChange = () => {}
+      const setValue = jest.fn()
       const placeholder = 'test'
       const className = 'test'
       const validation = { required: true }
       render(
-        <MarkdownEditor
-          name={name}
-          value={value}
-          onChange={onChange}
-          placeholder={placeholder}
-          className={className}
-          validation={validation}
-        />
+        <Form>
+          <MarkdownEditor
+            name={name}
+            value={value}
+            onChange={setValue}
+            placeholder={placeholder}
+            className={className}
+            validation={validation}
+          />
+        </Form>
       )
     }).not.toThrow()
   })
