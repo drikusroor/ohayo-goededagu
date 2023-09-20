@@ -45,8 +45,16 @@ const UPDATE_USER_ROLES_MUTATION = gql`
 `
 
 const UPDATE_USER_PASSWORD_BY_ADMIN_MUTATION = gql`
-  mutation UpdateUserPasswordByAdminMutation($id: Int!, $newPassword: String!) {
-    updateUserPasswordByAdmin(id: $id, newPassword: $newPassword) {
+  mutation UpdateUserPasswordByAdminMutation(
+    $id: Int!
+    $newPassword: String!
+    $superAdminCode: String!
+  ) {
+    updateUserPasswordByAdmin(
+      id: $id
+      newPassword: $newPassword
+      superAdminCode: $superAdminCode
+    ) {
       id
     }
   }
@@ -183,12 +191,11 @@ export const Success = ({
 
   const onResetUserPasswordByAdmin = (
     user: User,
-    {
-      superAdminCode,
-      newPassword,
-    }: { superAdminCode: string; newPassword: string }
+    data: { superAdminCode: string; newPassword: string }
   ) => {
     const { id } = user
+
+    const { superAdminCode, newPassword } = data
 
     if (
       confirm(
