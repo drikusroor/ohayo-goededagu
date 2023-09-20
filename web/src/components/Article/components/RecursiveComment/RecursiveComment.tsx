@@ -2,6 +2,7 @@ import { Post, Comment as TComment } from 'types/graphql'
 
 import CommentForm from 'src/components/CommentForm/CommentForm'
 import Comment from 'src/components/UserComment/Comment'
+import { classNames } from 'src/lib/class-names'
 
 export interface RecursiveCommentProps {
   comment: TComment
@@ -21,7 +22,7 @@ export const RecursiveComment = ({
   level = 0,
 }: RecursiveCommentProps) => {
   return (
-    <div className="relative ml-4 mt-4">
+    <div className={classNames('relative', comment.parentId && 'ml-4 mt-4')}>
       {comments.some((c) => c.parentId === comment.id) && (
         <div className="absolute bottom-1 left-2 top-0 w-[1px] transform rounded-b-md bg-slate-300"></div>
       )}
