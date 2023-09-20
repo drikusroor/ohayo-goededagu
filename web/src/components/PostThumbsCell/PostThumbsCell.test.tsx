@@ -1,4 +1,5 @@
 import { render } from '@redwoodjs/testing/web'
+
 import { Loading, Empty, Failure, Success } from './PostThumbsCell'
 import { standard } from './PostThumbsCell.mock'
 
@@ -17,7 +18,7 @@ describe('PostThumbsCell', () => {
 
   it('renders Empty successfully', async () => {
     expect(() => {
-      render(<Empty />)
+      render(<Empty postThumbs={[]} post={standard().post} />)
     }).not.toThrow()
   })
 
@@ -34,8 +35,17 @@ describe('PostThumbsCell', () => {
   // 2. Add test: expect(screen.getByText('Hello, world')).toBeInTheDocument()
 
   it('renders Success successfully', async () => {
+    mockCurrentUser({
+      id: 1,
+      name: 'test',
+      email: 'admin@example.com',
+      roles: ['ADMIN'],
+    })
+
     expect(() => {
-      render(<Success postThumbs={standard().postThumbs} />)
+      render(
+        <Success postThumbs={standard().postThumbs} post={standard().post} />
+      )
     }).not.toThrow()
   })
 })
