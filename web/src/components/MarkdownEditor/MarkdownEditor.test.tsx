@@ -1,4 +1,7 @@
-import { render, waitFor } from '@redwoodjs/testing/web'
+import { useState } from 'react'
+
+import { Form } from '@redwoodjs/forms'
+import { render } from '@redwoodjs/testing/web'
 
 import MarkdownEditor from './MarkdownEditor'
 
@@ -7,24 +10,24 @@ import MarkdownEditor from './MarkdownEditor'
 
 describe('MarkdownEditor', () => {
   it('renders successfully', () => {
-    expect(async () => {
+    expect(() => {
       const name = 'test'
       const value = 'test'
-      const onChange = () => {}
+      const setValue = jest.fn()
       const placeholder = 'test'
       const className = 'test'
       const validation = { required: true }
-      await waitFor(() =>
-        render(
+      render(
+        <Form>
           <MarkdownEditor
             name={name}
             value={value}
-            onChange={onChange}
+            onChange={setValue}
             placeholder={placeholder}
             className={className}
             validation={validation}
           />
-        )
+        </Form>
       )
     }).not.toThrow()
   })

@@ -8,12 +8,11 @@ import { toast } from '@redwoodjs/web/toast'
 
 import { useAuth } from 'src/auth'
 import { QUERY as FindArticleQuery } from 'src/components/ArticleCell'
-
-import Avatar from '../Avatar/Avatar'
-import Button from '../Button/Button'
-import DisplayDatetime from '../DisplayDatetime/DisplayDatetime'
-import RenderBody from '../RenderBody/RenderBody'
-import Thumbs from '../Thumbs/Thumbs'
+import Avatar from 'src/components/Avatar/Avatar'
+import Button from 'src/components/Button/Button'
+import DisplayDatetime from 'src/components/DisplayDatetime/DisplayDatetime'
+import RenderBody from 'src/components/RenderBody/RenderBody'
+import Thumbs from 'src/components/Thumbs/Thumbs'
 
 interface ICommentProps {
   comment: Comment
@@ -167,7 +166,6 @@ export default ({ comment, onClickReply }: ICommentProps) => {
 
           <Thumbs
             thumbs={comment.thumbs}
-            entityId={comment.id}
             onThumb={handleThumbClick}
             disabled={thumbsDisabled}
           />

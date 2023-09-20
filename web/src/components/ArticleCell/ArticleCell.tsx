@@ -50,6 +50,12 @@ export const QUERY = gql`
           id
           userId
           up
+          user {
+            email
+            profile {
+              name
+            }
+          }
         }
       }
       imageGalleries {

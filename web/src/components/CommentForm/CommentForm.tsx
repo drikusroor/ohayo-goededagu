@@ -8,10 +8,10 @@ import { toast } from '@redwoodjs/web/toast'
 
 import { useAuth } from 'src/auth'
 import { QUERY as FindArticleQuery } from 'src/components/ArticleCell'
+import MarkdownEditor from 'src/components/MarkdownEditor/MarkdownEditor'
 import { classNames } from 'src/lib/class-names'
 
 import Button from '../Button/Button'
-import MarkdownEditor from '../MarkdownEditor/MarkdownEditor'
 
 const CREATE_COMMENT = gql`
   mutation UserCreateCommentMutation($input: CreateCommentInput!) {

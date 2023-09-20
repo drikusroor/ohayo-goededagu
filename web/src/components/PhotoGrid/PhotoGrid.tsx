@@ -11,22 +11,33 @@ interface IPhotoGridProps extends React.HTMLAttributes<HTMLDivElement> {
   preview?: boolean
 }
 
+export interface IModalInfo {
+  url: string
+  id: string
+  imageId: string
+  title: string
+  description: string
+}
+
 const PhotoGrid = ({ className, images = [], preview }: IPhotoGridProps) => {
   const previewGallery = images?.slice(0, 4)
 
-  const [modalInfo, setModalInfo] = React.useState<object>({
-    url: String,
-    id: Number,
-    imageId: String,
-    title: String,
-    description: String,
-  })
+  const [modalInfo, setModalInfo] = React.useState<IModalInfo>()
 
   useEffect(() => {
-    if (typeof modalInfo.id === 'number') {
+    if (modalInfo?.id) {
       document.getElementById(modalInfo?.id).style.display = 'block'
     }
   }, [modalInfo])
+
+  const openModal = ({ url, id, imageId, title, description }: Image) =>
+    setModalInfo({
+      url,
+      id: id.toString(),
+      imageId,
+      title,
+      description,
+    })
 
   return (
     <>
@@ -63,30 +74,11 @@ const PhotoGrid = ({ className, images = [], preview }: IPhotoGridProps) => {
                     key={index}
                     src={photo.url}
                     alt={photo.imageId}
+                    // eslint-disable-next-line jsx-a11y/no-noninteractive-element-to-interactive-role
                     role="button"
                     tabIndex={0}
-                    onClick={() => {
-                      setModalInfo({
-                        url: photo.url,
-                        id: photo.id,
-                        imageId: photo.imageId,
-                        title: photo?.name ? photo?.name : '',
-                        description: photo?.description
-                          ? photo?.description
-                          : '',
-                      })
-                    }}
-                    onKeyDown={() => {
-                      setModalInfo({
-                        url: photo.url,
-                        id: photo.id,
-                        imageId: photo.imageId,
-                        title: photo?.name ? photo?.name : '',
-                        description: photo?.description
-                          ? photo?.description
-                          : '',
-                      })
-                    }}
+                    onClick={() => openModal(photo)}
+                    onKeyDown={() => openModal(photo)}
                   />
                 </li>
               )

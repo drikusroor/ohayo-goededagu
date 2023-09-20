@@ -5,6 +5,7 @@ import { Link, navigate, routes } from '@redwoodjs/router'
 import DisplayDatetime from 'src/components/DisplayDatetime/DisplayDatetime'
 import LocationPin from 'src/components/LocationPin/LocationPin'
 import PhotoGrid from 'src/components/PhotoGrid/PhotoGrid'
+import PostThumbsCell from 'src/components/PostThumbsCell'
 import RenderBody from 'src/components/RenderBody/RenderBody'
 import Video from 'src/components/Video/Video'
 import Person from 'src/pages/AboutPage/Person'
@@ -35,58 +36,59 @@ const FullLayout = ({ article }: Props) => {
   return (
     <>
       {hasCoverImage && (
-        <>
-          <section
-            style={{
-              backgroundImage: article.coverImage?.url
-                ? `url(${article.coverImage.url})`
-                : `url(/images/logo-full.png)`,
-            }}
-            className="rounded bg-gray-400 bg-cover bg-center bg-no-repeat bg-blend-multiply"
-          >
-            <div className="flex aspect-video max-w-screen-xl flex-col justify-end px-4">
-              <div className="flex flex-row items-center justify-start gap-2">
-                <div>
-                  <ArticleTypeIcon type={article.type as EPostType} />
-                </div>
-                <h1 className="flex items-center gap-2 text-3xl font-extrabold uppercase leading-none tracking-tight text-white drop-shadow-xl md:gap-4 md:text-5xl lg:text-6xl">
-                  {article.title}
-                </h1>
+        <section
+          style={{
+            backgroundImage: article.coverImage?.url
+              ? `url(${article.coverImage.url})`
+              : `url(/images/logo-full.png)`,
+          }}
+          className="relative rounded bg-gray-400 bg-cover bg-center bg-no-repeat bg-blend-multiply"
+        >
+          <div className="flex aspect-video max-w-screen-xl flex-col justify-end gap-2 px-4">
+            <div className="flex flex-row items-center justify-start gap-2">
+              <div>
+                <ArticleTypeIcon type={article.type as EPostType} />
               </div>
-              <div className="flex flex-row items-center gap-2 pb-2">
-                <Link
-                  to={
-                    article.user?.id
-                      ? routes.viewProfile({ id: article.user?.id })
-                      : '#'
-                  }
-                  className="text-sm text-slate-200 hover:underline"
-                  title={`View ${authorName}'s profile`}
-                >
-                  {authorName}
-                </Link>
-                <DisplayDatetime
-                  datetime={article.createdAt}
-                  showDate={true}
-                  className="text-sm text-slate-200"
-                />
-                <LocationPin
-                  location={article.location}
-                  className="text-white"
-                />
-              </div>
+              <h1 className="flex items-center gap-2 text-3xl font-extrabold uppercase leading-none tracking-tight text-white drop-shadow-xl md:gap-4 md:text-5xl lg:text-6xl">
+                {article.title}
+              </h1>
             </div>
-          </section>
-        </>
+            <div className="flex flex-row items-center gap-2 pb-2">
+              <Link
+                to={
+                  article.user?.id
+                    ? routes.viewProfile({ id: article.user?.id })
+                    : '#'
+                }
+                className="text-sm text-slate-200 hover:underline"
+                title={`View ${authorName}'s profile`}
+              >
+                {authorName}
+              </Link>
+              <DisplayDatetime
+                datetime={article.createdAt}
+                showDate={true}
+                className="text-sm text-slate-200"
+              />
+              <LocationPin location={article.location} className="text-white" />
+            </div>
+          </div>
+          <div className="absolute bottom-2 right-2 rounded bg-white p-1">
+            <PostThumbsCell postId={article.id} />
+          </div>
+        </section>
       )}
 
       {!hasCoverImage && (
         <>
           <header className="mb-4 flex flex-col gap-1">
-            <h1 className="flex items-center gap-2 text-3xl font-extrabold uppercase tracking-tight md:gap-4">
-              <ArticleTypeIcon type={article.type as EPostType} />
-              {article.title}
-            </h1>
+            <div className="flex flex-col justify-between gap-2 md:flex-row">
+              <h1 className="flex items-center gap-2 text-3xl font-extrabold uppercase tracking-tight md:gap-4">
+                <ArticleTypeIcon type={article.type as EPostType} />
+                {article.title}
+              </h1>{' '}
+              <PostThumbsCell postId={article.id} />
+            </div>
             <div className="flex flex-row items-center gap-2">
               <Link
                 to={

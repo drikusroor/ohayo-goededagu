@@ -5,7 +5,7 @@ const config = {
   preset: '@redwoodjs/testing/config/jest/web',
   moduleNameMapper: {
     'react-markdown':
-      '<rootDir>/node_modules/react-markdown/react-markdown.min.js',
+      '<rootDir>/web/src/components/__mocks__/ReactMarkdown.tsx',
   },
 }
 

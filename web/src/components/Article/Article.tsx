@@ -6,7 +6,6 @@ import type { Comment as TComment, Post } from 'types/graphql'
 import { Link, routes } from '@redwoodjs/router'
 
 import { useAuth } from 'src/auth'
-import { classNames } from 'src/lib/class-names'
 import dateStringToLocalizedDateString from 'src/lib/localized-date'
 import { EPostDisplayType } from 'src/types/post-display-type.enum'
 

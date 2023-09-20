@@ -10,9 +10,8 @@ import {
 
 import { TextAreaField } from '@redwoodjs/forms'
 
+import RenderBody from 'src/components/RenderBody/RenderBody'
 import { classNames } from 'src/lib/class-names'
-
-import RenderBody from '../RenderBody/RenderBody'
 
 interface IMarkdownEditorProps {
   name: string

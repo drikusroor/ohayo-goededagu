@@ -95,7 +95,6 @@ const Upload = ({
         text={uploadName}
         defaultValue={uploadName}
         className="rw-button rw-button-blue mt-4"
-        errorClassName="rw-button rw-button-blue rw-button-error"
       />
       <FieldError name={name} className="rw-field-error" />
     </>

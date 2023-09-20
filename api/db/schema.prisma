@@ -24,6 +24,7 @@ model User {
   profile             Profile?
   comments            Comment[]
   thumbs              Thumb[]
+  postThumbs          PostThumb[]
   UserAction          UserAction[]
   lastLoginAt         DateTime?
 }
@@ -55,6 +56,17 @@ model Post {
   coverImageId   Int?
   imageGalleries ImageGalleryOnPost[]
   location       String?
+  likes          PostThumb[]
+}
+
+model PostThumb {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id])
+  userId    Int
+  post      Post     @relation(fields: [postId], references: [id])
+  postId    Int
+  up        Boolean
 }
 
 model VideoPost {
