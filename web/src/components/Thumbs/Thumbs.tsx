@@ -43,7 +43,7 @@ const Thumbs = (props: IThumbProps) => {
   }, [props.thumbs, currentUser])
 
   return (
-    <div className={classNames('flex gap-2', className)}>
+    <div className={classNames('flex gap-1', className)}>
       <Thumb
         up={true}
         count={upCount}

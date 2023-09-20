@@ -33,7 +33,10 @@ const BlogLayout = ({ children, skeleton }: BlogLayoutProps) => {
           </h1>
           <Skeleton width={100} className="mx-auto mt-2 rounded" />
           <nav>
-            <ul className="mt-3 flex justify-center gap-5">
+            <ul className="mt-3 flex justify-center gap-2">
+              <li>
+                <Skeleton width={50} className="rounded" />
+              </li>
               <li>
                 <Skeleton width={50} className="rounded" />
               </li>
@@ -118,7 +121,7 @@ const BlogLayout = ({ children, skeleton }: BlogLayoutProps) => {
         </h1>
         <pre className="mt-3">Japan 2023</pre>
         <nav>
-          <ul className="mt-3 flex justify-center gap-5">
+          <ul className="mt-3 flex flex-wrap justify-center gap-2">
             <li>
               <Link className="rw-button" to={routes.home()}>
                 Blog
@@ -142,7 +145,7 @@ const BlogLayout = ({ children, skeleton }: BlogLayoutProps) => {
           </ul>
         </nav>
       </header>
-      <main className="mx-auto grid max-w-6xl">{children}</main>
+      <main className="max-w-6x mx-auto md:grid">{children}</main>
     </>
   )
 }

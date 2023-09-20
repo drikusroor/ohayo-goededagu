@@ -160,30 +160,31 @@ export default ({ comment, onClickReply }: ICommentProps) => {
               variant="outlined"
             >
               <BsReplyFill />
-              Reply
+              <span className="text-xs lg:text-base">Reply</span>
             </Button>
           )}
-
-          <Thumbs
-            thumbs={comment.thumbs}
-            onThumb={handleThumbClick}
-            disabled={thumbsDisabled}
-          />
         </div>
       </div>
       <div className="ml-14 mt-4 text-sm leading-relaxed text-slate-600">
         <RenderBody body={comment.body} />
       </div>
-      {currentUser?.id === comment.user.id && (
-        <Button
-          onClick={handleDelete}
-          className="user-select-none bottom-2 right-2 ml-auto mt-3 transition-opacity group-hover:cursor-pointer group-hover:opacity-100 md:absolute md:mt-0 md:opacity-0"
-          color="monza-red"
-          title="Delete comment"
-        >
-          <BsTrash />
-        </Button>
-      )}
+      <div className="flex flex-row items-center justify-end gap-2">
+        <Thumbs
+          thumbs={comment.thumbs}
+          onThumb={handleThumbClick}
+          disabled={thumbsDisabled}
+        />
+        {currentUser?.id === comment.user.id && (
+          <Button
+            onClick={handleDelete}
+            className="user-select-none transition-opacity group-hover:cursor-pointer group-hover:opacity-100 md:absolute md:mt-0 md:opacity-0"
+            color="monza-red"
+            title="Delete comment"
+          >
+            <BsTrash />
+          </Button>
+        )}
+      </div>
     </div>
   )
 }
