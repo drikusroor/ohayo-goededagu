@@ -24,6 +24,7 @@ const post = {
   updatedAt: '2021-02-22T20:02:20.000Z',
   user,
   imageGalleries: [],
+  postThumbs: [],
 }
 
 const comment = {
