@@ -23,11 +23,13 @@ export const schema = gql`
   input CreatePostThumbInput {
     userId: Int!
     postId: Int!
+    up: Boolean!
   }
 
   input UpdatePostThumbInput {
     userId: Int
     postId: Int
+    up: Boolean
   }
 
   type Mutation {

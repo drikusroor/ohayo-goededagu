@@ -33,6 +33,7 @@ describe('postThumbs', () => {
       input: {
         userId: scenario.postThumb.two.userId,
         postId: scenario.postThumb.two.postId,
+        up: true,
       },
     })
 
