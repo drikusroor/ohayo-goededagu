@@ -72,9 +72,9 @@ const FullLayout = ({ article }: Props) => {
               />
               <LocationPin location={article.location} className="text-white" />
             </div>
-          </div>
-          <div className="absolute bottom-2 right-2 rounded bg-white p-1">
-            <PostThumbsCell postId={article.id} />
+            <div className="absolute bottom-2 right-2 rounded bg-slate-300 bg-opacity-70 p-1">
+              <PostThumbsCell postId={article.id} />
+            </div>
           </div>
         </section>
       )}
