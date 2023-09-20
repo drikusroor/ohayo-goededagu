@@ -1,7 +1,6 @@
 import { FieldError } from '@redwoodjs/forms'
 
 import Button from 'src/components/Button/Button'
-import UploadList from 'src/components/UploadList/UploadList'
 import { ICloudinary } from 'src/types/cloudinary'
 
 export interface ICloudinaryUploadResultInfo {

@@ -33,6 +33,10 @@ export const schema = gql`
       id: Int!
       input: UpdateImageGalleryImageInput!
     ): ImageGalleryImage! @requireAuth
+    addImageGalleryImagesToImageGallery(
+      id: Int!
+      images: [CreateImageGalleryImageInput!]!
+    ): [ImageGalleryImage!]! @requireAuth
     deleteImageGalleryImage(id: Int!): ImageGalleryImage! @requireAuth
   }
 `
