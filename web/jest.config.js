@@ -6,6 +6,8 @@ const config = {
   moduleNameMapper: {
     'src/components/RenderBody/RenderBody':
       '<rootDir>/web/src/components/__mocks__/RenderBody.tsx',
+    'src/components/MarkdownEditor/MarkdownEditor':
+      '<rootDir>/web/src/components/__mocks__/MarkdownEditor.tsx',
   },
 }
 
