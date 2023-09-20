@@ -137,12 +137,10 @@ export const Success = ({
   }
 
   return (
-    <div className="rounded bg-white p-1">
-      <Thumbs
-        thumbs={postThumbs}
-        onThumb={handleThumbClick}
-        disabled={thumbsDisabled}
-      />
-    </div>
+    <Thumbs
+      thumbs={postThumbs}
+      onThumb={handleThumbClick}
+      disabled={thumbsDisabled}
+    />
   )
 }
