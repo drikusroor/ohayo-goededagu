@@ -175,7 +175,11 @@ export const Success = ({
           <div>
             <h2 className="text-xl font-semibold">Add Images</h2>
             <Form>
-              <Upload multiple handleUpload={onUpload} />
+              <Upload
+                multiple
+                handleUpload={onUpload}
+                setUploadedImages={(images) => console.log({ images })}
+              />
             </Form>
           </div>
         </div>
