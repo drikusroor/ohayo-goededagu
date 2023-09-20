@@ -55,6 +55,23 @@ export const addImageGalleryImagesToImageGallery: MutationResolvers['addImageGal
     })
   }
 
+export const deleteImageGalleryImage: MutationResolvers['deleteImageGalleryImage'] =
+  async ({ id }) => {
+    const imageGalleryImage = await db.imageGalleryImage.findUnique({
+      where: { id },
+    })
+
+    if (!imageGalleryImage) {
+      throw new Error('ImageGalleryImage not found')
+    }
+
+    await db.imageGalleryImage.delete({
+      where: { id },
+    })
+
+    return imageGalleryImage
+  }
+
 export const ImageGalleryImage: ImageGalleryImageRelationResolvers = {
   imageGallery: (_obj, { root }) => {
     return db.imageGalleryImage
