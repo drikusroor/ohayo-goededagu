@@ -5653,6 +5653,92 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@sentry-internal/tracing@npm:7.70.0":
+  version: 7.70.0
+  resolution: "@sentry-internal/tracing@npm:7.70.0"
+  dependencies:
+    "@sentry/core": 7.70.0
+    "@sentry/types": 7.70.0
+    "@sentry/utils": 7.70.0
+    tslib: ^2.4.1 || ^1.9.3
+  checksum: 72d271494c78577932c2fab48a43a44484705efc5787804a6a9b20e1c707fae87f6c4ad9363864599e583675280e55b0ef9285e40e0ea4938b296de1bc00d7e9
+  languageName: node
+  linkType: hard
+
+"@sentry/core@npm:7.70.0, @sentry/core@npm:^7.64.0":
+  version: 7.70.0
+  resolution: "@sentry/core@npm:7.70.0"
+  dependencies:
+    "@sentry/types": 7.70.0
+    "@sentry/utils": 7.70.0
+    tslib: ^2.4.1 || ^1.9.3
+  checksum: 2ba18489df8b20c1373199d5bbc843fb3d96a237a30bc58fe7f0a9e3385e5d27e48dc6a7ca7a7623318790481df0dce58556cce3d45268ea6cfa1321d77b153d
+  languageName: node
+  linkType: hard
+
+"@sentry/hub@npm:^7.64.0":
+  version: 7.70.0
+  resolution: "@sentry/hub@npm:7.70.0"
+  dependencies:
+    "@sentry/core": 7.70.0
+    "@sentry/types": 7.70.0
+    "@sentry/utils": 7.70.0
+    tslib: ^2.4.1 || ^1.9.3
+  checksum: f98d6147624c453290885317e38c43822f82fc8820022c3bad3ec3fd7771c7be568960eb2f02481856ef323c55a5ed30c664e659f5eebc9f960ca23b719f3b44
+  languageName: node
+  linkType: hard
+
+"@sentry/node@npm:^7.64.0, @sentry/node@npm:^7.70.0":
+  version: 7.70.0
+  resolution: "@sentry/node@npm:7.70.0"
+  dependencies:
+    "@sentry-internal/tracing": 7.70.0
+    "@sentry/core": 7.70.0
+    "@sentry/types": 7.70.0
+    "@sentry/utils": 7.70.0
+    cookie: ^0.5.0
+    https-proxy-agent: ^5.0.0
+    lru_map: ^0.3.3
+    tslib: ^2.4.1 || ^1.9.3
+  checksum: 79b0415c121c3d36cbb47457b5b0581f55c330c72cf196d8b8d8ec6f5e1fee4532832b620edfeb8e64cba9bf368fafa5b1ebcd5df998b11cb41bd2a4e99b82e3
+  languageName: node
+  linkType: hard
+
+"@sentry/profiling-node@npm:^1.2.1":
+  version: 1.2.1
+  resolution: "@sentry/profiling-node@npm:1.2.1"
+  dependencies:
+    "@sentry/core": ^7.64.0
+    "@sentry/hub": ^7.64.0
+    "@sentry/node": ^7.64.0
+    "@sentry/types": ^7.64.0
+    "@sentry/utils": ^7.64.0
+    detect-libc: ^2.0.1
+    node-abi: ^3.28.0
+    node-gyp: ^9.3.0
+  bin:
+    sentry-prune-profiler-binaries: scripts/prune-profiler-binaries.mjs
+  checksum: aaf50c4e2265edcd56a95670ae79c8242b5c35ef32f6dcf203fd2e742a38b75d0f4ead07001bf63a8ace4e8d06b6a5b976f3a49d8b8c3a0e2039bf92dff96a0a
+  languageName: node
+  linkType: hard
+
+"@sentry/types@npm:7.70.0, @sentry/types@npm:^7.64.0":
+  version: 7.70.0
+  resolution: "@sentry/types@npm:7.70.0"
+  checksum: 142dcb7f7f69b104403e47ad6bbbe0a0c9e7e46594d7a062d3556ecae601483eb4abe1074b04d7d9224cb02072b621f9a536b9f5662908119633dcbd82153fd7
+  languageName: node
+  linkType: hard
+
+"@sentry/utils@npm:7.70.0, @sentry/utils@npm:^7.64.0":
+  version: 7.70.0
+  resolution: "@sentry/utils@npm:7.70.0"
+  dependencies:
+    "@sentry/types": 7.70.0
+    tslib: ^2.4.1 || ^1.9.3
+  checksum: 18fe6662429d04700ac5f657fdb44bf35b8c4e64084da5441df1850fd6043bbc2585fed6575e8a27d5f3b5ef200593d36b53b011b07cbc7b200f4551585c065a
+  languageName: node
+  linkType: hard
+
 "@simplewebauthn/browser@npm:7.2.0":
   version: 7.2.0
   resolution: "@simplewebauthn/browser@npm:7.2.0"
@@ -8496,6 +8582,13 @@ __metadata:
   bin:
     acorn: bin/acorn
   checksum: deaeebfbea6e40f6c0e1070e9b0e16e76ba484de54cbd735914d1d41d19169a450de8630b7a3a0c4e271a3b0c0b075a3427ad1a40d8a69f8747c0e8cb02ee3e2
+  languageName: node
+  linkType: hard
+
+"add@npm:^2.0.6":
+  version: 2.0.6
+  resolution: "add@npm:2.0.6"
+  checksum: 6b21d5f2e58cf5e15d56cc6f9ebce04f04f4c33ae25f09d600ddacf8df00036ba521f17feb1b3f81307b7c6d2ef0bed8b511a0f86f062eb90c2f909b48b588ae
   languageName: node
   linkType: hard
 
@@ -11864,6 +11957,13 @@ __metadata:
   bin:
     detect-libc: ./bin/detect-libc.js
   checksum: 4da0deae9f69e13bc37a0902d78bf7169480004b1fed3c19722d56cff578d16f0e11633b7fbf5fb6249181236c72e90024cbd68f0b9558ae06e281f47326d50d
+  languageName: node
+  linkType: hard
+
+"detect-libc@npm:^2.0.1":
+  version: 2.0.2
+  resolution: "detect-libc@npm:2.0.2"
+  checksum: a9f4ffcd2701525c589617d98afe5a5d0676c8ea82bcc4ed6f3747241b79f781d36437c59a5e855254c864d36a3e9f8276568b6b531c28d6e53b093a15703f11
   languageName: node
   linkType: hard
 
@@ -17318,6 +17418,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"lru_map@npm:^0.3.3":
+  version: 0.3.3
+  resolution: "lru_map@npm:0.3.3"
+  checksum: d861f14a142a4a74ebf8d3ad57f2e768a5b820db4100ae53eed1a64eb6350912332e6ebc87cb7415ad6d0cd8f3ce6d20beab9a5e6042ccb5996ea0067a220448
+  languageName: node
+  linkType: hard
+
 "lz-string@npm:^1.5.0":
   version: 1.5.0
   resolution: "lz-string@npm:1.5.0"
@@ -18418,6 +18525,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"node-abi@npm:^3.28.0":
+  version: 3.47.0
+  resolution: "node-abi@npm:3.47.0"
+  dependencies:
+    semver: ^7.3.5
+  checksum: 85b5fe8314d5e59618ba99c926b998660522c0d4d40e4b83075f259ccefa97bde10332a8bd529a8e5c0f093ecc6a0220f8ba700b7cf141312ae1d353b1c9a21c
+  languageName: node
+  linkType: hard
+
 "node-abort-controller@npm:^3.0.1":
   version: 3.1.1
   resolution: "node-abort-controller@npm:3.1.1"
@@ -18485,7 +18601,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"node-gyp@npm:latest":
+"node-gyp@npm:^9.3.0, node-gyp@npm:latest":
   version: 9.4.0
   resolution: "node-gyp@npm:9.4.0"
   dependencies:
@@ -21494,10 +21610,14 @@ __metadata:
     "@redwoodjs/auth-dbauth-setup": 6.2.2
     "@redwoodjs/cli-storybook": 6.2.2
     "@redwoodjs/core": 6.2.2
+    "@sentry/node": ^7.70.0
+    "@sentry/profiling-node": ^1.2.1
+    add: ^2.0.6
     babel-plugin-graphql-tag: ^3.3.0
     cloudinary: ^1.37.3
     prettier-plugin-tailwindcss: ^0.3.0
     react-icons: ^4.10.1
+    yarn: ^1.22.19
   languageName: unknown
   linkType: soft
 
@@ -23461,7 +23581,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tslib@npm:^2.0.0, tslib@npm:^2.0.1, tslib@npm:^2.0.3, tslib@npm:^2.1.0, tslib@npm:^2.3.0, tslib@npm:^2.3.1, tslib@npm:^2.4.0, tslib@npm:^2.5.0, tslib@npm:^2.5.2":
+"tslib@npm:^2.0.0, tslib@npm:^2.0.1, tslib@npm:^2.0.3, tslib@npm:^2.1.0, tslib@npm:^2.3.0, tslib@npm:^2.3.1, tslib@npm:^2.4.0, tslib@npm:^2.4.1 || ^1.9.3, tslib@npm:^2.5.0, tslib@npm:^2.5.2":
   version: 2.6.2
   resolution: "tslib@npm:2.6.2"
   checksum: e03a8a4271152c8b26604ed45535954c0a45296e32445b4b87f8a5abdb2421f40b59b4ca437c4346af0f28179780d604094eb64546bee2019d903d01c6c19bdb
@@ -25182,6 +25302,16 @@ __metadata:
     y18n: ^5.0.5
     yargs-parser: ^20.2.2
   checksum: b1dbfefa679848442454b60053a6c95d62f2d2e21dd28def92b647587f415969173c6e99a0f3bab4f1b67ee8283bf735ebe3544013f09491186ba9e8a9a2b651
+  languageName: node
+  linkType: hard
+
+"yarn@npm:^1.22.19":
+  version: 1.22.19
+  resolution: "yarn@npm:1.22.19"
+  bin:
+    yarn: bin/yarn.js
+    yarnpkg: bin/yarn.js
+  checksum: a6f9cdf67cca7e11141a18ffc1736a24dd569885b2ec0838982fcf21e5138840c66d9ebfc1846b0b35bc7b415cb985c65d79fb43aa1721b865e4f60c5569062a
   languageName: node
   linkType: hard
 
