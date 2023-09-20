@@ -28,7 +28,7 @@ const Thumb = ({
       onClick={disabled ? undefined : onClick}
       variant={active ? 'filled' : 'outlined'}
       className={classNames(
-        'transition-filter',
+        'transition-filter whitespace-nowrap',
         disabled ? 'cursor-not-allowed grayscale' : ''
       )}
       title={title}
