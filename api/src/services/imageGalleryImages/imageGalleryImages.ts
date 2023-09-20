@@ -43,14 +43,17 @@ export const addImageGalleryImagesToImageGallery: MutationResolvers['addImageGal
       throw new Error('ImageGallery not found')
     }
 
-    return db.imageGalleryImage.createMany({
+    await db.imageGalleryImage.createMany({
       data: images.map((image) => ({
         ...image,
         imageGalleryId: imageGallery.id,
       })),
     })
-  }
 
+    return db.imageGalleryImage.findMany({
+      where: { imageGalleryId: imageGallery.id },
+    })
+  }
 
 export const ImageGalleryImage: ImageGalleryImageRelationResolvers = {
   imageGallery: (_obj, { root }) => {
