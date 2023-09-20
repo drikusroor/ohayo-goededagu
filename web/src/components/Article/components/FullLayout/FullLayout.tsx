@@ -112,7 +112,7 @@ const FullLayout = ({ article }: Props) => {
         </>
       )}
 
-      <div>
+      <div className="w-full">
         {article.videoPost != null && (
           <Video embedUrl={article?.videoPost?.videoUrl} />
         )}

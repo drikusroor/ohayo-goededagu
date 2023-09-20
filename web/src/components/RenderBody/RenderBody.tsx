@@ -12,10 +12,7 @@ interface IRenderBodyProps {
 const RenderBody = ({ className, body }: IRenderBodyProps) => {
   return (
     <ReactMarkdown
-      className={classNames(
-        'prose prose-sm sm:prose lg:prose-lg xl:prose-xl',
-        className
-      )}
+      className={classNames('leading-7 text-[#374151]', className)}
     >
       {body}
     </ReactMarkdown>
