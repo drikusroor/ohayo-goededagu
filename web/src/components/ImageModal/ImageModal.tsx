@@ -1,21 +1,26 @@
 import { BsXLg } from 'react-icons/bs'
 
 import Button from '../Button/Button'
+import { IModalInfo } from '../PhotoGrid/PhotoGrid'
 
 interface Props {
-  info: object
+  info: IModalInfo
 }
 
 const ImageModal = ({ info }: Props) => {
+  if (!info) return null
+
+  const { id, url, title, description } = info
+
   const closeModal = () => {
-    document.getElementById(info.id).style.display = 'none'
+    document.getElementById(id).style.display = 'none'
   }
 
   return (
     <>
       {info && (
         <div
-          id={info.id}
+          id={id}
           className="fixed left-0 top-0 z-30 hidden h-full w-full overflow-auto bg-black bg-opacity-70 pt-2.5 text-white"
         >
           <Button
@@ -41,12 +46,12 @@ const ImageModal = ({ info }: Props) => {
               <img
                 id="modalImage"
                 className="h-full w-fit rounded-md"
-                src={info?.url}
-                key={info?.id}
-                alt={info?.imageId}
+                src={url}
+                key={id}
+                alt={`${title} - ${description}`}
               />
-              {info?.title && <span className="text-xl">{info?.title}</span>}
-              {info?.description && <span>{info?.description}</span>}
+              {title && <span className="text-xl">{title}</span>}
+              {description && <span>{description}</span>}
             </div>
           </div>
         </div>
