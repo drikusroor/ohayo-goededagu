@@ -172,17 +172,16 @@ export const Success = ({
               <p className="text-gray-500">No images.</p>
             </div>
           )}
-          <div>
-            <h2 className="text-xl font-semibold">Add Images</h2>
-            <Form>
-              <Upload
-                multiple
-                handleUpload={onUpload}
-                setUploadedImages={(images) => console.log({ images })}
-              />
-            </Form>
-          </div>
         </div>
+
+        <h2 className="mt-5 text-xl font-semibold">Add Images</h2>
+        <Form>
+          <Upload
+            multiple
+            handleUpload={onUpload}
+            setUploadedImages={(images) => console.log({ images })}
+          />
+        </Form>
       </div>
     </div>
   )
