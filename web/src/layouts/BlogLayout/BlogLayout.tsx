@@ -145,7 +145,7 @@ const BlogLayout = ({ children, skeleton }: BlogLayoutProps) => {
           </ul>
         </nav>
       </header>
-      <main className="max-w-6x mx-auto md:grid">{children}</main>
+      <main className="mx-auto max-w-6xl md:grid">{children}</main>
     </>
   )
 }
