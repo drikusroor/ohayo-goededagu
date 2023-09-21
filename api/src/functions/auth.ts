@@ -23,29 +23,38 @@ export const handler = async (
     // address in a toast message so the user will know it worked and where
     // to look for the email.
     handler: async (user) => {
-      const userName = user.profile?.name
+      let userName = user.profile?.name
         ? user.profile.name
         : user.name
         ? user.name
         : 'bezoeker'
 
+      // capitalize
+      userName = userName.charAt(0).toUpperCase() + userName.slice(1)
+
       // Send email to user with password reset link
       sendEmail({
         to: user.email,
         subject: 'Password Reset',
-        html: `<p>Beste ${userName},</p><p>Je hebt een verzoek gedaan om je wachtwoord te resetten.</p><p>Klik op de link om je wachtwoord te resetten: <a href="https://ohayo-goededagu.nl/reset-password?resetToken=${user.resetToken}">Reset Password</a></p>
+        html: `<p>Beste ${userName},</p><p>Je hebt een verzoek gedaan om je wachtwoord te resetten. Klik op de link om je wachtwoord te resetten: <a href="https://ohayo-goededagu.nl/reset-password?resetToken=${user.resetToken}">Reset Password</a>. Als de link niet werkt, kopieer dan het volgende adres naar je browser: https://ohayo-goededagu.nl/reset-password?resetToken=${user.resetToken}</p>
 
         <p>Als je geen verzoek hebt gedaan om je wachtwoord te resetten, dan kun je deze email negeren.</p>
 
         <p>Mocht je nog vragen hebben, dan kun je altijd contact met ons opnemen.</p>
 
+        <br>
+
         <p>Met vriendelijke groet,</p>
 
         <p>Ohayo Goededagu</p>
 
-        <p><a href="https://ohayo-goededagu.nl" target="_blank" rel="noopener noreferrer">https://ohayo-goededagu.nl</a></p>
+        <p>
+          Website: <a href="https://ohayo-goededagu.nl" target="_blank" rel="noopener noreferrer">https://ohayo-goededagu.nl</a><br>
+          E-mail:  <a href="mailto:info@ohayo-goededagu.nl" target="_blank" rel="noopener noreferrer">info@ohayo-goededagu.nl</a>
+        </p>
+        <img src="https://ohayo-goededagu.nl/favicon.png" alt="Ohayo Goededagu" width="100" height="100">
+        `,
 
-        <p><a href="mailto:info@ohayo-goededagu.nl" target="_blank" rel="noopener noreferrer">info@ohayo-goededagu.nl</a></p>`,
         text: `Beste ${userName},
 
 Je hebt een verzoek gedaan om je wachtwoord te resetten.
@@ -60,9 +69,9 @@ Met vriendelijke groet,
 
 Ohayo Goededagu
 
-https://ohayo-goededagu.nl
+Website: https://ohayo-goededagu.nl
 
-info@ohayo-goededagu.nl
+E-mail:  info@ohayo-goededagu.nl
 `,
       })
 

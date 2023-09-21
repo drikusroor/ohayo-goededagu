@@ -11,20 +11,17 @@ export async function sendEmail({ to, subject, text, html }: Options) {
   console.log('Sending email to:', to)
 
   const transporter = nodemailer.createTransport({
-    host: process.env.SMTP_HOST,
-    secure: true,
+    host: 'smtp-relay.brevo.com',
     port: 465,
+    secure: true,
     auth: {
-      user: process.env.SMTP_USERNAME,
-      pass: process.env.SMTP_PASSWORD,
-    },
-    tls: {
-      rejectUnauthorized: false,
+      user: 'info@ohayo-goededagu.nl',
+      pass: process.env.SEND_IN_BLUE_KEY,
     },
   })
 
   const info = await transporter.sendMail({
-    from: '"Ohayo Noreplyo" <noreply@ohayo-goededagu.nl>',
+    from: '"Ohayo Goededagu" <info@ohayo-goededagu.nl>',
     to: Array.isArray(to) ? to : [to], // list of receivers
     subject,
     text,
