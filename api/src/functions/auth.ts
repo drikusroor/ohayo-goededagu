@@ -23,11 +23,14 @@ export const handler = async (
     // address in a toast message so the user will know it worked and where
     // to look for the email.
     handler: async (user) => {
-      const userName = user.profile?.name
+      let userName = user.profile?.name
         ? user.profile.name
         : user.name
         ? user.name
         : 'bezoeker'
+
+      // capitalize
+      userName = userName.charAt(0).toUpperCase() + userName.slice(1)
 
       // Send email to user with password reset link
       sendEmail({
