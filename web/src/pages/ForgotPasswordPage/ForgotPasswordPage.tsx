@@ -46,9 +46,18 @@ const ForgotPasswordPage = () => {
         <Toaster toastOptions={{ className: 'rw-toast', duration: 6000 }} />
         <div className="rw-scaffold rw-login-container">
           <span className="text-sm text-slate-700">
-            <b>Opgelet</b>: Er zijn momenteel problemen met het versturen van de
-            reset links. Check je spam folder of neem contact op met een van de
-            beheerders cq. reisgenoten.
+            <b>Opgelet</b>: Er zijn af en toe problemen met het versturen van de
+            reset wachtwoord link e-mails. Check je spam folder of neem contact
+            op met een van de beheerders cq. reisgenoten via{' '}
+            <a
+              href="mailto:info@ohayo-goededagu.nl"
+              className="text-blue-500 underline hover:text-blue-700"
+              aria-label="E-mail"
+              title="E-mail"
+            >
+              info@ohayo-goededagu.nl
+            </a>{' '}
+            als je geen e-mail ontvangt.
           </span>
 
           <div className="rw-segment mt-5">
