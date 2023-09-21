@@ -21,7 +21,7 @@ export async function sendEmail({ to, subject, text, html }: Options) {
   })
 
   const info = await transporter.sendMail({
-    from: '"Drikus from Ohayo Goededagu" <drikusroor@icloud.com>',
+    from: '"Drikus namens Ohayo Goededagu" <drikusroor@icloud.com>',
     to: Array.isArray(to) ? to : [to], // list of receivers
     subject,
     text,
