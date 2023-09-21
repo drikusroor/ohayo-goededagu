@@ -70,11 +70,14 @@ const FullLayout = ({ article }: Props) => {
                 showDate={true}
                 className="text-sm text-slate-200"
               />
-              <LocationPin location={article.location} className="text-white" />
+              <LocationPin
+                location={article.location}
+                className="pb-1 text-white"
+              />
             </div>
-          </div>
-          <div className="absolute bottom-2 right-2 rounded bg-white p-1">
-            <PostThumbsCell postId={article.id} />
+            <div className="absolute bottom-2 right-2 rounded bg-slate-300 bg-opacity-70 p-1">
+              <PostThumbsCell postId={article.id} />
+            </div>
           </div>
         </section>
       )}
@@ -82,41 +85,46 @@ const FullLayout = ({ article }: Props) => {
       {!hasCoverImage && (
         <>
           <header className="mb-4 flex flex-col gap-1">
-            <div className="flex flex-col justify-between gap-2 md:flex-row">
+            <div className="flex flex-row justify-between gap-2">
               <h1 className="flex items-center gap-2 text-3xl font-extrabold uppercase tracking-tight md:gap-4">
                 <ArticleTypeIcon type={article.type as EPostType} />
                 {article.title}
-              </h1>{' '}
-              <PostThumbsCell postId={article.id} />
+              </h1>
             </div>
-            <div className="flex flex-row items-center gap-2">
-              <Link
-                to={
-                  article.user?.id
-                    ? routes.viewProfile({ id: article.user?.id })
-                    : '#'
-                }
-                className="text-sm text-slate-500 hover:underline"
-                title={`View ${authorName}'s profile`}
-              >
-                {authorName}
-              </Link>
-              <DisplayDatetime
-                datetime={article.createdAt}
-                showDate={true}
-                className="text-sm text-slate-500"
-              />
-              <LocationPin location={article.location} />
+            <div className="flex flex-row items-center justify-between">
+              <div className="flex flex-row items-center gap-2">
+                <Link
+                  to={
+                    article.user?.id
+                      ? routes.viewProfile({ id: article.user?.id })
+                      : '#'
+                  }
+                  className="text-sm text-slate-500 hover:underline"
+                  title={`View ${authorName}'s profile`}
+                >
+                  {authorName}
+                </Link>{' '}
+                <DisplayDatetime
+                  datetime={article.createdAt}
+                  showDate={true}
+                  className="text-sm text-slate-500"
+                />
+                <LocationPin
+                  location={article.location}
+                  className="pb-1 text-slate-500"
+                />
+              </div>
+              <PostThumbsCell postId={article.id} />
             </div>
           </header>
         </>
       )}
 
-      <div>
+      <div className="w-full">
         {article.videoPost != null && (
           <Video embedUrl={article?.videoPost?.videoUrl} />
         )}
-        <RenderBody body={article.body} />
+        <RenderBody body={article.body} className="leading-7 text-[#374151]" />
       </div>
 
       {galleries &&

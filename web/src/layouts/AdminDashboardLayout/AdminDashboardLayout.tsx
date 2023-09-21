@@ -102,13 +102,13 @@ const AdminDashboardLayout = ({ children }: AdminDashboardLayoutProps) => {
 
   return (
     <div className="flex flex-row">
-      <div className="fixed flex h-screen w-14 flex-col justify-between bg-gray-200 lg:w-64">
+      <div className="fixed flex h-screen w-8 flex-col justify-between bg-gray-200 md:w-14 lg:w-64">
         <div>
           <div className="p-1 lg:p-3 lg:text-center">
             <h1 className="flex items-center justify-between text-xl font-bold lg:text-3xl">
               <span className="hidden lg:inline">Dashboard</span>
               <img
-                className="inline h-12 w-12"
+                className="inline h-6 w-6 md:h-12 md:w-12"
                 alt="Logo"
                 src="/images/logo.png"
                 width="48"
@@ -135,7 +135,7 @@ const AdminDashboardLayout = ({ children }: AdminDashboardLayoutProps) => {
                     )}`}
                     to={item.path}
                   >
-                    <span className="mx-auto text-lg md:my-2 lg:mx-0">
+                    <span className="mx-auto md:my-2 md:text-lg lg:mx-0">
                       {item.icon}
                     </span>
                     <span className="hidden lg:inline-block">{item.name}</span>
@@ -146,24 +146,24 @@ const AdminDashboardLayout = ({ children }: AdminDashboardLayoutProps) => {
           </nav>
         </div>
         {isAuthenticated ? (
-          <div className="flex items-center justify-between bg-slate-500 p-1 text-white lg:p-3">
+          <div className="flex flex-wrap items-center justify-between gap-2 bg-slate-500 p-0.5 text-white md:p-1 lg:p-3">
             <span className="hidden lg:block">
               Logged in as {currentUser.email}
             </span>
             <Button
               onClick={logOut}
               color="monza-red"
-              className="flex items-center gap-2 px-4 py-3 lg:text-sm"
+              className="flex items-center gap-2 text-xs md:text-sm"
             >
               <BsBoxArrowUp />
-              <span className="hidden lg:block ">Uitloggen</span>
+              <span className="hidden text-xs lg:block">Uitloggen</span>
             </Button>
           </div>
         ) : (
           <Link to={routes.login()}>Inloggen</Link>
         )}
       </div>
-      <div className="flex flex-1 flex-col overflow-auto pl-14 lg:pl-64">
+      <div className="flex flex-1 flex-col overflow-auto pl-8 md:pl-14 lg:pl-64">
         {children}
       </div>
     </div>

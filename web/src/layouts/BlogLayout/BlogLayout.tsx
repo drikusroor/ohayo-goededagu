@@ -33,7 +33,10 @@ const BlogLayout = ({ children, skeleton }: BlogLayoutProps) => {
           </h1>
           <Skeleton width={100} className="mx-auto mt-2 rounded" />
           <nav>
-            <ul className="mt-3 flex justify-center gap-5">
+            <ul className="mt-3 flex justify-center gap-2">
+              <li>
+                <Skeleton width={50} className="rounded" />
+              </li>
               <li>
                 <Skeleton width={50} className="rounded" />
               </li>
@@ -102,7 +105,7 @@ const BlogLayout = ({ children, skeleton }: BlogLayoutProps) => {
           </div>
         )}
         <div className={`mx-auto w-32 ${isAuthenticated && 'mt-16'}`}>
-          <Link to={routes.home()} title="Ohayou Goededagu" aria-label="Home">
+          <Link to={routes.home()} title="Ohayo Goededagu" aria-label="Home">
             <img
               src="/images/logo.png"
               className="mx-auto origin-top rounded-b-full shadow-lg transition duration-500 ease-in-out hover:scale-110 hover:transform hover:shadow-xl"
@@ -113,12 +116,12 @@ const BlogLayout = ({ children, skeleton }: BlogLayoutProps) => {
           </Link>
         </div>
         <h1 className="pt-3 text-3xl font-bold">
-          <span className="whitespace-nowrap">Ohayou&nbsp;Goededagu</span> |{' '}
+          <span className="whitespace-nowrap">Ohayo&nbsp;Goededagu</span> |{' '}
           <span className="whitespace-nowrap">おはよ&nbsp;グデダギュ</span>
         </h1>
         <pre className="mt-3">Japan 2023</pre>
         <nav>
-          <ul className="mt-3 flex justify-center gap-5">
+          <ul className="mt-3 flex flex-wrap justify-center gap-2">
             <li>
               <Link className="rw-button" to={routes.home()}>
                 Blog
@@ -142,7 +145,7 @@ const BlogLayout = ({ children, skeleton }: BlogLayoutProps) => {
           </ul>
         </nav>
       </header>
-      <main className="mx-auto grid max-w-6xl">{children}</main>
+      <main className="mx-auto max-w-6xl md:grid">{children}</main>
     </>
   )
 }

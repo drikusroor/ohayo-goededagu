@@ -43,7 +43,7 @@ const MarkdownEditor = ({
       <div className="mt-2 flex flex-row rounded-md">
         <button
           className={classNames(
-            'w-30 flex flex-row items-center gap-2 bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700',
+            'w-30 flex flex-row items-center gap-2 bg-blue-500 px-2 py-1 font-bold text-white hover:bg-blue-700 md:px-4 md:py-2',
             previewState === 'EDIT' ? 'bg-blue-700' : ''
           )}
           onClick={() => {
@@ -52,12 +52,12 @@ const MarkdownEditor = ({
           type="button"
         >
           <BsPencil />
-          Edit
+          <span className="hidden lg:inline-block">Edit</span>
         </button>
 
         <button
           className={classNames(
-            'w-30 flex flex-row items-center gap-2 bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700',
+            'w-30 flex flex-row items-center gap-2 bg-blue-500 px-2 py-1 font-bold text-white hover:bg-blue-700 md:px-4 md:py-2',
             previewState === 'SPLIT' ? 'bg-blue-700' : ''
           )}
           onClick={() => {
@@ -66,11 +66,11 @@ const MarkdownEditor = ({
           type="button"
         >
           <BsLayoutSplit />
-          Split
+          <span className="hidden lg:inline-block">Split</span>
         </button>
         <button
           className={classNames(
-            'w-30 flex flex-row items-center gap-2 bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700',
+            'w-30 flex flex-row items-center gap-2 bg-blue-500 px-2 py-1 font-bold text-white hover:bg-blue-700 md:px-4 md:py-2',
             previewState === 'PREVIEW' ? 'bg-blue-700' : ''
           )}
           onClick={() => {
@@ -79,16 +79,16 @@ const MarkdownEditor = ({
           type="button"
         >
           <BsEyeglasses />
-          Preview
+          <span className="hidden lg:inline-block">Preview</span>
         </button>
         <a
           href="https://www.markdownguide.org/basic-syntax/"
           target="_blank"
           rel="noopener noreferrer"
-          className="w-30 ml-auto flex flex-row items-center gap-2 px-4 py-2 font-bold text-blue-700 hover:text-blue-900 hover:underline"
+          className="w-30 ml-auto flex flex-row items-center gap-2 px-1 py-1 font-bold text-blue-700 hover:text-blue-900 hover:underline md:px-4 md:py-2"
         >
           <BsQuestionCircle />
-          Markdown cheatsheet
+          Edit tips
           <BsBoxArrowUpRight />
         </a>
       </div>
