@@ -15,13 +15,13 @@ export async function sendEmail({ to, subject, text, html }: Options) {
     port: 465,
     secure: true,
     auth: {
-      user: 'drikusroor@icloud.com',
+      user: 'info@ohayo-goededagu.nl',
       pass: process.env.SEND_IN_BLUE_KEY,
     },
   })
 
   const info = await transporter.sendMail({
-    from: '"Drikus namens Ohayo Goededagu" <drikusroor@icloud.com>',
+    from: '"Drikus namens Ohayo Goededagu" <info@ohayo-goededagu.nl>',
     to: Array.isArray(to) ? to : [to], // list of receivers
     subject,
     text,
