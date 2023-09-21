@@ -12,8 +12,8 @@ export async function sendEmail({ to, subject, text, html }: Options) {
 
   const transporter = nodemailer.createTransport({
     host: 'smtp-relay.brevo.com',
+    port: 465,
     secure: true,
-    port: 587,
     auth: {
       user: 'drikusroor@icloud.com',
       pass: process.env.SEND_IN_BLUE_KEY,
