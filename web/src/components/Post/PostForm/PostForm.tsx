@@ -203,6 +203,31 @@ const PostForm = (props: PostFormProps) => {
           />
 
           <Label
+            name="type"
+            className="rw-label"
+            errorClassName="rw-label rw-label-error"
+          >
+            Post type
+          </Label>
+
+          <SelectField
+            name="type"
+            defaultValue={postType}
+            onChange={(e) => {
+              setPostType(e.target.value as EPostType)
+            }}
+            className="rw-input"
+            errorClassName="rw-input rw-input-error"
+            validation={{ required: true }}
+          >
+            {postTypeOptions.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </SelectField>
+
+          <Label
             name="title"
             className="rw-label"
             errorClassName="rw-label rw-label-error"
@@ -263,31 +288,6 @@ const PostForm = (props: PostFormProps) => {
           <LocationPin location={postLocation} className="mt-2">
             {postLocation}
           </LocationPin>
-
-          <Label
-            name="type"
-            className="rw-label"
-            errorClassName="rw-label rw-label-error"
-          >
-            Post type
-          </Label>
-
-          <SelectField
-            name="type"
-            defaultValue={postType}
-            onChange={(e) => {
-              setPostType(e.target.value as EPostType)
-            }}
-            className="rw-input"
-            errorClassName="rw-input rw-input-error"
-            validation={{ required: true }}
-          >
-            {postTypeOptions.map((option) => (
-              <option key={option.value} value={option.value}>
-                {option.label}
-              </option>
-            ))}
-          </SelectField>
 
           {postType === EPostType.VIDEO && (
             <VideoForm
