@@ -13,6 +13,8 @@ const HomePage = () => {
     authors: params.authors
       ? params.authors.split(',').map((a) => parseInt(a))
       : [],
+    from: params.from ? new Date(params.from) : null,
+    to: params.to ? new Date(params.to) : null,
   }
 
   return (

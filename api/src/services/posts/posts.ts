@@ -3,7 +3,14 @@ import { PostRelationResolvers } from 'types/graphql'
 import { db } from 'src/lib/db'
 
 export const posts = ({ input }: { input: QueryPostsInput }) => {
-  const { page = 1, perPage = 10, authors = [], postTypes = [] } = input
+  const {
+    page = 1,
+    perPage = 10,
+    authors = [],
+    postTypes = [],
+    from = null,
+    to = null,
+  } = input
 
   let where = {
     published: true,
@@ -20,6 +27,23 @@ export const posts = ({ input }: { input: QueryPostsInput }) => {
     where = {
       ...where,
       type: { in: postTypes },
+    }
+  }
+
+  if (from && to) {
+    where = {
+      ...where,
+      createdAt: { gte: from, lte: to },
+    }
+  } else if (from) {
+    where = {
+      ...where,
+      createdAt: { gte: from },
+    }
+  } else if (to) {
+    where = {
+      ...where,
+      createdAt: { lte: to },
     }
   }
 

@@ -21,6 +21,8 @@ export const schema = gql`
     perPage: Int
     authors: [Int!]
     postTypes: [String!]
+    from: DateTime
+    to: DateTime
   }
 
   type Query {
