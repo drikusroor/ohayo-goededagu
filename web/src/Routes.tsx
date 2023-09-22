@@ -50,15 +50,8 @@ const Routes = () => {
             <Route path="/admin/comments/{id:Int}" page={CommentCommentPage} name="comment" />
             <Route path="/admin/comments" page={CommentCommentsPage} name="comments" />
           </Set>
-          <Set wrap={ScaffoldLayout} title="Profile" titleTo="profileSelf" buttonLabel="New Profile" buttonTo="newProfile">
-            <Route path="/admin/profile/new" page={ProfileNewProfilePage} name="newProfile" />
-            <Route path="/admin/profile/self" page={ProfileProfileSelfPage} name="profileSelf" />
-            <Route path="/admin/profile/self/edit" page={ProfileEditProfilePage} name="editProfile" />
-            <Route path="/admin/profile/{id:Int}" page={ProfileProfilePage} name="profile" />
-          </Set>
           <Set wrap={ScaffoldLayout} title="Account" titleTo="account">
             <Route path="/admin/account/edit" page={AccountEditAccountPage} name="editAccount" />
-            <Route path="/admin/account" page={AccountAccountPage} name="account" />
           </Set>
           <Set wrap={ScaffoldLayout} title="Moderate Users" titleTo="userModeration">
             <Route path="/admin/user-moderation" page={UserModerationPage} name="userModeration" />
