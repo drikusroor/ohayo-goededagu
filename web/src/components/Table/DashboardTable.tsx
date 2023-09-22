@@ -75,7 +75,11 @@ const DashboardTable = ({ headers, data, onDelete, onEdit, onShow }: Props) => {
                   {header === 'Author' && <td>{item?.user?.name}</td>}
                   {header === 'Created at' && (
                     <td>
-                      <DisplayDatetime datetime={item.createdAt} showDate />
+                      <DisplayDatetime
+                        datetime={item.createdAt}
+                        showDate
+                        showTimeago={false}
+                      />
                     </td>
                   )}
                   {header === 'User id' && <td>{truncate(item.userId)}</td>}
