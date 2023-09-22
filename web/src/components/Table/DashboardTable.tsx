@@ -53,7 +53,14 @@ const DashboardTable = ({ headers, data, onDelete, onEdit, onShow }: Props) => {
               {headers.map((header) => (
                 <>
                   {header === 'Id' && <td>{truncate(item.id)}</td>}
-                  {header === 'Title' && <td>{truncate(item.title)}</td>}
+                  {header === 'Title' && (
+                    <td
+                      onClick={() => onEdit(item)}
+                      className="cursor-pointer underline decoration-blue-500 hover:text-blue-500 hover:underline xl:no-underline"
+                    >
+                      {truncate(item.title)}
+                    </td>
+                  )}
                   {header === 'Body' && <td>{truncate(item.body)}</td>}
                   {header === 'Type' && (
                     <td>
