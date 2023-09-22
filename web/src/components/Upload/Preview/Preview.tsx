@@ -28,14 +28,14 @@ const Preview = ({ post }: Props) => {
             setBlogRollPreview(false)
           }}
           className={classNames(
-            'flex items-center gap-2 rounded-b-none rounded-r-none !text-gray-700 hover:bg-gray-100',
+            'flex items-center gap-2 rounded-b-none rounded-r-none text-xl !text-gray-700 hover:bg-gray-100 sm:text-sm',
             !blogRollPreview ? 'bg-gray-100' : 'bg-gray-200 shadow-inner'
           )}
           title="Preview Full Article"
           aria-label="Preview Full Article"
         >
           <BsJournalRichtext />
-          Preview Full Article
+          <span className="hidden sm:inline-block"> Preview Full Article</span>
           {!blogRollPreview ? <BsFillCheckCircleFill /> : <BsFillCircleFill />}
         </Button>
         <Button
@@ -44,14 +44,14 @@ const Preview = ({ post }: Props) => {
             setBlogRollPreview(true)
           }}
           className={classNames(
-            'flex items-center gap-2 rounded-b-none rounded-l-none !text-gray-700 hover:bg-gray-100',
+            'flex items-center gap-2 rounded-b-none rounded-l-none text-xl !text-gray-700 hover:bg-gray-100 sm:text-sm',
             blogRollPreview ? 'bg-gray-100' : 'bg-gray-200 shadow-inner'
           )}
           title="Preview Blog Roll"
           aria-label="Preview Blog Roll"
         >
           <BsViewList />
-          Preview Blog Roll
+          <span className="hidden sm:inline-block"> Preview Blog Roll</span>
           {blogRollPreview ? <BsFillCheckCircleFill /> : <BsFillCircleFill />}
         </Button>
       </div>
