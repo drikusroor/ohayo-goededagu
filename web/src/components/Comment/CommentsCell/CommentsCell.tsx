@@ -15,6 +15,9 @@ export const QUERY = gql`
       postId
       parentId
       deleted
+      user {
+        name
+      }
     }
   }
 `

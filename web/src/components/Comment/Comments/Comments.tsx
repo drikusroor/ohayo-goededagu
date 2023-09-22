@@ -39,10 +39,13 @@ const CommentsList = ({ comments }: FindComments) => {
     }
   }
 
+  console.log('comments', comments)
+
   const headers = [
     'Id',
     'Body',
     'Created at',
+    'Author',
     'User id',
     'Post id',
     'Parent id',
