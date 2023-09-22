@@ -23,9 +23,10 @@ import { hotScore } from './helpers/sort-comments'
 
 interface Props {
   article: Post
+  hideComments?: boolean
 }
 
-const Article = ({ article }: Props) => {
+const Article = ({ article, hideComments }: Props) => {
   const { currentUser } = useAuth()
   const isUserAuthor = article?.user?.id === currentUser?.id
 
@@ -109,7 +110,7 @@ const Article = ({ article }: Props) => {
         </div>
       )}
 
-      {sortedComments && (
+      {sortedComments && !hideComments && (
         <div>
           <h2 className="mt-5 text-2xl font-light text-gray-600">Comments</h2>
           <ul className="mt-3 max-w-xl">

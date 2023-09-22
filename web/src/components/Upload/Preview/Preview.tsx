@@ -14,9 +14,10 @@ import Button from '../../Button/Button'
 
 interface Props {
   post: Post
+  hideComments?: boolean
 }
 
-const Preview = ({ post }: Props) => {
+const Preview = ({ post, hideComments }: Props) => {
   const [blogRollPreview, setBlogRollPreview] = React.useState<boolean>(false)
 
   return (
@@ -57,7 +58,7 @@ const Preview = ({ post }: Props) => {
       </div>
 
       <div className="mb-2 bg-gray-100">
-        {!blogRollPreview && <Article article={post} />}
+        {!blogRollPreview && <Article article={post} hideComments />}
         {blogRollPreview && <ArticlePreview article={post} />}
       </div>
     </div>
