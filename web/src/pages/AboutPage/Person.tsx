@@ -19,7 +19,7 @@ const Person = ({ profile, id, style }: Props) => {
           alt={`Foto van ${profile.name || 'deze persoon'}`}
           key={id}
           src={profile.avatar || '/images/logo-full.png'}
-          className="h-48 w-48 items-center justify-center rounded-full bg-slate-300 object-cover"
+          className="h-24 w-24 items-center justify-center rounded-full bg-slate-300 object-cover md:h-48 md:w-48"
           loading="lazy"
           width="200"
           height="200"
