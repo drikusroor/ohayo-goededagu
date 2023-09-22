@@ -2,10 +2,32 @@ import { PostRelationResolvers } from 'types/graphql'
 
 import { db } from 'src/lib/db'
 
-export const posts = () => {
+export const posts = ({ input }: { input: QueryPostsInput }) => {
+  const { page = 1, perPage = 10, authors = [], postTypes = [] } = input
+
+  let where = {
+    published: true,
+  }
+
+  if (authors.length > 0) {
+    where = {
+      ...where,
+      userId: { in: authors },
+    }
+  }
+
+  if (postTypes.length > 0) {
+    where = {
+      ...where,
+      type: { in: postTypes },
+    }
+  }
+
   return db.post.findMany({
-    where: { published: true },
+    where,
     orderBy: { createdAt: 'desc' },
+    skip: (page - 1) * perPage,
+    take: perPage,
   })
 }
 

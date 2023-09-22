@@ -7,8 +7,8 @@ import { EPostType } from '../ArticleTypeIcon/ArticleTypeIcon'
 import Skeleton from '../Skeleton/Skeleton'
 
 export const QUERY = gql`
-  query ArticlesQuery {
-    articles: posts {
+  query ArticlesQuery($input: QueryPostsInput) {
+    articles: posts(input: $input) {
       id
       title
       body

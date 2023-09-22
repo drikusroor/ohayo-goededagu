@@ -16,8 +16,15 @@ export const schema = gql`
     postThumbs: [PostThumb]!
   }
 
+  input QueryPostsInput {
+    page: Int
+    perPage: Int
+    authors: [Int!]
+    postTypes: [String!]
+  }
+
   type Query {
-    posts: [Post!]! @skipAuth
+    posts(input: QueryPostsInput): [Post!]! @skipAuth
     allPosts: [Post!]! @skipAuth
     post(id: Int!): Post @skipAuth
   }
