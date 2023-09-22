@@ -1,7 +1,9 @@
+import { useEffect } from 'react'
+
 import { FieldError } from '@redwoodjs/forms'
 
 import Button from 'src/components/Button/Button'
-import { ICloudinary } from 'src/types/cloudinary'
+import { CreateUploadWidgetResponse, ICloudinary } from 'src/types/cloudinary'
 
 export interface ICloudinaryUploadResultInfo {
   id: string
@@ -48,31 +50,45 @@ const Upload = ({
   const defaultFolder =
     name === 'avatar' ? 'Avatars' : name === 'coverImage' ? 'Cover images' : ''
 
-  const widget = (window.cloudinary as ICloudinary).createUploadWidget(
-    {
-      cloudName: process.env.CLOUD_NAME,
-      uploadPreset: process.env.UPLOAD_PRESET,
-      multiple: multiple ? multiple : true,
-      folder: folder ? folder : defaultFolder,
-    },
-    (error, result) => {
-      if (error) {
-        console.log('Error uploading image: ', error)
-      }
+  const [widget, setWidget] =
+    React.useState<CreateUploadWidgetResponse | null>()
 
-      if (!error && result && result.event === 'success') {
-        console.log('Done! Here is the image info: ', result.info)
-      }
-
-      if (result?.info?.files) {
-        const images = result.info.files.map((image) => image.uploadInfo)
-        if (name !== 'avatar') {
-          setUploadedImages(images as ICloudinaryUploadResultInfo[])
+  useEffect(() => {
+    const createUploadWidgetResult = (
+      window.cloudinary as ICloudinary
+    ).createUploadWidget(
+      {
+        cloudName: process.env.CLOUD_NAME,
+        uploadPreset: process.env.UPLOAD_PRESET,
+        multiple: multiple ? multiple : true,
+        folder: folder ? folder : defaultFolder,
+      },
+      (error, result) => {
+        if (error) {
+          console.log('Error uploading image: ', error)
         }
-        handleUpload(images as ICloudinaryUploadResultInfo[])
+
+        if (!error && result && result.event === 'success') {
+          console.log('Done! Here is the image info: ', result.info)
+        }
+
+        if (result?.info?.files) {
+          const images = result.info.files.map((image) => image.uploadInfo)
+          if (name !== 'avatar') {
+            setUploadedImages(images as ICloudinaryUploadResultInfo[])
+          }
+          handleUpload(images as ICloudinaryUploadResultInfo[])
+        }
       }
+    )
+
+    setWidget(createUploadWidgetResult)
+
+    return () => {
+      widget?.close()
+      widget?.destroy()
     }
-  )
+  }, [])
 
   const onClickUpload = () => {
     widget.open()
