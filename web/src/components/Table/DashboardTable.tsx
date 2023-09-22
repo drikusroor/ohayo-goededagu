@@ -36,7 +36,6 @@ const DashboardTable = ({ headers, data, onDelete, onEdit, onShow }: Props) => {
       return true
     }
   }
-  console.log('data', data)
 
   return (
     <div className="rw-segment rw-table-wrapper-responsive">
