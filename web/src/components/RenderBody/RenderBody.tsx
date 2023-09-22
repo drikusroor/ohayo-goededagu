@@ -10,7 +10,16 @@ interface IRenderBodyProps {
 }
 
 const RenderBody = ({ className, body }: IRenderBodyProps) => {
-  return <ReactMarkdown className={classNames(className)}>{body}</ReactMarkdown>
+  return (
+    <ReactMarkdown
+      className={classNames(
+        'prose prose-sm max-w-full md:prose-base lg:prose-lg ',
+        className
+      )}
+    >
+      {body}
+    </ReactMarkdown>
+  )
 }
 
 export default RenderBody
