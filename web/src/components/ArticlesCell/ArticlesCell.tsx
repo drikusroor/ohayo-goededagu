@@ -8,41 +8,47 @@ import Skeleton from '../Skeleton/Skeleton'
 
 export const QUERY = gql`
   query ArticlesQuery($input: QueryPostsInput) {
-    articles: posts(input: $input) {
-      id
-      title
-      body
-      createdAt
-      videoPost {
-        videoUrl
-      }
-      user {
-        name
-        profile {
-          name
-          avatar
+    result: posts(input: $input) {
+      posts {
+        id
+        title
+        body
+        createdAt
+        videoPost {
+          videoUrl
         }
-      }
-      type
-      coverImage {
-        url
-      }
-      comments {
-        id
-      }
-      location
-      imageGalleries {
-        id
-        imageGallery {
+        user {
           name
-          description
-          images {
-            id
-            url
-            imageId
+          profile {
+            name
+            avatar
+          }
+        }
+        type
+        coverImage {
+          url
+        }
+        comments {
+          id
+        }
+        location
+        imageGalleries {
+          id
+          imageGallery {
+            name
+            description
+            images {
+              id
+              url
+              imageId
+            }
           }
         }
       }
+      count
+      page
+      perPage
+      activeFilters
     }
   }
 `
@@ -50,7 +56,7 @@ export const QUERY = gql`
 interface Props {
   vlog?: boolean
   gallery?: boolean
-  articles: CellSuccessProps<ArticlesQuery>
+  result: CellSuccessProps<ArticlesQuery>
 }
 
 export const Loading = () => (
@@ -69,14 +75,14 @@ export const Failure = ({ error }: CellFailureProps) => (
   <div style={{ color: 'red' }}>Error: {error?.message}</div>
 )
 
-export const Success = ({ articles, vlog, gallery }: Props) => {
-  const vlogs = articles.filter((article) => {
+export const Success = ({ result, vlog, gallery }: Props) => {
+  const vlogs = result.posts.filter((article) => {
     if (article.type === EPostType.VIDEO) {
       return article
     }
   })
 
-  const galleries = articles.filter((article) => {
+  const galleries = result.posts.filter((article) => {
     if (article.type === EPostType.PHOTO_GALLERY) {
       return article
     }
@@ -104,7 +110,7 @@ export const Success = ({ articles, vlog, gallery }: Props) => {
 
   return (
     <ul className="flex flex-col justify-center gap-6 p-3 md:gap-12 md:p-10">
-      {articles.map((article) => {
+      {result.posts.map((article) => {
         return <ArticlePreview key={article.id} article={article} />
       })}
     </ul>

@@ -16,6 +16,14 @@ export const schema = gql`
     postThumbs: [PostThumb]!
   }
 
+  type PostWithPaginationAndFilters {
+    posts: [Post!]!
+    count: Int!
+    page: Int!
+    perPage: Int!
+    activeFilters: [String!]!
+  }
+
   input QueryPostsInput {
     page: Int
     perPage: Int
@@ -26,7 +34,7 @@ export const schema = gql`
   }
 
   type Query {
-    posts(input: QueryPostsInput): [Post!]! @skipAuth
+    posts(input: QueryPostsInput): PostWithPaginationAndFilters! @skipAuth
     allPosts: [Post!]! @skipAuth
     post(id: Int!): Post @skipAuth
   }

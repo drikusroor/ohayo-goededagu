@@ -2,7 +2,7 @@ import { PostRelationResolvers } from 'types/graphql'
 
 import { db } from 'src/lib/db'
 
-export const posts = ({ input }: { input: QueryPostsInput }) => {
+export const posts = async ({ input }: { input: QueryPostsInput }) => {
   const {
     page = 1,
     perPage = 10,
@@ -47,12 +47,22 @@ export const posts = ({ input }: { input: QueryPostsInput }) => {
     }
   }
 
-  return db.post.findMany({
+  const result = await db.post.findMany({
     where,
     orderBy: { createdAt: 'desc' },
     skip: (page - 1) * perPage,
     take: perPage,
   })
+
+  const count = await db.post.count({ where })
+
+  return {
+    posts: result,
+    count,
+    page,
+    perPage,
+    activeFilters: [...authors, ...postTypes],
+  }
 }
 
 export const allPosts = () => {
