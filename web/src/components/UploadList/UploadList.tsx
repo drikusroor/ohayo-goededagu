@@ -1,4 +1,4 @@
-import { ICloudinaryUploadResultInfo } from "../Upload/Upload/Upload"
+import { ICloudinaryUploadResultInfo } from '../Upload/Upload/Upload'
 
 interface IUploadListProps {
   images: ICloudinaryUploadResultInfo[]
@@ -29,10 +29,7 @@ const UploadList = ({ images }: IUploadListProps) => {
         {images &&
           images.map((photo) => {
             return (
-              <li
-                className="flex flex-row gap-1"
-                key={photo.public_id}
-              >
+              <li className="flex flex-row gap-1" key={photo.public_id}>
                 <img
                   className="h-20 w-20"
                   key={photo.public_id}

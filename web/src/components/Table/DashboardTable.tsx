@@ -13,7 +13,6 @@ import ArticleTypeIcon, {
   EPostType,
 } from 'src/components/ArticleTypeIcon/ArticleTypeIcon'
 import Button from 'src/components/Button/Button'
-import RenderBody from 'src/components/RenderBody/RenderBody'
 import { checkboxInputTag, truncate } from 'src/lib/formatters'
 
 import DisplayDatetime from '../DisplayDatetime/DisplayDatetime'

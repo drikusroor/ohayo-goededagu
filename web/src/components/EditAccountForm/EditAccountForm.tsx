@@ -5,12 +5,10 @@ import {
   FormError,
   FieldError,
   Label,
-  TextField,
   Submit,
   EmailField,
 } from '@redwoodjs/forms'
 import type { RWGqlError } from '@redwoodjs/forms'
-import { Link, routes } from '@redwoodjs/router'
 
 import Button from '../Button/Button'
 
@@ -24,6 +22,8 @@ interface EditAccountFormProps {
 }
 
 const EditAccountForm = (props: EditAccountFormProps) => {
+  const formRef = React.useRef<HTMLFormElement>(null)
+
   const onSubmit = (data: FormAccount) => {
     props.onSave(
       {
@@ -34,9 +34,18 @@ const EditAccountForm = (props: EditAccountFormProps) => {
     )
   }
 
+  const onReset = () => {
+    formRef.current?.reset()
+  }
+
   return (
     <div className="rw-form-wrapper">
-      <Form<FormAccount> onSubmit={onSubmit} error={props.error}>
+      <Form<FormAccount>
+        onSubmit={onSubmit}
+        error={props.error}
+        ref={formRef}
+        className="rw-form-wrapper"
+      >
         <FormError
           error={props.error}
           wrapperClassName="rw-form-error-wrapper"
@@ -64,15 +73,16 @@ const EditAccountForm = (props: EditAccountFormProps) => {
         <FieldError name="email" className="rw-field-error" />
 
         <div className="rw-button-group">
-          <Submit disabled={props.loading} className="rw-button rw-button-blue">
+          <Submit
+            disabled={props.loading}
+            className="rw-button rw-button-blue py-3"
+          >
             Save
           </Submit>
 
-          <Link to={routes.account()}>
-            <Button color="monza-red" variant="outlined">
-              Cancel
-            </Button>
-          </Link>
+          <Button color="monza-red" variant="outlined" onClick={onReset}>
+            Cancel
+          </Button>
         </div>
       </Form>
     </div>

@@ -83,7 +83,7 @@ const BlogLayout = ({ children, skeleton }: BlogLayoutProps) => {
             <ul className="flex gap-3">
               <li>
                 <Link
-                  to={routes.account()}
+                  to={routes.editAccount()}
                   className="flex items-center gap-2 rounded bg-yellow-600 px-4 py-3 font-semibold uppercase text-white transition hover:bg-yellow-500 hover:filter sm:text-xs"
                   title={currentUser.email}
                 >

@@ -7,10 +7,8 @@ import ArticleCommentCountBadge from 'src/components/ArticleCommentCountBadge/Ar
 import ArticleTypeIcon, {
   EPostType,
 } from 'src/components/ArticleTypeIcon/ArticleTypeIcon'
-import Avatar from 'src/components/Avatar/Avatar'
 import AvatarTimestamp from 'src/components/Avatar/AvatarTimestamp/AvatarTimestamp'
 import Button from 'src/components/Button/Button'
-import DisplayDatetime from 'src/components/DisplayDatetime/DisplayDatetime'
 import RenderBody from 'src/components/RenderBody/RenderBody'
 import Video from 'src/components/Video/Video'
 
@@ -19,9 +17,6 @@ interface Props {
 }
 
 const PreviewLayout = ({ article }: Props) => {
-  const authorName =
-    article?.user?.profile?.name || article?.user?.name || 'Anonymous'
-
   const hasImage =
     article.type === EPostType.ARTICLE ||
     article.type === EPostType.PHOTO_GALLERY
