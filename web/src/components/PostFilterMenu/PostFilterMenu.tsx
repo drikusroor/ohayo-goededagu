@@ -9,14 +9,18 @@ interface PostFilterMenuProps {
     from: string
     to: string
   }
+  showPostTypeFilter?: boolean
 }
 
-const PostFilterMenu = ({ activeFilters }: PostFilterMenuProps) => {
+const PostFilterMenu = ({
+  activeFilters,
+  showPostTypeFilter = true,
+}: PostFilterMenuProps) => {
   const { postTypes = [], authors = [] } = activeFilters
 
   return (
     <div className="flex flex-row gap-4">
-      <PostTypeFilter activePostTypes={postTypes} />
+      {showPostTypeFilter && <PostTypeFilter activePostTypes={postTypes} />}
       <UserFilterCell activeAuthors={authors} />
     </div>
   )

@@ -88,11 +88,12 @@ export const Success = ({ result, vlog, gallery }: Props) => {
 
   return (
     <>
-      {!vlog && !gallery && (
-        <div className="mx-auto max-w-6xl py-3">
-          <PostFilterMenu activeFilters={activeFilters} />
-        </div>
-      )}
+      <div className="mx-auto max-w-6xl py-3">
+        <PostFilterMenu
+          activeFilters={activeFilters}
+          showPostTypeFilter={!vlog && !gallery}
+        />
+      </div>
       <ul className="flex flex-col justify-center gap-6 p-3 md:gap-12 md:p-10">
         {posts.map((article) => {
           return <ArticlePreview key={article.id} article={article} />
