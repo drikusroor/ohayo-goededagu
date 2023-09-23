@@ -19,7 +19,7 @@ const PostFilterMenu = ({
   const { postTypes = [], authors = [] } = activeFilters
 
   return (
-    <div className="flex flex-row gap-4">
+    <div className="flex flex-row flex-wrap gap-4">
       {showPostTypeFilter && <PostTypeFilter activePostTypes={postTypes} />}
       <UserFilterCell activeAuthors={authors} />
     </div>
