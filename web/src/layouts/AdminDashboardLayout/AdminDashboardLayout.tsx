@@ -7,7 +7,6 @@ import {
   BsFillHouseFill,
   BsFillJournalBookmarkFill,
   BsFillPersonFill,
-  BsFillPersonVcardFill,
   BsImages,
   BsJournals,
   BsPersonCheckFill,

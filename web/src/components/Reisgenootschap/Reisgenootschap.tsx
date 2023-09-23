@@ -1,4 +1,4 @@
-import { Link, navigate, routes } from '@redwoodjs/router'
+import { navigate, routes } from '@redwoodjs/router'
 import { MetaTags } from '@redwoodjs/web'
 
 import Person from 'src/pages/AboutPage/Person'

@@ -266,7 +266,7 @@ export const emailUser = async () => {
 
   console.log('Sending email to:', userEmailAddress)
 
-  const info = await sendEmail({
+  await sendEmail({
     to: user.email,
     subject: 'Test email',
     text: 'This is a test email',
