@@ -1,12 +1,75 @@
-import { PostRelationResolvers } from 'types/graphql'
+import { PostRelationResolvers, QueryPostsInput } from 'types/graphql'
 
 import { db } from 'src/lib/db'
 
-export const posts = () => {
-  return db.post.findMany({
-    where: { published: true },
+export const posts = async ({ input }: { input: QueryPostsInput }) => {
+  const {
+    page = 1,
+    perPage = 10,
+    authors = [],
+    postTypes = [],
+    from = null,
+    to = null,
+  } = input
+
+  let where = {
+    published: true,
+  }
+
+  if (authors.length > 0) {
+    where = {
+      ...where,
+      userId: { in: authors },
+    }
+  }
+
+  if (postTypes.length > 0) {
+    where = {
+      ...where,
+      type: { in: postTypes },
+    }
+  }
+
+  if (from && to) {
+    where = {
+      ...where,
+      createdAt: { gte: from, lte: to },
+    }
+  } else if (from) {
+    where = {
+      ...where,
+      createdAt: { gte: from },
+    }
+  } else if (to) {
+    where = {
+      ...where,
+      createdAt: { lte: to },
+    }
+  }
+
+  const result = await db.post.findMany({
+    where,
     orderBy: { createdAt: 'desc' },
+    skip: (page - 1) * perPage,
+    take: perPage,
   })
+
+  const count = await db.post.count({ where })
+
+  return {
+    posts: result,
+    pagination: {
+      count,
+      page,
+      perPage,
+    },
+    activeFilters: {
+      authors,
+      postTypes,
+      from,
+      to,
+    },
+  }
 }
 
 export const allPosts = () => {

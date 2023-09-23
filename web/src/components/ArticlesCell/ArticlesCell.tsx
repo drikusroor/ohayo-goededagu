@@ -3,45 +3,58 @@ import type { ArticlesQuery } from 'types/graphql'
 import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
 
 import ArticlePreview from '../Article/components/ArticlePreview/ArticlePreview'
-import { EPostType } from '../ArticleTypeIcon/ArticleTypeIcon'
+import Pagination from '../Pagination/Pagination'
 import Skeleton from '../Skeleton/Skeleton'
 
 export const QUERY = gql`
-  query ArticlesQuery {
-    articles: posts {
-      id
-      title
-      body
-      createdAt
-      videoPost {
-        videoUrl
-      }
-      user {
-        name
-        profile {
-          name
-          avatar
+  query ArticlesQuery($input: QueryPostsInput) {
+    result: posts(input: $input) {
+      posts {
+        id
+        title
+        body
+        createdAt
+        videoPost {
+          videoUrl
         }
-      }
-      type
-      coverImage {
-        url
-      }
-      comments {
-        id
-      }
-      location
-      imageGalleries {
-        id
-        imageGallery {
+        user {
           name
-          description
-          images {
-            id
-            url
-            imageId
+          profile {
+            name
+            avatar
           }
         }
+        type
+        coverImage {
+          url
+        }
+        comments {
+          id
+        }
+        location
+        imageGalleries {
+          id
+          imageGallery {
+            name
+            description
+            images {
+              id
+              url
+              imageId
+            }
+          }
+        }
+      }
+      pagination {
+        count
+        page
+        perPage
+      }
+      activeFilters {
+        postTypes
+        authors
+        from
+        to
       }
     }
   }
@@ -50,7 +63,7 @@ export const QUERY = gql`
 interface Props {
   vlog?: boolean
   gallery?: boolean
-  articles: CellSuccessProps<ArticlesQuery>
+  result: CellSuccessProps<ArticlesQuery>
 }
 
 export const Loading = () => (
@@ -69,44 +82,22 @@ export const Failure = ({ error }: CellFailureProps) => (
   <div style={{ color: 'red' }}>Error: {error?.message}</div>
 )
 
-export const Success = ({ articles, vlog, gallery }: Props) => {
-  const vlogs = articles.filter((article) => {
-    if (article.type === EPostType.VIDEO) {
-      return article
-    }
-  })
-
-  const galleries = articles.filter((article) => {
-    if (article.type === EPostType.PHOTO_GALLERY) {
-      return article
-    }
-  })
-
-  if (vlog) {
-    return (
-      <ul className="flex flex-col justify-center gap-6 p-3 md:gap-12 md:p-10">
-        {vlogs.map((article) => {
-          return <ArticlePreview key={article.id} article={article} />
-        })}
-      </ul>
-    )
-  }
-
-  if (gallery) {
-    return (
-      <ul className="flex flex-col justify-center gap-6 p-3 md:gap-12 md:p-10">
-        {galleries.map((article) => {
-          return <ArticlePreview key={article.id} article={article} />
-        })}
-      </ul>
-    )
-  }
+export const Success = ({ result, vlog, gallery }: Props) => {
+  const { posts, pagination } = result
 
   return (
-    <ul className="flex flex-col justify-center gap-6 p-3 md:gap-12 md:p-10">
-      {articles.map((article) => {
-        return <ArticlePreview key={article.id} article={article} />
-      })}
-    </ul>
+    <>
+      <ul className="flex flex-col justify-center gap-6 p-3 md:gap-12 md:p-10">
+        {posts.map((article) => {
+          return <ArticlePreview key={article.id} article={article} />
+        })}
+      </ul>
+      <div className="py-10">
+        <Pagination
+          pagination={pagination}
+          routeName={vlog ? 'vlog' : gallery ? 'galleries' : 'home'}
+        />
+      </div>
+    </>
   )
 }
