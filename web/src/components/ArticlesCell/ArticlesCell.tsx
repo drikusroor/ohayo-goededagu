@@ -3,7 +3,7 @@ import type { ArticlesQuery } from 'types/graphql'
 import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
 
 import ArticlePreview from '../Article/components/ArticlePreview/ArticlePreview'
-import { EPostType } from '../ArticleTypeIcon/ArticleTypeIcon'
+import Pagination from '../Pagination/Pagination'
 import Skeleton from '../Skeleton/Skeleton'
 
 export const QUERY = gql`
@@ -82,12 +82,22 @@ export const Failure = ({ error }: CellFailureProps) => (
   <div style={{ color: 'red' }}>Error: {error?.message}</div>
 )
 
-export const Success = ({ result }: Props) => {
+export const Success = ({ result, vlog, gallery }: Props) => {
+  const { posts, pagination } = result
+
   return (
-    <ul className="flex flex-col justify-center gap-6 p-3 md:gap-12 md:p-10">
-      {result.posts.map((article) => {
-        return <ArticlePreview key={article.id} article={article} />
-      })}
-    </ul>
+    <>
+      <ul className="flex flex-col justify-center gap-6 p-3 md:gap-12 md:p-10">
+        {posts.map((article) => {
+          return <ArticlePreview key={article.id} article={article} />
+        })}
+      </ul>
+      <div className="py-10">
+        <Pagination
+          pagination={pagination}
+          routeName={vlog ? 'vlog' : gallery ? 'galleries' : 'home'}
+        />
+      </div>
+    </>
   )
 }
