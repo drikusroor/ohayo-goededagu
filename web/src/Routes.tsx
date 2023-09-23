@@ -14,9 +14,8 @@ import ScaffoldLayout from 'src/layouts/ScaffoldLayout'
 import { useAuth } from './auth'
 import AdminDashboardLayout from './layouts/AdminDashboardLayout/AdminDashboardLayout'
 import BlogLayout from './layouts/BlogLayout/BlogLayout'
+import BlogLoader from './layouts/BlogLayout/BlogLoader/BlogLoader'
 import { Role } from './types/role'
-
-const BlogLoader = () => <BlogLayout skeleton />
 
 const Routes = () => {
   const { currentUser } = useAuth()
