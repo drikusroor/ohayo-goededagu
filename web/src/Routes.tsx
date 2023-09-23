@@ -13,21 +13,16 @@ import ScaffoldLayout from 'src/layouts/ScaffoldLayout'
 
 import { useAuth } from './auth'
 import AdminDashboardLayout from './layouts/AdminDashboardLayout/AdminDashboardLayout'
+import RedirectAdmin from './layouts/AdminDashboardLayout/AdminRedirect/AdminRedirect'
 import BlogLayout from './layouts/BlogLayout/BlogLayout'
 import BlogLoader from './layouts/BlogLayout/BlogLoader/BlogLoader'
-import { Role } from './types/role'
 
 const Routes = () => {
-  const { currentUser } = useAuth()
-  const requiredRolesAdminPosts = ['ADMIN', 'MODERATOR']
-  const roles = (currentUser?.roles || []) as Role[]
-  const adminRedirect = roles.some((role) => requiredRolesAdminPosts.includes(role)) ? '/admin/posts' : '/admin/profile/self'
-
   return (
     <Router useAuth={useAuth}>
       <Private unauthenticated="login">
         <Set wrap={AdminDashboardLayout}>
-          <Route path="/admin" page={() => <Redirect to={adminRedirect} />} name="admin" />
+          <Route path="/admin" page={RedirectAdmin} name="admin" />
           <Set wrap={ScaffoldLayout} title="My Posts" titleTo="myPosts" buttonLabel="New Post" buttonTo="newPost">
             <Route path="/admin/my-posts" page={PostMyPostsPage} name="myPosts" />
           </Set>
