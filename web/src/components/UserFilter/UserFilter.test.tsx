@@ -7,8 +7,25 @@ import UserFilter from './UserFilter'
 
 describe('UserFilter', () => {
   it('renders successfully', () => {
+    const activeAuthors = [1, 2, 3]
+
+    const usersWithPosts = [
+      {
+        id: 1,
+        profile: {
+          name: 'John Doe',
+          avatar: 'https://i.pravatar.cc/100?u=john-doe',
+        },
+      },
+    ]
+
     expect(() => {
-      render(<UserFilter />)
+      render(
+        <UserFilter
+          activeAuthors={activeAuthors}
+          usersWithPosts={usersWithPosts}
+        />
+      )
     }).not.toThrow()
   })
 })

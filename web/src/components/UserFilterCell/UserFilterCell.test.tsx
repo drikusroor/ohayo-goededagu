@@ -1,4 +1,5 @@
 import { render } from '@redwoodjs/testing/web'
+
 import { Loading, Empty, Failure, Success } from './UserFilterCell'
 import { standard } from './UserFilterCell.mock'
 
@@ -35,7 +36,12 @@ describe('UserFilterCell', () => {
 
   it('renders Success successfully', async () => {
     expect(() => {
-      render(<Success userFilter={standard().userFilter} />)
+      render(
+        <Success
+          usersWithPosts={standard().usersWithPosts}
+          activeAuthors={standard().activeAuthors}
+        />
+      )
     }).not.toThrow()
   })
 })
