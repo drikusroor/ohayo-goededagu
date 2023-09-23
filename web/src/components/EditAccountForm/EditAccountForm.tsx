@@ -5,7 +5,6 @@ import {
   FormError,
   FieldError,
   Label,
-  TextField,
   Submit,
   EmailField,
 } from '@redwoodjs/forms'
@@ -74,7 +73,10 @@ const EditAccountForm = (props: EditAccountFormProps) => {
         <FieldError name="email" className="rw-field-error" />
 
         <div className="rw-button-group">
-          <Submit disabled={props.loading} className="rw-button rw-button-blue">
+          <Submit
+            disabled={props.loading}
+            className="rw-button rw-button-blue py-3"
+          >
             Save
           </Submit>
 
