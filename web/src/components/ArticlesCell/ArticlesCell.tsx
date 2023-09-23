@@ -88,7 +88,7 @@ export const Success = ({ result, vlog, gallery }: Props) => {
 
   return (
     <>
-      <div className="mx-auto max-w-6xl py-3">
+      <div className="mx-auto max-w-6xl">
         <PostFilterMenu
           activeFilters={activeFilters}
           showPostTypeFilter={!vlog && !gallery}
