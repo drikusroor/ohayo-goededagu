@@ -1,20 +1,27 @@
-import PostTypeFilter from '../PostTypeFilter/PostTypeFilter'
+import UserFilterCell from 'src/components/UserFilterCell'
 
+import { EPostType } from '../ArticleTypeIcon/ArticleTypeIcon'
+import PostTypeFilter from '../PostTypeFilter/PostTypeFilter'
 interface PostFilterMenuProps {
   activeFilters: {
-    postTypes: string[]
+    postTypes: EPostType[]
     authors: string[]
     from: string
     to: string
   }
+  showPostTypeFilter?: boolean
 }
 
-const PostFilterMenu = ({ activeFilters }: PostFilterMenuProps) => {
-  const { postTypes = [], authors = [], from, to } = activeFilters
+const PostFilterMenu = ({
+  activeFilters,
+  showPostTypeFilter = true,
+}: PostFilterMenuProps) => {
+  const { postTypes = [], authors = [] } = activeFilters
 
   return (
-    <div>
-      <PostTypeFilter activePostTypes={postTypes} />
+    <div className="flex flex-row gap-4">
+      {showPostTypeFilter && <PostTypeFilter activePostTypes={postTypes} />}
+      <UserFilterCell activeAuthors={authors} />
     </div>
   )
 }

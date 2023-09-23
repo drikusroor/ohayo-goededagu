@@ -28,6 +28,16 @@ export const usersWithRoles: QueryResolvers['usersWithRoles'] = ({ roles }) => {
   })
 }
 
+export const usersWithPosts: QueryResolvers['usersWithPosts'] = () => {
+  return db.user.findMany({
+    where: {
+      posts: {
+        some: {},
+      },
+    },
+  })
+}
+
 export const user: QueryResolvers['user'] = ({ id }) => {
   return db.user.findUnique({
     where: { id },
