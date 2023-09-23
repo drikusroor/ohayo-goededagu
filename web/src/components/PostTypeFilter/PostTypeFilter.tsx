@@ -2,7 +2,10 @@ import { Link, routes, useParams } from '@redwoodjs/router'
 
 import { classNames } from 'src/lib/class-names'
 
-import ArticleTypeIcon, { EPostType } from '../ArticleTypeIcon/ArticleTypeIcon'
+import ArticleTypeIcon, {
+  EPostType,
+  postTypeOptions,
+} from '../ArticleTypeIcon/ArticleTypeIcon'
 
 interface Props {
   activePostTypes: EPostType[]
@@ -42,6 +45,10 @@ const getParams = (
   }
 }
 
+const getLabel = (type: EPostType) => {
+  return postTypeOptions.find((option) => option.value === type)?.label
+}
+
 const PostTypeFilter = ({ activePostTypes, routeName = 'home' }: Props) => {
   const currentParams = useParams()
 
@@ -53,6 +60,7 @@ const PostTypeFilter = ({ activePostTypes, routeName = 'home' }: Props) => {
           to={routes[routeName](
             getParams(currentParams, activePostTypes, type)
           )}
+          title={`Toon ${getLabel(type)} posts`}
         >
           <div
             className={classNames(
@@ -62,7 +70,7 @@ const PostTypeFilter = ({ activePostTypes, routeName = 'home' }: Props) => {
                 : 'border-white'
             )}
           >
-            <ArticleTypeIcon type={type} />
+            <ArticleTypeIcon type={type} showTitle={false} />
           </div>
         </Link>
       ))}

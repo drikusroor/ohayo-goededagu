@@ -54,6 +54,7 @@ const UserFilter = ({
             to={routes[routeName](
               getParams(currentParams, activeAuthors, user.id)
             )}
+            title={`Toon posts van ${user.profile.name}`}
           >
             <img
               src={user.profile.avatar}
