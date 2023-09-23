@@ -17,9 +17,6 @@ interface Props {
 }
 
 const PreviewLayout = ({ article }: Props) => {
-  const authorName =
-    article?.user?.profile?.name || article?.user?.name || 'Anonymous'
-
   const hasImage =
     article.type === EPostType.ARTICLE ||
     article.type === EPostType.PHOTO_GALLERY
