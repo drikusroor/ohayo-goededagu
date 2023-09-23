@@ -21,3 +21,4 @@ api/src/lib/generateGraphiQLHeader.*
 !.yarn/versions
 
 data
+data_test
