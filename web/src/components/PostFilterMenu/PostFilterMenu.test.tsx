@@ -7,8 +7,15 @@ import PostFilterMenu from './PostFilterMenu'
 
 describe('PostFilterMenu', () => {
   it('renders successfully', () => {
+    const activeFilters = {
+      postTypes: [],
+      authors: [],
+      from: null,
+      to: null,
+    }
+
     expect(() => {
-      render(<PostFilterMenu />)
+      render(<PostFilterMenu activeFilters={activeFilters} />)
     }).not.toThrow()
   })
 })

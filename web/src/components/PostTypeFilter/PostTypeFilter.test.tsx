@@ -7,8 +7,10 @@ import PostTypeFilter from './PostTypeFilter'
 
 describe('PostTypeFilter', () => {
   it('renders successfully', () => {
+    const activePostTypes = []
+
     expect(() => {
-      render(<PostTypeFilter />)
+      render(<PostTypeFilter activePostTypes={activePostTypes} />)
     }).not.toThrow()
   })
 })
