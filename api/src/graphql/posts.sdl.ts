@@ -18,10 +18,21 @@ export const schema = gql`
 
   type PostWithPaginationAndFilters {
     posts: [Post!]!
+    pagination: Pagination!
+    activeFilters: ActiveFilters!
+  }
+
+  type Pagination {
     count: Int!
     page: Int!
     perPage: Int!
-    activeFilters: [String!]!
+  }
+
+  type ActiveFilters {
+    authors: [Int!]!
+    postTypes: [String!]!
+    from: DateTime
+    to: DateTime
   }
 
   input QueryPostsInput {

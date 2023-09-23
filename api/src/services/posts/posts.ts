@@ -58,10 +58,17 @@ export const posts = async ({ input }: { input: QueryPostsInput }) => {
 
   return {
     posts: result,
-    count,
-    page,
-    perPage,
-    activeFilters: [...authors, ...postTypes],
+    pagination: {
+      count,
+      page,
+      perPage,
+    },
+    activeFilters: {
+      authors,
+      postTypes,
+      from,
+      to,
+    },
   }
 }
 

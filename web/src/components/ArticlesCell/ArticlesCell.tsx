@@ -45,10 +45,17 @@ export const QUERY = gql`
           }
         }
       }
-      count
-      page
-      perPage
-      activeFilters
+      pagination {
+        count
+        page
+        perPage
+      }
+      activeFilters {
+        postTypes
+        authors
+        from
+        to
+      }
     }
   }
 `
