@@ -17,12 +17,29 @@ const postTypes = [
   EPostType.PHOTO_GALLERY,
 ]
 
-const getParams = (activePostTypes: EPostType[], postType: EPostType) => {
-  if (activePostTypes.includes(postType)) {
-    return activePostTypes.filter((type) => type !== postType)
+const getParams = (
+  currentParams: Record<string, string>,
+  activePostTypes: EPostType[],
+  postType: EPostType
+) => {
+  // if removing the last post type, remove the postTypes param
+  if (activePostTypes.length === 1 && activePostTypes.includes(postType)) {
+    const { postTypes: _postTypes, ...rest } = currentParams
+
+    return rest
   }
 
-  return [...activePostTypes, postType]
+  if (activePostTypes.includes(postType)) {
+    return {
+      ...currentParams,
+      postTypes: activePostTypes.filter((type) => type !== postType),
+    }
+  }
+
+  return {
+    ...currentParams,
+    postTypes: [...activePostTypes, postType],
+  }
 }
 
 const PostTypeFilter = ({ activePostTypes, routeName = 'home' }: Props) => {
@@ -33,10 +50,9 @@ const PostTypeFilter = ({ activePostTypes, routeName = 'home' }: Props) => {
       {postTypes.map((type) => (
         <Link
           key={type}
-          to={routes[routeName]({
-            ...currentParams,
-            postTypes: getParams(activePostTypes, type),
-          })}
+          to={routes[routeName](
+            getParams(currentParams, activePostTypes, type)
+          )}
         >
           <div
             className={classNames(

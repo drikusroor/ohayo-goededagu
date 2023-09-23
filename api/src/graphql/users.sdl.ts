@@ -26,6 +26,7 @@ export const schema = gql`
     users: [User!]! @requireAuth
     user(id: Int!): User @requireAuth
     usersWithRoles(roles: [Role!]!): [User!]! @requireAuth
+    usersWithPosts: [User!]! @requireAuth
   }
 
   input CreateUserInput {
@@ -79,6 +80,7 @@ export const schema = gql`
       superAdminCode: String!
     ): User! @requireAuth(roles: ["ADMIN"])
     emailUser: User! @requireAuth
+    usersWithPosts: [User!]! @requireAuth
   }
 
   enum Role {
