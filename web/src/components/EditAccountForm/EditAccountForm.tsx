@@ -10,7 +10,6 @@ import {
   EmailField,
 } from '@redwoodjs/forms'
 import type { RWGqlError } from '@redwoodjs/forms'
-import { Link, routes } from '@redwoodjs/router'
 
 import Button from '../Button/Button'
 
@@ -24,6 +23,8 @@ interface EditAccountFormProps {
 }
 
 const EditAccountForm = (props: EditAccountFormProps) => {
+  const formRef = React.useRef<HTMLFormElement>(null)
+
   const onSubmit = (data: FormAccount) => {
     props.onSave(
       {
@@ -34,9 +35,18 @@ const EditAccountForm = (props: EditAccountFormProps) => {
     )
   }
 
+  const onReset = () => {
+    formRef.current?.reset()
+  }
+
   return (
     <div className="rw-form-wrapper">
-      <Form<FormAccount> onSubmit={onSubmit} error={props.error}>
+      <Form<FormAccount>
+        onSubmit={onSubmit}
+        error={props.error}
+        ref={formRef}
+        className="rw-form-wrapper"
+      >
         <FormError
           error={props.error}
           wrapperClassName="rw-form-error-wrapper"
@@ -68,11 +78,9 @@ const EditAccountForm = (props: EditAccountFormProps) => {
             Save
           </Submit>
 
-          <Link to={routes.account()}>
-            <Button color="monza-red" variant="outlined">
-              Cancel
-            </Button>
-          </Link>
+          <Button color="monza-red" variant="outlined" onClick={onReset}>
+            Cancel
+          </Button>
         </div>
       </Form>
     </div>
