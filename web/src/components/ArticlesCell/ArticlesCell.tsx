@@ -4,6 +4,7 @@ import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
 
 import ArticlePreview from '../Article/components/ArticlePreview/ArticlePreview'
 import Pagination from '../Pagination/Pagination'
+import PostFilterMenu from '../PostFilterMenu/PostFilterMenu'
 import Skeleton from '../Skeleton/Skeleton'
 
 export const QUERY = gql`
@@ -83,10 +84,15 @@ export const Failure = ({ error }: CellFailureProps) => (
 )
 
 export const Success = ({ result, vlog, gallery }: Props) => {
-  const { posts, pagination } = result
+  const { activeFilters, posts, pagination } = result
 
   return (
     <>
+      {!vlog && !gallery && (
+        <div className="mx-auto max-w-6xl py-3">
+          <PostFilterMenu activeFilters={activeFilters} />
+        </div>
+      )}
       <ul className="flex flex-col justify-center gap-6 p-3 md:gap-12 md:p-10">
         {posts.map((article) => {
           return <ArticlePreview key={article.id} article={article} />
