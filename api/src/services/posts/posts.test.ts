@@ -1,3 +1,5 @@
+import { QueryPostsInput } from 'types/graphql'
+
 import { posts, allPosts, post } from './posts'
 import type { StandardScenario } from './posts.scenarios'
 
@@ -11,7 +13,16 @@ describe('posts', () => {
   scenario(
     'returns all published posts',
     async (scenario: StandardScenario) => {
-      const result = await posts()
+      const input: QueryPostsInput = {
+        page: 1,
+        perPage: 10,
+        authors: [],
+        postTypes: [],
+        from: null,
+        to: null,
+      }
+
+      const result = await posts({ input })
 
       expect(result.length).toEqual(Object.keys(scenario.post).length)
     }

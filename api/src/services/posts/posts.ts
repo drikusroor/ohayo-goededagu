@@ -1,4 +1,4 @@
-import { PostRelationResolvers } from 'types/graphql'
+import { PostRelationResolvers, QueryPostsInput } from 'types/graphql'
 
 import { db } from 'src/lib/db'
 
