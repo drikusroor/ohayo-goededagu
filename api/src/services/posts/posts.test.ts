@@ -24,7 +24,8 @@ describe('posts', () => {
 
       const result = await posts({ input })
 
-      expect(result.length).toEqual(Object.keys(scenario.post).length)
+      expect(result.posts.length).toEqual(Object.keys(scenario.post).length)
+      expect(result.pagination.count).toEqual(Object.keys(scenario.post).length)
     }
   )
 
