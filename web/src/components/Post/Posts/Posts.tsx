@@ -64,7 +64,7 @@ const PostsList = ({ posts }: FindPosts) => {
         data={posts}
         onShow={(post) => onNavigatePost(post)}
         onEdit={(post) => onNavigateEditPost(post)}
-        onDelete={(postId) => onDeleteClick(postId)}
+        onDelete={(post) => onDeleteClick(post.id)}
       />
     </>
   )
