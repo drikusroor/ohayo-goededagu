@@ -32,7 +32,7 @@ const ImageModal = ({ info }: Props) => {
             <BsXLg />
           </Button>
           <div
-            className="flex h-screen w-full items-center justify-center px-4 py-4 xl:px-20 xl:py-20"
+            className="flex h-screen w-full flex-col items-center justify-center px-4 py-4 xl:px-20 xl:py-20"
             role="button"
             tabIndex={0}
             onClick={() => {
@@ -42,17 +42,15 @@ const ImageModal = ({ info }: Props) => {
               closeModal()
             }}
           >
-            <div className="flex flex-col gap-2">
-              <img
-                id="modalImage"
-                className="max-h-screen w-fit rounded-md"
-                src={url}
-                key={id}
-                alt={`${title} - ${description}`}
-              />
-              {title && <span className="text-xl">{title}</span>}
-              {description && <span>{description}</span>}
-            </div>
+            <img
+              id="modalImage"
+              className="w-fit rounded-md md:h-5/6"
+              src={url}
+              key={id}
+              alt={`${title} - ${description}`}
+            />
+            {title && <span className="text-xl">{title}</span>}
+            {description && <span>{description}</span>}
           </div>
         </div>
       )}
