@@ -113,7 +113,7 @@ const BlogLayout = ({ children, skeleton }: BlogLayoutProps) => {
             </ul>
           </div>
         )}
-        <div className={`mx-auto w-32 ${isAuthenticated && 'mt-16'}`}>
+        <div className={`mx-auto w-32 ${isAuthenticated && 'pt-16'}`}>
           <Link to={routes.home()} title="Ohayo Goededagu" aria-label="Home">
             <img
               src="/images/logo.png"
