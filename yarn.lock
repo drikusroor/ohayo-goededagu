@@ -1911,6 +1911,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@envelop/sentry@npm:5":
+  version: 5.1.1
+  resolution: "@envelop/sentry@npm:5.1.1"
+  dependencies:
+    tslib: ^2.5.0
+  peerDependencies:
+    "@envelop/core": ^3.0.6
+    "@sentry/node": ^6 || ^7
+    graphql: ^14.0.0 || ^15.0.0 || ^16.0.0
+  checksum: 316056d1c57fb9273bbc05d3579cac6933a835344aed1fb3901969f09c17b6491ff68ee9b904e608552d2d5fa1f6cc8098d2917c820962a932e0194159ba4d87
+  languageName: node
+  linkType: hard
+
 "@envelop/types@npm:4.0.0":
   version: 4.0.0
   resolution: "@envelop/types@npm:4.0.0"
@@ -5665,6 +5678,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@sentry/browser@npm:7.70.0":
+  version: 7.70.0
+  resolution: "@sentry/browser@npm:7.70.0"
+  dependencies:
+    "@sentry-internal/tracing": 7.70.0
+    "@sentry/core": 7.70.0
+    "@sentry/replay": 7.70.0
+    "@sentry/types": 7.70.0
+    "@sentry/utils": 7.70.0
+    tslib: ^2.4.1 || ^1.9.3
+  checksum: 55a6f70d668bf32af1b9e564a30ff2121e751b5bef4c22323549248ebe6f64a6e3a9208272f6f6f12370ceb6f99d84ac0460fbfcc3eb8389ed0dad58e48a07a0
+  languageName: node
+  linkType: hard
+
 "@sentry/core@npm:7.70.0, @sentry/core@npm:^7.64.0":
   version: 7.70.0
   resolution: "@sentry/core@npm:7.70.0"
@@ -5688,7 +5715,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sentry/node@npm:^7.64.0, @sentry/node@npm:^7.70.0":
+"@sentry/node@npm:7, @sentry/node@npm:^7.64.0, @sentry/node@npm:^7.70.0":
   version: 7.70.0
   resolution: "@sentry/node@npm:7.70.0"
   dependencies:
@@ -5719,6 +5746,41 @@ __metadata:
   bin:
     sentry-prune-profiler-binaries: scripts/prune-profiler-binaries.mjs
   checksum: aaf50c4e2265edcd56a95670ae79c8242b5c35ef32f6dcf203fd2e742a38b75d0f4ead07001bf63a8ace4e8d06b6a5b976f3a49d8b8c3a0e2039bf92dff96a0a
+  languageName: node
+  linkType: hard
+
+"@sentry/react@npm:7":
+  version: 7.70.0
+  resolution: "@sentry/react@npm:7.70.0"
+  dependencies:
+    "@sentry/browser": 7.70.0
+    "@sentry/types": 7.70.0
+    "@sentry/utils": 7.70.0
+    hoist-non-react-statics: ^3.3.2
+    tslib: ^2.4.1 || ^1.9.3
+  peerDependencies:
+    react: 15.x || 16.x || 17.x || 18.x
+  checksum: 6ad6b00bb4e055b2ac31590241a25cc572a016105c61a300d7c58ba9e8000547f934e37367a27d3bde8f2de5c359ab9214ecb184e60d2c3f5062871cc5d1f366
+  languageName: node
+  linkType: hard
+
+"@sentry/replay@npm:7.70.0":
+  version: 7.70.0
+  resolution: "@sentry/replay@npm:7.70.0"
+  dependencies:
+    "@sentry/core": 7.70.0
+    "@sentry/types": 7.70.0
+    "@sentry/utils": 7.70.0
+  checksum: 88d07aada6d3342cd0f4d86cc3602b3f4a24786a8fc1ee244594b2caf76a9ca49fcb2d3d270014dfed306f1e008eeddf07ead576bdab7c81bb897c739a0fb4dd
+  languageName: node
+  linkType: hard
+
+"@sentry/tracing@npm:7":
+  version: 7.70.0
+  resolution: "@sentry/tracing@npm:7.70.0"
+  dependencies:
+    "@sentry-internal/tracing": 7.70.0
+  checksum: 46892cca763ac402c8ff3caf014060d899d71ae6183e35d2866cec9c0374fb04793c70f6e5f734e923b50f39563124db181955ebf4518365d7797fe08f9419a2
   languageName: node
   linkType: hard
 
@@ -8871,9 +8933,12 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "api@workspace:api"
   dependencies:
+    "@envelop/sentry": 5
     "@redwoodjs/api": 6.2.2
     "@redwoodjs/auth-dbauth-api": 6.2.2
     "@redwoodjs/graphql-server": 6.2.2
+    "@sentry/node": 7
+    "@sentry/tracing": 7
     nodemailer: ^6.9.5
   languageName: unknown
   linkType: soft
@@ -24549,6 +24614,8 @@ __metadata:
     "@redwoodjs/router": 6.2.2
     "@redwoodjs/vite": 6.2.2
     "@redwoodjs/web": 6.2.2
+    "@sentry/react": 7
+    "@sentry/tracing": 7
     "@tailwindcss/typography": ^0.5.9
     autoprefixer: ^10.4.14
     humanize-string: 2.1.0

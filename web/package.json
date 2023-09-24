@@ -17,6 +17,8 @@
     "@redwoodjs/forms": "6.2.2",
     "@redwoodjs/router": "6.2.2",
     "@redwoodjs/web": "6.2.2",
+    "@sentry/react": "7",
+    "@sentry/tracing": "7",
     "humanize-string": "2.1.0",
     "prop-types": "15.8.1",
     "react": "18.2.0",
