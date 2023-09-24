@@ -118,7 +118,12 @@ const ProfileForm = (props: ProfileFormProps) => {
         </Label>
 
         <div className="mt-4 flex flex-row items-center gap-4">
-          <Upload name="avatar" multiple={false} handleUpload={handleUpload} />
+          <Upload
+            name="avatar"
+            folder="Avatars"
+            multiple={false}
+            handleUpload={handleUpload}
+          />
 
           <MediaLibrary
             name="avatar"

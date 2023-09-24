@@ -44,7 +44,7 @@ const ImageModal = ({ info }: Props) => {
           >
             <img
               id="modalImage"
-              className="w-fit rounded-md md:h-5/6"
+              className="max-w-fit rounded-md md:h-5/6"
               src={url}
               key={id}
               alt={`${title} - ${description}`}
