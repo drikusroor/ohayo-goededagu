@@ -129,7 +129,7 @@ export default ({ comment, onClickReply }: ICommentProps) => {
         deleteFadeOut ? 'animate-fade-out' : ''
       }`}
     >
-      <div className="flex flex-row items-center gap-4">
+      <div className="flex flex-row flex-wrap items-center gap-4">
         <Avatar
           src={comment.user?.profile?.avatar}
           alt={comment.user.name}
