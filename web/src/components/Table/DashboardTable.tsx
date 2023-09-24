@@ -23,7 +23,7 @@ import DisplayDatetime from '../DisplayDatetime/DisplayDatetime'
 
 interface Props {
   headers: Array<string>
-  data: object
+  data: object[]
   onDelete?: (value) => void
   onEdit?: (value) => void
   onShow?: (value) => void
@@ -155,7 +155,7 @@ const DashboardTable = ({ headers, data, onDelete, onEdit, onShow }: Props) => {
                         {showDelete(item) && (
                           <Button
                             title={'Delete post ' + item.id}
-                            onClick={() => onDelete(item.id)}
+                            onClick={() => onDelete(item)}
                             className="rw-button rw-button-small rw-button-red flex items-center gap-1"
                             color="monza-red"
                             variant="outlined"
