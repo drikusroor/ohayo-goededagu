@@ -4,9 +4,9 @@
   "private": true,
   "dependencies": {
     "@envelop/sentry": "5",
-    "@redwoodjs/api": "6.2.2",
-    "@redwoodjs/auth-dbauth-api": "6.2.2",
-    "@redwoodjs/graphql-server": "6.2.2",
+    "@redwoodjs/api": "6.3.1",
+    "@redwoodjs/auth-dbauth-api": "6.3.1",
+    "@redwoodjs/graphql-server": "6.3.1",
     "@sentry/node": "7",
     "@sentry/tracing": "7",
     "nodemailer": "^6.9.5"
