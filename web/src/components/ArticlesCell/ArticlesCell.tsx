@@ -71,7 +71,7 @@ export const Loading = () => (
   <div className="grid max-w-6xl">
     {Array.from({ length: 5 }).map((_, i) => (
       <div key={i}>
-        <Skeleton className="m-3 h-[480px] w-full rounded-md md:m-10" />
+        <Skeleton className="m-3 h-80 rounded-md md:m-10 md:h-[480px]" />
       </div>
     ))}
   </div>

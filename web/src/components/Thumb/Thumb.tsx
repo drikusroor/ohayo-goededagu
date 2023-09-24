@@ -8,6 +8,7 @@ import {
 } from 'react-icons/bs'
 
 import { classNames } from 'src/lib/class-names'
+import { useWindowDimensions } from 'src/lib/formatters'
 
 import Button from '../Button/Button'
 
@@ -28,14 +29,17 @@ const Thumb = ({
   onClick,
   disabled,
 }: IThumbProps) => {
+  const { width } = useWindowDimensions()
+  const isMobile = width < 428
   const title = useMemo(() => names.map((n) => `- ${n}`).join('\n'), [names])
 
   return (
     <Button
       onClick={disabled ? undefined : onClick}
       variant={active ? 'filled' : 'outlined'}
+      size={isMobile ? 'xs' : 'sm'}
       className={classNames(
-        'transition-filter whitespace-nowrap text-sm md:text-base lg:py-1 lg:text-lg',
+        'transition-filter whitespace-nowrap',
         disabled ? 'cursor-not-allowed grayscale' : ''
       )}
       title={title}

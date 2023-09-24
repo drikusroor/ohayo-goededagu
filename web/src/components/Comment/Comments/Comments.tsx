@@ -43,6 +43,7 @@ const CommentsList = ({ comments }: FindComments) => {
     'Id',
     'Body',
     'Created at',
+    'Author',
     'User id',
     'Post id',
     'Parent id',

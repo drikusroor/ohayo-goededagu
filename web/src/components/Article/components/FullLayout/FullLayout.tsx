@@ -8,6 +8,7 @@ import PhotoGrid from 'src/components/PhotoGrid/PhotoGrid'
 import PostThumbsCell from 'src/components/PostThumbsCell'
 import RenderBody from 'src/components/RenderBody/RenderBody'
 import Video from 'src/components/Video/Video'
+import { useWindowDimensions } from 'src/lib/formatters'
 import Person from 'src/pages/AboutPage/Person'
 
 import ArticleTypeIcon, {
@@ -19,6 +20,9 @@ interface Props {
 }
 
 const FullLayout = ({ article }: Props) => {
+  const { width } = useWindowDimensions()
+  const isMobile = width < 428
+
   const authorName =
     article?.user?.profile?.name || article?.user?.name || 'Anonymous'
 
@@ -67,7 +71,7 @@ const FullLayout = ({ article }: Props) => {
               </Link>
               <DisplayDatetime
                 datetime={article.createdAt}
-                showDate={true}
+                showDate={isMobile ? false : true}
                 className="text-sm text-slate-200"
               />
               <LocationPin
@@ -124,7 +128,7 @@ const FullLayout = ({ article }: Props) => {
         {article.videoPost != null && (
           <Video embedUrl={article?.videoPost?.videoUrl} />
         )}
-        <RenderBody body={article.body} className="leading-7 text-[#374151]" />
+        <RenderBody body={article.body} />
       </div>
 
       {galleries &&

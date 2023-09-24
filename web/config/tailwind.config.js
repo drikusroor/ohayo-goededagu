@@ -31,6 +31,13 @@ module.exports = {
         'fade-out': 'fade-out 0.5s ease-out forwards',
       },
     },
+    // typography: {
+    //   DEFAULT: {
+    //     css: {
+    //       color: 'bg-cobalt-blue-500',
+    //     },
+    //   },
+    // },
   },
   safelist: [
     'bg-cobalt-blue-500',

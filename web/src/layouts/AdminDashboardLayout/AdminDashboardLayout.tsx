@@ -12,7 +12,7 @@ import {
   BsPersonCheckFill,
 } from 'react-icons/bs'
 
-import { Link, routes } from '@redwoodjs/router'
+import { Link, navigate, routes } from '@redwoodjs/router'
 import { useLocation } from '@redwoodjs/router'
 
 import { useAuth } from 'src/auth'
@@ -103,7 +103,13 @@ const AdminDashboardLayout = ({ children }: AdminDashboardLayoutProps) => {
     <div className="flex flex-row">
       <div className="fixed flex h-screen w-8 flex-col justify-between bg-gray-200 md:w-14 lg:w-64">
         <div>
-          <div className="p-1 lg:p-3 lg:text-center">
+          <div
+            className="p-1 lg:p-3 lg:text-center"
+            onClick={() => navigate(routes.home())}
+            onKeyDown={() => navigate(routes.home())}
+            tabIndex={0}
+            role="button"
+          >
             <h1 className="flex items-center justify-between text-xl font-bold lg:text-3xl">
               <span className="hidden lg:inline">Dashboard</span>
               <img

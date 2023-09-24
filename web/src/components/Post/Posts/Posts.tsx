@@ -46,9 +46,9 @@ const PostsList = ({ posts }: FindPosts) => {
 
   const headers = [
     'Id',
+    'Type',
     'Title',
     'Body',
-    'Type',
     'Published',
     'Author',
     'Created at',
