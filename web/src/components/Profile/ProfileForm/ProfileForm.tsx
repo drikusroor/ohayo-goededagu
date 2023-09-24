@@ -10,6 +10,7 @@ import {
 } from '@redwoodjs/forms'
 import type { RWGqlError } from '@redwoodjs/forms'
 
+import { useAuth } from 'src/auth'
 import Avatar from 'src/components/Avatar/Avatar'
 import MediaLibrary from 'src/components/MediaLibrary/MediaLibrary'
 import Upload, {
@@ -26,6 +27,8 @@ interface ProfileFormProps {
 }
 
 const ProfileForm = (props: ProfileFormProps) => {
+  const { isAuthenticated, hasRole } = useAuth()
+
   const onSubmit = (data: FormProfile) => {
     if (profilePicture) {
       if (data.avatar) {
@@ -125,10 +128,12 @@ const ProfileForm = (props: ProfileFormProps) => {
             handleUpload={handleUpload}
           />
 
-          <MediaLibrary
-            name="avatar"
-            handleMediaLibrary={handleMediaLibraryResponse}
-          />
+          {isAuthenticated && hasRole('MODERATOR' || 'ADMIN') && (
+            <MediaLibrary
+              name="avatar"
+              handleMediaLibrary={handleMediaLibraryResponse}
+            />
+          )}
 
           {profilePicture && (
             <Avatar src={profilePicture} alt="ProfilePicture" />
