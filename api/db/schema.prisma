@@ -64,14 +64,14 @@ model PostThumb {
   createdAt DateTime @default(now())
   user      User     @relation(fields: [userId], references: [id])
   userId    Int
-  post      Post     @relation(fields: [postId], references: [id])
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
   postId    Int
   up        Boolean
 }
 
 model VideoPost {
   id       Int    @id @default(autoincrement())
-  post     Post   @relation(fields: [postId], references: [id])
+  post     Post   @relation(fields: [postId], references: [id], onDelete: Cascade)
   postId   Int    @unique
   videoUrl String
 }
@@ -111,7 +111,7 @@ model Thumb {
   createdAt DateTime @default(now())
   user      User     @relation(fields: [userId], references: [id])
   userId    Int
-  comment   Comment  @relation(fields: [commentId], references: [id])
+  comment   Comment  @relation(fields: [commentId], references: [id], onDelete: Cascade)
   commentId Int
   up        Boolean
 }
@@ -149,7 +149,7 @@ model ImageGalleryOnPost {
   imageGalleryId Int
   imageGallery   ImageGallery @relation(fields: [imageGalleryId], references: [id], onDelete: Cascade)
   postId         Int
-  post           Post         @relation(fields: [postId], references: [id])
+  post           Post         @relation(fields: [postId], references: [id], onDelete: Cascade)
 }
 
 model UserAction {
