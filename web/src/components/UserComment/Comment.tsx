@@ -13,6 +13,7 @@ import Button from 'src/components/Button/Button'
 import DisplayDatetime from 'src/components/DisplayDatetime/DisplayDatetime'
 import RenderBody from 'src/components/RenderBody/RenderBody'
 import Thumbs from 'src/components/Thumbs/Thumbs'
+import { getUserName } from 'src/lib/get-user-name'
 
 interface ICommentProps {
   comment: Comment
@@ -123,6 +124,10 @@ export default ({ comment, onClickReply }: ICommentProps) => {
     })
   }
 
+  const userName = useMemo(() => {
+    return getUserName(comment.user)
+  }, [comment.user])
+
   return (
     <div
       className={`z-10 rounded-lg bg-slate-100 p-4 transition-opacity ${ratingOpacity} group relative ${
@@ -132,18 +137,14 @@ export default ({ comment, onClickReply }: ICommentProps) => {
       <div className="flex flex-row flex-wrap items-center gap-4">
         <Avatar
           src={comment.user?.profile?.avatar}
-          alt={comment.user.name}
-          name={comment.user.name || comment.user.email}
+          alt={userName}
+          name={userName}
           userId={comment.user.id}
         />
 
         <div>
           <span className="text-base font-semibold text-slate-700">
-            {comment.user.name
-              ? comment.user.name
-              : comment.user.email
-              ? comment.user.email
-              : 'Anonymous'}
+            {userName}
           </span>
           <DisplayDatetime
             datetime={comment.createdAt}
