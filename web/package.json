@@ -13,10 +13,10 @@
     ]
   },
   "dependencies": {
-    "@redwoodjs/auth-dbauth-web": "6.2.2",
-    "@redwoodjs/forms": "6.2.2",
-    "@redwoodjs/router": "6.2.2",
-    "@redwoodjs/web": "6.2.2",
+    "@redwoodjs/auth-dbauth-web": "6.3.1",
+    "@redwoodjs/forms": "6.3.1",
+    "@redwoodjs/router": "6.3.1",
+    "@redwoodjs/web": "6.3.1",
     "@sentry/react": "7",
     "@sentry/tracing": "7",
     "humanize-string": "2.1.0",
@@ -27,7 +27,7 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
-    "@redwoodjs/vite": "6.2.2",
+    "@redwoodjs/vite": "6.3.1",
     "@tailwindcss/typography": "^0.5.9",
     "autoprefixer": "^10.4.14",
     "postcss": "^8.4.23",
