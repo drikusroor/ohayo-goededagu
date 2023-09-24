@@ -12,8 +12,23 @@
 // See https://storybook.js.org/docs/react/writing-stories/args.
 
 import type { ComponentMeta } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/your-framework'
 
 import Button from './Button'
+
+const meta: Meta<typeof Button> = {
+  component: Button,
+}
+
+export default meta
+type Story = StoryObj<typeof Button>
+
+export const Filled: Story = {
+  args: {
+    variant: 'filled',
+    text: 'Button',
+  },
+}
 
 export const generated = () => {
   return <Button text="Click me!" />
@@ -54,7 +69,7 @@ export const CustomVariant = () => {
   return <Button variant="outlined" text="Outlined" className="mr-3" />
 }
 
-export default {
-  title: 'Components/Button',
-  component: Button,
-} as ComponentMeta<typeof Button>
+// export default {
+//   title: 'Components/Button',
+//   component: Button,
+// } as ComponentMeta<typeof Button>

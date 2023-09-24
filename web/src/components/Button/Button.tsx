@@ -3,6 +3,7 @@ interface IButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   id?: string
   className?: string
   color?: 'cobalt-blue' | 'monza-red' | ''
+  size?: 'xs' | 'sm' | 'md' | 'lg'
   children?: React.ReactNode
   text?: string
   title?: string
@@ -15,6 +16,7 @@ const Button = ({
   id = '',
   className = '',
   color = '',
+  size = '',
   text = '',
   title = '',
   children,
@@ -28,6 +30,16 @@ const Button = ({
     variant === 'filled'
       ? `bg-${theme}-600 text-white transition hover:bg-${theme}-500 hover:filter`
       : `border-${theme}-500 text-${theme}-500 hover:bg-${theme}-500 hover:text-white transition-colors`
+  const buttonSizes =
+    size === 'xs'
+      ? `px-1 py-0.5 text-xs`
+      : size === 'sm'
+      ? `px-2 py-1 text-sm`
+      : size === 'md'
+      ? `px-3 py-2 text-lg`
+      : size === 'lg'
+      ? `px-4 py-3 text-2xl`
+      : `px-2 py-1 lg:px-3 lg:py-3 `
   return (
     <button
       id={id}
@@ -35,9 +47,10 @@ const Button = ({
       aria-label={text}
       title={title ? title : text ? text : ''}
       disabled={disabled}
-      className={`block rounded px-2 py-1 font-semibold uppercase lg:px-3 lg:py-3
+      className={`block rounded font-semibold uppercase
       ${disabled ? 'cursor-not-allowed opacity-50' : ''}
       ${buttonColors}
+      ${buttonSizes}
       ${className}
       `}
       onClick={onClick}
