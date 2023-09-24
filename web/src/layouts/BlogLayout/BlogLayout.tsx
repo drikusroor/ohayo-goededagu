@@ -1,4 +1,10 @@
-import { BsBoxArrowUp, BsHouse, BsPersonCircle, BsTools } from 'react-icons/bs'
+import {
+  BsArrowUpCircle,
+  BsBoxArrowUp,
+  BsHouse,
+  BsPersonCircle,
+  BsTools,
+} from 'react-icons/bs'
 
 import { Link, routes } from '@redwoodjs/router'
 import { Toaster } from '@redwoodjs/web/dist/toast'
@@ -14,6 +20,26 @@ type BlogLayoutProps = {
 
 const BlogLayout = ({ children, skeleton }: BlogLayoutProps) => {
   const { isAuthenticated, logOut, currentUser } = useAuth()
+
+  window.onscroll = function () {
+    scrollFunction()
+  }
+
+  function scrollFunction() {
+    if (
+      document.body.scrollTop > 20 ||
+      document.documentElement.scrollTop > 20
+    ) {
+      document.getElementById('scrollTopBtn').style.display = 'block'
+    } else {
+      document.getElementById('scrollTopBtn').style.display = 'none'
+    }
+  }
+
+  const scrollToTop = () => {
+    document.body.scrollTop = 0
+    document.documentElement.scrollTop = 0
+  }
 
   if (skeleton) {
     return (
@@ -146,6 +172,17 @@ const BlogLayout = ({ children, skeleton }: BlogLayoutProps) => {
         </nav>
       </header>
       <main className="mx-auto max-w-6xl md:grid">{children}</main>
+      <Button
+        id="scrollTopBtn"
+        size="md"
+        onClick={() => scrollToTop()}
+        className="fixed bottom-3 right-3 hidden"
+      >
+        <BsArrowUpCircle />
+      </Button>
+      <footer className="bg-slate-500 py-4 text-center text-white">
+        <div>Bedankt voor het volgen van onze avonturen in Japan!</div>
+      </footer>
     </>
   )
 }
