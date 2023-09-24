@@ -23,26 +23,6 @@ type BlogLayoutProps = {
 const BlogLayout = ({ children, skeleton }: BlogLayoutProps) => {
   const { isAuthenticated, logOut, currentUser } = useAuth()
 
-  const [visible, setVisible] = useState(false)
-
-  const toggleVisible = () => {
-    const scrolled = document.documentElement.scrollTop
-    if (scrolled > 300) {
-      setVisible(true)
-    } else if (scrolled <= 300) {
-      setVisible(false)
-    }
-  }
-
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    })
-  }
-
-  window.addEventListener('scroll', toggleVisible)
-
   if (skeleton) {
     return (
       <>
@@ -174,15 +154,6 @@ const BlogLayout = ({ children, skeleton }: BlogLayoutProps) => {
         </nav>
       </header>
       <main className="mx-auto max-w-6xl md:grid">{children}</main>
-      <Button
-        id="scrollTopBtn"
-        size="md"
-        onClick={() => scrollToTop()}
-        className="fixed bottom-3 right-3"
-        style={{ display: visible ? 'inline' : 'none' }}
-      >
-        <BsArrowUpCircle />
-      </Button>
       <footer className="bg-slate-500 py-4 text-center text-white">
         <div>Bedankt voor het volgen van onze avonturen in Japan!</div>
       </footer>
