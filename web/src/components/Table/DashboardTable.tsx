@@ -13,8 +13,11 @@ import ArticleTypeIcon, {
   EPostType,
 } from 'src/components/ArticleTypeIcon/ArticleTypeIcon'
 import Button from 'src/components/Button/Button'
-import RenderBody from 'src/components/RenderBody/RenderBody'
-import { checkboxInputTag, truncate } from 'src/lib/formatters'
+import {
+  checkboxInputTag,
+  truncate,
+  useWindowDimensions,
+} from 'src/lib/formatters'
 
 import DisplayDatetime from '../DisplayDatetime/DisplayDatetime'
 
@@ -28,6 +31,8 @@ interface Props {
 
 const DashboardTable = ({ headers, data, onDelete, onEdit, onShow }: Props) => {
   const { currentUser } = useAuth()
+  const { width } = useWindowDimensions()
+  const isMobile = width < 428
 
   const showDelete = (item) => {
     if (item.__typename === 'Post' && item?.user?.name === currentUser?.name) {
@@ -52,16 +57,18 @@ const DashboardTable = ({ headers, data, onDelete, onEdit, onShow }: Props) => {
             <tr key={item.id}>
               {headers.map((header) => (
                 <>
-                  {header === 'Id' && <td>{truncate(item.id)}</td>}
+                  {header === 'Id' && <td>{truncate(item.id, isMobile)}</td>}
                   {header === 'Title' && (
                     <td
                       onClick={() => onEdit(item)}
                       className="cursor-pointer underline decoration-blue-500 hover:text-blue-500 hover:underline xl:no-underline"
                     >
-                      {truncate(item.title)}
+                      {truncate(item.title, isMobile)}
                     </td>
                   )}
-                  {header === 'Body' && <td>{truncate(item.body)}</td>}
+                  {header === 'Body' && (
+                    <td>{truncate(item.body, isMobile)}</td>
+                  )}
                   {header === 'Type' && (
                     <td>
                       <ArticleTypeIcon type={item.type as EPostType} />
@@ -82,7 +89,9 @@ const DashboardTable = ({ headers, data, onDelete, onEdit, onShow }: Props) => {
                       />
                     </td>
                   )}
-                  {header === 'User id' && <td>{truncate(item.userId)}</td>}
+                  {header === 'User id' && (
+                    <td>{truncate(item.userId, isMobile)}</td>
+                  )}
                   {header === 'Post id' && (
                     <td>
                       <Link
@@ -90,18 +99,22 @@ const DashboardTable = ({ headers, data, onDelete, onEdit, onShow }: Props) => {
                         title={'Show post ' + item.postId + ' detail'}
                         className="flex flex-row items-center gap-2 text-blue-500 underline hover:text-blue-700"
                       >
-                        {truncate(item.postId)}
+                        {truncate(item.postId, isMobile)}
                       </Link>
                     </td>
                   )}
-                  {header === 'Parent id' && <td>{truncate(item.parentId)}</td>}
+                  {header === 'Parent id' && (
+                    <td>{truncate(item.parentId, isMobile)}</td>
+                  )}
                   {header === 'Deleted' && (
                     <td>{checkboxInputTag(item.deleted)}</td>
                   )}
 
-                  {header === 'Name' && <td>{truncate(item.name)}</td>}
+                  {header === 'Name' && (
+                    <td>{truncate(item.name, isMobile)}</td>
+                  )}
                   {header === 'Description' && (
-                    <td>{truncate(item.description)}</td>
+                    <td>{truncate(item.description, isMobile)}</td>
                   )}
                   {header === 'Show' && (
                     <td>

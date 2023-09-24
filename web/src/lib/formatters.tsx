@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 import humanize from 'humanize-string'
 
 const MAX_STRING_LENGTH = 150
+const MAX_STRING_LENGTH_MOBILE = 50
 
 export const formatEnum = (values: string | string[] | null | undefined) => {
   let output = ''
@@ -25,8 +26,12 @@ export const jsonDisplay = (obj: unknown) => {
   )
 }
 
-export const truncate = (value: string | number) => {
+export const truncate = (value: string | number, mobile?: boolean) => {
   let output = value?.toString() ?? ''
+
+  if (output.length > MAX_STRING_LENGTH && mobile) {
+    output = output.substring(0, MAX_STRING_LENGTH_MOBILE) + '...'
+  }
 
   if (output.length > MAX_STRING_LENGTH) {
     output = output.substring(0, MAX_STRING_LENGTH) + '...'
@@ -80,4 +85,29 @@ export const formatCreatedDate = (dateCreated: string, color?: string) => {
       })}
     </span>
   )
+}
+
+function getWindowDimensions() {
+  const { innerWidth: width, innerHeight: height } = window
+  return {
+    width,
+    height,
+  }
+}
+
+export const useWindowDimensions = () => {
+  const [windowDimensions, setWindowDimensions] = useState(
+    getWindowDimensions()
+  )
+
+  useEffect(() => {
+    function handleResize() {
+      setWindowDimensions(getWindowDimensions())
+    }
+
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
+
+  return windowDimensions
 }
