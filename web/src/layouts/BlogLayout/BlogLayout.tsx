@@ -1,3 +1,5 @@
+import { useState } from 'react'
+
 import {
   BsArrowUpCircle,
   BsBoxArrowUp,
@@ -21,25 +23,25 @@ type BlogLayoutProps = {
 const BlogLayout = ({ children, skeleton }: BlogLayoutProps) => {
   const { isAuthenticated, logOut, currentUser } = useAuth()
 
-  window.onscroll = function () {
-    scrollFunction()
-  }
+  const [visible, setVisible] = useState(false)
 
-  function scrollFunction() {
-    if (
-      document.body.scrollTop > 20 ||
-      document.documentElement.scrollTop > 20
-    ) {
-      document.getElementById('scrollTopBtn').style.display = 'block'
-    } else {
-      document.getElementById('scrollTopBtn').style.display = 'none'
+  const toggleVisible = () => {
+    const scrolled = document.documentElement.scrollTop
+    if (scrolled > 300) {
+      setVisible(true)
+    } else if (scrolled <= 300) {
+      setVisible(false)
     }
   }
 
   const scrollToTop = () => {
-    document.body.scrollTop = 0
-    document.documentElement.scrollTop = 0
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    })
   }
+
+  window.addEventListener('scroll', toggleVisible)
 
   if (skeleton) {
     return (
@@ -176,7 +178,8 @@ const BlogLayout = ({ children, skeleton }: BlogLayoutProps) => {
         id="scrollTopBtn"
         size="md"
         onClick={() => scrollToTop()}
-        className="fixed bottom-3 right-3 hidden"
+        className="fixed bottom-3 right-3"
+        style={{ display: visible ? 'inline' : 'none' }}
       >
         <BsArrowUpCircle />
       </Button>
