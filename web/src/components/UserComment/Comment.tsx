@@ -169,21 +169,21 @@ export default ({ comment, onClickReply }: ICommentProps) => {
         <RenderBody body={comment.body} />
       </div>
       <div className="flex flex-row items-center justify-end gap-2">
-        <Thumbs
-          thumbs={comment.thumbs}
-          onThumb={handleThumbClick}
-          disabled={thumbsDisabled}
-        />
         {currentUser?.id === comment.user.id && (
           <Button
             onClick={handleDelete}
-            className="user-select-none transition-opacity group-hover:cursor-pointer group-hover:opacity-100 md:absolute md:mt-0 md:opacity-0"
+            className="user-select-none rounded font-semibold uppercase transition-opacity group-hover:cursor-pointer group-hover:opacity-100 md:mt-0 md:opacity-0"
             color="monza-red"
             title="Delete comment"
           >
             <BsTrash />
           </Button>
         )}
+        <Thumbs
+          thumbs={comment.thumbs}
+          onThumb={handleThumbClick}
+          disabled={thumbsDisabled}
+        />
       </div>
     </div>
   )
