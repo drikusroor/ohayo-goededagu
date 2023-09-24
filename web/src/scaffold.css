@@ -370,7 +370,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 24rem;
+  max-width: 24rem;
   margin: 4rem auto;
   flex-wrap: wrap;
 }
