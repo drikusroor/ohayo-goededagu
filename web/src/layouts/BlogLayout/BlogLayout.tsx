@@ -1,4 +1,12 @@
-import { BsBoxArrowUp, BsHouse, BsPersonCircle, BsTools } from 'react-icons/bs'
+import { useState } from 'react'
+
+import {
+  BsArrowUpCircle,
+  BsBoxArrowUp,
+  BsHouse,
+  BsPersonCircle,
+  BsTools,
+} from 'react-icons/bs'
 
 import { Link, routes } from '@redwoodjs/router'
 import { Toaster } from '@redwoodjs/web/dist/toast'
@@ -146,6 +154,9 @@ const BlogLayout = ({ children, skeleton }: BlogLayoutProps) => {
         </nav>
       </header>
       <main className="mx-auto max-w-6xl md:grid">{children}</main>
+      <footer className="bg-slate-500 py-4 text-center text-white">
+        <div>Bedankt voor het volgen van onze avonturen in Japan!</div>
+      </footer>
     </>
   )
 }
