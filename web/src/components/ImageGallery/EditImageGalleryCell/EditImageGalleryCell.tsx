@@ -178,6 +178,7 @@ export const Success = ({
         <Form>
           <Upload
             multiple
+            folder={imageGallery.name}
             handleUpload={onUpload}
             setUploadedImages={(images) => console.log({ images })}
           />

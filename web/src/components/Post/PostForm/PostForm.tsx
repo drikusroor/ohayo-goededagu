@@ -305,6 +305,7 @@ const PostForm = (props: PostFormProps) => {
                     <Upload
                       name="coverImage"
                       multiple={false}
+                      folder={postTitle}
                       handleUpload={([{ public_id, secure_url }]) =>
                         setCoverImage({
                           imageId: public_id,
