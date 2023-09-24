@@ -4,6 +4,7 @@ import { db } from 'api/src/lib/db'
 import { hashPassword } from '@redwoodjs/auth-dbauth-api'
 
 import getImageGalleriesCreateCommand from './helpers/create-image-galleries-command'
+import generateManyPosts from './helpers/generate-many-posts'
 
 export default async () => {
   try {
@@ -48,6 +49,15 @@ export default async () => {
         email: 'admin@example.com',
         password: 'Test1234!',
         roles: ['ADMIN'],
+        profile: {
+          create: {
+            bio: 'I am an admin',
+            avatar:
+              'https://thumbs.dreamstime.com/b/cat-as-mailman-post-delivery-service-postman-illustration-generative-ai-cat-as-mailman-mail-post-delivery-service-postman-268937340.jpg',
+            name: 'Admin',
+            japaneseName: 'アドミン',
+          },
+        },
       },
       {
         name: 'drikus',
@@ -64,25 +74,78 @@ export default async () => {
           },
         },
       },
-      { name: 'john', email: 'john@example.com', password: 'secret1' },
-      { name: 'jane', email: 'jane@example.com', password: 'secret2' },
+      {
+        name: 'john',
+        email: 'john@example.com',
+        password: 'secret1',
+        profile: {
+          create: {
+            bio: 'I am a software developer',
+            avatar:
+              'https://thumbs.dreamstime.com/b/cat-as-mailman-post-delivery-service-postman-illustration-generative-ai-cat-as-mailman-mail-post-delivery-service-postman-268937340.jpg',
+            name: 'John',
+            japaneseName: 'ジョン',
+          },
+        },
+      },
+      {
+        name: 'jane',
+        email: 'jane@example.com',
+        password: 'secret2',
+        profile: {
+          create: {
+            bio: 'I am a software developer',
+            avatar:
+              'https://thumbs.dreamstime.com/b/cat-as-mailman-post-delivery-service-postman-illustration-generative-ai-cat-as-mailman-mail-post-delivery-service-postman-268937340.jpg',
+            name: 'John',
+            japaneseName: 'ジョン',
+          },
+        },
+      },
       {
         name: 'naomi',
         email: 'nreliasar@gmail.com',
         password: 'Test1234!',
         roles: ['GUEST', 'USER', 'MODERATOR', 'ADMIN'],
+        profile: {
+          create: {
+            bio: 'I am a software developer',
+            avatar:
+              'https://thumbs.dreamstime.com/b/cat-as-mailman-post-delivery-service-postman-illustration-generative-ai-cat-as-mailman-mail-post-delivery-service-postman-268937340.jpg',
+            name: 'Naomi Reliasar',
+            japaneseName: 'ナオミ レリアサー',
+          },
+        },
       },
       {
         name: 'moeder is guest',
         email: 'memoeder@example.com',
         password: 'Test1234!',
         roles: ['GUEST'],
+        profile: {
+          create: {
+            bio: 'I am a software developer',
+            avatar:
+              'https://thumbs.dreamstime.com/b/cat-as-mailman-post-delivery-service-postman-illustration-generative-ai-cat-as-mailman-mail-post-delivery-service-postman-268937340.jpg',
+            name: 'Naomi Reliasar',
+            japaneseName: 'ナオミ レリアサー',
+          },
+        },
       },
       {
         name: 'vader is user',
         email: 'mevader@example.com',
         password: 'Test1234!',
         roles: ['USER'],
+        profile: {
+          create: {
+            bio: 'I am a software developer',
+            avatar:
+              'https://thumbs.dreamstime.com/b/cat-as-mailman-post-delivery-service-postman-illustration-generative-ai-cat-as-mailman-mail-post-delivery-service-postman-268937340.jpg',
+            name: 'Naomi Reliasar',
+            japaneseName: 'ナオミ レリアサー',
+          },
+        },
       },
     ]
 
@@ -138,6 +201,7 @@ export default async () => {
           'Shibuya Scramble Crossing, 21 Udagawa-cho, Shibuya City, Tokyo, Japan',
         type: 'PHOTO_GALLERY',
       },
+      ...generateManyPosts(25),
     ]
 
     for (const post of posts) {

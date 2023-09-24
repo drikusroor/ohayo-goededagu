@@ -25,6 +25,7 @@ export const postTypeOptions = [
 
 interface IArticleTypeIconProps {
   type: EPostType
+  showTitle?: boolean
 }
 
 export const getIcon = (type: EPostType) => {
@@ -44,13 +45,13 @@ export const getIcon = (type: EPostType) => {
   }
 }
 
-const ArticleTypeIcon = ({ type }: IArticleTypeIconProps) => {
+const ArticleTypeIcon = ({ type, showTitle = true }: IArticleTypeIconProps) => {
   const label = postTypeOptions.find((option) => option.value === type)?.label
 
   return (
     <div
       className="bg-cobalt-red-500 relative flex h-10 w-10 items-center justify-center rounded-full text-lg font-semibold text-slate-500"
-      title={`This is a ${label} post`}
+      title={showTitle ? `This is a ${label} post` : undefined}
     >
       <img
         src="/images/avatar.png"

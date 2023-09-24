@@ -28,6 +28,16 @@ export const usersWithRoles: QueryResolvers['usersWithRoles'] = ({ roles }) => {
   })
 }
 
+export const usersWithPosts: QueryResolvers['usersWithPosts'] = () => {
+  return db.user.findMany({
+    where: {
+      posts: {
+        some: {},
+      },
+    },
+  })
+}
+
 export const user: QueryResolvers['user'] = ({ id }) => {
   return db.user.findUnique({
     where: { id },
@@ -266,7 +276,7 @@ export const emailUser = async () => {
 
   console.log('Sending email to:', userEmailAddress)
 
-  const info = await sendEmail({
+  await sendEmail({
     to: user.email,
     subject: 'Test email',
     text: 'This is a test email',

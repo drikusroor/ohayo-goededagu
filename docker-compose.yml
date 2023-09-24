@@ -12,6 +12,16 @@ services:
     ports:
       - 5432:5432
 
+  db_test:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: mysecretpassword
+    volumes:
+      - ./data_test:/var/lib/postgresql/data
+    ports:
+      - 5433:5432
+
 volumes:
   postgres_data:
     driver: local

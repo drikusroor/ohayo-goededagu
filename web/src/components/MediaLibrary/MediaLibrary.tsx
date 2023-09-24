@@ -4,7 +4,6 @@ import Button from 'src/components/Button/Button'
 import { ICloudinary } from 'src/types/cloudinary'
 
 import { ICloudinaryUploadResultInfo } from '../Upload/Upload/Upload'
-import UploadList from '../UploadList/UploadList'
 
 interface IMediaLibraryProps {
   name: string

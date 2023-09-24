@@ -7,28 +7,22 @@
 // 'src/pages/HomePage/HomePage.js'         -> HomePage
 // 'src/pages/Admin/BooksPage/BooksPage.js' -> AdminBooksPage
 
-import { Router, Route, Set, Private, Redirect } from '@redwoodjs/router'
+import { Router, Route, Set, Private } from '@redwoodjs/router'
 
 import ScaffoldLayout from 'src/layouts/ScaffoldLayout'
 
 import { useAuth } from './auth'
 import AdminDashboardLayout from './layouts/AdminDashboardLayout/AdminDashboardLayout'
+import RedirectAdmin from './layouts/AdminDashboardLayout/AdminRedirect/AdminRedirect'
 import BlogLayout from './layouts/BlogLayout/BlogLayout'
-import { Role } from './types/role'
-
-const BlogLoader = () => <BlogLayout skeleton />
+import BlogLoader from './layouts/BlogLayout/BlogLoader/BlogLoader'
 
 const Routes = () => {
-  const { currentUser } = useAuth()
-  const requiredRolesAdminPosts = ['ADMIN', 'MODERATOR']
-  const roles = (currentUser?.roles || []) as Role[]
-  const adminRedirect = roles.some((role) => requiredRolesAdminPosts.includes(role)) ? '/admin/posts' : '/admin/profile/self'
-
   return (
     <Router useAuth={useAuth}>
       <Private unauthenticated="login">
         <Set wrap={AdminDashboardLayout}>
-          <Route path="/admin" page={() => <Redirect to={adminRedirect} />} name="admin" />
+          <Route path="/admin" page={RedirectAdmin} name="admin" />
           <Set wrap={ScaffoldLayout} title="My Posts" titleTo="myPosts" buttonLabel="New Post" buttonTo="newPost">
             <Route path="/admin/my-posts" page={PostMyPostsPage} name="myPosts" />
           </Set>
@@ -50,15 +44,8 @@ const Routes = () => {
             <Route path="/admin/comments/{id:Int}" page={CommentCommentPage} name="comment" />
             <Route path="/admin/comments" page={CommentCommentsPage} name="comments" />
           </Set>
-          <Set wrap={ScaffoldLayout} title="Profile" titleTo="profileSelf" buttonLabel="New Profile" buttonTo="newProfile">
-            <Route path="/admin/profile/new" page={ProfileNewProfilePage} name="newProfile" />
-            <Route path="/admin/profile/self" page={ProfileProfileSelfPage} name="profileSelf" />
-            <Route path="/admin/profile/self/edit" page={ProfileEditProfilePage} name="editProfile" />
-            <Route path="/admin/profile/{id:Int}" page={ProfileProfilePage} name="profile" />
-          </Set>
-          <Set wrap={ScaffoldLayout} title="Account" titleTo="account">
+          <Set wrap={ScaffoldLayout} title="Account" titleTo="editAccount">
             <Route path="/admin/account/edit" page={AccountEditAccountPage} name="editAccount" />
-            <Route path="/admin/account" page={AccountAccountPage} name="account" />
           </Set>
           <Set wrap={ScaffoldLayout} title="Moderate Users" titleTo="userModeration">
             <Route path="/admin/user-moderation" page={UserModerationPage} name="userModeration" />
