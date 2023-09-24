@@ -34,8 +34,12 @@
     "@fortawesome/free-regular-svg-icons": "^6.4.0",
     "@fortawesome/free-solid-svg-icons": "^6.4.0",
     "@fortawesome/react-fontawesome": "latest",
+    "@sentry/node": "^7.70.0",
+    "@sentry/profiling-node": "^1.2.1",
+    "add": "^2.0.6",
     "babel-plugin-graphql-tag": "^3.3.0",
     "cloudinary": "^1.37.3",
-    "react-icons": "^4.10.1"
+    "react-icons": "^4.10.1",
+    "yarn": "^1.22.19"
   }
 }
