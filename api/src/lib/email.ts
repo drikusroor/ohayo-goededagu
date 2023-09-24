@@ -1,5 +1,4 @@
 import * as nodemailer from 'nodemailer'
-import './sentry'
 
 interface Options {
   to: string | string[]
