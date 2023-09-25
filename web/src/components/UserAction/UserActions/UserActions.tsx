@@ -68,9 +68,9 @@ const UserActionsList = ({ userActions }: FindUserActions) => {
               <td>
                 <Link
                   to={
-                    userAction.user.profile
-                      ? routes.profile({
-                          id: userAction.user.profile.id,
+                    userAction.user
+                      ? routes.viewProfile({
+                          id: userAction.user.id,
                         })
                       : routes.userAction({ id: userAction.id })
                   }
