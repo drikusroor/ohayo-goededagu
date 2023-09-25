@@ -1,13 +1,13 @@
 import { useEffect } from 'react'
 
-import { Image } from 'types/graphql'
+import { Image, ImageGalleryImage } from 'types/graphql'
 
 import { classNames } from 'src/lib/class-names'
 
 import ImageModal from '../ImageModal/ImageModal'
 
 interface IPhotoGridProps extends React.HTMLAttributes<HTMLDivElement> {
-  images: Image[]
+  images: ImageGalleryImage[]
   preview?: boolean
 }
 
@@ -30,14 +30,22 @@ const PhotoGrid = ({ className, images = [], preview }: IPhotoGridProps) => {
     }
   }, [modalInfo])
 
-  const openModal = ({ url, id, imageId, title, description }: Image) =>
+  const openModal = ({
+    url,
+    id,
+    imageId,
+    alt,
+    description,
+  }: ImageGalleryImage) =>
     setModalInfo({
       url,
       id: id.toString(),
       imageId,
-      title,
+      title: alt,
       description,
     })
+
+  console.log('PhotoGrid: images', images)
 
   return (
     <>
@@ -54,7 +62,7 @@ const PhotoGrid = ({ className, images = [], preview }: IPhotoGridProps) => {
                     className="h-full w-full rounded-md object-cover align-middle"
                     key={photo.imageId}
                     src={photo.url}
-                    alt={photo.imageId}
+                    alt={photo.alt || photo.imageId}
                   />
                 </li>
               )
@@ -73,7 +81,7 @@ const PhotoGrid = ({ className, images = [], preview }: IPhotoGridProps) => {
                     className="h-full w-full cursor-pointer rounded-md object-cover align-middle"
                     key={index}
                     src={photo.url}
-                    alt={photo.imageId}
+                    alt={photo.alt || photo.imageId}
                     // eslint-disable-next-line jsx-a11y/no-noninteractive-element-to-interactive-role
                     role="button"
                     tabIndex={0}
