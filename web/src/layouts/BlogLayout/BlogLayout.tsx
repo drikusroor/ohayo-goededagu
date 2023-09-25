@@ -13,6 +13,7 @@ import { Toaster } from '@redwoodjs/web/dist/toast'
 
 import { useAuth } from 'src/auth'
 import Button from 'src/components/Button/Button'
+import ScrollToTop from 'src/components/ScrollToTop/ScrollToTop'
 import Skeleton from 'src/components/Skeleton/Skeleton'
 
 type BlogLayoutProps = {
@@ -69,6 +70,7 @@ const BlogLayout = ({ children, skeleton }: BlogLayoutProps) => {
   return (
     <div className="flex min-h-screen flex-col">
       <Toaster />
+      <ScrollToTop />
       <header className="w-full pb-5 text-center">
         {isAuthenticated && currentUser && (
           <div className="fixed top-0 z-20 flex w-full items-center justify-between bg-slate-900 p-3 text-white">
