@@ -26,13 +26,15 @@ const ViewProfile = ({ user }: IViewProfileProps) => {
   return (
     <div className="grid max-w-6xl gap-8">
       <div className="max-w-2xl">
-        <h2 className="text-2xl font-bold">Profile</h2>
+        <h2 className="text-2xl font-bold">Gebruikersprofiel</h2>
         {profile ? (
           <div className="mt-3">
             <Person profile={profile} />
           </div>
         ) : (
-          <div className="mt-3 text-slate-500">This user has no profile.</div>
+          <div className="mt-3 text-slate-500">
+            Deze gebruiker heeft geen profiel.
+          </div>
         )}
       </div>
       <div>
