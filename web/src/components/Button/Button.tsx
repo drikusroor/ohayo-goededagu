@@ -3,7 +3,7 @@ interface IButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   id?: string
   className?: string
   color?: 'cobalt-blue' | 'monza-red' | ''
-  size?: 'xs' | 'sm' | 'md' | 'lg'
+  size?: 'xs' | 'sm' | 'md' | 'lg' | ''
   children?: React.ReactNode
   text?: string
   title?: string
