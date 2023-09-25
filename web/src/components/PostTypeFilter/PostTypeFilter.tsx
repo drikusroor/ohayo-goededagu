@@ -26,21 +26,21 @@ const getParams = (
   postType: EPostType
 ) => {
   // if removing the last post type, remove the postTypes param
-  if (activePostTypes.length === 1 && activePostTypes.includes(postType)) {
-    const { postTypes: _postTypes, ...rest } = currentParams
+  const { postTypes: _postTypes, page: _page, ...rest } = currentParams
 
+  if (activePostTypes.length === 1 && activePostTypes.includes(postType)) {
     return rest
   }
 
   if (activePostTypes.includes(postType)) {
     return {
-      ...currentParams,
+      ...rest,
       postTypes: activePostTypes.filter((type) => type !== postType),
     }
   }
 
   return {
-    ...currentParams,
+    ...rest,
     postTypes: [...activePostTypes, postType],
   }
 }

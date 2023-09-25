@@ -19,22 +19,22 @@ const getParams = (
   activeAuthors: number[],
   author: number
 ) => {
+  const { authors: _authors, page: _page, ...rest } = currentParams
+
   // if removing the last author, remove the authors param
   if (activeAuthors.length === 1 && activeAuthors.includes(author)) {
-    const { authors: _authors, ...rest } = currentParams
-
     return rest
   }
 
   if (activeAuthors.includes(author)) {
     return {
-      ...currentParams,
+      ...rest,
       authors: activeAuthors.filter((id) => id !== author),
     }
   }
 
   return {
-    ...currentParams,
+    ...rest,
     authors: [...activeAuthors, author],
   }
 }

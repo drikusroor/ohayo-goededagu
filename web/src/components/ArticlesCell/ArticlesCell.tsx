@@ -72,6 +72,24 @@ interface Props {
 
 export const Loading = () => (
   <div className="grid max-w-6xl">
+    <div className="flex flex-wrap justify-center gap-4 px-3">
+      <div className="flex gap-2">
+        {Array.from({ length: 5 }).map((_, i) => (
+          <Skeleton
+            key={i}
+            className="!h-12 !w-12 animate-pulse rounded-full bg-gray-200"
+          />
+        ))}
+      </div>
+      <div className="flex gap-2">
+        {Array.from({ length: 5 }).map((_, i) => (
+          <Skeleton
+            key={i}
+            className="!h-12 !w-12 animate-pulse rounded-full bg-gray-200"
+          />
+        ))}
+      </div>
+    </div>
     {Array.from({ length: 5 }).map((_, i) => (
       <div key={i}>
         <Skeleton className="m-3 h-80 rounded-md md:m-10 md:h-[480px]" />
