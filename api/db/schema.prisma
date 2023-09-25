@@ -130,6 +130,9 @@ model ImageGalleryImage {
   createdAt      DateTime     @default(now())
   imageId        String
   url            String
+  alt            String?
+  title          String?
+  description    String?
   imageGalleryId Int
   imageGallery   ImageGallery @relation(fields: [imageGalleryId], references: [id], onDelete: Cascade)
 }

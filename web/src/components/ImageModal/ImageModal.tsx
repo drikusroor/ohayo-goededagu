@@ -10,7 +10,7 @@ interface Props {
 const ImageModal = ({ info }: Props) => {
   if (!info) return null
 
-  const { id, url, title, description } = info
+  const { id, url, alt, title, description } = info
 
   const closeModal = () => {
     document.getElementById(id).style.display = 'none'
@@ -47,7 +47,7 @@ const ImageModal = ({ info }: Props) => {
               className="max-w-fit rounded-md md:h-5/6"
               src={url}
               key={id}
-              alt={`${title} - ${description}`}
+              alt={alt || [title, description].filter(Boolean).join(' - ')}
             />
             {title && <span className="text-xl">{title}</span>}
             {description && <span>{description}</span>}

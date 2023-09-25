@@ -4,6 +4,9 @@ export const schema = gql`
     createdAt: DateTime!
     imageId: String!
     url: String!
+    alt: String
+    title: String
+    description: String
     imageGalleryId: Int!
     imageGallery: ImageGallery!
   }
@@ -17,12 +20,18 @@ export const schema = gql`
     imageId: String!
     url: String!
     imageGalleryId: Int!
+    alt: String
+    title: String
+    description: String
   }
 
   input UpdateImageGalleryImageInput {
     imageId: String
     url: String
     imageGalleryId: Int
+    alt: String
+    title: String
+    description: String
   }
 
   type Mutation {
