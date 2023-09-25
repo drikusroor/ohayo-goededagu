@@ -8,6 +8,8 @@ import {
   BsFillExclamationTriangleFill,
   BsFillXCircleFill,
   BsSaveFill,
+  BsExclamation,
+  BsExclamationTriangleFill,
 } from 'react-icons/bs'
 import type {
   CreateImageInput,
@@ -435,7 +437,8 @@ const PostForm = (props: PostFormProps) => {
                 >
                   <BsFillXCircleFill />
                   Cancel
-                  <span className="user-select-none absolute left-full ml-2 w-32 text-left text-xs text-monza-red-500 opacity-0 transition-opacity group-hover:opacity-100">
+                  <span className="user-select-none absolute bottom-full left-0 mb-2 w-32 rounded-md border-2 border-monza-red-500 bg-white p-2 text-left text-xs text-monza-red-500 opacity-0 shadow-md transition-opacity group-hover:opacity-100">
+                    <BsExclamationTriangleFill className="text-md mb-1 mr-1 inline-block" />
                     Warning: All unsaved changes will be lost.
                   </span>
                 </Button>
