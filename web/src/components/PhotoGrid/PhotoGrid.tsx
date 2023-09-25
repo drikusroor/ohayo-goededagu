@@ -15,6 +15,7 @@ export interface IModalInfo {
   url: string
   id: string
   imageId: string
+  alt: string
   title: string
   description: string
 }
@@ -35,17 +36,17 @@ const PhotoGrid = ({ className, images = [], preview }: IPhotoGridProps) => {
     id,
     imageId,
     alt,
+    title,
     description,
   }: ImageGalleryImage) =>
     setModalInfo({
       url,
       id: id.toString(),
       imageId,
-      title: alt,
+      alt,
+      title,
       description,
     })
-
-  console.log('PhotoGrid: images', images)
 
   return (
     <>
@@ -62,7 +63,12 @@ const PhotoGrid = ({ className, images = [], preview }: IPhotoGridProps) => {
                     className="h-full w-full rounded-md object-cover align-middle"
                     key={photo.imageId}
                     src={photo.url}
-                    alt={photo.alt || photo.imageId}
+                    alt={
+                      photo.alt ||
+                      [photo.title, photo.description]
+                        .filter(Boolean)
+                        .join(' - ')
+                    }
                   />
                 </li>
               )
@@ -81,7 +87,12 @@ const PhotoGrid = ({ className, images = [], preview }: IPhotoGridProps) => {
                     className="h-full w-full cursor-pointer rounded-md object-cover align-middle"
                     key={index}
                     src={photo.url}
-                    alt={photo.alt || photo.imageId}
+                    alt={
+                      photo.alt ||
+                      [photo.description, photo.title]
+                        .filter(Boolean)
+                        .join(' - ')
+                    }
                     // eslint-disable-next-line jsx-a11y/no-noninteractive-element-to-interactive-role
                     role="button"
                     tabIndex={0}

@@ -5,6 +5,7 @@ export const schema = gql`
     imageId: String!
     url: String!
     alt: String
+    title: String
     description: String
     imageGalleryId: Int!
     imageGallery: ImageGallery!
@@ -20,6 +21,7 @@ export const schema = gql`
     url: String!
     imageGalleryId: Int!
     alt: String
+    title: String
     description: String
   }
 
@@ -28,6 +30,7 @@ export const schema = gql`
     url: String
     imageGalleryId: Int
     alt: String
+    title: String
     description: String
   }
 

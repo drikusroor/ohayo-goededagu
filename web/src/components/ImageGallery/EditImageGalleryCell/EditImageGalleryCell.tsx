@@ -27,6 +27,7 @@ export const QUERY = gql`
         id
         url
         alt
+        title
         description
       }
     }
@@ -163,12 +164,15 @@ export const Success = ({
   }
 
   const onUpdateImageGalleryImage = (image, data) => {
+    const { alt, title, description } = data
+
     updateImageGalleryImage({
       variables: {
         id: image.id,
         input: {
-          alt: data.alt,
-          description: data.description,
+          alt,
+          title,
+          description,
         },
       },
     })
@@ -204,6 +208,13 @@ export const Success = ({
                 defaultValue={image.alt}
                 className="mt-2 rounded-md border border-gray-300 px-1 focus:outline-none focus:ring-1 focus:ring-blue-500"
                 placeholder="Alt"
+              />
+
+              <TextField
+                name="title"
+                defaultValue={image.title}
+                className="mt-2 rounded-md border border-gray-300 px-1 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                placeholder="Title"
               />
 
               <TextField

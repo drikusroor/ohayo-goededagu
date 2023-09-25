@@ -69,6 +69,7 @@ export const QUERY = gql`
             url
             imageId
             alt
+            title
             description
           }
         }
