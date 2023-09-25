@@ -168,4 +168,5 @@ model UserAction {
 enum UserActionType {
   LOGIN
   FORGOT_PASSWORD
+  SIGNUP
 }

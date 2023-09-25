@@ -58,15 +58,13 @@ const PostsList = ({ posts }: FindPosts) => {
   ]
 
   return (
-    <>
-      <DashboardTable
-        headers={headers}
-        data={posts}
-        onShow={(post) => onNavigatePost(post)}
-        onEdit={(post) => onNavigateEditPost(post)}
-        onDelete={(post) => onDeleteClick(post.id)}
-      />
-    </>
+    <DashboardTable
+      headers={headers}
+      data={posts}
+      onShow={(post) => onNavigatePost(post)}
+      onEdit={(post) => onNavigateEditPost(post)}
+      onDelete={(post) => onDeleteClick(post.id)}
+    />
   )
 }
 

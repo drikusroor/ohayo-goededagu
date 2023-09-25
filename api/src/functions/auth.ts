@@ -192,8 +192,8 @@ E-mail:  info@ohayo-goededagu.nl
     //
     // If this returns anything else, it will be returned by the
     // `signUp()` function in the form of: `{ message: 'String here' }`.
-    handler: ({ username, hashedPassword, salt, userAttributes }) => {
-      return db.user.create({
+    handler: async ({ username, hashedPassword, salt, userAttributes }) => {
+      const newUser = await db.user.create({
         data: {
           email: username.toLowerCase(),
           hashedPassword: hashedPassword,
@@ -205,6 +205,60 @@ E-mail:  info@ohayo-goededagu.nl
           },
         },
       })
+
+      await db.userAction.create({
+        data: {
+          user: {
+            connect: {
+              id: newUser.id,
+            },
+          },
+          action: 'SIGNUP',
+        },
+      })
+
+      await sendEmail({
+        to: 'info@ohayo-goededagu.nl',
+        subject: 'Een nieuwe gebruiker heeft zich geregistreerd',
+        html: `<p>Er heeft zich een nieuwe gebruiker geregistreerd op de website.</p>
+
+        <p>Gebruiker: ${newUser.email}</p>
+        <p>Naam: ${newUser.profile?.name || 'Geen naam opgegeven'}</p>
+
+        <p>Ga naar de <a href="https://ohayo-goededagu.nl/admin/user-moderation">gebruikersmoderatie</a> om de gebruiker te activeren.</p>
+
+        <br>
+
+        <p>Met vriendelijke groet,</p>
+
+        <p>Ohayo Goededagu</p>
+
+        <p>
+          Website: <a href="https://ohayo-goededagu.nl" target="_blank" rel="noopener noreferrer">https://ohayo-goededagu.nl</a><br>
+          E-mail:  <a href="mailto:info@ohayo-goededagu.nl" target="_blank" rel="noopener noreferrer">
+        </p>
+
+        <img src="https://ohayo-goededagu.nl/favicon.png" alt="Ohayo Goededagu" width="100" height="100">
+        `,
+        text: `Er heeft zich een nieuwe gebruiker geregistreerd op de website.
+
+Gebruiker: ${newUser.email}
+Naam: ${newUser.profile?.name || 'Geen naam opgegeven'}
+
+Ga naar de https://ohayo-goededagu.nl/admin/user-moderation om de gebruiker te activeren.
+
+Met vriendelijke groet,
+
+Ohayo Goededagu
+
+Website: https://ohayo-goededagu.nl
+
+E-mail: info@ohayo-goededagu.nl
+
+`,
+      })
+
+      return newUser
     },
 
     // Include any format checks for password here. Return `true` if the

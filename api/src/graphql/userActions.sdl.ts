@@ -12,6 +12,7 @@ export const schema = gql`
   enum UserActionType {
     LOGIN
     FORGOT_PASSWORD
+    SIGNUP
   }
 
   type Query {
