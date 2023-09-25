@@ -1,10 +1,10 @@
-import { BsTrash } from 'react-icons/bs'
+import { BsSave, BsSave2, BsSaveFill, BsTrash } from 'react-icons/bs'
 import type {
   EditImageGalleryById,
   UpdateImageGalleryInput,
 } from 'types/graphql'
 
-import { Form } from '@redwoodjs/forms'
+import { Form, TextField } from '@redwoodjs/forms'
 import { navigate, routes } from '@redwoodjs/router'
 import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
 import { useMutation } from '@redwoodjs/web'
@@ -26,6 +26,8 @@ export const QUERY = gql`
       images {
         id
         url
+        alt
+        description
       }
     }
   }
@@ -50,6 +52,17 @@ const ADD_IMAGE_GALLERY_IMAGES_MUTATION = gql`
     $images: [CreateImageGalleryImageInput!]!
   ) {
     addImageGalleryImagesToImageGallery(id: $id, images: $images) {
+      id
+    }
+  }
+`
+
+const UPDATE_IMAGE_GALLERY_IMAGE_MUTATION = gql`
+  mutation UpdateImageGalleryImageMutation(
+    $id: Int!
+    $input: UpdateImageGalleryImageInput!
+  ) {
+    updateImageGalleryImage(id: $id, input: $input) {
       id
     }
   }
@@ -98,6 +111,19 @@ export const Success = ({
     }
   )
 
+  const [updateImageGalleryImage] = useMutation(
+    UPDATE_IMAGE_GALLERY_IMAGE_MUTATION,
+    {
+      onCompleted: () => {
+        toast.success('Image updated')
+      },
+      onError: (error) => {
+        toast.error(error.message)
+      },
+      refetchQueries: [{ query: QUERY, variables: { id: imageGallery.id } }],
+    }
+  )
+
   const [deleteImageGalleryImage] = useMutation(
     DELETE_IMAGE_GALLERY_IMAGE_MUTATION,
     {
@@ -136,6 +162,18 @@ export const Success = ({
     })
   }
 
+  const onUpdateImageGalleryImage = (image, data) => {
+    updateImageGalleryImage({
+      variables: {
+        id: image.id,
+        input: {
+          alt: data.alt,
+          description: data.description,
+        },
+      },
+    })
+  }
+
   return (
     <div className="rw-segment">
       <header className="rw-segment-header">
@@ -155,17 +193,47 @@ export const Success = ({
         <h2 className="text-xl font-semibold">Images</h2>
         <div className="mt-4 grid grid-cols-3 gap-4">
           {imageGallery?.images?.map((image) => (
-            <div key={image.id}>
+            <Form
+              key={image.id}
+              onSubmit={(data) => onUpdateImageGalleryImage(image, data)}
+            >
               <img src={image.url} alt={imageGallery.name} key={image.id} />
-              <Button
-                color="monza-red"
-                className="mt-2 flex flex-row items-center gap-2"
-                onClick={() => onDeleteImageGalleryImage(image.id)}
-              >
-                <BsTrash />
-                Delete
-              </Button>
-            </div>
+
+              <TextField
+                name="alt"
+                defaultValue={image.alt}
+                className="mt-2 rounded-md border border-gray-300 px-1 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                placeholder="Alt"
+              />
+
+              <TextField
+                name="description"
+                defaultValue={image.description}
+                className="mt-2 rounded-md border border-gray-300 px-1 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                placeholder="Description"
+              />
+
+              <div className="mt-2 flex flex-row flex-wrap items-center gap-2">
+                <Button
+                  color="monza-red"
+                  size="md"
+                  className="flex flex-row items-center gap-2"
+                  onClick={() => onDeleteImageGalleryImage(image.id)}
+                >
+                  <BsTrash />
+                  Delete
+                </Button>
+                <Button
+                  color="cobalt-blue"
+                  type="submit"
+                  size="md"
+                  className="flex flex-row items-center gap-2"
+                >
+                  <BsSaveFill />
+                  Save
+                </Button>
+              </div>
+            </Form>
           ))}
           {imageGallery?.images?.length === 0 && (
             <div>
