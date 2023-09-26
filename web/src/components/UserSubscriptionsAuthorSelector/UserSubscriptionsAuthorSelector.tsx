@@ -44,6 +44,7 @@ const UserSubscriptionsAuthorSelector = ({
               key={user.id}
               className="group flex items-center gap-2"
               onClick={() => onSelect(user.id)}
+              data-testid="selected-user-subscription-author"
             >
               <div
                 className={classNames(
@@ -78,6 +79,7 @@ const UserSubscriptionsAuthorSelector = ({
                 key={user.id}
                 className="group flex items-center gap-2"
                 onClick={() => onSelect(user.id)}
+                data-testid="unselected-user-subscription-author"
               >
                 <div
                   className={classNames(
