@@ -42,21 +42,6 @@ describe('UserSubscriptionsAuthorSelector', () => {
   it('calls the onSelect function when a user is clicked', () => {
     const users = [
       {
-        id: 123,
-        email: 'info@example.com',
-        profile: {
-          name: 'John Doe',
-          avatar: 'https://example.com/avatar.jpg',
-          userId: 123,
-          bio: 'Lorem ipsum dolor sit amet',
-          japaneseName: 'ジョン・ドゥ',
-        },
-        posts: [],
-        roles: ['USER'],
-        userSubscriptions: [],
-      },
-
-      {
         id: 456,
         email: 'info@example.com',
         profile: {
