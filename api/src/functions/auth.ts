@@ -225,6 +225,31 @@ ${emailFooterAsText}
 `,
       })
 
+      await sendEmail({
+        to: newUser.email,
+        subject: 'Welkom bij Ohayo Goededagu',
+        html: `<p>Beste ${newUser.profile?.name || 'bezoeker'},</p>
+
+        <p>Welkom bij Ohayo Goededagu. Je kunt nu inloggen op de website. Wel kijken we nog even wie je bent voordat we je toegang geven tot de commentsectie.</p>
+
+        <p>Vergeet niet om je profiel aan te vullen zodat andere gebruikers weten wie je bent. Ga daarvoor naar <a href="https://ohayo-goededagu.nl/admin/account/edit">je account instellingen</a>.</p>
+
+        <p>Als je nog vragen hebt, dan kun je altijd contact met ons opnemen.</p>
+
+        ${emailFooter}
+        `,
+        text: `Beste ${newUser.profile?.name || 'bezoeker'},
+
+Welkom bij Ohayo Goededagu. Je kunt nu inloggen op de website. Wel kijken we nog even wie je bent voordat we je toegang geven tot de commentsectie.
+
+Vergeet niet om je profiel aan te vullen zodat andere gebruikers weten wie je bent. Ga daarvoor naar https://ohayo-goededagu.nl/admin/account/edit.
+
+Als je nog vragen hebt, dan kun je altijd contact met ons opnemen.
+
+${emailFooterAsText}
+`,
+      })
+
       return newUser
     },
 
