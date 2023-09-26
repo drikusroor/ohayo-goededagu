@@ -22,6 +22,7 @@ interface Props {
 const FullLayout = ({ article }: Props) => {
   const { width } = useWindowDimensions()
   const isMobile = width < 428
+  console.log('ismobile', isMobile)
 
   const authorName =
     article?.user?.profile?.name || article?.user?.name || 'Anonymous'
@@ -110,7 +111,7 @@ const FullLayout = ({ article }: Props) => {
                 </Link>{' '}
                 <DisplayDatetime
                   datetime={article.createdAt}
-                  showDate={true}
+                  showDate={isMobile ? false : true}
                   className="text-sm text-slate-500"
                 />
                 <LocationPin
