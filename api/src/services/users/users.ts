@@ -10,6 +10,7 @@ import { hashPassword } from '@redwoodjs/auth-dbauth-api'
 
 import { db } from 'src/lib/db'
 import { sendEmail } from 'src/lib/email'
+import { emailFooter, emailFooterAsText } from 'src/lib/email/footer'
 
 export const users: QueryResolvers['users'] = () => {
   return db.user.findMany()
@@ -135,6 +136,9 @@ export const updateUserRoles = async ({ input }) => {
 
   const user = await db.user.findUnique({
     where: { id: input.id },
+    include: {
+      profile: true,
+    },
   })
 
   if (!user) {
@@ -149,12 +153,32 @@ export const updateUserRoles = async ({ input }) => {
     throw new Error('User not authorized')
   }
 
-  return db.user.update({
+  const updated = await db.user.update({
     data: {
       roles: input.roles,
     },
     where: { id: input.id },
   })
+
+  // if roles are ['GUEST', 'USER'], it means we have "approved" the user
+  if (input.roles.includes('USER') && input.roles.includes('GUEST')) {
+    await sendEmail({
+      to: user.email,
+      subject: 'Je account is goedgekeurd',
+      text: `Beste ${user.profile?.name || 'bezoeker'},
+
+Je account is goedgekeurd en je kunt nu comments plaatsen op de website. We wensen je veel plezier!
+
+${emailFooterAsText}`,
+      html: `<p>Beste ${user.profile?.name || 'bezoeker'},</p>
+
+<p>Je account is goedgekeurd en je kunt nu comments plaatsen op de website. We wensen je veel plezier!</p>
+
+${emailFooter}`,
+    })
+  }
+
+  return updated
 }
 
 export const updateUserPassword = async ({
