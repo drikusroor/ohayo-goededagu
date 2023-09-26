@@ -21,6 +21,7 @@ export const schema = gql`
     posts: [Post]!
     profile: Profile
     roles: [Role!]!
+    userSubscriptions: [UserSubscription!]!
   }
 
   type Query {

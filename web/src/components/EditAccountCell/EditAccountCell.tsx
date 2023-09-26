@@ -5,6 +5,8 @@ import { useMutation } from '@redwoodjs/web'
 import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
+import UserSubscriptionsCell from 'src/components/UserSubscriptionsCell/UserSubscriptionsCell'
+
 import Button from '../Button/Button'
 import EditAccountForm from '../EditAccountForm/EditAccountForm'
 import ProfileForm from '../Profile/ProfileForm/ProfileForm'
@@ -24,6 +26,11 @@ export const QUERY = gql`
         avatar
         name
         japaneseName
+      }
+      userSubscriptions {
+        id
+        type
+        target
       }
     }
   }
@@ -172,6 +179,24 @@ export const Success = ({ user }: CellSuccessProps<EditUserProfileById>) => {
             loading={loadingPassword}
             error={errorPassword}
           />
+        </div>
+      </div>
+
+      <div className="rw-segment mt-5">
+        <header className="rw-segment-header">
+          <h2 className="rw-heading rw-heading-secondary">
+            Hou mij op de hoogte van
+          </h2>
+        </header>
+
+        <div className="rw-segment-main">
+          <h3 className="rw-heading rw-heading-secondary">Nieuwe posts</h3>
+
+          <div className="mt-3">
+            <UserSubscriptionsCell
+              selected={user.userSubscriptions.map((us) => us.id)}
+            />
+          </div>
         </div>
       </div>
 
