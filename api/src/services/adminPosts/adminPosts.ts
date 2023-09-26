@@ -35,6 +35,18 @@ export const createPost = async ({ input }) => {
     upsertImageGalleriesOnPost(created.id, imageGalleries)
   }
 
+  const shouldSendEmail = postInput.published
+
+  // TODO: Send email
+  if (shouldSendEmail) {
+    console.log('Send email')
+
+    await db.post.update({
+      data: { emailSent: true },
+      where: { id: created.id },
+    })
+  }
+
   return created
 }
 
@@ -66,6 +78,18 @@ export const updatePost = async ({ id, input }) => {
 
   if (imageGalleries.length > 0) {
     upsertImageGalleriesOnPost(id, imageGalleries)
+  }
+
+  const shouldSendEmail = !post.emailSent && postInput.published
+
+  // TODO: Send email
+  if (shouldSendEmail) {
+    console.log('Send email')
+
+    await db.post.update({
+      data: { emailSent: true },
+      where: { id },
+    })
   }
 
   return updated
