@@ -57,6 +57,7 @@ model Post {
   imageGalleries ImageGalleryOnPost[]
   location       String?
   likes          PostThumb[]
+  emailSent      Boolean              @default(false)
 }
 
 model PostThumb {
