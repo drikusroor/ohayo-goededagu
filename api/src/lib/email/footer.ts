@@ -7,7 +7,7 @@ export const emailFooter = `
 
 <p>
   Website: <a href="https://ohayo-goededagu.nl" target="_blank" rel="noopener noreferrer">https://ohayo-goededagu.nl</a><br>
-  E-mail:  <a href="mailto:info@ohayo-goededagu.nl" target="_blank" rel="noopener noreferrer">
+  E-mail:  <a href="mailto:info@ohayo-goededagu.nl" target="_blank" rel="noopener noreferrer">info@ohayo-goededagu.nl</a>
 </p>
 
 <img src="https://ohayo-goededagu.nl/favicon.png" alt="Ohayo Goededagu" width="100" height="100">
