@@ -8,6 +8,7 @@ import {
   FieldError,
   Submit,
   EmailField,
+  TextField,
 } from '@redwoodjs/forms'
 import { Link, navigate, routes } from '@redwoodjs/router'
 import { MetaTags } from '@redwoodjs/web'
@@ -34,6 +35,7 @@ const SignupPage = () => {
     const response = await signUp({
       username: data.username.toLowerCase(),
       password: data.password,
+      name: data.name,
     })
 
     if (response.message) {
@@ -61,6 +63,25 @@ const SignupPage = () => {
             <div className="rw-segment-main">
               <div className="rw-form-wrapper">
                 <Form onSubmit={onSubmit} className="rw-form-wrapper">
+                  <Label
+                    name="name"
+                    className="rw-label"
+                    errorClassName="rw-label rw-label-error"
+                  >
+                    Naam
+                  </Label>
+                  <TextField
+                    name="name"
+                    className="rw-input"
+                    errorClassName="rw-input rw-input-error"
+                    validation={{
+                      required: {
+                        value: true,
+                        message: 'Naam is vereist',
+                      },
+                    }}
+                  />
+
                   <Label
                     name="username"
                     className="rw-label"
