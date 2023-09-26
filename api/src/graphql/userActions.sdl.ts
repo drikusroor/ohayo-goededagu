@@ -13,6 +13,7 @@ export const schema = gql`
     LOGIN
     FORGOT_PASSWORD
     SIGNUP
+    USER_APPROVED
   }
 
   type Query {

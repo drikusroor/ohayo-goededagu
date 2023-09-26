@@ -178,6 +178,18 @@ ${emailFooter}`,
     })
   }
 
+  await db.userAction.create({
+    data: {
+      user: {
+        connect: {
+          id: user.id,
+        },
+      },
+      target: `User ${user.email} (${user.id}) approved by ${context.currentUser.email}`,
+      action: 'USER_APPROVED',
+    },
+  })
+
   return updated
 }
 
