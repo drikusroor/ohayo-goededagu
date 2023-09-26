@@ -7,6 +7,13 @@ import EmailSettingsPage from './EmailSettingsPage'
 
 describe('EmailSettingsPage', () => {
   it('renders successfully', () => {
+    mockCurrentUser({
+      id: 1,
+      name: 'John Doe',
+      email: 'info@example.com',
+      roles: ['USER'],
+    })
+
     expect(() => {
       render(<EmailSettingsPage />)
     }).not.toThrow()
