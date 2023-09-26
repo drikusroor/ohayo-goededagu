@@ -28,11 +28,7 @@ const DisplayDatetime = ({
   }, [datetime])
 
   if (!className) {
-    className = classNames(
-      'text-sm text-slate-500',
-      !showDate && 'hidden md:inline',
-      !showTimeago && 'hidden sm:inline'
-    )
+    className = classNames('text-sm text-slate-500')
   }
 
   return (
