@@ -40,7 +40,7 @@ const MediaLibrary = ({
       <Button
         id="media_library_widget"
         title="Media library"
-        className="rw-button rw-button-blue mt-4"
+        className="rw-button rw-button-blue"
         onClick={onClickOpen}
         text="Select from Media Library"
       />
