@@ -61,6 +61,24 @@ const UPDATE_USER_PASSWORD_MUTATION = gql`
   }
 `
 
+const CREATE_USER_SUBSCRIPTIONS_MUTATION = gql`
+  mutation CreateUserSubscriptionMutation(
+    $input: CreateUserSubscriptionInput!
+  ) {
+    createUserSubscription(input: $input) {
+      id
+    }
+  }
+`
+
+const DELETE_USER_SUBSCRIPTION_MUTATION = gql`
+  mutation DeleteUserSubscriptionMutation($id: Int!) {
+    deleteUserSubscription(id: $id) {
+      id
+    }
+  }
+`
+
 const EMAIL_USER_MUTATION = gql`
   mutation EmailUserMutation {
     emailUser {
@@ -115,12 +133,6 @@ export const Success = ({ user }: CellSuccessProps<EditUserProfileById>) => {
     awaitRefetchQueries: true,
   })
 
-  const [emailUser] = useMutation(EMAIL_USER_MUTATION, {
-    onCompleted: () => {
-      toast.success('Email sent')
-    },
-  })
-
   const onSave = (input: UpdateUserInput, id: EditUserById['user']['id']) => {
     updateUser({ variables: { id, input } })
   }
@@ -136,6 +148,62 @@ export const Success = ({ user }: CellSuccessProps<EditUserProfileById>) => {
   }) => {
     updateUserPassword({ variables: { input } })
   }
+
+  const [createUserSubscriptions] = useMutation(
+    CREATE_USER_SUBSCRIPTIONS_MUTATION,
+    {
+      onCompleted: () => {
+        toast.success('User subscriptions updated')
+      },
+      onError: (error) => {
+        toast.error(error.message)
+      },
+      refetchQueries: [{ query: QUERY, variables: { id: user.id } }],
+      awaitRefetchQueries: true,
+    }
+  )
+
+  const [onDeleteUserSubscription] = useMutation(
+    DELETE_USER_SUBSCRIPTION_MUTATION,
+    {
+      onCompleted: () => {
+        toast.success('User subscription deleted')
+      },
+      onError: (error) => {
+        toast.error(error.message)
+      },
+      refetchQueries: [{ query: QUERY, variables: { id: user.id } }],
+      awaitRefetchQueries: true,
+    }
+  )
+
+  const onToggleUserSubscriptionUser = (id: number) => {
+    const userSubscription = user.userSubscriptions.find(
+      (us) => us.target === id
+    )
+
+    if (userSubscription) {
+      return onDeleteUserSubscription({
+        variables: { id: userSubscription.id },
+      })
+    }
+
+    return createUserSubscriptions({
+      variables: {
+        input: {
+          type: 'POST_AUTHOR',
+          target: id,
+          userId: user.id,
+        },
+      },
+    })
+  }
+
+  const [emailUser] = useMutation(EMAIL_USER_MUTATION, {
+    onCompleted: () => {
+      toast.success('Email sent')
+    },
+  })
 
   return (
     <>
@@ -185,16 +253,19 @@ export const Success = ({ user }: CellSuccessProps<EditUserProfileById>) => {
       <div className="rw-segment mt-5">
         <header className="rw-segment-header">
           <h2 className="rw-heading rw-heading-secondary">
-            Hou mij op de hoogte van
+            Hou mij op de hoogte met e-mail notificaties
           </h2>
         </header>
 
         <div className="rw-segment-main">
-          <h3 className="rw-heading rw-heading-secondary">Nieuwe posts</h3>
+          <h2 className="rw-heading rw-heading-secondary">
+            Abonneren op posts van auteurs:
+          </h2>
 
           <div className="mt-3">
             <UserSubscriptionsCell
-              selected={user.userSubscriptions.map((us) => us.id)}
+              selected={user.userSubscriptions.map((us) => us.target)}
+              onSelect={onToggleUserSubscriptionUser}
             />
           </div>
         </div>
@@ -202,7 +273,9 @@ export const Success = ({ user }: CellSuccessProps<EditUserProfileById>) => {
 
       <div className="rw-segment mt-5">
         <header className="rw-segment-header">
-          <h2 className="rw-heading rw-heading-secondary">Send test email</h2>
+          <h2 className="rw-heading rw-heading-secondary">
+            Verstuur test e-mail
+          </h2>
         </header>
 
         <div className="rw-segment-main">

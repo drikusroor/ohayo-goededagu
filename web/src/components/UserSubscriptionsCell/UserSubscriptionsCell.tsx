@@ -5,7 +5,7 @@ import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
 import UserSubscriptionsAuthorSelector from '../UserSubscriptionsAuthorSelector/UserSubscriptionsAuthorSelector'
 
 export const QUERY = gql`
-  query FindUsersWithPostsQuery {
+  query FindUsersWithPostsForSubscriptionsCellQuery {
     users: usersWithPosts {
       id
       profile {
@@ -27,16 +27,13 @@ export const Failure = ({ error }: CellFailureProps) => (
 export const Success = ({
   users,
   selected,
+  onSelect,
 }: CellSuccessProps<UserSubscriptionsQuery>) => {
-  const onSelectUser = (id: number) => {
-    console.log(id)
-  }
-
   return (
     <UserSubscriptionsAuthorSelector
       users={users}
       selected={selected}
-      onSelect={onSelectUser}
+      onSelect={onSelect}
     />
   )
 }
