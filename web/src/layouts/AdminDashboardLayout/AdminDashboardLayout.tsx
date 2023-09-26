@@ -1,8 +1,9 @@
-import { useCallback } from 'react'
+import { useCallback, useMemo } from 'react'
 
 import {
   BsBoxArrowUp,
   BsChatLeft,
+  BsEnvelope,
   BsFillCalendarEventFill,
   BsFillHouseFill,
   BsFillJournalBookmarkFill,
@@ -26,7 +27,7 @@ interface MenuItem {
   icon?: React.ReactNode
 }
 
-const menuItems: MenuItem[] = [
+const getMenuItems = (routes) => [
   {
     name: 'Home',
     path: '/',
@@ -67,6 +68,12 @@ const menuItems: MenuItem[] = [
     icon: <BsFillPersonFill />,
   },
   {
+    name: 'Email settings',
+    path: routes.emailSettings(),
+    activeRoutePattern: '/email-settings',
+    icon: <BsEnvelope />,
+  },
+  {
     name: 'Moderate Users',
     path: '/admin/user-moderation',
     activeRoutePattern: '/user-moderation',
@@ -98,6 +105,10 @@ const AdminDashboardLayout = ({ children }: AdminDashboardLayoutProps) => {
     },
     [pathname]
   )
+
+  const menuItems = useMemo(() => {
+    return getMenuItems(routes)
+  }, [])
 
   return (
     <div className="flex flex-row">
