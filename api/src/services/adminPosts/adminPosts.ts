@@ -2,6 +2,7 @@ import { ForbiddenError } from '@redwoodjs/graphql-server'
 
 import { db } from 'src/lib/db'
 
+import notifyUsersOfPublishedPost from './helpers/notify-users-published-post'
 import upsertImageGalleriesOnPost from './helpers/upsert-image-galleries-on-post'
 
 export const adminPosts = () => {
@@ -21,30 +22,26 @@ export const createPost = async ({ input }) => {
     data: { ...postInput, userId: context.currentUser.id },
   })
 
+  const { id } = created
+
   if (postInput.type === 'VIDEO' && videoPost) {
     await db.videoPost.create({
-      data: { ...videoPost, postId: created.id },
+      data: { ...videoPost, postId: id },
     })
   }
 
   if (coverImage) {
-    await upsertCoverImage(created.id, coverImage)
+    await upsertCoverImage(id, coverImage)
   }
 
   if (imageGalleries.length > 0) {
-    upsertImageGalleriesOnPost(created.id, imageGalleries)
+    upsertImageGalleriesOnPost(id, imageGalleries)
   }
 
   const shouldSendEmail = postInput.published
 
-  // TODO: Send email
   if (shouldSendEmail) {
-    console.log('Send email')
-
-    await db.post.update({
-      data: { emailSent: true },
-      where: { id: created.id },
-    })
+    notifyUsersOfPublishedPost(id)
   }
 
   return created
@@ -82,14 +79,8 @@ export const updatePost = async ({ id, input }) => {
 
   const shouldSendEmail = !post.emailSent && postInput.published
 
-  // TODO: Send email
   if (shouldSendEmail) {
-    console.log('Send email')
-
-    await db.post.update({
-      data: { emailSent: true },
-      where: { id },
-    })
+    notifyUsersOfPublishedPost(id)
   }
 
   return updated
