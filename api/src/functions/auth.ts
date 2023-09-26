@@ -4,6 +4,7 @@ import { DbAuthHandler, DbAuthHandlerOptions } from '@redwoodjs/auth-dbauth-api'
 
 import { db } from 'src/lib/db'
 import { sendEmail } from 'src/lib/email'
+import { emailFooter, emailFooterAsText } from 'src/lib/email/footer'
 
 export const handler = async (
   event: APIGatewayProxyEvent,
@@ -42,17 +43,7 @@ export const handler = async (
 
         <p>Mocht je nog vragen hebben, dan kun je altijd contact met ons opnemen.</p>
 
-        <br>
-
-        <p>Met vriendelijke groet,</p>
-
-        <p>Ohayo Goededagu</p>
-
-        <p>
-          Website: <a href="https://ohayo-goededagu.nl" target="_blank" rel="noopener noreferrer">https://ohayo-goededagu.nl</a><br>
-          E-mail:  <a href="mailto:info@ohayo-goededagu.nl" target="_blank" rel="noopener noreferrer">info@ohayo-goededagu.nl</a>
-        </p>
-        <img src="https://ohayo-goededagu.nl/favicon.png" alt="Ohayo Goededagu" width="100" height="100">
+        ${emailFooter}
         `,
 
         text: `Beste ${userName},
@@ -65,13 +56,7 @@ Als je geen verzoek hebt gedaan om je wachtwoord te resetten, dan kun je deze em
 
 Mocht je nog vragen hebben, dan kun je altijd contact met ons opnemen.
 
-Met vriendelijke groet,
-
-Ohayo Goededagu
-
-Website: https://ohayo-goededagu.nl
-
-E-mail:  info@ohayo-goededagu.nl
+${emailFooterAsText}
 `,
       })
 
@@ -227,18 +212,7 @@ E-mail:  info@ohayo-goededagu.nl
 
         <p>Ga naar de <a href="https://ohayo-goededagu.nl/admin/user-moderation">gebruikersmoderatie</a> om de gebruiker te activeren.</p>
 
-        <br>
-
-        <p>Met vriendelijke groet,</p>
-
-        <p>Ohayo Goededagu</p>
-
-        <p>
-          Website: <a href="https://ohayo-goededagu.nl" target="_blank" rel="noopener noreferrer">https://ohayo-goededagu.nl</a><br>
-          E-mail:  <a href="mailto:info@ohayo-goededagu.nl" target="_blank" rel="noopener noreferrer">
-        </p>
-
-        <img src="https://ohayo-goededagu.nl/favicon.png" alt="Ohayo Goededagu" width="100" height="100">
+        ${emailFooter}
         `,
         text: `Er heeft zich een nieuwe gebruiker geregistreerd op de website.
 
@@ -247,14 +221,7 @@ Naam: ${newUser.profile?.name || 'Geen naam opgegeven'}
 
 Ga naar de https://ohayo-goededagu.nl/admin/user-moderation om de gebruiker te activeren.
 
-Met vriendelijke groet,
-
-Ohayo Goededagu
-
-Website: https://ohayo-goededagu.nl
-
-E-mail: info@ohayo-goededagu.nl
-
+${emailFooterAsText}
 `,
       })
 
