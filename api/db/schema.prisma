@@ -12,21 +12,22 @@ generator client {
 // to create migrations for them and apply to your dev DB.
 // TODO: Please remove the following example:
 model User {
-  id                  Int          @id @default(autoincrement())
-  email               String       @unique
+  id                  Int                @id @default(autoincrement())
+  email               String             @unique
   name                String?
   hashedPassword      String
   salt                String
   resetToken          String?
   resetTokenExpiresAt DateTime?
   posts               Post[]
-  roles               Role[]       @default([GUEST])
+  roles               Role[]             @default([GUEST])
   profile             Profile?
   comments            Comment[]
   thumbs              Thumb[]
   postThumbs          PostThumb[]
   UserAction          UserAction[]
   lastLoginAt         DateTime?
+  userSubscriptions   UserSubscription[]
 }
 
 model Profile {
@@ -170,4 +171,19 @@ enum UserActionType {
   LOGIN
   FORGOT_PASSWORD
   SIGNUP
+}
+
+model UserSubscription {
+  id        Int                  @id @default(autoincrement())
+  createdAt DateTime             @default(now())
+  user      User                 @relation(fields: [userId], references: [id])
+  userId    Int
+  type      UserSubscriptionType
+  target    Int
+}
+
+enum UserSubscriptionType {
+  POST_AUTHOR
+  POST_TYPE
+  COMMENT
 }
