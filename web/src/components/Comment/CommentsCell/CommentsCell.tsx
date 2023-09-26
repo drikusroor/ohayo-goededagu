@@ -16,7 +16,13 @@ export const QUERY = gql`
       parentId
       deleted
       user {
+        id
+        email
         name
+        profile {
+          name
+          avatar
+        }
       }
     }
   }
