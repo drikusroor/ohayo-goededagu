@@ -26,10 +26,10 @@ describe('Pagination', () => {
     }
 
     expect(() => {
-      render(<Pagination pagination={pagination} routeName="vlog" />)
+      render(<Pagination pagination={pagination} routeName="home" />)
     }).not.toThrow()
 
     const link = screen.getByRole('link', { name: '1' })
-    expect(link).toHaveAttribute('href', '/vlog?page=1')
+    expect(link).toHaveAttribute('href', '/?page=1')
   })
 })
