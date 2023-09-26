@@ -18,6 +18,7 @@ import {
   truncate,
   useWindowDimensions,
 } from 'src/lib/formatters'
+import { getUserName } from 'src/lib/get-user-name'
 
 import DisplayDatetime from '../DisplayDatetime/DisplayDatetime'
 
@@ -79,7 +80,7 @@ const DashboardTable = ({ headers, data, onDelete, onEdit, onShow }: Props) => {
                       {item.published ? <BsSendFill /> : <BsPencilSquare />}
                     </td>
                   )}
-                  {header === 'Author' && <td>{item?.user?.name}</td>}
+                  {header === 'Author' && <td>{getUserName(item?.user)}</td>}
                   {header === 'Created at' && (
                     <td>
                       <DisplayDatetime
