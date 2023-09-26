@@ -25,6 +25,11 @@ export const QUERY = gql`
         name
         japaneseName
       }
+      userSubscriptions {
+        id
+        type
+        target
+      }
     }
   }
 `
@@ -108,12 +113,6 @@ export const Success = ({ user }: CellSuccessProps<EditUserProfileById>) => {
     awaitRefetchQueries: true,
   })
 
-  const [emailUser] = useMutation(EMAIL_USER_MUTATION, {
-    onCompleted: () => {
-      toast.success('Email sent')
-    },
-  })
-
   const onSave = (input: UpdateUserInput, id: EditUserById['user']['id']) => {
     updateUser({ variables: { id, input } })
   }
@@ -129,6 +128,12 @@ export const Success = ({ user }: CellSuccessProps<EditUserProfileById>) => {
   }) => {
     updateUserPassword({ variables: { input } })
   }
+
+  const [emailUser] = useMutation(EMAIL_USER_MUTATION, {
+    onCompleted: () => {
+      toast.success('Email sent')
+    },
+  })
 
   return (
     <>
@@ -177,7 +182,9 @@ export const Success = ({ user }: CellSuccessProps<EditUserProfileById>) => {
 
       <div className="rw-segment mt-5">
         <header className="rw-segment-header">
-          <h2 className="rw-heading rw-heading-secondary">Send test email</h2>
+          <h2 className="rw-heading rw-heading-secondary">
+            Verstuur test e-mail
+          </h2>
         </header>
 
         <div className="rw-segment-main">

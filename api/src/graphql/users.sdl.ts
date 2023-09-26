@@ -7,6 +7,7 @@ export const schema = gql`
     profile: Profile
     roles: [Role!]!
     lastLoginAt: DateTime
+    userSubscriptions: [UserSubscription!]!
   }
 
   type UserWithHashedPassword {
@@ -20,6 +21,7 @@ export const schema = gql`
     posts: [Post]!
     profile: Profile
     roles: [Role!]!
+    userSubscriptions: [UserSubscription!]!
   }
 
   type Query {

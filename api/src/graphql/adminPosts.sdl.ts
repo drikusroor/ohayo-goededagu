@@ -12,6 +12,7 @@ export const schema = gql`
     coverImage: Image
     location: String
     imageGalleries: [ImageGalleryOnPost]!
+    emailSent: Boolean!
   }
 
   type Query {

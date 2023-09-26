@@ -296,4 +296,9 @@ export const User: UserRelationResolvers = {
   thumbs: (_obj, { root }) => {
     return db.user.findMany({ where: { id: root?.id } }).thumbs()
   },
+  userSubscriptions: (_obj, { root }) => {
+    return db.userSubscription.findMany({
+      where: { userId: root?.id },
+    })
+  },
 }
