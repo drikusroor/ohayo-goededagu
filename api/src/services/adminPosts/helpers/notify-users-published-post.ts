@@ -1,11 +1,9 @@
-import { Post } from 'types/graphql'
-
 import { db } from 'src/lib/db'
 import { sendEmail } from 'src/lib/email'
 import { emailFooter, emailFooterAsText } from 'src/lib/email/footer'
 
 async function notifyUsersOfPublishedPost(postId: number) {
-  const post = db.post.findUnique({
+  const post = await db.post.findUnique({
     where: { id: postId },
     include: { user: { include: { profile: true } } },
   })
@@ -44,7 +42,6 @@ async function notifyUsersOfPublishedPost(postId: number) {
           <p>Er is een nieuw artikel van ${
             user.profile?.name || 'een auteur'
           } op Ohayo Goededagu gepubliceerd: <a href="https://ohayo-goededagu.nl/article/${id}">${title}</a>!</p>
-
           ${emailFooter}
         `,
       })
@@ -54,7 +51,7 @@ async function notifyUsersOfPublishedPost(postId: number) {
   // update the post to indicate that the email has been sent to avoid sending it again
   await db.post.update({
     data: { emailSent: true },
-    where: { id },
+    where: { id: postId },
   })
 }
 
