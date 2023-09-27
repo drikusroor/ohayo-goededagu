@@ -22,6 +22,9 @@ const WorldClock = () => {
   const Tokyo2Start = new Date('2023-10-21').getTime()
   const Tokyo2End = new Date('2023-10-26').getTime()
 
+  const onTheWayThere =
+    new Date('2023-09-27').setHours(0, 0, 0, 0) ===
+    new Date().setHours(0, 0, 0, 0)
   const inTokyo1 = today > Tokyo1Start && today < Tokyo1End
   const inHakone = today > HakoneStart && today < HakoneEnd
   const inKyoto = today > KyotoStart && today < KyotoEnd
@@ -29,26 +32,35 @@ const WorldClock = () => {
   const inOsaka = today > OsakaStart && today < OsakaEnd
   const inTakayama = today > TakayamaStart && today < TakayamaEnd
   const inTokyo2 = today > Tokyo2Start && today < Tokyo2End
+  const onTheWayBack =
+    new Date('2023-10-26').setHours(0, 0, 0, 0) ===
+    new Date().setHours(0, 0, 0, 0)
 
-  const clockLabel = inTokyo1
-    ? 'Tokyo:'
+  console.log('onThewaythere', onTheWayThere)
+
+  const message = onTheWayThere
+    ? 'We zijn onderweg naar Japan! ✈️ Het avontuur is begonnen'
+    : inTokyo1
+    ? 'We zijn in Tokyo!'
     : inHakone
-    ? 'Hakone:'
+    ? 'We zijn in Hakone!'
     : inKyoto
-    ? 'Kyoto:'
+    ? 'We zijn in Kyoto!'
     : inNagasaki
-    ? 'Nagasaki:'
+    ? 'We zijn in Nagasaki!'
     : inOsaka
-    ? 'Osaka:'
+    ? 'We zijn in Osaka!'
     : inTakayama
-    ? 'Takayama:'
+    ? 'We zijn in Takayama!'
     : inTokyo2
-    ? 'Tokyo:'
-    : 'Japan:'
+    ? 'We zijn in Tokyo!'
+    : onTheWayBack
+    ? 'We zitten weer in het vliegtuig naar huis ✈️ Tot straks!'
+    : ''
 
   return (
-    <div className="flex flex-row items-center gap-2">
-      <h2>{clockLabel}</h2>
+    <div className="flex flex-col items-center justify-center">
+      <span>{message}</span>
       <iframe
         title="Japan time"
         src="https://free.timeanddate.com/clock/i91kf3v7/n248/tlde3/fcfff/tct/pct/th1/ts1/ta1"
