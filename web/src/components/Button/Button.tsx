@@ -4,9 +4,11 @@ interface IButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   className?: string
   color?: 'cobalt-blue' | 'monza-red' | ''
   size?: 'xs' | 'sm' | 'md' | 'lg' | ''
+  icon?: React.ReactNode
   children?: React.ReactNode
   text?: string
   title?: string
+  textStay?: boolean
   type?: 'button' | 'submit' | 'reset'
   variant?: 'filled' | 'outlined' | ''
 }
@@ -20,7 +22,9 @@ const Button = ({
   text = '',
   title = '',
   children,
+  icon,
   disabled,
+  textStay,
   type = 'button',
   variant: variant = 'filled',
   ...props
@@ -32,14 +36,25 @@ const Button = ({
       : `border-${theme}-500 text-${theme}-500 hover:bg-${theme}-500 hover:text-white transition-colors`
   const buttonSizes =
     size === 'xs'
-      ? `px-1 py-0.5 text-xs`
+      ? `p-1.5 text-xs`
       : size === 'sm'
-      ? `px-2 py-1 text-sm`
+      ? `text-xs`
       : size === 'md'
-      ? `px-3 py-2 text-lg`
+      ? `text-sm`
       : size === 'lg'
-      ? `px-4 py-3 text-2xl`
-      : `px-2 py-1 lg:px-3 lg:py-3 `
+      ? `text-base`
+      : `text-sm`
+  const iconSizes =
+    size === 'xs'
+      ? `text-xs`
+      : size === 'sm'
+      ? `text-sm`
+      : size === 'md'
+      ? `text-base`
+      : size === 'lg'
+      ? `text-lg`
+      : `text-base`
+
   return (
     <button
       id={id}
@@ -47,7 +62,7 @@ const Button = ({
       aria-label={text}
       title={title ? title : text ? text : ''}
       disabled={disabled}
-      className={`block rounded font-semibold uppercase
+      className={`flex flex-row items-center gap-1 rounded p-2 font-semibold uppercase
       ${disabled ? 'cursor-not-allowed opacity-50' : ''}
       ${buttonColors}
       ${buttonSizes}
@@ -56,7 +71,16 @@ const Button = ({
       onClick={onClick}
       {...props}
     >
-      {text}
+      {icon && <span className={`${iconSizes}`}>{icon}</span>}
+      {text && (
+        <span
+          className={
+            icon && !textStay ? `hidden sm:inline-block` : 'inline-block'
+          }
+        >
+          {text}
+        </span>
+      )}
       {children}
     </button>
   )

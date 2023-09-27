@@ -13,6 +13,7 @@
 
 import type { ComponentMeta } from '@storybook/react'
 import type { Meta, StoryObj } from '@storybook/your-framework'
+import { BsTrash } from 'react-icons/bs'
 
 import Button from './Button'
 
@@ -27,6 +28,7 @@ export const Filled: Story = {
   args: {
     variant: 'filled',
     text: 'Button',
+    icon: <BsTrash />,
   },
 }
 

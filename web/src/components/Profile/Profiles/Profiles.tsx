@@ -1,12 +1,14 @@
+import { BsPencil, BsSearch, BsTrash } from 'react-icons/bs'
 import type {
   DeleteProfileMutationVariables,
   FindProfiles,
 } from 'types/graphql'
 
-import { Link, routes } from '@redwoodjs/router'
+import { Link, navigate, routes } from '@redwoodjs/router'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
+import Button from 'src/components/Button/Button'
 import { QUERY } from 'src/components/Profile/ProfilesCell'
 import { timeTag, truncate } from 'src/lib/formatters'
 
@@ -64,28 +66,38 @@ const ProfilesList = ({ profiles }: FindProfiles) => {
               <td>{truncate(profile.avatar)}</td>
               <td>
                 <nav className="rw-table-actions">
-                  <Link
-                    to={routes.profile({ id: profile.id })}
-                    title={'Show profile ' + profile.id + ' detail'}
-                    className="rw-button rw-button-small"
-                  >
-                    Show
-                  </Link>
-                  <Link
-                    to={routes.editProfile({ id: profile.id })}
-                    title={'Edit profile ' + profile.id}
-                    className="rw-button rw-button-small rw-button-blue"
-                  >
-                    Edit
-                  </Link>
-                  <button
+                  <Button
                     type="button"
+                    text="Show"
+                    icon={<BsSearch />}
+                    className="text-slate-500"
+                    variant="outlined"
+                    size="xs"
+                    title={'Show profile ' + profile.id + 'detail'}
+                    onClick={() => navigate(routes.profile({ id: profile.id }))}
+                  />
+                  <Button
+                    type="button"
+                    text="Edit"
+                    color="cobalt-blue"
+                    icon={<BsPencil />}
+                    variant="outlined"
+                    size="xs"
+                    title={'Edit profile ' + profile.id}
+                    onClick={() =>
+                      navigate(routes.editProfile({ id: profile.id }))
+                    }
+                  />
+                  <Button
+                    type="button"
+                    text="Delete"
+                    color="monza-red"
+                    icon={<BsTrash />}
+                    variant="outlined"
+                    size="xs"
                     title={'Delete profile ' + profile.id}
-                    className="rw-button rw-button-small rw-button-red"
                     onClick={() => onDeleteClick(profile.id)}
-                  >
-                    Delete
-                  </button>
+                  />
                 </nav>
               </td>
             </tr>

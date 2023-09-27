@@ -1,12 +1,14 @@
+import { BsSearch, BsTrash } from 'react-icons/bs'
 import type {
   DeleteUserActionMutationVariables,
   FindUserActions,
 } from 'types/graphql'
 
-import { Link, routes } from '@redwoodjs/router'
+import { Link, navigate, routes } from '@redwoodjs/router'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
+import Button from 'src/components/Button/Button'
 import DisplayDatetime from 'src/components/DisplayDatetime/DisplayDatetime'
 import { QUERY } from 'src/components/UserAction/UserActionsCell'
 import { formatEnum, truncate } from 'src/lib/formatters'
@@ -85,21 +87,27 @@ const UserActionsList = ({ userActions }: FindUserActions) => {
               <td>{truncate(userAction.targetId)}</td>
               <td>
                 <nav className="rw-table-actions">
-                  <Link
-                    to={routes.userAction({ id: userAction.id })}
+                  <Button
                     title={'Show userAction ' + userAction.id + ' detail'}
-                    className="rw-button rw-button-small"
-                  >
-                    Show
-                  </Link>
-                  <button
+                    text="Show"
+                    variant="outlined"
+                    size="xs"
+                    className="text-slate-500"
+                    icon={<BsSearch />}
+                    onClick={() =>
+                      navigate(routes.userAction({ id: userAction.id }))
+                    }
+                  />
+                  <Button
                     type="button"
                     title={'Delete userAction ' + userAction.id}
-                    className="rw-button rw-button-small rw-button-red"
+                    text="Delete"
+                    variant="outlined"
+                    size="xs"
+                    color="monza-red"
+                    icon={<BsTrash />}
                     onClick={() => onDeleteClick(userAction.id)}
-                  >
-                    Delete
-                  </button>
+                  />
                 </nav>
               </td>
             </tr>

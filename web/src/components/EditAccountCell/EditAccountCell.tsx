@@ -189,12 +189,12 @@ export const Success = ({ user }: CellSuccessProps<EditUserProfileById>) => {
 
         <div className="rw-segment-main">
           <Button
+            text="Send email"
+            color="cobalt-blue"
+            size="sm"
+            icon={<BsEnvelope />}
             onClick={emailUser}
-            className="rw-button rw-button-blue flex items-center gap-2 py-2 text-base transition-colors sm:text-sm"
-          >
-            <BsEnvelope />
-            Send email
-          </Button>
+          />
         </div>
       </div>
     </>

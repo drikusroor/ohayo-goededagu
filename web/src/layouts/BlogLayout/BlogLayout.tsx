@@ -8,13 +8,14 @@ import {
   BsTools,
 } from 'react-icons/bs'
 
-import { Link, routes } from '@redwoodjs/router'
+import { Link, navigate, routes } from '@redwoodjs/router'
 import { Toaster } from '@redwoodjs/web/dist/toast'
 
 import { useAuth } from 'src/auth'
 import Button from 'src/components/Button/Button'
 import ScrollToTop from 'src/components/ScrollToTop/ScrollToTop'
 import Skeleton from 'src/components/Skeleton/Skeleton'
+import WorldClock from 'src/components/WorldClock/WorldClock'
 
 type BlogLayoutProps = {
   children?: React.ReactNode
@@ -75,41 +76,39 @@ const BlogLayout = ({ children, skeleton }: BlogLayoutProps) => {
         {isAuthenticated && currentUser && (
           <div className="fixed top-0 z-20 flex w-full items-center justify-between bg-slate-900 p-3 text-white">
             <div className="flex items-center gap-2">
-              <Link
-                className="flex items-center gap-2 rounded bg-green-800 px-4 py-3 font-semibold uppercase text-white transition hover:bg-green-700 hover:filter sm:text-xs"
-                to={routes.home()}
-              >
-                <BsHouse />
-                <span className="hidden sm:block">Home</span>
-              </Link>
-              <Link
-                className="flex items-center gap-2 rounded bg-cobalt-blue-600 px-4 py-3 font-semibold uppercase text-white transition hover:bg-cobalt-blue-500 hover:filter sm:text-xs"
-                to={routes.admin()}
-              >
-                <BsTools />
-                <span className="hidden sm:block">Dashboard</span>
-              </Link>
+              <Button
+                text="Home"
+                icon={<BsHouse />}
+                className="bg-green-800"
+                onClick={() => navigate(routes.home())}
+              />
+              <Button
+                text="Dashboard"
+                icon={<BsTools />}
+                color="cobalt-blue"
+                onClick={() => navigate(routes.admin())}
+              />
             </div>
+
+            <WorldClock />
+
             <ul className="flex gap-3">
               <li>
-                <Link
-                  to={routes.editAccount()}
-                  className="flex items-center gap-2 rounded bg-yellow-600 px-4 py-3 font-semibold uppercase text-white transition hover:bg-yellow-500 hover:filter sm:text-xs"
+                <Button
+                  text="Account"
+                  icon={<BsPersonCircle />}
                   title={currentUser.email}
-                >
-                  <BsPersonCircle />
-                  <span className="hidden sm:inline-block">Account</span>
-                </Link>
+                  className="bg-yellow-600"
+                  onClick={() => navigate(routes.editAccount())}
+                />
               </li>
               <li>
                 <Button
+                  text="Uitloggen"
+                  icon={<BsBoxArrowUp />}
                   onClick={logOut}
                   color="monza-red"
-                  className="flex items-center gap-2 px-4 py-3 sm:text-xs "
-                >
-                  <BsBoxArrowUp />
-                  <span className="hidden sm:block ">Uitloggen</span>
-                </Button>
+                />
               </li>
             </ul>
           </div>
@@ -135,6 +134,11 @@ const BlogLayout = ({ children, skeleton }: BlogLayoutProps) => {
             <li>
               <Link className="rw-button" to={routes.home()}>
                 Blog
+              </Link>
+            </li>
+            <li>
+              <Link className="rw-button" to={routes.route()}>
+                Route
               </Link>
             </li>
             <li>

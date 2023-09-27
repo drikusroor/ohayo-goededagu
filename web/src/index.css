@@ -27,4 +27,8 @@
   .h2 {
       @apply text-lg font-semibold;
     }
+
+  .button-group {
+    @apply flex flex-row justify-center gap-1 mt-2;
+  }
 }

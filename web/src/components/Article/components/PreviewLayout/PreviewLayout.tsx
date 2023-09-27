@@ -48,17 +48,15 @@ const PreviewLayout = ({ article }: Props) => {
               to={routes.article({ id: article.id })}
               className="items-center justify-end text-center text-base font-medium text-white focus:ring-4 focus:ring-gray-400"
             >
-              <Button className="flex max-w-fit items-center justify-end gap-2 px-4 py-3 text-xs">
-                {article.type === EPostType.PHOTO_GALLERY && (
-                  <span className="hidden sm:inline-block">
-                    Zie alle foto&apos;s
-                  </span>
-                )}
-                {article.type === EPostType.ARTICLE && (
-                  <span className="hidden sm:inline-block">Lees verder</span>
-                )}
-                <BsArrowRightCircle />
-              </Button>
+              <Button
+                text={
+                  article.type === EPostType.PHOTO_GALLERY
+                    ? "Zie alle foto's"
+                    : 'Lees verder'
+                }
+                icon={<BsArrowRightCircle />}
+                className="flex max-w-fit items-center justify-end gap-2 px-4 py-3 text-xs"
+              />
             </Link>
           </div>
         </>
@@ -103,12 +101,11 @@ const PreviewLayout = ({ article }: Props) => {
                 )}
                 {article.type === EPostType.VIDEO && article.body && (
                   <Button
+                    text="Lees verder"
+                    icon={<BsArrowRightCircle />}
                     className="flex items-center gap-2 px-4 py-3 text-xs"
                     onClick={() => navigate(routes.article({ id: article.id }))}
-                  >
-                    <span className="hidden sm:inline-block">Lees verder</span>
-                    <BsArrowRightCircle />
-                  </Button>
+                  />
                 )}
               </div>
             </div>

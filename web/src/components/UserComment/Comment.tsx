@@ -155,14 +155,14 @@ export default ({ comment, onClickReply }: ICommentProps) => {
           {onClickReply && (
             <Button
               data-testid="replyButton"
+              text="Reply"
+              icon={<BsReplyFill />}
               onClick={() => onClickReply(comment)}
-              className="user-select-none flex flex-row items-center gap-1"
+              className="text-xs lg:text-base"
               title="Reply"
+              textStay
               variant="outlined"
-            >
-              <BsReplyFill />
-              <span className="text-xs lg:text-base">Reply</span>
-            </Button>
+            />
           )}
         </div>
       </div>
@@ -176,9 +176,8 @@ export default ({ comment, onClickReply }: ICommentProps) => {
             className="user-select-none rounded font-semibold uppercase transition-opacity group-hover:cursor-pointer group-hover:opacity-100 md:mt-0 md:opacity-0"
             color="monza-red"
             title="Delete comment"
-          >
-            <BsTrash />
-          </Button>
+            icon={<BsTrash />}
+          />
         )}
         <Thumbs
           thumbs={comment.thumbs}

@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react'
 
+import { BsSend, BsXCircle } from 'react-icons/bs'
 import { Comment } from 'types/graphql'
 
 import { Form, FormError, Submit, SubmitHandler } from '@redwoodjs/forms'
@@ -115,22 +116,27 @@ const CommentForm = ({ postId, replyToComment, onCancel }: Props) => {
           value={body}
           onKeyDown={onKeyDown}
         />
-        <div className="flex flex-row gap-2">
-          <Submit
+        <div className="button-group justify-start">
+          <Button
+            type="submit"
+            color="cobalt-blue"
+            size="sm"
+            textStay
+            icon={<BsSend />}
+            text={
+              loading ? 'Saving...' : replyToComment ? 'Submit reply' : 'Submit'
+            }
             disabled={loading}
-            title={loading ? 'Saving...' : 'Submit'}
-            className="mt-4 block rounded bg-cobalt-blue-500 px-3 py-2 text-xs font-semibold uppercase tracking-wide text-white disabled:opacity-50"
-          >
-            Submit
-            {replyToComment && <span> reply</span>}
-          </Submit>
+          />
           {replyToComment && (
             <Button
-              className="mt-4 block rounded bg-monza-red-500 px-3 py-2 text-xs font-semibold uppercase tracking-wide text-white disabled:opacity-50"
+              text="Cancel"
+              textStay
+              icon={<BsXCircle />}
+              color="monza-red"
+              size="sm"
               onClick={onCancel}
-            >
-              Cancel
-            </Button>
+            />
           )}
         </div>
       </Form>

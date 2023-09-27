@@ -1,3 +1,4 @@
+import { BsPencil, BsTrash } from 'react-icons/bs'
 import type {
   DeleteImageGalleryMutationVariables,
   FindImageGalleryById,
@@ -7,6 +8,7 @@ import { Link, routes, navigate } from '@redwoodjs/router'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
+import Button from 'src/components/Button/Button'
 import PhotoGrid from 'src/components/PhotoGrid/PhotoGrid'
 import { timeTag } from 'src/lib/formatters'
 
@@ -75,20 +77,23 @@ const ImageGallery = ({ imageGallery }: Props) => {
         <div className="rw-text-center mt-4">No images found.</div>
       )}
 
-      <nav className="rw-button-group">
-        <Link
-          to={routes.editImageGallery({ id: imageGallery.id })}
-          className="rw-button rw-button-blue"
-        >
-          Edit
-        </Link>
-        <button
+      <nav className="button-group">
+        <Button
+          text="Edit"
+          size="sm"
+          icon={<BsPencil />}
+          onClick={() =>
+            navigate(routes.editImageGallery({ id: imageGallery.id }))
+          }
+        />
+        <Button
           type="button"
-          className="rw-button rw-button-red"
+          size="sm"
+          text="Delete"
+          color="monza-red"
+          icon={<BsTrash />}
           onClick={() => onDeleteClick(imageGallery.id)}
-        >
-          Delete
-        </button>
+        />
       </nav>
     </>
   )

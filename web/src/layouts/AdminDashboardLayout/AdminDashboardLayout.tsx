@@ -168,10 +168,11 @@ const AdminDashboardLayout = ({ children }: AdminDashboardLayoutProps) => {
             </span>
             <Button
               onClick={logOut}
+              icon={<BsBoxArrowUp />}
               color="monza-red"
+              size="xs"
               className="flex items-center gap-2 text-xs md:text-sm"
             >
-              <BsBoxArrowUp />
               <span className="hidden text-xs lg:block">Uitloggen</span>
             </Button>
           </div>

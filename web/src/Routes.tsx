@@ -16,6 +16,7 @@ import AdminDashboardLayout from './layouts/AdminDashboardLayout/AdminDashboardL
 import RedirectAdmin from './layouts/AdminDashboardLayout/AdminRedirect/AdminRedirect'
 import BlogLayout from './layouts/BlogLayout/BlogLayout'
 import BlogLoader from './layouts/BlogLayout/BlogLoader/BlogLoader'
+import RoutePage from './pages/RoutePage/RoutePage'
 
 const Routes = () => {
   return (
@@ -71,6 +72,7 @@ const Routes = () => {
         <Route path="/reset-password" page={ResetPasswordPage} name="resetPassword" />
         <Route path="/about" page={AboutPage} name="about" />
         <Route path="/user/{id:Int}" page={ViewProfilePage} name="viewProfile" />
+        <Route path="/route" page={RoutePage} name="route" />
       </Set>
       <Route notfound page={NotFoundPage} />
     </Router>

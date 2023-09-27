@@ -384,6 +384,8 @@ const PostForm = (props: PostFormProps) => {
           <div>
             <div className="rw-button-group gap-0">
               <Button
+                text="Draft"
+                icon={<BsPencilSquare />}
                 type="button"
                 onClick={() => {
                   setPublished(false)
@@ -393,13 +395,13 @@ const PostForm = (props: PostFormProps) => {
                   !published ? 'bg-green-600 underline' : 'bg-rw-blue-500'
                 )}
               >
-                Draft
-                <BsPencilSquare />
                 {!published ? <BsFillCheckCircleFill /> : <BsFillCircleFill />}
               </Button>
 
               <Button
                 type="button"
+                text="Published"
+                icon={<BsFillSendFill />}
                 onClick={() => {
                   setPublished(true)
                 }}
@@ -408,8 +410,6 @@ const PostForm = (props: PostFormProps) => {
                   published ? 'bg-green-600 underline' : 'bg-rw-blue-500'
                 )}
               >
-                Published
-                <BsFillSendFill />
                 {published ? <BsFillCheckCircleFill /> : <BsFillCircleFill />}
               </Button>
             </div>
@@ -426,17 +426,18 @@ const PostForm = (props: PostFormProps) => {
               </div>
             )}
 
-            <div className="rw-button-group">
+            <div className="button-group">
               <Link
                 to={routes.posts({ id: props.post?.id })}
                 title={'Back to overview'}
               >
                 <Button
                   type="button"
-                  className="rw-button rw-button-red group relative flex items-center gap-2 text-sm"
+                  text="Cancel"
+                  icon={<BsFillXCircleFill />}
+                  color="monza-red"
+                  className="group relative flex items-center gap-2 text-sm"
                 >
-                  <BsFillXCircleFill />
-                  Cancel
                   <span className="user-select-none absolute bottom-full left-0 mb-2 w-32 rounded-md border-2 border-monza-red-500 bg-white p-2 text-left text-xs text-monza-red-500 opacity-0 shadow-md transition-opacity group-hover:opacity-100">
                     <BsExclamationTriangleFill className="text-md mb-1 mr-1 inline-block" />
                     Warning: All unsaved changes will be lost.
@@ -444,13 +445,12 @@ const PostForm = (props: PostFormProps) => {
                 </Button>
               </Link>
 
-              <Submit
+              <Button
+                type="submit"
+                text="Save"
+                icon={<BsSaveFill />}
                 disabled={props.loading}
-                className="rw-button rw-button-blue flex items-center gap-2 text-sm"
-              >
-                <BsSaveFill />
-                Save
-              </Submit>
+              />
             </div>
           </div>
         </Form>
