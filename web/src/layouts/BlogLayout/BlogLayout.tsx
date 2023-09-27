@@ -15,6 +15,7 @@ import { useAuth } from 'src/auth'
 import Button from 'src/components/Button/Button'
 import ScrollToTop from 'src/components/ScrollToTop/ScrollToTop'
 import Skeleton from 'src/components/Skeleton/Skeleton'
+import WorldClock from 'src/components/WorldClock/WorldClock'
 
 type BlogLayoutProps = {
   children?: React.ReactNode
@@ -88,6 +89,9 @@ const BlogLayout = ({ children, skeleton }: BlogLayoutProps) => {
                 onClick={() => navigate(routes.admin())}
               />
             </div>
+
+            <WorldClock />
+
             <ul className="flex gap-3">
               <li>
                 <Button
