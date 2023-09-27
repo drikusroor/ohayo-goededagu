@@ -114,13 +114,13 @@ const ProfileForm = (props: ProfileFormProps) => {
 
         <Label
           name="avatar"
-          className="rw-label"
+          className="rw-label mb-2"
           errorClassName="rw-label rw-label-error"
         >
           Avatar
         </Label>
 
-        <div className="mt-4 flex flex-row items-center gap-4">
+        <div className="flex flex-row flex-wrap items-center gap-2">
           <Upload
             name="avatar"
             folder="Avatars"
