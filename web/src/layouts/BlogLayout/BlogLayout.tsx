@@ -137,6 +137,11 @@ const BlogLayout = ({ children, skeleton }: BlogLayoutProps) => {
               </Link>
             </li>
             <li>
+              <Link className="rw-button" to={routes.route()}>
+                Route
+              </Link>
+            </li>
+            <li>
               <Link className="rw-button" to={routes.about()}>
                 Reisgenootschap
               </Link>
