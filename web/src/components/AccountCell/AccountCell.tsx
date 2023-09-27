@@ -29,13 +29,13 @@ export const Success = ({
 }: CellSuccessProps<FindAccountQuery, FindAccountQueryVariables>) => {
   return (
     <div className="">
-      <p className="text-gray-700">Name: {account.name ?? 'No name'}</p>
-      <p className="mt-2 text-gray-700">Email: {account.email}</p>
+      <p className="text-gray-700">Naam: {account.name ?? 'No name'}</p>
+      <p className="mt-2 text-gray-700">E-mail: {account.email}</p>
 
       <div className="mt-5 flex gap-2">
         <Link
           to={routes.editAccount()}
-          title="Edit account"
+          title="Account instellingen"
           className="rw-button rw-button-blue flex items-center gap-2 py-2 text-base transition-colors sm:text-sm"
         >
           <BsFillPencilFill />

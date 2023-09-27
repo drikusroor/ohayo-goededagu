@@ -1,3 +1,4 @@
+import { BsBoxArrowUpRight } from 'react-icons/bs'
 import type { FindProfileSelf, UpdateProfileInput } from 'types/graphql'
 
 import {
@@ -9,6 +10,7 @@ import {
   Submit,
 } from '@redwoodjs/forms'
 import type { RWGqlError } from '@redwoodjs/forms'
+import { Link } from '@redwoodjs/router'
 
 import { useAuth } from 'src/auth'
 import Avatar from 'src/components/Avatar/Avatar'
@@ -70,7 +72,7 @@ const ProfileForm = (props: ProfileFormProps) => {
           className="rw-label"
           errorClassName="rw-label rw-label-error"
         >
-          Name
+          Naam
         </Label>
 
         <TextField
@@ -78,6 +80,7 @@ const ProfileForm = (props: ProfileFormProps) => {
           defaultValue={props.profile?.name}
           className="rw-input"
           errorClassName="rw-input rw-input-error"
+          placeholder='Bijvoorbeeld: "Hans"'
         />
 
         <Label
@@ -85,7 +88,16 @@ const ProfileForm = (props: ProfileFormProps) => {
           className="rw-label"
           errorClassName="rw-label rw-label-error"
         >
-          Japanese name
+          Japanse naam
+          <Link
+            to="https://japanga.com/name-converter"
+            target="_blank"
+            className="ml-4 text-sm text-blue-500 underline hover:text-blue-700"
+          >
+            <span className="sr-only">Open in new tab</span>
+            Hulp nodig?
+            <BsBoxArrowUpRight className="ml-2 inline-block" />
+          </Link>
         </Label>
 
         <TextField
@@ -93,6 +105,7 @@ const ProfileForm = (props: ProfileFormProps) => {
           defaultValue={props.profile?.japaneseName}
           className="rw-input"
           errorClassName="rw-input rw-input-error"
+          placeholder='Bijvoorbeeld: "ハンス"'
         />
 
         <Label
@@ -100,12 +113,13 @@ const ProfileForm = (props: ProfileFormProps) => {
           className="rw-label"
           errorClassName="rw-label rw-label-error"
         >
-          Bio
+          Wie ben je?
         </Label>
 
         <TextField
           name="bio"
           defaultValue={props.profile?.bio}
+          placeholder='Bijvoorbeeld: "Ik hou van paarden en vim."'
           className="rw-input"
           errorClassName="rw-input rw-input-error"
         />
@@ -142,7 +156,7 @@ const ProfileForm = (props: ProfileFormProps) => {
 
         <div className="rw-button-group">
           <Submit disabled={props.loading} className="rw-button rw-button-blue">
-            Save
+            Opslaan
           </Submit>
         </div>
       </Form>

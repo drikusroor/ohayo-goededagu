@@ -58,7 +58,7 @@ const EditAccountForm = (props: EditAccountFormProps) => {
           className="rw-label"
           errorClassName="rw-label rw-label-error"
         >
-          Email
+          E-mail
         </Label>
 
         <EmailField
@@ -66,6 +66,7 @@ const EditAccountForm = (props: EditAccountFormProps) => {
           className="rw-input"
           defaultValue={props.user?.email}
           title="Email"
+          placeholder="E-mailadres"
           errorClassName="rw-input rw-input-error"
           validation={{ required: true }}
         />
@@ -74,7 +75,7 @@ const EditAccountForm = (props: EditAccountFormProps) => {
 
         <div className="button-group">
           <Button
-            text="Save"
+            text="Opslaan"
             type="submit"
             icon={<BsSaveFill />}
             disabled={props.loading}
@@ -83,7 +84,7 @@ const EditAccountForm = (props: EditAccountFormProps) => {
           />
 
           <Button
-            text="Cancel"
+            text="Annuleren"
             size="sm"
             color="monza-red"
             icon={<BsXCircle />}

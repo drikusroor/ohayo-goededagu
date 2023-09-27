@@ -10,7 +10,10 @@ const EditAccountPage = () => {
 
   return (
     <>
-      <MetaTags title="Edit Account" description="Edit Account page" />
+      <MetaTags
+        title="Account instellingen"
+        description="Account instellingen pagina"
+      />
 
       <EditAccountCell id={userId} />
     </>

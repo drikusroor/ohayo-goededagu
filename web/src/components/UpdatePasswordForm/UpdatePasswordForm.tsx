@@ -40,7 +40,7 @@ const UpdatePasswordForm = ({
           className="rw-label"
           errorClassName="rw-label rw-label-error"
         >
-          Current password
+          Huidig wachtwoord
         </Label>
 
         <PasswordField
@@ -55,7 +55,7 @@ const UpdatePasswordForm = ({
           className="rw-label"
           errorClassName="rw-label rw-label-error"
         >
-          New password
+          Nieuw wachtwoord
         </Label>
 
         <PasswordField
@@ -70,7 +70,7 @@ const UpdatePasswordForm = ({
           className="rw-label"
           errorClassName="rw-label rw-label-error"
         >
-          Confirm new password
+          Bevestig nieuw wachtwoord
         </Label>
 
         <PasswordField
@@ -82,7 +82,7 @@ const UpdatePasswordForm = ({
 
         <Button
           type="submit"
-          text="Update password"
+          text="Wijzig wachtwoord"
           color="cobalt-blue"
           disabled={loading}
           className="mt-4"

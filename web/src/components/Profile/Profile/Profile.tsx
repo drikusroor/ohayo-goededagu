@@ -33,7 +33,7 @@ const Profile = ({ profile }: Props) => {
               <td>{profile.name}</td>
             </tr>
             <tr>
-              <th>Japanese name</th>
+              <th>Japanse naam</th>
               <td>{profile.japaneseName}</td>
             </tr>
             <tr>
