@@ -1,5 +1,7 @@
 import { useEffect } from 'react'
 
+import { BsUpload } from 'react-icons/bs'
+
 import { FieldError } from '@redwoodjs/forms'
 
 import Button from 'src/components/Button/Button'
@@ -107,10 +109,13 @@ const Upload = ({
       <Button
         id="upload_widget"
         title={uploadName}
+        textStay
+        color="cobalt-blue"
+        icon={<BsUpload />}
+        size="sm"
         onClick={onClickUpload}
         text={uploadName}
         defaultValue={uploadName}
-        className="rw-button rw-button-blue mt-4"
       />
       <FieldError name={name} className="rw-field-error" />
     </>

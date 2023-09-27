@@ -1,3 +1,4 @@
+import { BsSave, BsSave2, BsXCircle } from 'react-icons/bs'
 import type { UpdateUserProfileInput, EditUserProfileById } from 'types/graphql'
 
 import {
@@ -72,17 +73,24 @@ const EditAccountForm = (props: EditAccountFormProps) => {
 
         <FieldError name="email" className="rw-field-error" />
 
-        <div className="rw-button-group">
-          <Submit
+        <div className="button-group">
+          <Button
+            text="Save"
+            type="submit"
+            icon={<BsSave />}
             disabled={props.loading}
-            className="rw-button rw-button-blue py-3"
-          >
-            Save
-          </Submit>
+            color="cobalt-blue"
+            size="sm"
+          />
 
-          <Button color="monza-red" variant="outlined" onClick={onReset}>
-            Cancel
-          </Button>
+          <Button
+            text="Cancel"
+            size="sm"
+            color="monza-red"
+            icon={<BsXCircle />}
+            variant="outlined"
+            onClick={onReset}
+          />
         </div>
       </Form>
     </div>

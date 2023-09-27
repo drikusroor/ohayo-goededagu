@@ -82,12 +82,11 @@ const UpdatePasswordForm = ({
 
         <Button
           type="submit"
+          text="Update password"
           color="cobalt-blue"
           disabled={loading}
           className="mt-4"
-        >
-          Update password
-        </Button>
+        />
       </Form>
     </div>
   )

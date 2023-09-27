@@ -1,3 +1,5 @@
+import { BsImages } from 'react-icons/bs'
+
 import { FieldError } from '@redwoodjs/forms'
 
 import Button from 'src/components/Button/Button'
@@ -40,9 +42,12 @@ const MediaLibrary = ({
       <Button
         id="media_library_widget"
         title="Media library"
-        className="rw-button rw-button-blue mt-4"
+        textStay
+        color="cobalt-blue"
+        size="sm"
         onClick={onClickOpen}
         text="Select from Media Library"
+        icon={<BsImages />}
       />
       <FieldError name="upload" className="rw-field-error" />
     </>

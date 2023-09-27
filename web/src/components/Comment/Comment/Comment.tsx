@@ -1,3 +1,4 @@
+import { BsPencil, BsTrash } from 'react-icons/bs'
 import type {
   DeleteCommentMutationVariables,
   FindCommentById,
@@ -7,6 +8,7 @@ import { Link, routes, navigate } from '@redwoodjs/router'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
+import Button from 'src/components/Button/Button'
 import { checkboxInputTag, timeTag } from 'src/lib/formatters'
 
 const DELETE_COMMENT_MUTATION = gql`
@@ -79,20 +81,19 @@ const Comment = ({ comment }: Props) => {
           </tbody>
         </table>
       </div>
-      <nav className="rw-button-group">
-        <Link
-          to={routes.editComment({ id: comment.id })}
-          className="rw-button rw-button-blue"
-        >
-          Edit
-        </Link>
-        <button
-          type="button"
-          className="rw-button rw-button-red"
+      <nav className="button-group">
+        <Button
+          text="Edit"
+          color="cobalt-blue"
+          icon={<BsPencil />}
+          onClick={() => navigate(routes.editComment({ id: comment.id }))}
+        />
+        <Button
+          text="Delete"
+          color="monza-red"
+          icon={<BsTrash />}
           onClick={() => onDeleteClick(comment.id)}
-        >
-          Delete
-        </button>
+        />
       </nav>
     </>
   )

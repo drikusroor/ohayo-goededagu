@@ -100,10 +100,11 @@ const Article = ({ article, hideComments }: Props) => {
         <div className="flex flex-row items-center justify-between pt-4">
           <div className="flex items-center gap-6">
             <Link to={routes.editPost({ id: article.id })}>
-              <Button className="flex items-center gap-2">
-                <BsPencil />
-                Edit
-              </Button>
+              <Button
+                text="Edit"
+                icon={<BsPencil />}
+                className="flex items-center gap-2"
+              />
             </Link>
             (Only visible to you)
           </div>

@@ -194,7 +194,20 @@ export const Success = ({
         />
       </div>
       <div className="rw-segment-main">
-        <h2 className="text-xl font-semibold">Images</h2>
+        <div className="pb-5">
+          <h2 className="text-xl font-semibold">Add Images</h2>
+          <Form>
+            <Upload
+              name="imageGalleries"
+              multiple
+              folder={imageGallery.name}
+              handleUpload={onUpload}
+              setUploadedImages={(images) => console.log({ images })}
+            />
+          </Form>
+        </div>
+
+        <h2 className="text-xl font-semibold">Edit Images</h2>
         <div className="mt-4 grid grid-cols-3 gap-4">
           {imageGallery?.images?.map((image) => (
             <Form
@@ -224,25 +237,23 @@ export const Success = ({
                 placeholder="Description"
               />
 
-              <div className="mt-2 flex flex-row flex-wrap items-center gap-2">
+              <div className="button-group justify-start">
                 <Button
                   color="monza-red"
-                  size="md"
+                  size="sm"
+                  text="Delete"
+                  icon={<BsTrash />}
                   className="flex flex-row items-center gap-2"
                   onClick={() => onDeleteImageGalleryImage(image.id)}
-                >
-                  <BsTrash />
-                  Delete
-                </Button>
+                />
                 <Button
                   color="cobalt-blue"
                   type="submit"
-                  size="md"
+                  text="Save"
+                  icon={<BsSaveFill />}
+                  size="sm"
                   className="flex flex-row items-center gap-2"
-                >
-                  <BsSaveFill />
-                  Save
-                </Button>
+                />
               </div>
             </Form>
           ))}
@@ -252,16 +263,6 @@ export const Success = ({
             </div>
           )}
         </div>
-
-        <h2 className="mt-5 text-xl font-semibold">Add Images</h2>
-        <Form>
-          <Upload
-            multiple
-            folder={imageGallery.name}
-            handleUpload={onUpload}
-            setUploadedImages={(images) => console.log({ images })}
-          />
-        </Form>
       </div>
     </div>
   )

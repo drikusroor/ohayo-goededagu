@@ -1,3 +1,4 @@
+import { BsTrash } from 'react-icons/bs'
 import type {
   DeleteUserActionMutationVariables,
   FindUserActionById,
@@ -7,6 +8,7 @@ import { Link, routes, navigate } from '@redwoodjs/router'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
+import Button from 'src/components/Button/Button'
 import DisplayDatetime from 'src/components/DisplayDatetime/DisplayDatetime'
 import { formatEnum } from 'src/lib/formatters'
 
@@ -96,14 +98,14 @@ const UserAction = ({ userAction }: Props) => {
           </tbody>
         </table>
       </div>
-      <nav className="rw-button-group">
-        <button
+      <nav className="button-group">
+        <Button
           type="button"
-          className="rw-button rw-button-red"
+          color="monza-red"
+          text="Delete"
+          icon={<BsTrash />}
           onClick={() => onDeleteClick(userAction.id)}
-        >
-          Delete
-        </button>
+        />
       </nav>
     </>
   )

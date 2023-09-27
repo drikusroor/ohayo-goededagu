@@ -79,25 +79,22 @@ const Post = ({ post }: Props) => {
           </tbody>
         </table>
       </div>
-      <nav className="rw-button-group">
-        <Link
-          to={routes.editPost({ id: post.id })}
+      <nav className="button-group">
+        <Button
+          text="Edit"
+          icon={<BsFillPencilFill />}
           title={'Edit post ' + post.id}
-          className="rw-button rw-button-blue flex items-center gap-2 text-base transition-colors sm:text-sm"
-        >
-          <BsFillPencilFill />
-          Edit
-        </Link>
+          onClick={() => navigate(routes.editPost({ id: post.id }))}
+        />
         {post?.user?.name === currentUser?.name && (
           <Button
             title={'Delete post ' + post.id}
+            text="Delete"
+            icon={<BsFillTrash3Fill />}
             onClick={() => onDeleteClick(post.id)}
             className="rw-button flex items-center gap-2 text-base transition-colors sm:text-sm"
             color="monza-red"
-          >
-            <BsFillTrash3Fill />
-            Delete
-          </Button>
+          />
         )}
       </nav>
     </>

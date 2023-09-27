@@ -25,6 +25,8 @@ const Preview = ({ post, hideComments }: Props) => {
       <div className="mt-8 flex flex-row gap-0">
         <Button
           type="button"
+          text="Preview Full Article"
+          icon={<BsJournalRichtext />}
           onClick={() => {
             setBlogRollPreview(false)
           }}
@@ -35,12 +37,12 @@ const Preview = ({ post, hideComments }: Props) => {
           title="Preview Full Article"
           aria-label="Preview Full Article"
         >
-          <BsJournalRichtext />
-          <span className="hidden sm:inline-block"> Preview Full Article</span>
           {!blogRollPreview ? <BsFillCheckCircleFill /> : <BsFillCircleFill />}
         </Button>
         <Button
           type="button"
+          text="Preview Blog Roll"
+          icon={<BsViewList />}
           onClick={() => {
             setBlogRollPreview(true)
           }}
@@ -51,8 +53,6 @@ const Preview = ({ post, hideComments }: Props) => {
           title="Preview Blog Roll"
           aria-label="Preview Blog Roll"
         >
-          <BsViewList />
-          <span className="hidden sm:inline-block"> Preview Blog Roll</span>
           {blogRollPreview ? <BsFillCheckCircleFill /> : <BsFillCircleFill />}
         </Button>
       </div>

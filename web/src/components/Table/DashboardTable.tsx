@@ -122,15 +122,13 @@ const DashboardTable = ({ headers, data, onDelete, onEdit, onShow }: Props) => {
                       <nav className="rw-table-actions">
                         <Button
                           title={'Show post' + item.id}
+                          text="Show"
+                          size="xs"
+                          icon={<BsSearch />}
                           onClick={() => onShow(item)}
-                          className="rw-button rw-button-small flex items-center gap-1"
-                          color="rw-gray"
-                          icon={BsSearch}
+                          className="text-slate-500"
                           variant="outlined"
-                        >
-                          <BsSearch />
-                          <span className="hidden lg:inline-block">Show</span>
-                        </Button>
+                        />
                       </nav>
                     </td>
                   )}
@@ -139,14 +137,13 @@ const DashboardTable = ({ headers, data, onDelete, onEdit, onShow }: Props) => {
                       <nav className="rw-table-actions">
                         <Button
                           title={'Edit post' + item.id}
+                          text="Edit"
+                          size="xs"
+                          icon={<BsFillPencilFill />}
                           onClick={() => onEdit(item)}
-                          className="rw-button rw-button-small rw-button-blue flex items-center gap-1"
                           color="cobalt-blue"
                           variant="outlined"
-                        >
-                          <BsFillPencilFill />
-                          <span className="hidden lg:inline-block">Edit</span>
-                        </Button>
+                        />
                       </nav>
                     </td>
                   )}
@@ -156,16 +153,13 @@ const DashboardTable = ({ headers, data, onDelete, onEdit, onShow }: Props) => {
                         {showDelete(item) && (
                           <Button
                             title={'Delete post ' + item.id}
+                            text="Delete"
+                            size="xs"
+                            icon={<BsFillTrash3Fill />}
                             onClick={() => onDelete(item)}
-                            className="rw-button rw-button-small rw-button-red flex items-center gap-1"
                             color="monza-red"
                             variant="outlined"
-                          >
-                            <BsFillTrash3Fill />
-                            <span className="hidden lg:inline-block">
-                              Delete
-                            </span>
-                          </Button>
+                          />
                         )}
                       </nav>
                     </td>

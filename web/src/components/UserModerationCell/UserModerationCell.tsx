@@ -260,15 +260,14 @@ export const Success = ({
                   <div className="flex flex-row flex-wrap gap-2">
                     {user.roles.join() === Role.GUEST && (
                       <Button
+                        text="Approve"
+                        icon={<BsCheck2Circle />}
                         className={`flex flex-row items-center gap-2 rounded bg-green-500 p-2 font-bold text-white hover:bg-green-700 ${
                           loading ? 'animate-bounce cursor-wait opacity-50' : ''
                         }`}
                         disabled={loading}
                         onClick={() => approveGuest(user.id)}
-                      >
-                        <BsCheck2Circle />
-                        Approve
-                      </Button>
+                      />
                     )}
 
                     {user.roles.join() !== Role.GUEST && (
@@ -324,10 +323,9 @@ export const Success = ({
                       <Button
                         className="flex flex-row items-center gap-2 whitespace-nowrap rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700"
                         type="submit"
-                      >
-                        <BsKey />
-                        Reset Password
-                      </Button>
+                        text="Reset password"
+                        icon={<BsKey />}
+                      />
                     </Form>
                   ) : (
                     <span className="text-sm text-gray-500 ">
@@ -338,12 +336,11 @@ export const Success = ({
                 <td>
                   {user.id !== currentUser.id ? (
                     <Button
-                      className="flex flex-row items-center gap-2 rounded bg-red-500 px-4 py-2 font-bold text-white hover:bg-red-700"
+                      text="Delete"
+                      icon={<BsTrash />}
+                      color="monza-red"
                       onClick={() => onClickDeleteUser(user as User)}
-                    >
-                      <BsTrash />
-                      <span className="hidden lg:inline-block"> Delete </span>
-                    </Button>
+                    />
                   ) : (
                     <span className="text-sm text-gray-500 ">
                       Can&apos;t delete yourself
