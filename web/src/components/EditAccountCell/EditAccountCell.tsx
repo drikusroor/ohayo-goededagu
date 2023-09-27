@@ -139,7 +139,7 @@ export const Success = ({ user }: CellSuccessProps<EditUserProfileById>) => {
     <>
       <div className="rw-segment">
         <header className="rw-segment-header">
-          <h2 className="rw-heading rw-heading-secondary">Edit Account</h2>
+          <h2 className="rw-heading rw-heading-secondary">Account wijzigen</h2>
         </header>
         <div className="rw-segment-main">
           <EditAccountForm
@@ -153,7 +153,7 @@ export const Success = ({ user }: CellSuccessProps<EditUserProfileById>) => {
 
       <div className="rw-segment mt-5">
         <header className="rw-segment-header">
-          <h2 className="rw-heading rw-heading-secondary">Update Profile</h2>
+          <h2 className="rw-heading rw-heading-secondary">Profiel wijzigen</h2>
         </header>
 
         <div className="rw-segment-main">
@@ -168,7 +168,9 @@ export const Success = ({ user }: CellSuccessProps<EditUserProfileById>) => {
 
       <div className="rw-segment mt-5">
         <header className="rw-segment-header">
-          <h2 className="rw-heading rw-heading-secondary">Update Password</h2>
+          <h2 className="rw-heading rw-heading-secondary">
+            Wachtwoord wijzigen
+          </h2>
         </header>
 
         <div className="rw-segment-main">
@@ -189,7 +191,7 @@ export const Success = ({ user }: CellSuccessProps<EditUserProfileById>) => {
 
         <div className="rw-segment-main">
           <Button
-            text="Send email"
+            text="Verstuur test e-mail"
             color="cobalt-blue"
             size="sm"
             icon={<BsEnvelope />}

@@ -72,7 +72,7 @@ const ProfileForm = (props: ProfileFormProps) => {
           className="rw-label"
           errorClassName="rw-label rw-label-error"
         >
-          Name
+          Naam
         </Label>
 
         <TextField
@@ -80,6 +80,7 @@ const ProfileForm = (props: ProfileFormProps) => {
           defaultValue={props.profile?.name}
           className="rw-input"
           errorClassName="rw-input rw-input-error"
+          placeholder='Bijvoorbeeld: "Hans"'
         />
 
         <Label
@@ -87,6 +88,7 @@ const ProfileForm = (props: ProfileFormProps) => {
           className="rw-label"
           errorClassName="rw-label rw-label-error"
         >
+          Japanse naam
           <Link
             to="https://japanga.com/name-converter"
             target="_blank"
@@ -103,6 +105,7 @@ const ProfileForm = (props: ProfileFormProps) => {
           defaultValue={props.profile?.japaneseName}
           className="rw-input"
           errorClassName="rw-input rw-input-error"
+          placeholder='Bijvoorbeeld: "ハンス"'
         />
 
         <Label
@@ -110,12 +113,13 @@ const ProfileForm = (props: ProfileFormProps) => {
           className="rw-label"
           errorClassName="rw-label rw-label-error"
         >
-          Bio
+          Wie ben je?
         </Label>
 
         <TextField
           name="bio"
           defaultValue={props.profile?.bio}
+          placeholder='Bijvoorbeeld: "Ik hou van paarden en vim."'
           className="rw-input"
           errorClassName="rw-input rw-input-error"
         />
@@ -152,7 +156,7 @@ const ProfileForm = (props: ProfileFormProps) => {
 
         <div className="rw-button-group">
           <Submit disabled={props.loading} className="rw-button rw-button-blue">
-            Save
+            Opslaan
           </Submit>
         </div>
       </Form>
