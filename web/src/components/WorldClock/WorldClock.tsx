@@ -23,7 +23,7 @@ const WorldClock = () => {
   const Tokyo2End = new Date('2023-10-26').getTime()
 
   const onTheWayThere =
-    new Date('2023-09-27').setHours(0, 0, 0, 0) ===
+    new Date('2023-09-30').setHours(0, 0, 0, 0) ===
     new Date().setHours(0, 0, 0, 0)
   const inTokyo1 = today > Tokyo1Start && today < Tokyo1End
   const inHakone = today > HakoneStart && today < HakoneEnd
@@ -35,8 +35,6 @@ const WorldClock = () => {
   const onTheWayBack =
     new Date('2023-10-26').setHours(0, 0, 0, 0) ===
     new Date().setHours(0, 0, 0, 0)
-
-  console.log('onThewaythere', onTheWayThere)
 
   const message = onTheWayThere
     ? 'We zijn onderweg naar Japan! ✈️ Het avontuur is begonnen'
