@@ -1,4 +1,4 @@
-import { BsSave, BsSave2, BsXCircle } from 'react-icons/bs'
+import { BsSaveFill, BsXCircle } from 'react-icons/bs'
 import type { UpdateUserProfileInput, EditUserProfileById } from 'types/graphql'
 
 import {
@@ -6,7 +6,6 @@ import {
   FormError,
   FieldError,
   Label,
-  Submit,
   EmailField,
 } from '@redwoodjs/forms'
 import type { RWGqlError } from '@redwoodjs/forms'
@@ -77,7 +76,7 @@ const EditAccountForm = (props: EditAccountFormProps) => {
           <Button
             text="Save"
             type="submit"
-            icon={<BsSave />}
+            icon={<BsSaveFill />}
             disabled={props.loading}
             color="cobalt-blue"
             size="sm"
