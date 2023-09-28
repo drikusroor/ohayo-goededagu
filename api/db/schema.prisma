@@ -180,7 +180,7 @@ model UserSubscription {
   user      User                 @relation(fields: [userId], references: [id])
   userId    Int
   type      UserSubscriptionType
-  target    Int
+  target    Int?
 }
 
 enum UserSubscriptionType {
