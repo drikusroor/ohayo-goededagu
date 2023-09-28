@@ -22,7 +22,10 @@ export const RecursiveComment = ({
   level = 0,
 }: RecursiveCommentProps) => {
   return (
-    <div className={classNames('relative', comment.parentId && 'ml-4 mt-4')}>
+    <div
+      className={classNames('relative', comment.parentId && 'ml-4 mt-4')}
+      id={`comment-${comment.id}`}
+    >
       {comments.some((c) => c.parentId === comment.id) && (
         <div className="absolute bottom-1 left-2 top-0 w-[1px] transform rounded-b-md bg-slate-300"></div>
       )}
