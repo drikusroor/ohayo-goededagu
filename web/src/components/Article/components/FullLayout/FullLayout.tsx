@@ -127,19 +127,21 @@ const FullLayout = ({ article }: Props) => {
               <div className="flex flex-row gap-2">
                 <Button
                   variant="outlined"
+                  className="hover:bg-slate-200"
                   onClick={() => {
                     setEnglish(false)
                   }}
                 >
-                  🇳🇱
+                  <span className="text-xl">🇳🇱</span>
                 </Button>
                 <Button
                   variant="outlined"
+                  className="hover:bg-slate-200"
                   onClick={() => {
                     setEnglish(true)
                   }}
                 >
-                  🇬🇧
+                  <span className="text-xl">🇬🇧</span>
                 </Button>
               </div>
             )}
