@@ -10,6 +10,7 @@ import {
 import { toast } from '@redwoodjs/web/toast'
 
 import UserSubscriptionsAuthorSelector from '../UserSubscriptionsAuthorSelector/UserSubscriptionsAuthorSelector'
+import UserSubscriptionsCommentCheckbox from '../UserSubscriptionsCommentCheckbox/UserSubscriptionsCommentCheckbox'
 
 export const QUERY = gql`
   query FindUsersWithPostsForSubscriptionsCellQuery($id: Int!) {
@@ -48,6 +49,7 @@ const CREATE_USER_SUBSCRIPTIONS_MUTATION = gql`
   ) {
     createUserSubscription(input: $input) {
       id
+      type
     }
   }
 `
@@ -56,6 +58,7 @@ const DELETE_USER_SUBSCRIPTION_MUTATION = gql`
   mutation DeleteUserSubscriptionMutation($id: Int!) {
     deleteUserSubscription(id: $id) {
       id
+      type
     }
   }
 `
@@ -72,7 +75,7 @@ export const Success = ({
   users,
   user,
 }: CellSuccessProps<UserSubscriptionsQuery>) => {
-  const { userSubscriptions } = user
+  const { userSubscriptions = [] } = user
 
   const selected = useMemo(() => {
     return userSubscriptions
@@ -80,11 +83,20 @@ export const Success = ({
       .map((us) => us.target)
   }, [userSubscriptions])
 
-  const [createUserSubscriptions] = useMutation(
+  const commentSubscription = useMemo(() => {
+    return userSubscriptions.find((us) => us.type === 'COMMENT')
+  }, [userSubscriptions])
+
+  const [createUserSubscriptions, { loading: createLoading }] = useMutation(
     CREATE_USER_SUBSCRIPTIONS_MUTATION,
     {
-      onCompleted: () => {
-        toast.success('User subscriptions updated')
+      onCompleted: (data) => {
+        const subscriptionType =
+          data.createUserSubscription.type === 'POST_AUTHOR'
+            ? 'auteur'
+            : 'reacties'
+
+        toast.success(`Geabonneerd op ${subscriptionType}`)
       },
       onError: (error) => {
         toast.error(error.message)
@@ -94,11 +106,16 @@ export const Success = ({
     }
   )
 
-  const [onDeleteUserSubscription] = useMutation(
+  const [onDeleteUserSubscription, { loading: deleteLoading }] = useMutation(
     DELETE_USER_SUBSCRIPTION_MUTATION,
     {
-      onCompleted: () => {
-        toast.success('User subscription deleted')
+      onCompleted: (data) => {
+        const subscriptionType =
+          data.deleteUserSubscription.type === 'POST_AUTHOR'
+            ? 'auteur'
+            : 'reacties'
+
+        toast.success(`Abonnement op ${subscriptionType} opgezegd`)
       },
       onError: (error) => {
         toast.error(error.message)
@@ -130,23 +147,59 @@ export const Success = ({
     })
   }
 
-  return (
-    <div className="rw-segment mt-5">
-      <header className="rw-segment-header">
-        <h2 className="rw-heading rw-heading-secondary">
-          Abonneren op posts van auteurs:
-        </h2>
-      </header>
+  const onToggleUserSubscriptionComments = (id?: number) => {
+    // if id is defined, delete the subscription
+    if (id) {
+      return onDeleteUserSubscription({
+        variables: { id: id },
+      })
+    }
 
-      <div className="rw-segment-main">
-        <div className="mt-3">
-          <UserSubscriptionsAuthorSelector
-            users={users}
-            selected={selected}
-            onSelect={onToggleUserSubscriptionUser}
+    // if id is undefined, create the subscription
+    return createUserSubscriptions({
+      variables: {
+        input: {
+          type: 'COMMENT',
+          userId: user.id,
+        },
+      },
+    })
+  }
+
+  return (
+    <>
+      <div className="rw-segment mt-5">
+        <header className="rw-segment-header">
+          <h2 className="rw-heading rw-heading-secondary">
+            Abonneren op posts van auteurs:
+          </h2>
+        </header>
+
+        <div className="rw-segment-main">
+          <div className="mt-3">
+            <UserSubscriptionsAuthorSelector
+              users={users}
+              selected={selected}
+              onSelect={onToggleUserSubscriptionUser}
+            />
+          </div>
+        </div>
+      </div>
+      <div className="rw-segment mt-5">
+        <header className="rw-segment-header">
+          <h2 className="rw-heading rw-heading-secondary">
+            Abonneren op reacties op mijn reacties:
+          </h2>
+        </header>
+
+        <div className="rw-segment-main">
+          <UserSubscriptionsCommentCheckbox
+            userSubscriptionId={commentSubscription?.id}
+            onToggleUserSubscriptionComments={onToggleUserSubscriptionComments}
+            loading={createLoading || deleteLoading}
           />
         </div>
       </div>
-    </div>
+    </>
   )
 }

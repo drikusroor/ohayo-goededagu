@@ -5,7 +5,7 @@ export const schema = gql`
     user: User!
     userId: Int!
     type: UserSubscriptionType!
-    target: Int!
+    target: Int
   }
 
   enum UserSubscriptionType {
@@ -22,7 +22,7 @@ export const schema = gql`
   input CreateUserSubscriptionInput {
     userId: Int!
     type: UserSubscriptionType!
-    target: Int!
+    target: Int
   }
 
   input UpdateUserSubscriptionInput {

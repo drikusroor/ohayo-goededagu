@@ -20,6 +20,10 @@ export const userSubscription: QueryResolvers['userSubscription'] = ({
 
 export const createUserSubscription: MutationResolvers['createUserSubscription'] =
   ({ input }) => {
+    if (input.type === 'POST_AUTHOR' && !input.target) {
+      throw new Error('target is required for POST_AUTHOR subscription')
+    }
+
     return db.userSubscription.create({
       data: input,
     })

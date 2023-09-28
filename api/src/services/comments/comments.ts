@@ -3,9 +3,17 @@ import type {
   MutationResolvers,
   CommentRelationResolvers,
   CommentOrderByInput,
+  User,
+  Comment,
 } from 'types/graphql'
 
+import { getUserName } from 'src/functions/get-user-name'
 import { db } from 'src/lib/db'
+import { sendEmail } from 'src/lib/email'
+import { emailFooter, emailFooterAsText } from 'src/lib/email/footer'
+
+import notifyAuthorOnCommentIfSubscribed from './helpers/notify-author-on-comment'
+import notifyUserOnCommentReplyIfSubscribed from './helpers/notify-user-on-comment-reply'
 
 export const comments: QueryResolvers['comments'] = (
   {
@@ -43,12 +51,20 @@ export const createComment: MutationResolvers['createComment'] = async ({
     }
   }
 
-  return db.comment.create({
+  const created = await db.comment.create({
     data: {
       ...input,
       userId: context.currentUser.id,
     },
   })
+
+  // send email to parent comment author if they have a subscription to comment replies
+  await notifyUserOnCommentReplyIfSubscribed(created as Comment)
+
+  // send email to post author if they have a subscription to comments
+  await notifyAuthorOnCommentIfSubscribed(created as Comment)
+
+  return created
 }
 
 export const updateComment: MutationResolvers['updateComment'] = ({
