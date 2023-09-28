@@ -2,6 +2,7 @@ import type { Post } from 'types/graphql'
 
 import { Link, navigate, routes } from '@redwoodjs/router'
 
+import Button from 'src/components/Button/Button'
 import DisplayDatetime from 'src/components/DisplayDatetime/DisplayDatetime'
 import LocationPin from 'src/components/LocationPin/LocationPin'
 import PhotoGrid from 'src/components/PhotoGrid/PhotoGrid'
@@ -22,6 +23,8 @@ interface Props {
 const FullLayout = ({ article }: Props) => {
   const { width } = useWindowDimensions()
   const isMobile = width < 428
+
+  const [english, setEnglish] = React.useState<boolean>(false)
 
   const authorName =
     article?.user?.profile?.name || article?.user?.name || 'Anonymous'
@@ -92,7 +95,7 @@ const FullLayout = ({ article }: Props) => {
             <div className="flex flex-row justify-between gap-2">
               <h1 className="flex items-center gap-2 text-3xl font-extrabold uppercase tracking-tight md:gap-4">
                 <ArticleTypeIcon type={article.type as EPostType} />
-                {article.title}
+                {english ? article.titleEn : article.title}
               </h1>
             </div>
             <div className="flex flex-row items-center justify-between">
@@ -120,6 +123,26 @@ const FullLayout = ({ article }: Props) => {
               </div>
               <PostThumbsCell postId={article.id} />
             </div>
+            {article.titleEn && article.bodyEn && (
+              <div className="flex flex-row gap-2">
+                <Button
+                  variant="outlined"
+                  onClick={() => {
+                    setEnglish(false)
+                  }}
+                >
+                  🇳🇱
+                </Button>
+                <Button
+                  variant="outlined"
+                  onClick={() => {
+                    setEnglish(true)
+                  }}
+                >
+                  🇬🇧
+                </Button>
+              </div>
+            )}
           </header>
         </>
       )}
@@ -128,7 +151,7 @@ const FullLayout = ({ article }: Props) => {
         {article.videoPost != null && (
           <Video embedUrl={article?.videoPost?.videoUrl} />
         )}
-        <RenderBody body={article.body} />
+        <RenderBody body={english ? article.bodyEn : article.body} />
       </div>
 
       {galleries &&

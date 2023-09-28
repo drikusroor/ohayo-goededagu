@@ -2,7 +2,9 @@ export const schema = gql`
   type Post {
     id: Int!
     title: String!
+    titleEn: String
     body: String
+    bodyEn: String
     createdAt: DateTime!
     updatedAt: DateTime!
     user: User!
