@@ -8,7 +8,6 @@ import {
   BsFillExclamationTriangleFill,
   BsFillXCircleFill,
   BsSaveFill,
-  BsExclamation,
   BsExclamationTriangleFill,
 } from 'react-icons/bs'
 import type {
@@ -23,7 +22,6 @@ import {
   FieldError,
   Label,
   TextField,
-  Submit,
   SelectField,
 } from '@redwoodjs/forms'
 import type { RWGqlError } from '@redwoodjs/forms'
@@ -115,6 +113,12 @@ const PostForm = (props: PostFormProps) => {
   const [postTitle, setPostTitle] = React.useState<string>(props.post?.title)
 
   const [postBody, setPostBody] = React.useState<string>(props.post?.body)
+
+  const [postTitleEn, setPostTitleEn] = React.useState<string>(
+    props.post?.titleEn
+  )
+
+  const [postBodyEn, setPostBodyEn] = React.useState<string>(props.post?.bodyEn)
 
   const [postLocation, setPostLocation] = React.useState<string>(
     props.post?.location
@@ -270,6 +274,46 @@ const PostForm = (props: PostFormProps) => {
               />
 
               <FieldError name="body" className="rw-field-error" />
+
+              <Label
+                name="titleEn"
+                className="rw-label"
+                errorClassName="rw-label rw-label-error"
+              >
+                English Title
+              </Label>
+
+              <TextField
+                name="titleEn"
+                defaultValue={postTitleEn}
+                className="rw-input"
+                errorClassName="rw-input rw-input-error"
+                onChange={(e) => {
+                  setPostTitleEn(e.target.value)
+                }}
+                validation={{ required: true }}
+              />
+
+              <FieldError name="titleEn" className="rw-field-error" />
+
+              <Label
+                name="bodyEn"
+                className="rw-label"
+                errorClassName="rw-label rw-label-error"
+              >
+                English Body
+              </Label>
+
+              <MarkdownEditor
+                name="bodyEn"
+                value={postBodyEn}
+                onChange={setPostBodyEn}
+                validation={{
+                  required: !bodyNotRequired,
+                }}
+              />
+
+              <FieldError name="bodyEn" className="rw-field-error" />
 
               <Label
                 name="location"
