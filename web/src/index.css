@@ -54,6 +54,18 @@
     color:transparent!important;
   }
 
+  .goog-te-combo {
+    @apply bg-cobalt-blue-500 text-white cursor-pointer;
+
+    &:hover {
+      @apply bg-cobalt-blue-600;
+    }
+
+    &:focus {
+      @apply bg-cobalt-blue-600;
+    }
+  }
+
   .VIpgJd-ZVi9od-l4eHX-hSRGPd{
     z-index: 9724790009779!important;
     top: 0;
