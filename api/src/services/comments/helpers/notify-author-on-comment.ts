@@ -5,15 +5,11 @@ import { db } from 'src/lib/db'
 import { sendEmail } from 'src/lib/email'
 import { wrapBody, wrapBodyAsText } from 'src/lib/email/wrap'
 
-async function notifyUserOnCommentReplyIfSubscribed(comment: Comment) {
-  if (!comment.parentId) {
-    return
-  }
-
-  // get parent comment author
-  const parentCommentAuthor = await db.comment
+async function notifyAuthorOnCommentIfSubscribed(comment: Comment) {
+  // get comment post author
+  const commentPostAuthor = await db.post
     .findUnique({
-      where: { id: comment.parentId },
+      where: { id: comment.postId },
     })
     .user({
       include: {
@@ -26,30 +22,30 @@ async function notifyUserOnCommentReplyIfSubscribed(comment: Comment) {
       },
     })
 
-  if (
-    parentCommentAuthor?.userSubscriptions.some((s) => s.type === 'COMMENT')
-  ) {
-    // send email to parent comment author
+  console.log(commentPostAuthor)
+
+  if (commentPostAuthor?.userSubscriptions.some((s) => s.type === 'COMMENT')) {
+    // send email to comment post author
     sendEmail({
-      to: parentCommentAuthor.email,
-      subject: 'Iemand heeft gereageerd op je comment',
+      to: commentPostAuthor.email,
+      subject: 'Iemand heeft gereageerd op je post',
       text: wrapBodyAsText(
-        parentCommentAuthor,
+        commentPostAuthor,
         `
         ${getUserName(
           context.currentUser
-        )} heeft gereageerd op je comment. Ga naar de post om de reactie te bekijken: https://ohayo-goededagu.nl/article/${
+        )} heeft gereageerd op je post. Ga naar de post om de reactie te bekijken: https://ohayo-goededagu.nl/article/${
           comment.postId
         }#comment-${comment.id}
         `
       ),
 
       html: wrapBody(
-        parentCommentAuthor,
+        commentPostAuthor,
         `
         <p>${getUserName(
           context.currentUser
-        )} heeft gereageerd op je comment. Ga naar de post om de reactie te bekijken: <a href="https://ohayo-goededagu.nl/article/${
+        )} heeft gereageerd op je post. Ga naar de post om de reactie te bekijken: <a href="https://ohayo-goededagu.nl/article/${
           comment.postId
         }#comment-${comment.id}">https://ohayo-goededagu.nl/article/${
           comment.postId
@@ -60,4 +56,4 @@ async function notifyUserOnCommentReplyIfSubscribed(comment: Comment) {
   }
 }
 
-export default notifyUserOnCommentReplyIfSubscribed
+export default notifyAuthorOnCommentIfSubscribed

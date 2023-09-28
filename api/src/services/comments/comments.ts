@@ -12,6 +12,7 @@ import { db } from 'src/lib/db'
 import { sendEmail } from 'src/lib/email'
 import { emailFooter, emailFooterAsText } from 'src/lib/email/footer'
 
+import notifyAuthorOnCommentIfSubscribed from './helpers/notify-author-on-comment'
 import notifyUserOnCommentReplyIfSubscribed from './helpers/notify-user-on-comment-reply'
 
 export const comments: QueryResolvers['comments'] = (
@@ -59,6 +60,9 @@ export const createComment: MutationResolvers['createComment'] = async ({
 
   // send email to parent comment author if they have a subscription to comment replies
   await notifyUserOnCommentReplyIfSubscribed(created as Comment)
+
+  // send email to post author if they have a subscription to comments
+  await notifyAuthorOnCommentIfSubscribed(created as Comment)
 
   return created
 }
