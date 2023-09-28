@@ -141,6 +141,8 @@ const PostForm = (props: PostFormProps) => {
       id: props.post?.id ? props.post?.id : '',
       title: postTitle,
       body: postBody,
+      titleEn: postTitleEn,
+      bodyEn: postBodyEn,
       type: postType,
       createdAt: props.post?.createdAt
         ? props.post?.createdAt
@@ -164,6 +166,8 @@ const PostForm = (props: PostFormProps) => {
     coverImage,
     postBody,
     postTitle,
+    postTitleEn,
+    postBodyEn,
     postType,
     props.post,
     props.profile,
@@ -174,6 +178,8 @@ const PostForm = (props: PostFormProps) => {
 
   const bodyNotRequired =
     postType === EPostType.VIDEO || postType === EPostType.PHOTO_GALLERY
+
+  const bodyEnNotRequired = postTitleEn?.length < 1
 
   const showImageGalleryButtons =
     postType === EPostType.ARTICLE || postType === EPostType.PHOTO_GALLERY
@@ -291,7 +297,7 @@ const PostForm = (props: PostFormProps) => {
                 onChange={(e) => {
                   setPostTitleEn(e.target.value)
                 }}
-                validation={{ required: true }}
+                validation={{ required: false }}
               />
 
               <FieldError name="titleEn" className="rw-field-error" />
@@ -309,7 +315,7 @@ const PostForm = (props: PostFormProps) => {
                 value={postBodyEn}
                 onChange={setPostBodyEn}
                 validation={{
-                  required: !bodyNotRequired,
+                  required: !bodyEnNotRequired,
                 }}
               />
 
