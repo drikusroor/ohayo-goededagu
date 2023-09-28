@@ -13,6 +13,7 @@ import Button from 'src/components/Button/Button'
 import DisplayDatetime from 'src/components/DisplayDatetime/DisplayDatetime'
 import RenderBody from 'src/components/RenderBody/RenderBody'
 import Thumbs from 'src/components/Thumbs/Thumbs'
+import { classNames } from 'src/lib/class-names'
 import { getUserName } from 'src/lib/get-user-name'
 
 interface ICommentProps {
@@ -44,6 +45,17 @@ export default ({ comment, onClickReply }: ICommentProps) => {
 
   const [deleteFadeOut, setDeleteFadeOut] = useState(false)
   const [thumbsDisabled, setThumbsDisabled] = useState(false)
+
+  // check if comment is active in url hash (#comment-123) and set focus
+  const isActive = useMemo(() => {
+    if (typeof window === 'undefined') {
+      return false
+    }
+
+    console.log(window.location.hash, comment.id)
+
+    return window.location.hash === `#comment-${comment.id}`
+  }, [comment.id])
 
   useEffect(() => {
     setThumbsDisabled(false)
@@ -130,9 +142,11 @@ export default ({ comment, onClickReply }: ICommentProps) => {
 
   return (
     <div
-      className={`z-10 rounded-lg bg-slate-100 p-4 transition-opacity ${ratingOpacity} group relative ${
-        deleteFadeOut ? 'animate-fade-out' : ''
-      }`}
+      className={classNames(
+        `z-10 rounded-lg bg-slate-100 p-4 transition-opacity ${ratingOpacity} group relative`,
+        deleteFadeOut ? 'animate-fade-out' : '',
+        isActive ? 'border-2 border-red-500' : ''
+      )}
     >
       <div className="flex flex-row flex-wrap items-center gap-4">
         <Avatar
