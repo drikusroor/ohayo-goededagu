@@ -1,4 +1,4 @@
-import { useCallback, useMemo } from 'react'
+import { useCallback, useEffect, useMemo } from 'react'
 
 import {
   BsBoxArrowUp,
@@ -13,7 +13,7 @@ import {
   BsPersonCheckFill,
 } from 'react-icons/bs'
 
-import { Link, navigate, routes } from '@redwoodjs/router'
+import { AvailableRoutes, Link, navigate, routes } from '@redwoodjs/router'
 import { useLocation } from '@redwoodjs/router'
 
 import { useAuth } from 'src/auth'
@@ -27,7 +27,9 @@ interface MenuItem {
   icon?: React.ReactNode
 }
 
-const getMenuItems = (routes) => [
+type GetMenuItems = (routes: AvailableRoutes) => MenuItem[]
+
+const getMenuItems: GetMenuItems = (routes) => [
   {
     name: 'Home',
     path: '/',
@@ -96,6 +98,16 @@ type AdminDashboardLayoutProps = {
 const AdminDashboardLayout = ({ children }: AdminDashboardLayoutProps) => {
   const { isAuthenticated, currentUser, logOut } = useAuth()
   const { pathname } = useLocation()
+
+  useEffect(() => {
+    // apply .admin-dashboard-layout class to body
+    document.body.classList.add('admin-dashboard-layout')
+
+    // cleanup
+    return () => {
+      document.body.classList.remove('admin-dashboard-layout')
+    }
+  }, [])
 
   const getIsActiveClass = useCallback(
     (path: string) => {

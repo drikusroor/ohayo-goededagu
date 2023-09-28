@@ -1,12 +1,6 @@
-import { useState } from 'react'
+import { useEffect } from 'react'
 
-import {
-  BsArrowUpCircle,
-  BsBoxArrowUp,
-  BsHouse,
-  BsPersonCircle,
-  BsTools,
-} from 'react-icons/bs'
+import { BsBoxArrowUp, BsHouse, BsPersonCircle, BsTools } from 'react-icons/bs'
 
 import { Link, navigate, routes } from '@redwoodjs/router'
 import { Toaster } from '@redwoodjs/web/dist/toast'
@@ -24,6 +18,16 @@ type BlogLayoutProps = {
 
 const BlogLayout = ({ children, skeleton }: BlogLayoutProps) => {
   const { isAuthenticated, logOut, currentUser } = useAuth()
+
+  useEffect(() => {
+    // apply .blog-layout class to body
+    document.body.classList.add('blog-layout')
+
+    // cleanup
+    return () => {
+      document.body.classList.remove('blog-layout')
+    }
+  }, [])
 
   if (skeleton) {
     return (
@@ -113,7 +117,7 @@ const BlogLayout = ({ children, skeleton }: BlogLayoutProps) => {
             </ul>
           </div>
         )}
-        <div className={`mx-auto w-32 ${isAuthenticated && 'mt-16'}`}>
+        <div className={`mx-auto w-32 ${isAuthenticated && 'pt-16'}`}>
           <Link to={routes.home()} title="Ohayo Goededagu" aria-label="Home">
             <img
               src="/images/logo.png"
