@@ -6,10 +6,9 @@ export const standard = defineScenario<Prisma.UserSubscriptionCreateArgs>({
     one: {
       data: {
         type: 'POST_AUTHOR',
-        target: 3582616,
         user: {
           create: {
-            email: 'String309799',
+            email: 'String873498',
             hashedPassword: 'String',
             salt: 'String',
           },
@@ -19,10 +18,9 @@ export const standard = defineScenario<Prisma.UserSubscriptionCreateArgs>({
     two: {
       data: {
         type: 'POST_AUTHOR',
-        target: 4576454,
         user: {
           create: {
-            email: 'String2968877',
+            email: 'String9691098',
             hashedPassword: 'String',
             salt: 'String',
           },

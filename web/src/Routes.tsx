@@ -45,6 +45,12 @@ const Routes = () => {
             <Route path="/admin/comments/{id:Int}" page={CommentCommentPage} name="comment" />
             <Route path="/admin/comments" page={CommentCommentsPage} name="comments" />
           </Set>
+          <Set wrap={ScaffoldLayout} title="UserSubscriptions" titleTo="userSubscriptions" buttonLabel="New UserSubscription" buttonTo="newUserSubscription">
+            <Route path="/admin/user-subscriptions/new" page={UserSubscriptionNewUserSubscriptionPage} name="newUserSubscription" />
+            <Route path="/admin/user-subscriptions/{id:Int}/edit" page={UserSubscriptionEditUserSubscriptionPage} name="editUserSubscription" />
+            <Route path="/admin/user-subscriptions/{id:Int}" page={UserSubscriptionUserSubscriptionPage} name="userSubscription" />
+            <Route path="/admin/user-subscriptions" page={UserSubscriptionUserSubscriptionsPage} name="userSubscriptions" />
+          </Set>
           <Set wrap={ScaffoldLayout} title="Account" titleTo="editAccount">
             <Route path="/admin/account/edit" page={AccountEditAccountPage} name="editAccount" />
           </Set>

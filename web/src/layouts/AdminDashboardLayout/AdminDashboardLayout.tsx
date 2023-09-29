@@ -5,6 +5,7 @@ import {
   BsChatLeft,
   BsEnvelope,
   BsFillCalendarEventFill,
+  BsFillHandIndexThumbFill,
   BsFillHouseFill,
   BsFillJournalBookmarkFill,
   BsFillPersonFill,
@@ -62,6 +63,13 @@ const getMenuItems: GetMenuItems = (routes) => [
     activeRoutePattern: '/comments',
     roles: ['ADMIN', 'MODERATOR'],
     icon: <BsChatLeft />,
+  },
+  {
+    name: 'Subscriptions',
+    path: '/admin/user-subscriptions',
+    activeRoutePattern: '/user-subscriptions',
+    roles: ['ADMIN', 'MODERATOR'],
+    icon: <BsFillHandIndexThumbFill />,
   },
   {
     name: 'Account',

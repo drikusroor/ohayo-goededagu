@@ -43,13 +43,11 @@ describe('userSubscriptions', () => {
       input: {
         userId: scenario.userSubscription.two.userId,
         type: 'POST_AUTHOR',
-        target: 408783,
       },
     })
 
     expect(result.userId).toEqual(scenario.userSubscription.two.userId)
     expect(result.type).toEqual('POST_AUTHOR')
-    expect(result.target).toEqual(408783)
   })
 
   scenario('updates a userSubscription', async (scenario: StandardScenario) => {
