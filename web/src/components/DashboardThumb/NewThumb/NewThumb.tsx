@@ -4,7 +4,7 @@ import { navigate, routes } from '@redwoodjs/router'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
-import ThumbForm from 'src/components/Thumb/ThumbForm'
+import ThumbForm from 'src/components/DashboardThumb/ThumbForm'
 
 const CREATE_THUMB_MUTATION = gql`
   mutation CreateThumbMutation($input: CreateThumbInput!) {

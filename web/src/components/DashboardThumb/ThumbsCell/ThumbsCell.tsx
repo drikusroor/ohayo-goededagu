@@ -3,7 +3,7 @@ import type { FindThumbs, Thumb } from 'types/graphql'
 import { Link, routes } from '@redwoodjs/router'
 import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
 
-import Thumbs from 'src/components/Thumb/Thumbs'
+import Thumbs from 'src/components/DashboardThumb/Thumbs'
 
 export const QUERY = gql`
   query FindThumbs {

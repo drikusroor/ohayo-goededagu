@@ -5,7 +5,7 @@ import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
-import ThumbForm from 'src/components/Thumb/ThumbForm'
+import ThumbForm from 'src/components/DashboardThumb/ThumbForm'
 
 export const QUERY = gql`
   query EditThumbById($id: Int!) {

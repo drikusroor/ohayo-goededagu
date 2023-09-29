@@ -1,4 +1,4 @@
-import ThumbsCell from 'src/components/Thumb/ThumbsCell'
+import ThumbsCell from 'src/components/DashboardThumb/ThumbsCell'
 
 const ThumbsPage = () => {
   return <ThumbsCell />

@@ -1,4 +1,4 @@
-import ThumbCell from 'src/components/Thumb/ThumbCell'
+import ThumbCell from 'src/components/DashboardThumb/ThumbCell'
 
 type ThumbPageProps = {
   id: number

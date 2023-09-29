@@ -10,7 +10,7 @@ import { Link, routes } from '@redwoodjs/router'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
-import { QUERY } from 'src/components/Thumb/ThumbsCell'
+import { QUERY } from 'src/components/DashboardThumb/ThumbsCell'
 import { truncate } from 'src/lib/formatters'
 import { getUserName } from 'src/lib/get-user-name'
 import { dateStringToTimeAgo } from 'src/lib/time-ago'

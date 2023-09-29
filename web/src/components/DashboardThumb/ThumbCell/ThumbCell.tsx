@@ -2,7 +2,7 @@ import type { FindThumbById } from 'types/graphql'
 
 import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
 
-import Thumb from 'src/components/Thumb/Thumb'
+import Thumb from 'src/components/DashboardThumb/Thumb'
 
 export const QUERY = gql`
   query FindThumbById($id: Int!) {

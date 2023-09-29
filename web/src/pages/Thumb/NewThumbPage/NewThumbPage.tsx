@@ -1,4 +1,4 @@
-import NewThumb from 'src/components/Thumb/NewThumb'
+import NewThumb from 'src/components/DashboardThumb/NewThumb'
 
 const NewThumbPage = () => {
   return <NewThumb />

@@ -1,4 +1,4 @@
-import EditThumbCell from 'src/components/Thumb/EditThumbCell'
+import EditThumbCell from 'src/components/DashboardThumb/EditThumbCell'
 
 type ThumbPageProps = {
   id: number
