@@ -1,4 +1,12 @@
-import { BsHandThumbsDownFill, BsHandThumbsUpFill } from 'react-icons/bs'
+import {
+  BsChatLeft,
+  BsChatLeftFill,
+  BsHandThumbsDownFill,
+  BsHandThumbsUpFill,
+  BsJournal,
+  BsJournalBookmarkFill,
+  BsJournals,
+} from 'react-icons/bs'
 import type { DeleteThumbMutationVariables, FindThumbs } from 'types/graphql'
 
 import { Link, routes } from '@redwoodjs/router'
@@ -71,10 +79,20 @@ const ThumbsList = ({ thumbs }: FindThumbs) => {
                     title={'Show article ' + thumb.comment?.postId + ' detail'}
                     className="mr-2 text-blue-500 underline hover:text-blue-700"
                   >
-                    {thumb.comment?.postId}
+                    <BsChatLeft className="mr-2 inline-block" />
+                    {thumb.comment?.postId} / {thumb.commentId}
                   </Link>
                 )}
-                {truncate(thumb.commentId)}
+                {thumb.postId && (
+                  <Link
+                    to={routes.article({ id: thumb.postId })}
+                    title={'Show article ' + thumb.postId + ' detail'}
+                    className="mr-2 text-blue-500 underline hover:text-blue-700"
+                  >
+                    <BsJournals className="mr-2 inline-block" />
+                    {thumb.postId}
+                  </Link>
+                )}
               </td>
               <td>
                 {thumb.up ? (

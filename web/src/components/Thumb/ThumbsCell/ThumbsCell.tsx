@@ -1,4 +1,4 @@
-import type { FindThumbs } from 'types/graphql'
+import type { FindThumbs, Thumb } from 'types/graphql'
 
 import { Link, routes } from '@redwoodjs/router'
 import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
@@ -16,6 +16,21 @@ export const QUERY = gql`
       comment {
         postId
       }
+      user {
+        id
+        email
+        profile {
+          name
+          avatar
+        }
+      }
+    }
+    postThumbs {
+      id
+      createdAt
+      userId
+      postId
+      up
       user {
         id
         email
@@ -45,6 +60,11 @@ export const Failure = ({ error }: CellFailureProps) => (
   <div className="rw-cell-error">{error?.message}</div>
 )
 
-export const Success = ({ thumbs }: CellSuccessProps<FindThumbs>) => {
-  return <Thumbs thumbs={thumbs} />
+export const Success = ({
+  thumbs,
+  postThumbs,
+}: CellSuccessProps<FindThumbs>) => {
+  const combinedThumbs = thumbs.concat(postThumbs) as Thumb[]
+
+  return <Thumbs thumbs={combinedThumbs} />
 }
