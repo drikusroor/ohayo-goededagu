@@ -48,7 +48,7 @@ const UserSubscriptionsList = ({
     }
   }
 
-  const sortedUserSubscriptions = userSubscriptions.sort((a, b) => {
+  const sortedUserSubscriptions = [...userSubscriptions].sort((a, b) => {
     if (a.createdAt > b.createdAt) return -1
     if (a.createdAt < b.createdAt) return 1
     return 0

@@ -44,7 +44,7 @@ const ThumbsList = ({ thumbs }: FindThumbs) => {
     }
   }
 
-  const sortedThumbs = thumbs.sort((a, b) => {
+  const sortedThumbs = [...thumbs].sort((a, b) => {
     if (a.createdAt > b.createdAt) return -1
     if (a.createdAt < b.createdAt) return 1
     return 0
