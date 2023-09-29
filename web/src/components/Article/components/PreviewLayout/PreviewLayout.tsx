@@ -9,6 +9,7 @@ import ArticleTypeIcon, {
 } from 'src/components/ArticleTypeIcon/ArticleTypeIcon'
 import AvatarTimestamp from 'src/components/Avatar/AvatarTimestamp/AvatarTimestamp'
 import Button from 'src/components/Button/Button'
+import LanguageButton from 'src/components/LanguageButton/LanguageButton'
 import PostThumbsCell from 'src/components/PostThumbsCell'
 import RenderBody from 'src/components/RenderBody/RenderBody'
 import Video from 'src/components/Video/Video'
@@ -78,24 +79,7 @@ const PreviewLayout = ({ article }: Props) => {
                 </Link>
               </h2>
             </div>
-            <div className="flex flex-row content-start justify-end gap-2 p-2">
-              {article.title && article.body && (
-                <span className="group relative flex items-center gap-2 text-lg ">
-                  🇳🇱
-                  <span className="user-select-none absolute bottom-full right-0 mb-2 w-52 rounded-md border-2 border-slate-200 bg-white p-2 text-left text-xs text-slate-500 opacity-0 shadow-md transition-opacity group-hover:opacity-100">
-                    Beschikbaar in Nederlands
-                  </span>
-                </span>
-              )}
-              {article.titleEn && article.bodyEn && (
-                <span className="group relative flex items-center gap-2 text-lg ">
-                  🇬🇧
-                  <span className="user-select-none absolute bottom-full right-0 mb-2 w-32 rounded-md border-2 border-slate-200 bg-white p-2 text-left text-xs text-slate-500 opacity-0 shadow-md transition-opacity group-hover:opacity-100">
-                    Available in English
-                  </span>
-                </span>
-              )}
-            </div>
+            <LanguageButton article={article} readOnly />
           </header>
 
           {article.type === EPostType.VIDEO && (

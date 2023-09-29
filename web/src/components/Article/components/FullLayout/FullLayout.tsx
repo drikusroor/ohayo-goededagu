@@ -4,6 +4,7 @@ import { Link, navigate, routes } from '@redwoodjs/router'
 
 import Button from 'src/components/Button/Button'
 import DisplayDatetime from 'src/components/DisplayDatetime/DisplayDatetime'
+import LanguageButton from 'src/components/LanguageButton/LanguageButton'
 import LocationPin from 'src/components/LocationPin/LocationPin'
 import PhotoGrid from 'src/components/PhotoGrid/PhotoGrid'
 import PostThumbsCell from 'src/components/PostThumbsCell'
@@ -25,6 +26,7 @@ const FullLayout = ({ article }: Props) => {
   const isMobile = width < 428
 
   const [english, setEnglish] = React.useState<boolean>(false)
+  console.log('english', english)
 
   const authorName =
     article?.user?.profile?.name || article?.user?.name || 'Anonymous'
@@ -53,28 +55,7 @@ const FullLayout = ({ article }: Props) => {
         >
           <div className="flex flex-row content-start justify-end p-1">
             {article.titleEn && article.bodyEn && (
-              <div className="flex flex-row gap-2 rounded bg-slate-300 bg-opacity-70 p-1">
-                <Button
-                  variant="outlined"
-                  size="xs"
-                  className="hover:bg-slate-200"
-                  onClick={() => {
-                    setEnglish(false)
-                  }}
-                >
-                  <span className="text-lg">🇳🇱</span>
-                </Button>
-                <Button
-                  variant="outlined"
-                  size="xs"
-                  className="hover:bg-slate-200"
-                  onClick={() => {
-                    setEnglish(true)
-                  }}
-                >
-                  <span className="text-lg">🇬🇧</span>
-                </Button>
-              </div>
+              <LanguageButton setEnglish={setEnglish} />
             )}
           </div>
           <div className="flex aspect-video max-w-screen-xl flex-col justify-end gap-2 px-4">
@@ -150,26 +131,7 @@ const FullLayout = ({ article }: Props) => {
               {article.id && <PostThumbsCell postId={article.id} />}
             </div>
             {article.titleEn && article.bodyEn && (
-              <div className="flex flex-row gap-2">
-                <Button
-                  variant="outlined"
-                  className="hover:bg-slate-200"
-                  onClick={() => {
-                    setEnglish(false)
-                  }}
-                >
-                  <span className="text-xl">🇳🇱</span>
-                </Button>
-                <Button
-                  variant="outlined"
-                  className="hover:bg-slate-200"
-                  onClick={() => {
-                    setEnglish(true)
-                  }}
-                >
-                  <span className="text-xl">🇬🇧</span>
-                </Button>
-              </div>
+              <LanguageButton setEnglish={setEnglish} />
             )}
           </header>
         </>
