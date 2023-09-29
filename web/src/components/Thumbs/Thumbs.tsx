@@ -13,6 +13,8 @@ export interface IThumbProps {
   onThumb: (up: boolean) => void
   disabled?: boolean
   className?: string
+  show?: boolean
+  light?: boolean
 }
 
 const Thumbs = (props: IThumbProps) => {
@@ -50,6 +52,8 @@ const Thumbs = (props: IThumbProps) => {
         active={currentUserThumb?.up}
         onClick={() => onThumb(true)}
         disabled={props.disabled}
+        show={props.show}
+        light={props.light}
         names={upThumbs.map((thumb) => getUserName(thumb.user))}
       />
       <Thumb
@@ -58,6 +62,8 @@ const Thumbs = (props: IThumbProps) => {
         active={currentUserThumb?.up === false}
         onClick={() => onThumb(false)}
         disabled={props.disabled}
+        show={props.show}
+        light={props.light}
         names={downThumbs.map((thumb) => getUserName(thumb.user))}
       />
     </div>

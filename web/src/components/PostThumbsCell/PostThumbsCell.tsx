@@ -99,7 +99,12 @@ export const Failure = ({ error }: CellFailureProps) => (
 export const Success = ({
   postThumbs,
   post,
-}: CellSuccessProps<FindPostThumbsByPostIdQuery>) => {
+  show,
+  light,
+}: CellSuccessProps<FindPostThumbsByPostIdQuery> & {
+  show?: boolean
+  light?: boolean
+}) => {
   const postId = post.id
 
   const [createUpdateOrDeletePostThumb] = useMutation(
@@ -137,10 +142,15 @@ export const Success = ({
   }
 
   return (
-    <Thumbs
-      thumbs={postThumbs}
-      onThumb={handleThumbClick}
-      disabled={thumbsDisabled}
-    />
+    <>
+      {show && <Thumbs thumbs={postThumbs} show={show} light={light} />}
+      {!show && (
+        <Thumbs
+          thumbs={postThumbs}
+          onThumb={handleThumbClick}
+          disabled={thumbsDisabled}
+        />
+      )}
+    </>
   )
 }
