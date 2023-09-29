@@ -47,6 +47,12 @@ const ThumbsList = ({ thumbs }: FindThumbs) => {
     }
   }
 
+  const sortedThumbs = thumbs.sort((a, b) => {
+    if (a.createdAt > b.createdAt) return -1
+    if (a.createdAt < b.createdAt) return 1
+    return 0
+  })
+
   return (
     <div className="rw-segment rw-table-wrapper-responsive">
       <table className="rw-table">
@@ -61,7 +67,7 @@ const ThumbsList = ({ thumbs }: FindThumbs) => {
           </tr>
         </thead>
         <tbody>
-          {thumbs.map((thumb) => (
+          {sortedThumbs.map((thumb) => (
             <tr key={thumb.id}>
               <td>{truncate(thumb.id)}</td>
               <td>{dateStringToTimeAgo(thumb.createdAt)}</td>

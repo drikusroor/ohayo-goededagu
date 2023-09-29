@@ -48,6 +48,12 @@ const UserSubscriptionsList = ({
     }
   }
 
+  const sortedUserSubscriptions = userSubscriptions.sort((a, b) => {
+    if (a.createdAt > b.createdAt) return -1
+    if (a.createdAt < b.createdAt) return 1
+    return 0
+  })
+
   return (
     <div className="rw-segment rw-table-wrapper-responsive">
       <table className="rw-table">
@@ -62,7 +68,7 @@ const UserSubscriptionsList = ({
           </tr>
         </thead>
         <tbody>
-          {userSubscriptions.map((userSubscription) => (
+          {sortedUserSubscriptions.map((userSubscription) => (
             <tr key={userSubscription.id}>
               <td>{truncate(userSubscription.id)}</td>
               <td>{dateStringToTimeAgo(userSubscription.createdAt)}</td>
