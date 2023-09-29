@@ -46,7 +46,9 @@ const PreviewLayout = ({ article }: Props) => {
             {article?.comments?.length > 0 && (
               <ArticleCommentCountBadge count={article.comments.length} />
             )}
-            {article.id && <PostThumbsCell postId={article.id} show light />}
+            {article.id && (
+              <PostThumbsCell postId={article.id} readOnly light />
+            )}
 
             <Link
               to={routes.article({ id: article.id })}
@@ -104,7 +106,7 @@ const PreviewLayout = ({ article }: Props) => {
                     variant="dark"
                   />
                 )}
-                {article.id && <PostThumbsCell postId={article.id} show />}
+                {article.id && <PostThumbsCell postId={article.id} readOnly />}
                 {article.type === EPostType.VIDEO && article.body && (
                   <Button
                     text="Lees verder"

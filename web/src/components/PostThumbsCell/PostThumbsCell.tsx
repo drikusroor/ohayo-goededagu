@@ -99,10 +99,10 @@ export const Failure = ({ error }: CellFailureProps) => (
 export const Success = ({
   postThumbs,
   post,
-  show,
+  readOnly,
   light,
 }: CellSuccessProps<FindPostThumbsByPostIdQuery> & {
-  show?: boolean
+  readOnly?: boolean
   light?: boolean
 }) => {
   const postId = post.id
@@ -141,10 +141,14 @@ export const Success = ({
     })
   }
 
+  const readOnlyHasThumbs = readOnly && postThumbs.length > 0
+
   return (
     <>
-      {show && <Thumbs thumbs={postThumbs} show={show} light={light} />}
-      {!show && (
+      {readOnlyHasThumbs && (
+        <Thumbs thumbs={postThumbs} readOnly={readOnly} light={light} />
+      )}
+      {!readOnly && (
         <Thumbs
           thumbs={postThumbs}
           onThumb={handleThumbClick}

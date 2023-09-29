@@ -18,7 +18,7 @@ interface IThumbProps {
   count: number
   onClick: () => void
   disabled?: boolean
-  show?: boolean
+  readOnly?: boolean
   light?: boolean
   names: string[]
 }
@@ -30,7 +30,7 @@ const Thumb = ({
   names = [],
   onClick,
   disabled,
-  show,
+  readOnly,
   light,
 }: IThumbProps) => {
   const { width } = useWindowDimensions()
@@ -46,9 +46,9 @@ const Thumb = ({
         'transition-filter whitespace-nowrap',
         disabled ? 'cursor-not-allowed grayscale' : '',
         light ? 'text-white hover:text-white' : '',
-        show && !light && !active ? 'hover:text-[#1e4785]' : '',
-        show && !active ? 'cursor-auto hover:bg-transparent' : '',
-        show ? 'cursor-auto' : ''
+        readOnly && !light && !active ? 'hover:text-[#1e4785]' : '',
+        readOnly && !active ? 'cursor-auto hover:bg-transparent' : '',
+        readOnly ? 'cursor-auto' : ''
       )}
       title={title}
     >
