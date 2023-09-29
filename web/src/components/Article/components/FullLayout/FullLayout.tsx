@@ -83,7 +83,7 @@ const FullLayout = ({ article }: Props) => {
                 <ArticleTypeIcon type={article.type as EPostType} />
               </div>
               <h1 className="flex items-center gap-2 text-3xl font-extrabold uppercase leading-none tracking-tight text-white drop-shadow-xl md:gap-4 md:text-5xl lg:text-6xl">
-                {article.title}
+                {english ? article.titleEn : article.title}
               </h1>
             </div>
             <div className="flex flex-row items-center gap-2 pb-2">
