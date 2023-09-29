@@ -40,7 +40,17 @@ const ArticlePhotoGallery = ({ article, displayType }: Props) => {
               />
             )}
             <div className="font-3xl lg:min-h-48 min-h-20 md:min-h-24 absolute bottom-0 mx-auto flex h-full w-full flex-col justify-center rounded-md bg-gray-600 bg-opacity-50 px-4 text-center text-white text-opacity-100">
-              <PreviewLayout article={article} />
+              <div className="flex flex-row content-start justify-end gap-2 p-2">
+                {article.title && article.body && (
+                  <span className="text-lg">🇳🇱</span>
+                )}
+                {article.titleEn && article.bodyEn && (
+                  <span className="text-lg">🇬🇧</span>
+                )}
+              </div>
+              <div className="mx-auto max-w-screen-xl px-4 py-20 md:py-24 lg:py-56">
+                <PreviewLayout article={article} />
+              </div>
             </div>
           </div>
         </>

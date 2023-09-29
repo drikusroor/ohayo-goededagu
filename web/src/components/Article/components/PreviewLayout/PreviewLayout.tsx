@@ -17,6 +17,7 @@ interface Props {
 }
 
 const PreviewLayout = ({ article }: Props) => {
+  console.log('preview layout', article)
   const hasImage =
     article.type === EPostType.ARTICLE ||
     article.type === EPostType.PHOTO_GALLERY
@@ -63,7 +64,7 @@ const PreviewLayout = ({ article }: Props) => {
       )}
       {!hasImage && (
         <>
-          <header className="mb-3">
+          <header className="mb-3 flex flex-row justify-between">
             <div className="mt-4 flex flex-row items-center gap-2 pl-1">
               <ArticleTypeIcon type={article.type as EPostType} />
               <h2
@@ -74,6 +75,14 @@ const PreviewLayout = ({ article }: Props) => {
                   {article.title}
                 </Link>
               </h2>
+            </div>
+            <div className="flex flex-row content-start justify-end gap-2 p-2">
+              {article.title && article.body && (
+                <span className="text-lg">🇳🇱</span>
+              )}
+              {article.titleEn && article.bodyEn && (
+                <span className="text-lg">🇬🇧</span>
+              )}
             </div>
           </header>
 

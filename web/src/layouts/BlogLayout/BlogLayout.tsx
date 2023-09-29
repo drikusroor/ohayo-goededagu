@@ -153,7 +153,9 @@ const BlogLayout = ({ children, skeleton }: BlogLayoutProps) => {
           </ul>
         </nav>
       </header>
-      <main className="mx-auto max-w-6xl flex-grow md:grid">{children}</main>
+      <main className="mx-auto min-w-[80%] max-w-6xl flex-grow md:grid">
+        {children}
+      </main>
       <footer className="bg-slate-500 py-4 text-center text-white">
         <div>Bedankt voor het volgen van onze avonturen in Japan!</div>
       </footer>

@@ -12,6 +12,7 @@ interface Props {
 
 const ArticleArticle = ({ article, displayType }: Props) => {
   const { coverImage } = article
+  console.log('articlearticle', article)
 
   return (
     <>
@@ -24,6 +25,14 @@ const ArticleArticle = ({ article, displayType }: Props) => {
           }}
           className="rounded bg-gray-600 bg-cover bg-center bg-no-repeat bg-blend-multiply"
         >
+          <div className="flex flex-row content-start justify-end gap-2 p-2">
+            {article.title && article.body && (
+              <span className="text-lg">🇳🇱</span>
+            )}
+            {article.titleEn && article.bodyEn && (
+              <span className="text-lg">🇬🇧</span>
+            )}
+          </div>
           <div className="mx-auto max-w-screen-xl px-4 py-20 md:py-24 lg:py-56">
             <PreviewLayout article={article} />
           </div>

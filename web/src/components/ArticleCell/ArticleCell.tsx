@@ -103,5 +103,6 @@ export const Failure = ({
 export const Success = ({
   article,
 }: CellSuccessProps<FindArticleQuery, FindArticleQueryVariables>) => {
+  console.log('articlecell', article)
   return <Article article={article} />
 }

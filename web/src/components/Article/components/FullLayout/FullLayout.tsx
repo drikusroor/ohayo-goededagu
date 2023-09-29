@@ -51,7 +51,7 @@ const FullLayout = ({ article }: Props) => {
           }}
           className="relative rounded bg-gray-400 bg-cover bg-center bg-no-repeat bg-blend-multiply"
         >
-          <div className="flex flex-row content-start justify-end  p-1">
+          <div className="flex flex-row content-start justify-end p-1">
             {article.titleEn && article.bodyEn && (
               <div className="flex flex-row gap-2 rounded bg-slate-300 bg-opacity-70 p-1">
                 <Button
