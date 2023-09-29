@@ -13,6 +13,17 @@ export const QUERY = gql`
       userId
       commentId
       up
+      comment {
+        postId
+      }
+      user {
+        id
+        email
+        profile {
+          name
+          avatar
+        }
+      }
     }
   }
 `

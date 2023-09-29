@@ -1,11 +1,14 @@
+import { BsHandThumbsDownFill, BsHandThumbsUpFill } from 'react-icons/bs'
+import type { DeleteThumbMutationVariables, FindThumbs } from 'types/graphql'
+
 import { Link, routes } from '@redwoodjs/router'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
 import { QUERY } from 'src/components/Thumb/ThumbsCell'
-import { checkboxInputTag, timeTag, truncate } from 'src/lib/formatters'
-
-import type { DeleteThumbMutationVariables, FindThumbs } from 'types/graphql'
+import { timeTag, truncate } from 'src/lib/formatters'
+import { getUserName } from 'src/lib/get-user-name'
+import { dateStringToTimeAgo } from 'src/lib/time-ago'
 
 const DELETE_THUMB_MUTATION = gql`
   mutation DeleteThumbMutation($id: Int!) {
@@ -42,9 +45,9 @@ const ThumbsList = ({ thumbs }: FindThumbs) => {
         <thead>
           <tr>
             <th>Id</th>
-            <th>Created at</th>
-            <th>User id</th>
-            <th>Comment id</th>
+            <th>Created</th>
+            <th>User</th>
+            <th>Post / Comment</th>
             <th>Up</th>
             <th>&nbsp;</th>
           </tr>
@@ -53,10 +56,33 @@ const ThumbsList = ({ thumbs }: FindThumbs) => {
           {thumbs.map((thumb) => (
             <tr key={thumb.id}>
               <td>{truncate(thumb.id)}</td>
-              <td>{timeTag(thumb.createdAt)}</td>
-              <td>{truncate(thumb.userId)}</td>
-              <td>{truncate(thumb.commentId)}</td>
-              <td>{checkboxInputTag(thumb.up)}</td>
+              <td>{dateStringToTimeAgo(thumb.createdAt)}</td>
+              <td>
+                {getUserName(thumb.user)} ({truncate(thumb.userId)})
+              </td>
+              <td>
+                {thumb.comment?.postId && (
+                  <Link
+                    to={
+                      routes.article({ id: thumb.comment?.postId }) +
+                      '#comment-' +
+                      thumb.commentId
+                    }
+                    title={'Show article ' + thumb.comment?.postId + ' detail'}
+                    className="mr-2 text-blue-500 underline hover:text-blue-700"
+                  >
+                    {thumb.comment?.postId}
+                  </Link>
+                )}
+                {truncate(thumb.commentId)}
+              </td>
+              <td>
+                {thumb.up ? (
+                  <BsHandThumbsUpFill className="text-green-600" />
+                ) : (
+                  <BsHandThumbsDownFill className="text-red-600" />
+                )}
+              </td>
               <td>
                 <nav className="rw-table-actions">
                   <Link
