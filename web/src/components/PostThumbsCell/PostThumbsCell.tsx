@@ -97,7 +97,7 @@ export const Failure = ({ error }: CellFailureProps) => (
 )
 
 export const Success = ({
-  postThumbs,
+  postThumbs = [],
   post,
   readOnly,
   light,

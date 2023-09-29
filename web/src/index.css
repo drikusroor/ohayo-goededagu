@@ -79,7 +79,11 @@
 
 /* blog */
 .blog-layout .google_translate  {
-  @apply fixed pt-16 right-2 bottom-auto top-0 z-30 w-40 drop-shadow;
+  @apply fixed mt-16 pt-2 right-2 bottom-auto top-0 z-30 w-40 drop-shadow;
+
+  .goog-te-combo {
+    @apply w-full;
+  }
 }
 
 /* admin */

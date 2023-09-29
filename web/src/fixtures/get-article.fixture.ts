@@ -36,6 +36,21 @@ export const getArticle = (overrides = {}) => ({
       },
       userId: 1,
       post: null,
+      postThumbs: [
+        {
+          id: 1,
+          up: true,
+          userId: 1,
+          postId: 1,
+          user: {
+            id: 1,
+            email: 'info@example.com',
+            profile: {
+              name: 'John Doe',
+            },
+          },
+        },
+      ],
     },
   ],
   createdAt: '2021-07-01T19:24:00.000Z',

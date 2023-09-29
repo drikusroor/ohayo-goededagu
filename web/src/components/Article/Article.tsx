@@ -6,7 +6,6 @@ import type { Comment as TComment, Post } from 'types/graphql'
 import { Link, routes } from '@redwoodjs/router'
 
 import { useAuth } from 'src/auth'
-import dateStringToLocalizedDateString from 'src/lib/localized-date'
 import { EPostDisplayType } from 'src/types/post-display-type.enum'
 
 import { EPostType } from '../ArticleTypeIcon/ArticleTypeIcon'
@@ -30,8 +29,6 @@ const Article = ({ article, hideComments }: Props) => {
   const { currentUser } = useAuth()
   const isUserAuthor = article?.user?.id === currentUser?.id
 
-  const formattedDate = dateStringToLocalizedDateString(article.createdAt)
-
   const sortedComments = useMemo(() => {
     if (article.comments) {
       return [...article.comments].sort((a, b) => {
@@ -54,7 +51,7 @@ const Article = ({ article, hideComments }: Props) => {
   const [replyToComment, setReplyToComment] = React.useState<TComment>()
 
   return (
-    <article className="flex flex-col gap-24 p-3 md:p-10">
+    <article className="flex flex-col gap-16 p-3 md:p-10">
       <div className="flex flex-col gap-4">
         {article.type === EPostType.ARTICLE && (
           <ArticleArticle
@@ -64,34 +61,24 @@ const Article = ({ article, hideComments }: Props) => {
         )}
 
         {article.type === EPostType.VIDEO && (
-          <ArticleVideo
-            article={article}
-            displayType={EPostDisplayType.FULL}
-            date={formattedDate}
-          />
+          <ArticleVideo article={article} displayType={EPostDisplayType.FULL} />
         )}
 
         {article.type === EPostType.CHOTTO && (
           <ArticleChotto
             article={article}
             displayType={EPostDisplayType.FULL}
-            date={formattedDate}
           />
         )}
 
         {article.type === EPostType.HAIKU && (
-          <ArticleHaiku
-            article={article}
-            displayType={EPostDisplayType.FULL}
-            date={formattedDate}
-          />
+          <ArticleHaiku article={article} displayType={EPostDisplayType.FULL} />
         )}
 
         {article.type === EPostType.PHOTO_GALLERY && (
           <ArticlePhotoGallery
             article={article}
             displayType={EPostDisplayType.FULL}
-            date={formattedDate}
           />
         )}
       </div>

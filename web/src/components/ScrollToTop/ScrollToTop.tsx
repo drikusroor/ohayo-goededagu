@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-import { BsArrow90DegUp, BsArrowUp } from 'react-icons/bs'
+import { BsArrowUp } from 'react-icons/bs'
 
 import { classNames } from 'src/lib/class-names'
 

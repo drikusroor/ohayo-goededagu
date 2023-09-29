@@ -3,14 +3,10 @@ import type {
   MutationResolvers,
   CommentRelationResolvers,
   CommentOrderByInput,
-  User,
   Comment,
 } from 'types/graphql'
 
-import { getUserName } from 'src/functions/get-user-name'
 import { db } from 'src/lib/db'
-import { sendEmail } from 'src/lib/email'
-import { emailFooter, emailFooterAsText } from 'src/lib/email/footer'
 
 import notifyAuthorOnCommentIfSubscribed from './helpers/notify-author-on-comment'
 import notifyUserOnCommentReplyIfSubscribed from './helpers/notify-user-on-comment-reply'

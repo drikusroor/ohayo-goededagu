@@ -3,7 +3,7 @@ import { useRef, useState } from 'react'
 import { BsSend, BsXCircle } from 'react-icons/bs'
 import { Comment } from 'types/graphql'
 
-import { Form, FormError, Submit, SubmitHandler } from '@redwoodjs/forms'
+import { Form, FormError, SubmitHandler } from '@redwoodjs/forms'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 

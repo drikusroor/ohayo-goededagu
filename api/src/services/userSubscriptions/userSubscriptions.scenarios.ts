@@ -1,4 +1,5 @@
 import type { Prisma, UserSubscription } from '@prisma/client'
+
 import type { ScenarioData } from '@redwoodjs/testing/api'
 
 export const standard = defineScenario<Prisma.UserSubscriptionCreateArgs>({
@@ -6,10 +7,10 @@ export const standard = defineScenario<Prisma.UserSubscriptionCreateArgs>({
     one: {
       data: {
         type: 'POST_AUTHOR',
-        target: 3582616,
+        target: 123,
         user: {
           create: {
-            email: 'String309799',
+            email: 'String873498',
             hashedPassword: 'String',
             salt: 'String',
           },
@@ -19,10 +20,10 @@ export const standard = defineScenario<Prisma.UserSubscriptionCreateArgs>({
     two: {
       data: {
         type: 'POST_AUTHOR',
-        target: 4576454,
+        target: 666,
         user: {
           create: {
-            email: 'String2968877',
+            email: 'String9691098',
             hashedPassword: 'String',
             salt: 'String',
           },

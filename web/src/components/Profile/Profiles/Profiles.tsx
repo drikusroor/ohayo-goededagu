@@ -4,7 +4,7 @@ import type {
   FindProfiles,
 } from 'types/graphql'
 
-import { Link, navigate, routes } from '@redwoodjs/router'
+import { navigate, routes } from '@redwoodjs/router'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 

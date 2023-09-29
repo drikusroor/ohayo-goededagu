@@ -1,6 +1,6 @@
 import { render } from '@redwoodjs/testing/web'
 
-import Thumb from './Thumb'
+import Thumb from 'src/components/Thumb/Thumb'
 
 //   Improve this test with help from the Redwood Testing Doc:
 //    https://redwoodjs.com/docs/testing#testing-components
@@ -11,8 +11,9 @@ describe('Thumb', () => {
       const up = true
       const count = 1
       const onClick = () => {}
+      const names = ['John Doe']
 
-      render(<Thumb up={up} count={count} onClick={onClick} />)
+      render(<Thumb names={names} up={up} count={count} onClick={onClick} />)
     }).not.toThrow()
   })
 })

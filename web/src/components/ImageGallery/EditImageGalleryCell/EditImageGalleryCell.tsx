@@ -1,4 +1,4 @@
-import { BsSave, BsSave2, BsSaveFill, BsTrash } from 'react-icons/bs'
+import { BsSaveFill, BsTrash } from 'react-icons/bs'
 import type {
   EditImageGalleryById,
   UpdateImageGalleryInput,

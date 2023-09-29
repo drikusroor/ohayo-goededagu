@@ -1,7 +1,7 @@
-import Sentry from 'src/lib/sentry'
 import { RedwoodProvider } from '@redwoodjs/web'
 import { RedwoodApolloProvider } from '@redwoodjs/web/apollo'
 
+import Sentry from 'src/lib/sentry'
 import FatalErrorPage from 'src/pages/FatalErrorPage'
 import Routes from 'src/Routes'
 

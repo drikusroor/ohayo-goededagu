@@ -44,7 +44,7 @@ export const QUERY = gql`
 `
 
 const CREATE_USER_SUBSCRIPTIONS_MUTATION = gql`
-  mutation CreateUserSubscriptionMutation(
+  mutation CustomCreateUserSubscriptionMutation(
     $input: CreateUserSubscriptionInput!
   ) {
     createUserSubscription(input: $input) {
@@ -55,7 +55,7 @@ const CREATE_USER_SUBSCRIPTIONS_MUTATION = gql`
 `
 
 const DELETE_USER_SUBSCRIPTION_MUTATION = gql`
-  mutation DeleteUserSubscriptionMutation($id: Int!) {
+  mutation CustomDeleteUserSubscriptionMutation($id: Int!) {
     deleteUserSubscription(id: $id) {
       id
       type

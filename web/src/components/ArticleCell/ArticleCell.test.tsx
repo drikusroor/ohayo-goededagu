@@ -10,6 +10,19 @@ import { standard } from './ArticleCell.mock'
 // https://redwoodjs.com/docs/testing#jest-expect-type-considerations
 
 describe('ArticleCell', () => {
+  beforeEach(() => {
+    mockCurrentUser({
+      id: 1,
+      email: 'info@example.com',
+      profile: {
+        id: 1,
+        name: 'John Doe',
+        avatar: 'https://avatars.githubusercontent.com/u/1?v=4',
+      },
+      roles: ['ADMIN', 'MODERATOR'],
+    })
+  })
+
   it('renders Loading successfully', () => {
     expect(() => {
       render(<Loading />)

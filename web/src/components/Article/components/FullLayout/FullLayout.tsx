@@ -2,7 +2,6 @@ import type { Post } from 'types/graphql'
 
 import { Link, navigate, routes } from '@redwoodjs/router'
 
-import Button from 'src/components/Button/Button'
 import DisplayDatetime from 'src/components/DisplayDatetime/DisplayDatetime'
 import LanguageButton from 'src/components/LanguageButton/LanguageButton'
 import LocationPin from 'src/components/LocationPin/LocationPin'
@@ -26,7 +25,6 @@ const FullLayout = ({ article }: Props) => {
   const isMobile = width < 428
 
   const [english, setEnglish] = React.useState<boolean>(false)
-  console.log('english', english)
 
   const authorName =
     article?.user?.profile?.name || article?.user?.name || 'Anonymous'
