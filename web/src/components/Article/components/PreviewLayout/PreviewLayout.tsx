@@ -9,6 +9,8 @@ import ArticleTypeIcon, {
 } from 'src/components/ArticleTypeIcon/ArticleTypeIcon'
 import AvatarTimestamp from 'src/components/Avatar/AvatarTimestamp/AvatarTimestamp'
 import Button from 'src/components/Button/Button'
+import LanguageButton from 'src/components/LanguageButton/LanguageButton'
+import PostThumbsCell from 'src/components/PostThumbsCell'
 import RenderBody from 'src/components/RenderBody/RenderBody'
 import Video from 'src/components/Video/Video'
 
@@ -44,6 +46,10 @@ const PreviewLayout = ({ article }: Props) => {
             {article?.comments?.length > 0 && (
               <ArticleCommentCountBadge count={article.comments.length} />
             )}
+            {article.id && (
+              <PostThumbsCell postId={article.id} readOnly light />
+            )}
+
             <Link
               to={routes.article({ id: article.id })}
               className="items-center justify-end text-center text-base font-medium text-white focus:ring-4 focus:ring-gray-400"
@@ -63,7 +69,7 @@ const PreviewLayout = ({ article }: Props) => {
       )}
       {!hasImage && (
         <>
-          <header className="mb-3">
+          <header className="mb-3 flex flex-row justify-between">
             <div className="mt-4 flex flex-row items-center gap-2 pl-1">
               <ArticleTypeIcon type={article.type as EPostType} />
               <h2
@@ -75,6 +81,7 @@ const PreviewLayout = ({ article }: Props) => {
                 </Link>
               </h2>
             </div>
+            <LanguageButton article={article} readOnly />
           </header>
 
           {article.type === EPostType.VIDEO && (
@@ -99,6 +106,7 @@ const PreviewLayout = ({ article }: Props) => {
                     variant="dark"
                   />
                 )}
+                {article.id && <PostThumbsCell postId={article.id} readOnly />}
                 {article.type === EPostType.VIDEO && article.body && (
                   <Button
                     text="Lees verder"

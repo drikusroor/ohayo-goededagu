@@ -2,7 +2,9 @@ import type { Post } from 'types/graphql'
 
 import { Link, navigate, routes } from '@redwoodjs/router'
 
+import Button from 'src/components/Button/Button'
 import DisplayDatetime from 'src/components/DisplayDatetime/DisplayDatetime'
+import LanguageButton from 'src/components/LanguageButton/LanguageButton'
 import LocationPin from 'src/components/LocationPin/LocationPin'
 import PhotoGrid from 'src/components/PhotoGrid/PhotoGrid'
 import PostThumbsCell from 'src/components/PostThumbsCell'
@@ -22,7 +24,9 @@ interface Props {
 const FullLayout = ({ article }: Props) => {
   const { width } = useWindowDimensions()
   const isMobile = width < 428
-  console.log('ismobile', isMobile)
+
+  const [english, setEnglish] = React.useState<boolean>(false)
+  console.log('english', english)
 
   const authorName =
     article?.user?.profile?.name || article?.user?.name || 'Anonymous'
@@ -49,13 +53,18 @@ const FullLayout = ({ article }: Props) => {
           }}
           className="relative rounded bg-gray-400 bg-cover bg-center bg-no-repeat bg-blend-multiply"
         >
+          <div className="flex flex-row content-start justify-end p-1">
+            {article.titleEn && article.bodyEn && (
+              <LanguageButton setEnglish={setEnglish} />
+            )}
+          </div>
           <div className="flex aspect-video max-w-screen-xl flex-col justify-end gap-2 px-4">
             <div className="flex flex-row items-center justify-start gap-2">
               <div>
                 <ArticleTypeIcon type={article.type as EPostType} />
               </div>
               <h1 className="flex items-center gap-2 text-3xl font-extrabold uppercase leading-none tracking-tight text-white drop-shadow-xl md:gap-4 md:text-5xl lg:text-6xl">
-                {article.title}
+                {english ? article.titleEn : article.title}
               </h1>
             </div>
             <div className="flex flex-row items-center gap-2 pb-2">
@@ -81,7 +90,7 @@ const FullLayout = ({ article }: Props) => {
               />
             </div>
             <div className="absolute bottom-2 right-2 rounded bg-slate-300 bg-opacity-70 p-1">
-              <PostThumbsCell postId={article.id} />
+              {article.id && <PostThumbsCell postId={article.id} />}
             </div>
           </div>
         </section>
@@ -93,7 +102,7 @@ const FullLayout = ({ article }: Props) => {
             <div className="flex flex-row justify-between gap-2">
               <h1 className="flex items-center gap-2 text-3xl font-extrabold uppercase tracking-tight md:gap-4">
                 <ArticleTypeIcon type={article.type as EPostType} />
-                {article.title}
+                {english ? article.titleEn : article.title}
               </h1>
             </div>
             <div className="flex flex-row items-center justify-between">
@@ -119,8 +128,11 @@ const FullLayout = ({ article }: Props) => {
                   className="pb-1 text-slate-500"
                 />
               </div>
-              <PostThumbsCell postId={article.id} />
+              {article.id && <PostThumbsCell postId={article.id} />}
             </div>
+            {article.titleEn && article.bodyEn && (
+              <LanguageButton setEnglish={setEnglish} />
+            )}
           </header>
         </>
       )}
@@ -129,7 +141,7 @@ const FullLayout = ({ article }: Props) => {
         {article.videoPost != null && (
           <Video embedUrl={article?.videoPost?.videoUrl} />
         )}
-        <RenderBody body={article.body} />
+        <RenderBody body={english ? article.bodyEn : article.body} />
       </div>
 
       {galleries &&

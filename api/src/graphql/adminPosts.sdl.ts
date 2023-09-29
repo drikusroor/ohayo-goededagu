@@ -2,7 +2,9 @@ export const schema = gql`
   type Post {
     id: Int!
     title: String!
+    titleEn: String
     body: String
+    bodyEn: String
     createdAt: DateTime!
     updatedAt: DateTime!
     user: User!
@@ -23,7 +25,9 @@ export const schema = gql`
 
   input CreatePostInput {
     title: String!
+    titleEn: String
     body: String
+    bodyEn: String
     published: Boolean
     type: String!
     videoPost: CreateVideoPostInput
@@ -34,7 +38,9 @@ export const schema = gql`
 
   input UpdatePostInput {
     title: String
+    titleEn: String
     body: String
+    bodyEn: String
     published: Boolean
     type: String
     videoPost: CreateVideoPostInput

@@ -8,7 +8,6 @@ import {
   BsFillExclamationTriangleFill,
   BsFillXCircleFill,
   BsSaveFill,
-  BsExclamation,
   BsExclamationTriangleFill,
 } from 'react-icons/bs'
 import type {
@@ -23,7 +22,6 @@ import {
   FieldError,
   Label,
   TextField,
-  Submit,
   SelectField,
 } from '@redwoodjs/forms'
 import type { RWGqlError } from '@redwoodjs/forms'
@@ -116,6 +114,14 @@ const PostForm = (props: PostFormProps) => {
 
   const [postBody, setPostBody] = React.useState<string>(props.post?.body)
 
+  const [english, setEnglish] = React.useState<boolean>(false)
+
+  const [postTitleEn, setPostTitleEn] = React.useState<string>(
+    props.post?.titleEn
+  )
+
+  const [postBodyEn, setPostBodyEn] = React.useState<string>(props.post?.bodyEn)
+
   const [postLocation, setPostLocation] = React.useState<string>(
     props.post?.location
   )
@@ -137,6 +143,8 @@ const PostForm = (props: PostFormProps) => {
       id: props.post?.id ? props.post?.id : '',
       title: postTitle,
       body: postBody,
+      titleEn: postTitleEn,
+      bodyEn: postBodyEn,
       type: postType,
       createdAt: props.post?.createdAt
         ? props.post?.createdAt
@@ -160,6 +168,8 @@ const PostForm = (props: PostFormProps) => {
     coverImage,
     postBody,
     postTitle,
+    postTitleEn,
+    postBodyEn,
     postType,
     props.post,
     props.profile,
@@ -170,6 +180,8 @@ const PostForm = (props: PostFormProps) => {
 
   const bodyNotRequired =
     postType === EPostType.VIDEO || postType === EPostType.PHOTO_GALLERY
+
+  const bodyEnNotRequired = postTitleEn?.length < 1
 
   const showImageGalleryButtons =
     postType === EPostType.ARTICLE || postType === EPostType.PHOTO_GALLERY
@@ -270,6 +282,65 @@ const PostForm = (props: PostFormProps) => {
               />
 
               <FieldError name="body" className="rw-field-error" />
+
+              {!english && (
+                <>
+                  <span className="rw-label">Add English:</span>
+                  <Button
+                    variant="outlined"
+                    className="hover:bg-slate-200"
+                    onClick={() => {
+                      setEnglish(true)
+                    }}
+                  >
+                    <span className="text-xl">🇬🇧</span>
+                  </Button>
+                </>
+              )}
+
+              {english && (
+                <>
+                  <Label
+                    name="titleEn"
+                    className="rw-label"
+                    errorClassName="rw-label rw-label-error"
+                  >
+                    English Title
+                  </Label>
+
+                  <TextField
+                    name="titleEn"
+                    defaultValue={postTitleEn}
+                    className="rw-input"
+                    errorClassName="rw-input rw-input-error"
+                    onChange={(e) => {
+                      setPostTitleEn(e.target.value)
+                    }}
+                    validation={{ required: false }}
+                  />
+
+                  <FieldError name="titleEn" className="rw-field-error" />
+
+                  <Label
+                    name="bodyEn"
+                    className="rw-label"
+                    errorClassName="rw-label rw-label-error"
+                  >
+                    English Body
+                  </Label>
+
+                  <MarkdownEditor
+                    name="bodyEn"
+                    value={postBodyEn}
+                    onChange={setPostBodyEn}
+                    validation={{
+                      required: !bodyEnNotRequired,
+                    }}
+                  />
+
+                  <FieldError name="bodyEn" className="rw-field-error" />
+                </>
+              )}
 
               <Label
                 name="location"

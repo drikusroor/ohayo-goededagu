@@ -1,5 +1,6 @@
 import type { Post } from 'types/graphql'
 
+import LanguageButton from 'src/components/LanguageButton/LanguageButton'
 import { EPostDisplayType } from 'src/types/post-display-type.enum'
 
 import FullLayout from '../FullLayout/FullLayout'
@@ -24,6 +25,7 @@ const ArticleArticle = ({ article, displayType }: Props) => {
           }}
           className="rounded bg-gray-600 bg-cover bg-center bg-no-repeat bg-blend-multiply"
         >
+          <LanguageButton article={article} readOnly />
           <div className="mx-auto max-w-screen-xl px-4 py-20 md:py-24 lg:py-56">
             <PreviewLayout article={article} />
           </div>

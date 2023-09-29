@@ -1,5 +1,6 @@
 import { Post } from 'types/graphql'
 
+import LanguageButton from 'src/components/LanguageButton/LanguageButton'
 import PhotoGrid from 'src/components/PhotoGrid/PhotoGrid'
 import { EPostDisplayType } from 'src/types/post-display-type.enum'
 
@@ -40,7 +41,10 @@ const ArticlePhotoGallery = ({ article, displayType }: Props) => {
               />
             )}
             <div className="font-3xl lg:min-h-48 min-h-20 md:min-h-24 absolute bottom-0 mx-auto flex h-full w-full flex-col justify-center rounded-md bg-gray-600 bg-opacity-50 px-4 text-center text-white text-opacity-100">
-              <PreviewLayout article={article} />
+              <LanguageButton article={article} readOnly />
+              <div className="mx-auto max-w-screen-xl px-4 py-20 md:py-24 lg:py-56">
+                <PreviewLayout article={article} />
+              </div>
             </div>
           </div>
         </>
