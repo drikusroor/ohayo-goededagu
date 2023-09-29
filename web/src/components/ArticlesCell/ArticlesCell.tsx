@@ -14,6 +14,8 @@ export const QUERY = gql`
         id
         title
         body
+        titleEn
+        bodyEn
         createdAt
         videoPost {
           videoUrl
