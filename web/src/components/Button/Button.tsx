@@ -13,6 +13,36 @@ interface IButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'filled' | 'outlined' | ''
 }
 
+function getButtonSize(size: 'xs' | 'sm' | 'md' | 'lg' | ''): string {
+  switch (size) {
+    case 'xs':
+      return 'p-1.5 text-xs'
+    case 'sm':
+      return 'text-xs'
+    case 'md':
+      return 'text-sm'
+    case 'lg':
+      return 'text-base'
+    default:
+      return 'text-sm'
+  }
+}
+
+function getIconSize(size: 'xs' | 'sm' | 'md' | 'lg' | ''): string {
+  switch (size) {
+    case 'xs':
+      return 'text-xs'
+    case 'sm':
+      return 'text-sm'
+    case 'md':
+      return 'text-base'
+    case 'lg':
+      return 'text-lg'
+    default:
+      return 'text-base'
+  }
+}
+
 const Button = ({
   onClick,
   id = '',
@@ -29,31 +59,16 @@ const Button = ({
   variant: variant = 'filled',
   ...props
 }: IButtonProps) => {
-  const theme = color ? color : 'cobalt-blue'
+  const theme = color || 'cobalt-blue'
+
   const buttonColors =
     variant === 'filled'
       ? `bg-${theme}-600 text-white transition hover:bg-${theme}-500 hover:filter`
       : `border-${theme}-500 text-${theme}-500 hover:bg-${theme}-500 hover:text-white transition-colors`
-  const buttonSizes =
-    size === 'xs'
-      ? `p-1.5 text-xs`
-      : size === 'sm'
-      ? `text-xs`
-      : size === 'md'
-      ? `text-sm`
-      : size === 'lg'
-      ? `text-base`
-      : `text-sm`
-  const iconSizes =
-    size === 'xs'
-      ? `text-xs`
-      : size === 'sm'
-      ? `text-sm`
-      : size === 'md'
-      ? `text-base`
-      : size === 'lg'
-      ? `text-lg`
-      : `text-base`
+
+  const buttonSizes = getButtonSize(size)
+
+  const iconSizes = getIconSize(size)
 
   return (
     <button

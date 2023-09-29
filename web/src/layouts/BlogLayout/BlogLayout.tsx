@@ -83,7 +83,7 @@ const BlogLayout = ({ children, skeleton }: BlogLayoutProps) => {
               <Button
                 text="Home"
                 icon={<BsHouse />}
-                className="bg-green-800"
+                className="bg-green-800 hover:bg-green-700"
                 onClick={() => navigate(routes.home())}
               />
               <Button
@@ -102,7 +102,7 @@ const BlogLayout = ({ children, skeleton }: BlogLayoutProps) => {
                   text="Account"
                   icon={<BsPersonCircle />}
                   title={currentUser.email}
-                  className="bg-yellow-600"
+                  className="bg-yellow-600 hover:bg-yellow-500"
                   onClick={() => navigate(routes.editAccount())}
                 />
               </li>
