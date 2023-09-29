@@ -51,6 +51,32 @@ const FullLayout = ({ article }: Props) => {
           }}
           className="relative rounded bg-gray-400 bg-cover bg-center bg-no-repeat bg-blend-multiply"
         >
+          <div className="flex flex-row content-start justify-end  p-1">
+            {article.titleEn && article.bodyEn && (
+              <div className="flex flex-row gap-2 rounded bg-slate-300 bg-opacity-70 p-1">
+                <Button
+                  variant="outlined"
+                  size="xs"
+                  className="hover:bg-slate-200"
+                  onClick={() => {
+                    setEnglish(false)
+                  }}
+                >
+                  <span className="text-lg">🇳🇱</span>
+                </Button>
+                <Button
+                  variant="outlined"
+                  size="xs"
+                  className="hover:bg-slate-200"
+                  onClick={() => {
+                    setEnglish(true)
+                  }}
+                >
+                  <span className="text-lg">🇬🇧</span>
+                </Button>
+              </div>
+            )}
+          </div>
           <div className="flex aspect-video max-w-screen-xl flex-col justify-end gap-2 px-4">
             <div className="flex flex-row items-center justify-start gap-2">
               <div>
