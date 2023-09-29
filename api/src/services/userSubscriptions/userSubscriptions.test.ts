@@ -38,17 +38,36 @@ describe('userSubscriptions', () => {
     }
   )
 
-  scenario('creates a userSubscription', async (scenario: StandardScenario) => {
-    const result = await createUserSubscription({
-      input: {
-        userId: scenario.userSubscription.two.userId,
-        type: 'POST_AUTHOR',
-      },
-    })
+  scenario(
+    'creates a POST_AUTHOR userSubscription',
+    async (scenario: StandardScenario) => {
+      const result = await createUserSubscription({
+        input: {
+          userId: scenario.userSubscription.two.userId,
+          type: 'POST_AUTHOR',
+          target: 123,
+        },
+      })
 
-    expect(result.userId).toEqual(scenario.userSubscription.two.userId)
-    expect(result.type).toEqual('POST_AUTHOR')
-  })
+      expect(result.userId).toEqual(scenario.userSubscription.two.userId)
+      expect(result.type).toEqual('POST_AUTHOR')
+    }
+  )
+
+  scenario(
+    'creates a COMMENT userSubscription',
+    async (scenario: StandardScenario) => {
+      const result = await createUserSubscription({
+        input: {
+          userId: scenario.userSubscription.two.userId,
+          type: 'COMMENT',
+        },
+      })
+
+      expect(result.userId).toEqual(scenario.userSubscription.two.userId)
+      expect(result.type).toEqual('COMMENT')
+    }
+  )
 
   scenario('updates a userSubscription', async (scenario: StandardScenario) => {
     const original = (await userSubscription({
