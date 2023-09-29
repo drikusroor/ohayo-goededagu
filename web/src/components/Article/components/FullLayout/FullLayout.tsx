@@ -109,7 +109,7 @@ const FullLayout = ({ article }: Props) => {
               />
             </div>
             <div className="absolute bottom-2 right-2 rounded bg-slate-300 bg-opacity-70 p-1">
-              <PostThumbsCell postId={article.id} />
+              {article.id && <PostThumbsCell postId={article.id} />}
             </div>
           </div>
         </section>
@@ -147,7 +147,7 @@ const FullLayout = ({ article }: Props) => {
                   className="pb-1 text-slate-500"
                 />
               </div>
-              <PostThumbsCell postId={article.id} />
+              {article.id && <PostThumbsCell postId={article.id} />}
             </div>
             {article.titleEn && article.bodyEn && (
               <div className="flex flex-row gap-2">
