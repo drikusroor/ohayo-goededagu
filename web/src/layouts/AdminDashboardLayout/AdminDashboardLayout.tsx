@@ -6,6 +6,7 @@ import {
   BsEnvelope,
   BsFillCalendarEventFill,
   BsFillHandIndexThumbFill,
+  BsFillHandThumbsUpFill,
   BsFillHouseFill,
   BsFillJournalBookmarkFill,
   BsFillPersonFill,
@@ -70,6 +71,13 @@ const getMenuItems: GetMenuItems = (routes) => [
     activeRoutePattern: '/user-subscriptions',
     roles: ['ADMIN', 'MODERATOR'],
     icon: <BsFillHandIndexThumbFill />,
+  },
+  {
+    name: 'Thumbs',
+    path: '/admin/thumbs',
+    activeRoutePattern: '/thumbs',
+    roles: ['ADMIN', 'MODERATOR'],
+    icon: <BsFillHandThumbsUpFill />,
   },
   {
     name: 'Account',
