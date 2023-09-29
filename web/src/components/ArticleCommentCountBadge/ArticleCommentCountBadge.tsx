@@ -13,7 +13,7 @@ const ArticleCommentCountBadge = ({
 }: IArticleCommentCountBadgeProps) => {
   return (
     <div className="relative flex flex-row items-center justify-center gap-1">
-      <BsChatLeft size="2rem" fill={variant === 'light' ? '#fff' : '#000'}>
+      <BsChatLeft size="1.5rem" fill={variant === 'light' ? '#fff' : '#000'}>
         {count}
       </BsChatLeft>
       <span
