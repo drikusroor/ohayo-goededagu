@@ -17,7 +17,6 @@ interface Props {
 }
 
 const PreviewLayout = ({ article }: Props) => {
-  console.log('preview layout', article)
   const hasImage =
     article.type === EPostType.ARTICLE ||
     article.type === EPostType.PHOTO_GALLERY
@@ -78,10 +77,20 @@ const PreviewLayout = ({ article }: Props) => {
             </div>
             <div className="flex flex-row content-start justify-end gap-2 p-2">
               {article.title && article.body && (
-                <span className="text-lg">🇳🇱</span>
+                <span className="group relative flex items-center gap-2 text-lg ">
+                  🇳🇱
+                  <span className="user-select-none absolute bottom-full right-0 mb-2 w-52 rounded-md border-2 border-slate-200 bg-white p-2 text-left text-xs text-slate-500 opacity-0 shadow-md transition-opacity group-hover:opacity-100">
+                    Beschikbaar in Nederlands
+                  </span>
+                </span>
               )}
               {article.titleEn && article.bodyEn && (
-                <span className="text-lg">🇬🇧</span>
+                <span className="group relative flex items-center gap-2 text-lg ">
+                  🇬🇧
+                  <span className="user-select-none absolute bottom-full right-0 mb-2 w-32 rounded-md border-2 border-slate-200 bg-white p-2 text-left text-xs text-slate-500 opacity-0 shadow-md transition-opacity group-hover:opacity-100">
+                    Available in English
+                  </span>
+                </span>
               )}
             </div>
           </header>

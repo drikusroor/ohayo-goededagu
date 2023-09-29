@@ -30,8 +30,6 @@ const Article = ({ article, hideComments }: Props) => {
   const { currentUser } = useAuth()
   const isUserAuthor = article?.user?.id === currentUser?.id
 
-  console.log('article', article)
-
   const formattedDate = dateStringToLocalizedDateString(article.createdAt)
 
   const sortedComments = useMemo(() => {
