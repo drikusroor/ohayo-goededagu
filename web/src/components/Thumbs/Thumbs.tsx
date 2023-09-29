@@ -3,10 +3,9 @@ import { useMemo } from 'react'
 import type { PostThumb as TPhostThumb, Thumb as TThumb } from 'types/graphql'
 
 import { useAuth } from 'src/auth'
+import Thumb from 'src/components/Thumb/Thumb'
 import { classNames } from 'src/lib/class-names'
 import { getUserName } from 'src/lib/get-user-name'
-
-import Thumb from '../Thumb/Thumb'
 
 export interface IThumbProps {
   thumbs: TThumb[] | TPhostThumb[]

@@ -52,8 +52,6 @@ export default ({ comment, onClickReply }: ICommentProps) => {
       return false
     }
 
-    console.log(window.location.hash, comment.id)
-
     return window.location.hash === `#comment-${comment.id}`
   }, [comment.id])
 

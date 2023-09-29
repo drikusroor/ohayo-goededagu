@@ -22,8 +22,6 @@ async function notifyAuthorOnCommentIfSubscribed(comment: Comment) {
       },
     })
 
-  console.log(commentPostAuthor)
-
   if (commentPostAuthor?.userSubscriptions.some((s) => s.type === 'COMMENT')) {
     // send email to comment post author
     sendEmail({

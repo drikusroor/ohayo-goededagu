@@ -1,10 +1,10 @@
+import type { DeleteThumbMutationVariables, FindThumbById } from 'types/graphql'
+
 import { Link, routes, navigate } from '@redwoodjs/router'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
 import { checkboxInputTag, timeTag } from 'src/lib/formatters'
-
-import type { DeleteThumbMutationVariables, FindThumbById } from 'types/graphql'
 
 const DELETE_THUMB_MUTATION = gql`
   mutation DeleteThumbMutation($id: Int!) {
@@ -18,7 +18,7 @@ interface Props {
   thumb: NonNullable<FindThumbById['thumb']>
 }
 
-const Thumb = ({ thumb }: Props) => {
+const DashboardThumb = ({ thumb }: Props) => {
   const [deleteThumb] = useMutation(DELETE_THUMB_MUTATION, {
     onCompleted: () => {
       toast.success('Thumb deleted')
@@ -87,4 +87,4 @@ const Thumb = ({ thumb }: Props) => {
   )
 }
 
-export default Thumb
+export default DashboardThumb

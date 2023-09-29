@@ -17,7 +17,7 @@ interface Props {
   hideComments?: boolean
 }
 
-const Preview = ({ post, hideComments }: Props) => {
+const Preview = ({ post }: Props) => {
   const [blogRollPreview, setBlogRollPreview] = React.useState<boolean>(false)
 
   return (

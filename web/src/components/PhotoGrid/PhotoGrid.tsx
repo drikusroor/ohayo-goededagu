@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 
-import { Image, ImageGalleryImage } from 'types/graphql'
+import { ImageGalleryImage } from 'types/graphql'
 
 import { classNames } from 'src/lib/class-names'
 

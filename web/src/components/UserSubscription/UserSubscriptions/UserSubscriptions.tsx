@@ -8,9 +8,9 @@ import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
 import { QUERY } from 'src/components/UserSubscription/UserSubscriptionsCell'
-import { formatEnum, timeTag, truncate } from 'src/lib/formatters'
+import { formatEnum, truncate } from 'src/lib/formatters'
 import { getUserName } from 'src/lib/get-user-name'
-import dateToTimeAgo, { dateStringToTimeAgo } from 'src/lib/time-ago'
+import { dateStringToTimeAgo } from 'src/lib/time-ago'
 
 const DELETE_USER_SUBSCRIPTION_MUTATION = gql`
   mutation DeleteUserSubscriptionMutation($id: Int!) {

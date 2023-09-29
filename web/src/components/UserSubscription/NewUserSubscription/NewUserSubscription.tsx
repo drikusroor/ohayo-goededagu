@@ -1,10 +1,10 @@
+import type { CreateUserSubscriptionInput } from 'types/graphql'
+
 import { navigate, routes } from '@redwoodjs/router'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
 import UserSubscriptionForm from 'src/components/UserSubscription/UserSubscriptionForm'
-
-import type { CreateUserSubscriptionInput } from 'types/graphql'
 
 const CREATE_USER_SUBSCRIPTION_MUTATION = gql`
   mutation CreateUserSubscriptionMutation(
