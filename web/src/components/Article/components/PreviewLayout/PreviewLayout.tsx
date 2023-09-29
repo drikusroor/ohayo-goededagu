@@ -76,7 +76,7 @@ const PreviewLayout = ({ article }: Props) => {
             <div className="mt-4 flex flex-row items-center gap-2 pl-1">
               <ArticleTypeIcon type={article.type as EPostType} />
               <h2
-                className="text-xl font-semibold text-slate-700 md:text-2xl"
+                className="w-fit text-xl font-semibold text-slate-700 md:text-2xl"
                 title={article.title}
               >
                 <Link to={routes.article({ id: article.id })}>

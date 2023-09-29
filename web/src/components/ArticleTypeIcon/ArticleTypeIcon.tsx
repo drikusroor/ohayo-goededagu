@@ -56,11 +56,11 @@ const ArticleTypeIcon = ({ type, showTitle = true }: IArticleTypeIconProps) => {
       <img
         src="/images/avatar.png"
         alt={type}
-        className="bg-cobalt-red-500 absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-full object-cover shadow"
+        className="bg-cobalt-red-500 absolute left-0 top-0 flex h-full w-full items-center justify-center rounded-full object-cover shadow"
         width={10}
         height={10}
       />
-      <div className="absolute flex h-10 w-10 items-center justify-center rounded-full bg-black opacity-20 "></div>
+      <div className="absolute flex h-full w-full items-center justify-center rounded-full bg-black opacity-20 "></div>
 
       <div className="absolute text-white"> {getIcon(type)}</div>
     </div>
