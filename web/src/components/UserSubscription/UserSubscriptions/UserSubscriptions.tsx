@@ -1,14 +1,16 @@
+import type {
+  DeleteUserSubscriptionMutationVariables,
+  FindUserSubscriptions,
+} from 'types/graphql'
+
 import { Link, routes } from '@redwoodjs/router'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
 import { QUERY } from 'src/components/UserSubscription/UserSubscriptionsCell'
 import { formatEnum, timeTag, truncate } from 'src/lib/formatters'
-
-import type {
-  DeleteUserSubscriptionMutationVariables,
-  FindUserSubscriptions,
-} from 'types/graphql'
+import { getUserName } from 'src/lib/get-user-name'
+import dateToTimeAgo, { dateStringToTimeAgo } from 'src/lib/time-ago'
 
 const DELETE_USER_SUBSCRIPTION_MUTATION = gql`
   mutation DeleteUserSubscriptionMutation($id: Int!) {
@@ -63,8 +65,11 @@ const UserSubscriptionsList = ({
           {userSubscriptions.map((userSubscription) => (
             <tr key={userSubscription.id}>
               <td>{truncate(userSubscription.id)}</td>
-              <td>{timeTag(userSubscription.createdAt)}</td>
-              <td>{truncate(userSubscription.userId)}</td>
+              <td>{dateStringToTimeAgo(userSubscription.createdAt)}</td>
+              <td>
+                {getUserName(userSubscription.user)} (
+                {truncate(userSubscription.userId)})
+              </td>
               <td>{formatEnum(userSubscription.type)}</td>
               <td>{truncate(userSubscription.target)}</td>
               <td>

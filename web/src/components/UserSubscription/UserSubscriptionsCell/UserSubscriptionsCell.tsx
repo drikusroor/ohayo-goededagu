@@ -13,6 +13,14 @@ export const QUERY = gql`
       userId
       type
       target
+      user {
+        id
+        email
+        profile {
+          name
+          avatar
+        }
+      }
     }
   }
 `
