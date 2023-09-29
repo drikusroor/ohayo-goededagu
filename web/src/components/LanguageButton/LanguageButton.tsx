@@ -32,7 +32,7 @@ const LanguageButton = ({ article, readOnly, setEnglish }: Props) => {
         </div>
       )}
       {!readOnly && (
-        <div className="flex flex-row gap-2">
+        <div className="flex flex-row">
           <Button
             variant="outlined"
             className="hover:bg-slate-200"
