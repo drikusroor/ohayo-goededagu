@@ -97,6 +97,12 @@ const FullLayout = ({ article }: Props) => {
       {!hasCoverImage && (
         <>
           <header className="mb-4 flex flex-col gap-1">
+            <div className="flex flex-row justify-end">
+              {isMobile && article.titleEn && article.bodyEn && (
+                <LanguageButton setEnglish={setEnglish} />
+              )}
+            </div>
+
             <div className="flex flex-row justify-between gap-2">
               <h1 className="flex items-center gap-2 text-3xl font-extrabold uppercase tracking-tight md:gap-4">
                 <ArticleTypeIcon type={article.type as EPostType} />
@@ -126,11 +132,13 @@ const FullLayout = ({ article }: Props) => {
                   className="pb-1 text-slate-500"
                 />
               </div>
-              {article.id && <PostThumbsCell postId={article.id} />}
+              <div className="flex flex-row gap-2 md:gap-6">
+                {!isMobile && article.titleEn && article.bodyEn && (
+                  <LanguageButton setEnglish={setEnglish} />
+                )}
+                {article.id && <PostThumbsCell postId={article.id} />}
+              </div>
             </div>
-            {article.titleEn && article.bodyEn && (
-              <LanguageButton setEnglish={setEnglish} />
-            )}
           </header>
         </>
       )}

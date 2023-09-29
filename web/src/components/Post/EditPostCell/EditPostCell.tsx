@@ -13,6 +13,8 @@ export const QUERY = gql`
       id
       title
       body
+      titleEn
+      bodyEn
       type
       createdAt
       published
@@ -62,6 +64,8 @@ const UPDATE_POST_MUTATION = gql`
       id
       title
       body
+      titleEn
+      bodyEn
       createdAt
       published
       videoPost {

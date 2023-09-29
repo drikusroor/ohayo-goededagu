@@ -41,29 +41,32 @@ const PreviewLayout = ({ article }: Props) => {
               className="prose mx-auto mb-8 line-clamp-3 max-h-[4.5rem] text-center text-[#d1d5db] md:max-h-[5.5rem] lg:max-h-24"
             />
           )}
-          <div className="flex flex-row items-center justify-center gap-12">
-            <AvatarTimestamp article={article} hasImage={hasImage} />
-            {article?.comments?.length > 0 && (
-              <ArticleCommentCountBadge count={article.comments.length} />
-            )}
-            {article.id && (
-              <PostThumbsCell postId={article.id} readOnly light />
-            )}
-
-            <Link
-              to={routes.article({ id: article.id })}
-              className="items-center justify-end text-center text-base font-medium text-white focus:ring-4 focus:ring-gray-400"
-            >
-              <Button
-                text={
-                  article.type === EPostType.PHOTO_GALLERY
-                    ? "Zie alle foto's"
-                    : 'Lees verder'
-                }
-                icon={<BsArrowRightCircle />}
-                className="flex max-w-fit items-center justify-end gap-2 px-4 py-3 text-xs"
-              />
-            </Link>
+          <div className="flex flex-col gap-4">
+            <div className="flex flex-row items-center justify-center gap-12">
+              <AvatarTimestamp article={article} hasImage={hasImage} />
+              <Link
+                to={routes.article({ id: article.id })}
+                className="items-center justify-end text-center text-base font-medium text-white focus:ring-4 focus:ring-gray-400"
+              >
+                <Button
+                  text={
+                    article.type === EPostType.PHOTO_GALLERY
+                      ? "Zie alle foto's"
+                      : 'Lees verder'
+                  }
+                  icon={<BsArrowRightCircle />}
+                  className="flex max-w-fit items-center justify-end gap-2 px-4 py-3 text-xs"
+                />
+              </Link>
+            </div>
+            <div className="flex flex-row flex-wrap items-center justify-center gap-2">
+              {article?.comments?.length > 0 && (
+                <ArticleCommentCountBadge count={article.comments.length} />
+              )}
+              {article.id && (
+                <PostThumbsCell postId={article.id} readOnly light />
+              )}
+            </div>
           </div>
         </>
       )}
@@ -73,7 +76,7 @@ const PreviewLayout = ({ article }: Props) => {
             <div className="mt-4 flex flex-row items-center gap-2 pl-1">
               <ArticleTypeIcon type={article.type as EPostType} />
               <h2
-                className="text-xl font-semibold text-slate-700 md:text-2xl"
+                className="w-fit text-xl font-semibold text-slate-700 md:text-2xl"
                 title={article.title}
               >
                 <Link to={routes.article({ id: article.id })}>
@@ -99,7 +102,7 @@ const PreviewLayout = ({ article }: Props) => {
 
             <div className="flex items-center justify-between pt-4">
               <AvatarTimestamp article={article} hasImage={hasImage} />
-              <div className="flex items-center gap-6">
+              <div className="flex items-center gap-2 md:gap-6">
                 {article?.comments?.length > 0 && (
                   <ArticleCommentCountBadge
                     count={article.comments.length}

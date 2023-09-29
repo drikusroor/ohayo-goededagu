@@ -283,7 +283,7 @@ const PostForm = (props: PostFormProps) => {
 
               <FieldError name="body" className="rw-field-error" />
 
-              {!english && (
+              {!english && !postTitleEn && (
                 <>
                   <span className="rw-label">Add English:</span>
                   <Button
@@ -298,49 +298,50 @@ const PostForm = (props: PostFormProps) => {
                 </>
               )}
 
-              {english && (
-                <>
-                  <Label
-                    name="titleEn"
-                    className="rw-label"
-                    errorClassName="rw-label rw-label-error"
-                  >
-                    English Title
-                  </Label>
+              {english ||
+                (postTitleEn && (
+                  <>
+                    <Label
+                      name="titleEn"
+                      className="rw-label"
+                      errorClassName="rw-label rw-label-error"
+                    >
+                      English Title
+                    </Label>
 
-                  <TextField
-                    name="titleEn"
-                    defaultValue={postTitleEn}
-                    className="rw-input"
-                    errorClassName="rw-input rw-input-error"
-                    onChange={(e) => {
-                      setPostTitleEn(e.target.value)
-                    }}
-                    validation={{ required: false }}
-                  />
+                    <TextField
+                      name="titleEn"
+                      defaultValue={postTitleEn}
+                      className="rw-input"
+                      errorClassName="rw-input rw-input-error"
+                      onChange={(e) => {
+                        setPostTitleEn(e.target.value)
+                      }}
+                      validation={{ required: false }}
+                    />
 
-                  <FieldError name="titleEn" className="rw-field-error" />
+                    <FieldError name="titleEn" className="rw-field-error" />
 
-                  <Label
-                    name="bodyEn"
-                    className="rw-label"
-                    errorClassName="rw-label rw-label-error"
-                  >
-                    English Body
-                  </Label>
+                    <Label
+                      name="bodyEn"
+                      className="rw-label"
+                      errorClassName="rw-label rw-label-error"
+                    >
+                      English Body
+                    </Label>
 
-                  <MarkdownEditor
-                    name="bodyEn"
-                    value={postBodyEn}
-                    onChange={setPostBodyEn}
-                    validation={{
-                      required: !bodyEnNotRequired,
-                    }}
-                  />
+                    <MarkdownEditor
+                      name="bodyEn"
+                      value={postBodyEn}
+                      onChange={setPostBodyEn}
+                      validation={{
+                        required: !bodyEnNotRequired,
+                      }}
+                    />
 
-                  <FieldError name="bodyEn" className="rw-field-error" />
-                </>
-              )}
+                    <FieldError name="bodyEn" className="rw-field-error" />
+                  </>
+                ))}
 
               <Label
                 name="location"
