@@ -8,7 +8,6 @@ import {
   BsFillExclamationTriangleFill,
   BsFillXCircleFill,
   BsSaveFill,
-  BsExclamationTriangleFill,
 } from 'react-icons/bs'
 import type {
   CreateImageInput,
@@ -25,7 +24,7 @@ import {
   SelectField,
 } from '@redwoodjs/forms'
 import type { RWGqlError } from '@redwoodjs/forms'
-import { Link, routes } from '@redwoodjs/router'
+import { Link, Router, navigate, routes } from '@redwoodjs/router'
 
 import {
   EPostType,
@@ -96,6 +95,14 @@ const PostForm = (props: PostFormProps) => {
     }
 
     props.onSave(data, props?.post?.id)
+  }
+
+  const onCancel = () => {
+    if (
+      confirm('Are you sure you want to cancel? All your changes will be lost.')
+    ) {
+      navigate(routes.posts())
+    }
   }
 
   const [published, setPublished] = React.useState<boolean>(
@@ -488,7 +495,7 @@ const PostForm = (props: PostFormProps) => {
 
             {published && (
               <div
-                className="mt-5 flex items-center border-l-4 border-yellow-500 bg-yellow-100 p-4 text-yellow-700"
+                className="pointer-events-none mt-5 flex items-center border-l-4 border-yellow-500 bg-yellow-100 p-4 text-yellow-700"
                 role="alert"
               >
                 <BsFillExclamationTriangleFill className="mr-2 inline-block" />
@@ -498,24 +505,15 @@ const PostForm = (props: PostFormProps) => {
               </div>
             )}
 
-            <div className="button-group">
-              <Link
-                to={routes.posts({ id: props.post?.id })}
-                title={'Back to overview'}
-              >
-                <Button
-                  type="button"
-                  text="Cancel"
-                  icon={<BsFillXCircleFill />}
-                  color="monza-red"
-                  className="group relative flex items-center gap-2 text-sm"
-                >
-                  <span className="user-select-none absolute bottom-full left-0 mb-2 w-32 rounded-md border-2 border-monza-red-500 bg-white p-2 text-left text-xs text-monza-red-500 opacity-0 shadow-md transition-opacity group-hover:opacity-100">
-                    <BsExclamationTriangleFill className="text-md mb-1 mr-1 inline-block" />
-                    Warning: All unsaved changes will be lost.
-                  </span>
-                </Button>
-              </Link>
+            <div className="button-group mb-8">
+              <Button
+                type="button"
+                text="Cancel"
+                icon={<BsFillXCircleFill />}
+                color="monza-red"
+                className="group relative flex items-center gap-2 text-sm"
+                onClick={onCancel}
+              ></Button>
 
               <Button
                 type="submit"
