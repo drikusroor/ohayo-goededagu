@@ -12,6 +12,7 @@ export const schema = gql`
     POST_AUTHOR
     POST_TYPE
     COMMENT
+    POST_NEWSLETTER
   }
 
   type Query {

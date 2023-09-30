@@ -12,14 +12,14 @@
 
 import type { Meta, StoryObj } from '@storybook/react'
 
-import UserSubscriptionsCommentCheckbox from './UserSubscriptionsCommentCheckbox'
+import UserSubscriptionsCheckbox from './UserSubscriptionsCheckbox'
 
-const meta: Meta<typeof UserSubscriptionsCommentCheckbox> = {
-  component: UserSubscriptionsCommentCheckbox,
+const meta: Meta<typeof UserSubscriptionsCheckbox> = {
+  component: UserSubscriptionsCheckbox,
 }
 
 export default meta
 
-type Story = StoryObj<typeof UserSubscriptionsCommentCheckbox>
+type Story = StoryObj<typeof UserSubscriptionsCheckbox>
 
 export const Primary: Story = {}

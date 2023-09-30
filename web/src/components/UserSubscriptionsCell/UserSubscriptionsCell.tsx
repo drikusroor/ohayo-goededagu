@@ -10,7 +10,7 @@ import {
 import { toast } from '@redwoodjs/web/toast'
 
 import UserSubscriptionsAuthorSelector from '../UserSubscriptionsAuthorSelector/UserSubscriptionsAuthorSelector'
-import UserSubscriptionsCommentCheckbox from '../UserSubscriptionsCommentCheckbox/UserSubscriptionsCommentCheckbox'
+import UserSubscriptionsCheckbox from '../UserSubscriptionsCheckbox/UserSubscriptionsCheckbox'
 
 export const QUERY = gql`
   query FindUsersWithPostsForSubscriptionsCellQuery($id: Int!) {
@@ -83,6 +83,10 @@ export const Success = ({
       .map((us) => us.target)
   }, [userSubscriptions])
 
+  const newsletterSubscription = useMemo(() => {
+    return userSubscriptions.find((us) => us.type === 'POST_NEWSLETTER')
+  }, [userSubscriptions])
+
   const commentSubscription = useMemo(() => {
     return userSubscriptions.find((us) => us.type === 'COMMENT')
   }, [userSubscriptions])
@@ -147,6 +151,25 @@ export const Success = ({
     })
   }
 
+  const onToggleUserSubscriptionNewsletter = (id?: number) => {
+    // if id is defined, delete the subscription
+    if (id) {
+      return onDeleteUserSubscription({
+        variables: { id: id },
+      })
+    }
+
+    // if id is undefined, create the subscription
+    return createUserSubscriptions({
+      variables: {
+        input: {
+          type: 'POST_NEWSLETTER',
+          userId: user.id,
+        },
+      },
+    })
+  }
+
   const onToggleUserSubscriptionComments = (id?: number) => {
     // if id is defined, delete the subscription
     if (id) {
@@ -176,6 +199,10 @@ export const Success = ({
         </header>
 
         <div className="rw-segment-main">
+          <p className="text-sm text-gray-500">
+            <b>Let op:</b> je ontvangt voor elke nieuwe post een e-mail. Je kunt
+            je abonnement opzeggen door de auteur te deselecteren.
+          </p>
           <div className="mt-3">
             <UserSubscriptionsAuthorSelector
               users={users}
@@ -188,16 +215,47 @@ export const Success = ({
       <div className="rw-segment mt-5">
         <header className="rw-segment-header">
           <h2 className="rw-heading rw-heading-secondary">
+            Ontvang dagelijks een overzicht van nieuwe posts:
+          </h2>
+        </header>
+
+        <div className="rw-segment-main">
+          <p className="text-sm text-gray-500">
+            Als je liever niet voor élke nieuwe post een e-mail ontvangt, kun je
+            je abonneren op een periodiek overzicht van nieuwe posts. Wij zijn
+            voornemens om dit overzicht elke 1-2 dagen te versturen.
+          </p>
+          <div className="mt-3">
+            <UserSubscriptionsCheckbox
+              label="Abonneren op nieuwsbrief"
+              userSubscriptionId={newsletterSubscription?.id}
+              onToggleUserSubscription={onToggleUserSubscriptionNewsletter}
+              loading={createLoading || deleteLoading}
+            />
+          </div>
+        </div>
+      </div>
+      <div className="rw-segment mt-5">
+        <header className="rw-segment-header">
+          <h2 className="rw-heading rw-heading-secondary">
             Abonneren op reacties op mijn reacties:
           </h2>
         </header>
 
         <div className="rw-segment-main">
-          <UserSubscriptionsCommentCheckbox
-            userSubscriptionId={commentSubscription?.id}
-            onToggleUserSubscriptionComments={onToggleUserSubscriptionComments}
-            loading={createLoading || deleteLoading}
-          />
+          <p className="text-sm text-gray-500">
+            Soms is het leuk om te weten of er op jouw reactie is gereageerd. Je
+            moet natuurlijk wel af en toe een snedige reactie plaatsen om dit te
+            ervaren.
+          </p>
+          <div className="mt-3">
+            <UserSubscriptionsCheckbox
+              label="Abonneren op reacties op mijn reacties"
+              userSubscriptionId={commentSubscription?.id}
+              onToggleUserSubscription={onToggleUserSubscriptionComments}
+              loading={createLoading || deleteLoading}
+            />
+          </div>
         </div>
       </div>
     </>

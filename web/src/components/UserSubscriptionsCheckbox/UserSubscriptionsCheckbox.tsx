@@ -1,16 +1,18 @@
 import { CheckboxField, Form, Label } from '@redwoodjs/forms'
 
-interface UserSubscriptionsCommentCheckboxProps {
+interface UserSubscriptionsCheckboxProps {
   userSubscriptionId?: number
-  onToggleUserSubscriptionComments: (id?: number) => void
+  onToggleUserSubscription: (id?: number) => void
   loading?: boolean
+  label: string
 }
 
-const UserSubscriptionsCommentCheckbox = ({
+const UserSubscriptionsCheckbox = ({
   userSubscriptionId,
-  onToggleUserSubscriptionComments,
+  onToggleUserSubscription,
   loading,
-}: UserSubscriptionsCommentCheckboxProps) => {
+  label = 'Abonneren',
+}: UserSubscriptionsCheckboxProps) => {
   return (
     <Form className="flex flex-row items-center gap-2">
       <Label
@@ -18,18 +20,18 @@ const UserSubscriptionsCommentCheckbox = ({
         className="rw-label mt-0"
         errorClassName="rw-label rw-label-error"
       >
-        Abonneren op reacties
+        {label}
       </Label>
       <CheckboxField
         name="comments"
         disabled={loading}
         checked={!!userSubscriptionId}
         onChange={() => {
-          onToggleUserSubscriptionComments(userSubscriptionId)
+          onToggleUserSubscription(userSubscriptionId)
         }}
       />
     </Form>
   )
 }
 
-export default UserSubscriptionsCommentCheckbox
+export default UserSubscriptionsCheckbox

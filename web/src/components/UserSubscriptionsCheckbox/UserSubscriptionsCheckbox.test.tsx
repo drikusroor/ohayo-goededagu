@@ -1,14 +1,14 @@
 import { render } from '@redwoodjs/testing/web'
 
-import UserSubscriptionsCommentCheckbox from './UserSubscriptionsCommentCheckbox'
+import UserSubscriptionsCheckbox from './UserSubscriptionsCheckbox'
 
 //   Improve this test with help from the Redwood Testing Doc:
 //    https://redwoodjs.com/docs/testing#testing-components
 
-describe('UserSubscriptionsCommentCheckbox', () => {
+describe('UserSubscriptionsCheckbox', () => {
   it('renders successfully', () => {
     expect(() => {
-      render(<UserSubscriptionsCommentCheckbox />)
+      render(<UserSubscriptionsCheckbox />)
     }).not.toThrow()
   })
 })
