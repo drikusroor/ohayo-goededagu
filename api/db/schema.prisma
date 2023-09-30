@@ -189,4 +189,5 @@ enum UserSubscriptionType {
   POST_AUTHOR
   POST_TYPE
   COMMENT
+  POST_NEWSLETTER
 }
