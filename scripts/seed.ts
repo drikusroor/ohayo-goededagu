@@ -202,6 +202,18 @@ export default async () => {
         type: 'PHOTO_GALLERY',
       },
       ...generateManyPosts(25),
+      {
+        title: 'Knalvis deluxe',
+        body: 'This is a post with a compressed cover image',
+        published: true,
+        userId: 1,
+        createdAt: new Date('2023-01-01'),
+        type: 'ARTICLE',
+        coverImage: {
+          imageId: 128381209,
+          url: 'https://images.pexels.com/photos/2892012/pexels-photo-2892012.jpeg',
+        },
+      },
     ]
 
     for (const post of posts) {

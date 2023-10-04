@@ -3,6 +3,7 @@ import { useEffect } from 'react'
 import { ImageGalleryImage } from 'types/graphql'
 
 import { classNames } from 'src/lib/class-names'
+import { getCompressedImageUrl } from 'src/lib/get-compressed-image-url'
 
 import ImageModal from '../ImageModal/ImageModal'
 
@@ -21,7 +22,10 @@ export interface IModalInfo {
 }
 
 const PhotoGrid = ({ className, images = [], preview }: IPhotoGridProps) => {
-  const previewGallery = images?.slice(0, 4)
+  const previewGallery = images?.slice(0, 4).map((image) => ({
+    ...image,
+    url: getCompressedImageUrl(image.url),
+  }))
 
   const [modalInfo, setModalInfo] = React.useState<IModalInfo>()
 

@@ -1,6 +1,6 @@
 import getImageGalleriesCreateCommand from './create-image-galleries-command'
 
-function generateManyPosts(amount: number) {
+function generateManyPosts(amount: number, override?: Partial<Post>) {
   const posts = []
 
   for (let i = 0; i < amount; i++) {
@@ -22,6 +22,7 @@ function generateManyPosts(amount: number) {
       userId: 1,
       location: '1 Chome-1-2 Oshiage, Sumida City, Tokyo 131-0045, Japan',
       type: postType,
+      ...override,
     }
 
     if (postType === 'PHOTO_GALLERY') {
