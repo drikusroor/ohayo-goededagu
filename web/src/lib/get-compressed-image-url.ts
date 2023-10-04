@@ -11,5 +11,9 @@ export const getCompressedImageUrl = (
 ) => {
   const [baseUrl, imageId] = url.split('upload/')
 
+  if (!imageId) {
+    return url
+  }
+
   return `${baseUrl}upload/q_auto:${options.qAuto}/c_scale,w_${options.width}/${imageId}`
 }
