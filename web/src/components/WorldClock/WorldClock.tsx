@@ -1,5 +1,7 @@
 import React from 'react'
 
+import { locations } from 'src/data/locations'
+
 interface WorldClockPureProps {
   todayDate: Date
 }
@@ -19,26 +21,12 @@ export const WorldClockPure = ({ todayDate }: WorldClockPureProps) => {
     return null
   }
 
-  if (isInBetween('1970-01-01', '2023-09-30')) {
-    message = 'We zijn in Nederland! 🇳🇱'
-  } else if (isInBetween('2023-09-30', '2023-10-01')) {
-    message = 'We zijn onderweg naar Japan! ✈️'
-  } else if (isInBetween('2023-10-01', '2023-10-05')) {
-    message = 'We zijn in Tokyo!'
-  } else if (isInBetween('2023-10-05', '2023-10-07')) {
-    message = 'We zijn in Hakone!'
-  } else if (isInBetween('2023-10-07', '2023-10-11')) {
-    message = 'We zijn in Kyoto!'
-  } else if (isInBetween('2023-10-11', '2023-10-14')) {
-    message = 'We zijn in Nagasaki!'
-  } else if (isInBetween('2023-10-14', '2023-10-18')) {
-    message = 'We zijn in Osaka!'
-  } else if (isInBetween('2023-10-18', '2023-10-21')) {
-    message = 'We zijn in Takayama!'
-  } else if (isInBetween('2023-10-21', '2023-10-27')) {
-    message = 'We zijn in Tokyo!'
-  } else {
-    message = 'We zijn weer terug in Nederland! 🥺'
+  for (const location of locations) {
+    const { startDate, endDate, name } = location
+    if (isInBetween(startDate, endDate)) {
+      message = `We zijn in ${name}!`
+      break
+    }
   }
 
   return (
