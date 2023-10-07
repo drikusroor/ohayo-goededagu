@@ -161,10 +161,15 @@ export default ({ comment, onClickReply }: ICommentProps) => {
           <span className="text-base font-semibold text-slate-700">
             {userName}
           </span>
-          <DisplayDatetime
-            datetime={comment.createdAt}
-            className="text-sm text-slate-500"
-          />
+          <div className="flex gap-1">
+            <DisplayDatetime
+              datetime={comment.createdAt}
+              className="text-sm text-slate-500"
+            />
+            {comment.edited && (
+              <span className="text-sm text-slate-500">(edited)</span>
+            )}
+          </div>
         </div>
         <div className="ml-auto flex flex-row items-center gap-2">
           {onClickReply && (

@@ -12,6 +12,7 @@ export const schema = gql`
     children: [Comment]!
     thumbs: [Thumb]!
     deleted: Boolean!
+    edited: Boolean
   }
 
   type Query {
