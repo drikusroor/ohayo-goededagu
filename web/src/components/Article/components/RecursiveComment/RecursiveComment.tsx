@@ -1,6 +1,6 @@
 import { Post, Comment as TComment } from 'types/graphql'
 
-import CommentForm from 'src/components/CommentForm/CommentForm'
+import UserCommentForm from 'src/components/UserCommentForm/UserCommentForm'
 import Comment from 'src/components/UserComment/Comment'
 import { classNames } from 'src/lib/class-names'
 
@@ -34,7 +34,7 @@ export const RecursiveComment = ({
         onClickReply={level < 5 && setReplyToComment}
       />
       {replyToComment?.id === comment.id && (
-        <CommentForm
+        <UserCommentForm
           postId={article.id}
           replyToComment={replyToComment}
           onCancel={() => setReplyToComment(undefined)}

@@ -68,7 +68,10 @@ export const updateComment: MutationResolvers['updateComment'] = ({
   input,
 }) => {
   return db.comment.update({
-    data: input,
+    data: {
+      body: input.body,
+      edited: true,
+    },
     where: { id },
   })
 }

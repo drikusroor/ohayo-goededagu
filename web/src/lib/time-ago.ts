@@ -9,31 +9,31 @@ export function dateToTimeAgo(date: Date): string {
   const years = Math.floor(days / 365.25) // Taking into account leap years
 
   if (seconds < 60) {
-    return 'just now'
+    return 'zojuist'
   } else if (minutes === 1) {
-    return '1 min ago'
+    return '1 minuut geleden'
   } else if (minutes < 60) {
-    return `${minutes} min ago`
+    return `${minutes} minuten geleden`
   } else if (hours === 1) {
-    return '1 hour ago'
+    return '1 uur geleden'
   } else if (hours < 24) {
-    return `${hours} hours ago`
+    return `${hours} uur geleden`
   } else if (days === 1) {
-    return 'yesterday'
+    return 'gisteren'
   } else if (days < 7) {
-    return `${days} days ago`
+    return `${days} dagen geleden`
   } else if (weeks === 1) {
-    return '1 week ago'
+    return '1 week geleden'
   } else if (weeks < 4) {
-    return `${weeks} weeks ago`
+    return `${weeks} weken geleden`
   } else if (months <= 1) {
-    return 'last month'
+    return 'afgelopen maand'
   } else if (months < 12) {
-    return `${months} months ago`
+    return `${months} maanden geleden`
   } else if (years === 1) {
-    return 'last year'
+    return 'afgelopen jaar'
   } else {
-    return `${years} years ago`
+    return `${years} jaar geleden`
   }
 }
 

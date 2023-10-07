@@ -25,6 +25,17 @@ const CREATE_COMMENT = gql`
   }
 `
 
+const UPDATE_COMMENT = gql`
+  mutation UserUpdateCommentMutation($id: Int!, $input: UpdateCommentInput!) {
+    updateComment(id: $id, input: $input) {
+      id
+      body
+      createdAt
+      parentId
+    }
+  }
+`
+
 interface FormValues {
   name: string
   email: string
@@ -35,9 +46,17 @@ interface Props {
   postId: number
   replyToComment?: Comment
   onCancel?: () => void
+  afterSubmit?: () => void
+  comment?: Comment
 }
 
-const CommentForm = ({ postId, replyToComment, onCancel }: Props) => {
+const UserCommentForm = ({
+  afterSubmit,
+  postId,
+  replyToComment,
+  onCancel,
+  comment,
+}: Props) => {
   const { currentUser } = useAuth()
 
   const formRef = useRef<HTMLFormElement>(null)
@@ -47,11 +66,28 @@ const CommentForm = ({ postId, replyToComment, onCancel }: Props) => {
     currentUser?.id &&
     currentUser?.roles.some((role) => allowedRoles.includes(role))
 
-  const [body, setBody] = useState('')
+  const [body, setBody] = useState(comment?.body || '')
   const [createComment, { loading, error }] = useMutation(CREATE_COMMENT, {
     onCompleted: () => {
       toast.success('Thank you for your comment!')
       setBody('')
+      if (afterSubmit) {
+        return afterSubmit()
+      }
+      onCancel?.()
+    },
+    refetchQueries: [
+      { query: FindArticleQuery, variables: { id: postId, $id: postId } },
+    ],
+  })
+
+  const [updateComment] = useMutation(UPDATE_COMMENT, {
+    onCompleted: () => {
+      toast.success('Thank you for your comment!')
+      setBody('')
+      if (afterSubmit) {
+        return afterSubmit()
+      }
       onCancel?.()
     },
     refetchQueries: [
@@ -60,6 +96,16 @@ const CommentForm = ({ postId, replyToComment, onCancel }: Props) => {
   })
 
   const onSubmit: SubmitHandler<FormValues> = (input) => {
+    // if editing a comment, update it
+    if (comment) {
+      updateComment({
+        variables: { id: comment.id, input: { body } },
+      })
+      return
+    }
+
+    // if not editing a comment, create a new one
+    // if replying to a comment, set parentId
     const parentId = replyToComment?.id
 
     createComment({ variables: { input: { postId, ...input, parentId } } })
@@ -78,11 +124,11 @@ const CommentForm = ({ postId, replyToComment, onCancel }: Props) => {
   if (!isAllowedToComment) {
     return (
       <div className="max-w-xl">
-        <h3 className="text-lg font-light text-gray-600">Leave a Comment</h3>
+        <h3 className="text-lg font-light text-gray-600">Plaats een reactie</h3>
         <div className="mt-4">
           <p className="text-sm text-gray-600">
-            You don&apos;t have permission to comment. Please contact the site
-            admin.
+            Je hebt geen toestemming om reacties te plaatsen. Neem aub contact
+            op met de beheerder.
           </p>
         </div>
       </div>
@@ -110,8 +156,8 @@ const CommentForm = ({ postId, replyToComment, onCancel }: Props) => {
       shadow-sm focus:border-transparent focus:ring-2 focus:ring-blue-500
       ${loading ? 'cursor-not-allowed bg-gray-100' : 'bg-white'}`}
           validation={{ required: true }}
-          placeholder={`Type your comment here...
-(Hint: use ctrl/cmd + enter to submit)`}
+          placeholder={`Typ je reactie hier...
+(Hint: Gebruik ctrl/cmd + enter om reactie te plaatsen)`}
           onChange={setBody}
           value={body}
           onKeyDown={onKeyDown}
@@ -123,9 +169,7 @@ const CommentForm = ({ postId, replyToComment, onCancel }: Props) => {
             size="sm"
             textStay
             icon={<BsSend />}
-            text={
-              loading ? 'Saving...' : replyToComment ? 'Submit reply' : 'Submit'
-            }
+            text={loading ? 'Bezig...' : 'Verstuur reactie'}
             disabled={loading}
           />
           {replyToComment && (
@@ -144,4 +188,4 @@ const CommentForm = ({ postId, replyToComment, onCancel }: Props) => {
   )
 }
 
-export default CommentForm
+export default UserCommentForm

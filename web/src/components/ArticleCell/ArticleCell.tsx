@@ -40,6 +40,7 @@ export const QUERY = gql`
         postId
         parentId
         deleted
+        edited
         user {
           id
           name
