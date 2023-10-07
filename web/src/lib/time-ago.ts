@@ -13,7 +13,7 @@ export function dateToTimeAgo(date: Date): string {
   } else if (minutes === 1) {
     return '1 minuut geleden'
   } else if (minutes < 60) {
-    return `${minutes} min ago`
+    return `${minutes} minuten geleden`
   } else if (hours === 1) {
     return '1 uur geleden'
   } else if (hours < 24) {

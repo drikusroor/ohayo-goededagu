@@ -4,7 +4,7 @@ describe('dateToTimeAgo', () => {
   it('returns "zojuist" when the date is less than a minute ago', () => {
     const now = new Date()
     const date = new Date(now.getTime() - 1000)
-    expect(dateToTimeAgo(date)).toEqual('just now')
+    expect(dateToTimeAgo(date)).toEqual('zojuist')
   })
 
   it('returns "1 minuut geleden" when the date is 1 minute ago', () => {
