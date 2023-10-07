@@ -108,6 +108,7 @@ model Comment {
   children  Comment[] @relation("ChildComments")
   thumbs    Thumb[]
   deleted   Boolean   @default(false)
+  edited    Boolean   @default(false)
 }
 
 model Thumb {
