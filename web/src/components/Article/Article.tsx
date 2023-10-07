@@ -10,7 +10,7 @@ import { EPostDisplayType } from 'src/types/post-display-type.enum'
 
 import { EPostType } from '../ArticleTypeIcon/ArticleTypeIcon'
 import Button from '../Button/Button'
-import CommentForm from '../CommentForm/CommentForm'
+import UserCommentForm from '../UserCommentForm/UserCommentForm'
 
 import ArticleArticle from './components/ArticleArticle/ArticleArticle'
 import ArticleChotto from './components/ArticleChotto/ArticleChotto'
@@ -125,7 +125,7 @@ const Article = ({ article, hideComments }: Props) => {
             )}
           </ul>
           <div className="mt-5">
-            {!replyToComment && <CommentForm postId={article.id} />}
+            {!replyToComment && <UserCommentForm postId={article.id} />}
           </div>
         </div>
       )}

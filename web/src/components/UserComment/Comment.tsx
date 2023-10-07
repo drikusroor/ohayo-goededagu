@@ -16,7 +16,7 @@ import Thumbs from 'src/components/Thumbs/Thumbs'
 import { classNames } from 'src/lib/class-names'
 import { getUserName } from 'src/lib/get-user-name'
 
-import CommentForm from '../CommentForm/CommentForm'
+import UserCommentForm from '../UserCommentForm/UserCommentForm'
 
 interface ICommentProps {
   comment: Comment
@@ -191,7 +191,7 @@ export default ({ comment, onClickReply }: ICommentProps) => {
           <RenderBody body={comment.body} />
         </div>
       ) : (
-        <CommentForm
+        <UserCommentForm
           postId={comment.postId}
           onCancel={() => setEditMode(false)}
           afterSubmit={() => setEditMode(false)}

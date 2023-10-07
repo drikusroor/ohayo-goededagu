@@ -13,13 +13,13 @@
 
 import type { ComponentMeta } from '@storybook/react'
 
-import CommentForm from './CommentForm'
+import UserCommentForm from './UserCommentForm'
 
 export const generated = () => {
-  return <CommentForm />
+  return <UserCommentForm postId={1} />
 }
 
 export default {
   title: 'Components/CommentForm',
-  component: CommentForm,
-} as ComponentMeta<typeof CommentForm>
+  component: UserCommentForm,
+} as ComponentMeta<typeof UserCommentForm>

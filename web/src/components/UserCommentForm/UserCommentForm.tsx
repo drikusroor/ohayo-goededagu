@@ -50,7 +50,7 @@ interface Props {
   comment?: Comment
 }
 
-const CommentForm = ({
+const UserCommentForm = ({
   afterSubmit,
   postId,
   replyToComment,
@@ -190,4 +190,4 @@ const CommentForm = ({
   )
 }
 
-export default CommentForm
+export default UserCommentForm
