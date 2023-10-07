@@ -167,7 +167,7 @@ export default ({ comment, onClickReply }: ICommentProps) => {
               className="text-sm text-slate-500"
             />
             {comment.edited && (
-              <span className="text-sm text-slate-500">(edited)</span>
+              <span className="text-sm text-slate-500">(bewerkt)</span>
             )}
           </div>
         </div>
@@ -175,11 +175,11 @@ export default ({ comment, onClickReply }: ICommentProps) => {
           {onClickReply && (
             <Button
               data-testid="replyButton"
-              text="Reply"
+              text="Reageer"
               icon={<BsReplyFill />}
               onClick={() => onClickReply(comment)}
               className="text-xs lg:text-base"
-              title="Reply"
+              title="Reageer"
               textStay
               variant="outlined"
             />

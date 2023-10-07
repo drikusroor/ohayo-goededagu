@@ -124,11 +124,11 @@ const UserCommentForm = ({
   if (!isAllowedToComment) {
     return (
       <div className="max-w-xl">
-        <h3 className="text-lg font-light text-gray-600">Leave a Comment</h3>
+        <h3 className="text-lg font-light text-gray-600">Plaats een reactie</h3>
         <div className="mt-4">
           <p className="text-sm text-gray-600">
-            You don&apos;t have permission to comment. Please contact the site
-            admin.
+            Je hebt geen toestemming om reacties te plaatsen. Neem aub contact
+            op met de beheerder.
           </p>
         </div>
       </div>
@@ -156,8 +156,8 @@ const UserCommentForm = ({
       shadow-sm focus:border-transparent focus:ring-2 focus:ring-blue-500
       ${loading ? 'cursor-not-allowed bg-gray-100' : 'bg-white'}`}
           validation={{ required: true }}
-          placeholder={`Type your comment here...
-(Hint: use ctrl/cmd + enter to submit)`}
+          placeholder={`Typ je reactie hier...
+(Hint: Gebruik ctrl/cmd + enter om reactie te plaatsen)`}
           onChange={setBody}
           value={body}
           onKeyDown={onKeyDown}
@@ -169,9 +169,7 @@ const UserCommentForm = ({
             size="sm"
             textStay
             icon={<BsSend />}
-            text={
-              loading ? 'Saving...' : replyToComment ? 'Submit reply' : 'Submit'
-            }
+            text={loading ? 'Bezig...' : 'Verstuur reactie'}
             disabled={loading}
           />
           {replyToComment && (
