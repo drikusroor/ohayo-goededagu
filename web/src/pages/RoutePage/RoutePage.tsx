@@ -1,6 +1,6 @@
 import { MetaTags } from '@redwoodjs/web'
 
-import TravelProgressBar from 'src/components/TravelProgressBar/TravelProgressBar'
+import TravelProgressBarCell from 'src/components/TravelProgressBarCell/TravelProgressBarCell'
 
 const RoutePage = () => {
   return (
@@ -12,7 +12,7 @@ const RoutePage = () => {
           src="https://www.google.com/maps/d/embed?mid=1ArsHjITlNvUl5SemqV6B5QmF6xmgqk8&ehbc=2E312F&noprof=1"
           className="aspect-[16/8] w-full"
         ></iframe>
-        <TravelProgressBar />
+        <TravelProgressBarCell />
       </div>
     </>
   )
