@@ -207,7 +207,7 @@ export default async () => {
         body: 'This is a post with a compressed cover image',
         published: true,
         userId: 1,
-        createdAt: new Date('2023-01-01'),
+        createdAt: new Date('2023-10-13'),
         type: 'ARTICLE',
         coverImage: {
           imageId: 128381209,

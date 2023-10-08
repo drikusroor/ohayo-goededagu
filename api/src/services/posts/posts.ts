@@ -74,6 +74,7 @@ export const posts = async ({ input }: { input: QueryPostsInput }) => {
 
 export const allPosts = () => {
   return db.post.findMany({
+    where: { published: true },
     orderBy: { createdAt: 'desc' },
   })
 }
