@@ -1,7 +1,7 @@
 import React from 'react'
 
-import { locations } from 'src/data/locations'
 import { classNames } from 'src/lib/class-names'
+import { locations } from 'src/lib/locations'
 
 // Calculate total duration from the end of the first location to the start of the last location
 const calculateTotalDuration = () => {
