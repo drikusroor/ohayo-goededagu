@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { classNames } from 'src/lib/class-names'
-import { locations } from 'src/lib/locations'
+import { locations, Location } from 'src/lib/locations'
 
 // Calculate total duration from the end of the first location to the start of the last location
 const calculateTotalDuration = () => {
@@ -28,7 +28,16 @@ const calculateProgress = () => {
 const TravelProgressBar = () => {
   const progress = calculateProgress()
 
-  console.log(progress, totalDuration)
+  function locationDescription(location: Location) {
+    const readableStartDate = new Date(location.startDate).toLocaleDateString(
+      'nl-NL'
+    )
+    const readableEndDate = new Date(location.endDate).toLocaleDateString(
+      'nl-NL'
+    )
+
+    return `${location.name} \n${readableStartDate} - ${readableEndDate}`
+  }
 
   return (
     <div className="mt-5 w-full overflow-x-auto">
@@ -58,6 +67,7 @@ const TravelProgressBar = () => {
                     }%`,
                     position: 'absolute',
                   }}
+                  title={locationDescription(location)}
                 >
                   <div
                     className={classNames(
