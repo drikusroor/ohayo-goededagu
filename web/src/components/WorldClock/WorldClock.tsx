@@ -22,9 +22,9 @@ export const WorldClockPure = ({ todayDate }: WorldClockPureProps) => {
   }
 
   for (const location of locations) {
-    const { startDate, endDate, name } = location
+    const { startDate, endDate, description } = location
     if (isInBetween(startDate, endDate)) {
-      message = `We zijn in ${name}!`
+      message = description
       break
     }
   }
