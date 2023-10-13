@@ -1,13 +1,23 @@
-import { BsXLg } from 'react-icons/bs'
+import { BsChevronLeft, BsChevronRight, BsXLg } from 'react-icons/bs'
 
 import Button from '../Button/Button'
-import { IModalInfo } from '../PhotoGrid/PhotoGrid'
 
+export interface IModalInfo {
+  url: string
+  id: string
+  imageId: string
+  alt: string
+  title: string
+  description: string
+  index: number
+}
 interface Props {
   info: IModalInfo
+  onNext: () => void
+  onPrevious: () => void
 }
 
-const ImageModal = ({ info }: Props) => {
+const ImageModal = ({ info, onNext, onPrevious }: Props) => {
   if (!info) return null
 
   const { id, url, alt, title, description } = info
@@ -30,6 +40,22 @@ const ImageModal = ({ info }: Props) => {
               closeModal()
             }}
           />
+          <Button
+            icon={<BsChevronLeft />}
+            className="hover:bg-bg-gray-800 fixed left-2 top-1/2 cursor-pointer rounded-full border-2 border-white bg-gray-900 text-4xl font-bold text-white hover:text-slate-300 lg:top-1/2"
+            onClick={() => {
+              onPrevious()
+            }}
+          />
+
+          <Button
+            icon={<BsChevronRight />}
+            className="hover:bg-bg-gray-800 fixed right-2 top-1/2 cursor-pointer rounded-full border-2 border-white bg-gray-900 text-4xl font-bold text-white hover:text-slate-300 lg:top-1/2"
+            onClick={() => {
+              onNext()
+            }}
+          />
+
           <div
             className="flex h-screen w-full flex-col items-center justify-center px-4 py-4 xl:px-20 xl:py-20"
             role="button"
