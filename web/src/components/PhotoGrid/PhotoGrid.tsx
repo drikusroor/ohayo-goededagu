@@ -20,12 +20,6 @@ const PhotoGrid = ({ className, images = [], preview }: IPhotoGridProps) => {
 
   const [modalInfo, setModalInfo] = React.useState<IModalInfo>()
 
-  useEffect(() => {
-    if (modalInfo?.id) {
-      document.getElementById(modalInfo?.id).style.display = 'block'
-    }
-  }, [modalInfo])
-
   const openModal = (
     { url, id, imageId, alt, title, description }: ImageGalleryImage,
     index: number
@@ -41,20 +35,34 @@ const PhotoGrid = ({ className, images = [], preview }: IPhotoGridProps) => {
     })
   }
 
-  const onNext = () => {
-    const nextIndex = modalInfo?.index + 1
-    const nextImage = images[nextIndex]
+  const onNext = (newIndex: number) => {
+    const nextImage = images[newIndex]
     if (nextImage) {
-      openModal(nextImage, nextIndex)
+      openModal(nextImage, newIndex)
     }
   }
 
-  const onPrevious = () => {
-    const previousIndex = modalInfo?.index - 1
-    const previousImage = images[previousIndex]
+  const onPrevious = (newIndex: number) => {
+    const previousImage = images[newIndex]
     if (previousImage) {
-      openModal(previousImage, previousIndex)
+      openModal(previousImage, newIndex)
     }
+  }
+
+  const onClose = () => {
+    setModalInfo(undefined)
+  }
+
+  const onKeyDown = (
+    e: KeyboardEvent,
+    photo: ImageGalleryImage,
+    index: number
+  ) => {
+    if (modalInfo?.id && modalInfo?.id === photo.id.toString()) {
+      return
+    }
+
+    return e.key === 'Enter' || e.key === ' ' ? openModal(photo, index) : null
   }
 
   return (
@@ -102,11 +110,10 @@ const PhotoGrid = ({ className, images = [], preview }: IPhotoGridProps) => {
                         .filter(Boolean)
                         .join(' - ')
                     }
-                    // eslint-disable-next-line jsx-a11y/no-noninteractive-element-to-interactive-role
+                    onClick={() => openModal(photo, index)}
                     role="button"
                     tabIndex={0}
-                    onClick={() => openModal(photo, index)}
-                    onKeyDown={() => openModal(photo, index)}
+                    onKeyDown={(e) => onKeyDown(e, photo, index)}
                   />
                 </li>
               )
@@ -114,7 +121,12 @@ const PhotoGrid = ({ className, images = [], preview }: IPhotoGridProps) => {
           </ul>
         )}
       </div>
-      <ImageModal info={modalInfo} onNext={onNext} onPrevious={onPrevious} />
+      <ImageModal
+        info={modalInfo}
+        onNext={() => onNext(modalInfo?.index + 1)}
+        onPrevious={() => onPrevious(modalInfo?.index - 1)}
+        onClose={onClose}
+      />
     </>
   )
 }
