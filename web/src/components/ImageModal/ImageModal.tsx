@@ -25,7 +25,7 @@ const ImageModal = ({ info }: Props) => {
         >
           <Button
             icon={<BsXLg />}
-            className="absolute right-2 top-4 cursor-pointer bg-transparent text-4xl font-bold text-white hover:bg-transparent hover:text-slate-300 lg:top-16"
+            className="hover:bg-bg-gray-800 absolute right-2 top-4 cursor-pointer rounded-full border-2 border-white bg-gray-900 text-4xl font-bold text-white hover:text-slate-300 lg:top-16"
             onClick={() => {
               closeModal()
             }}
