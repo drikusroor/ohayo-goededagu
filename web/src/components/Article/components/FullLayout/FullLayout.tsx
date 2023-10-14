@@ -166,11 +166,6 @@ const FullLayout = ({ article }: Props) => {
             ? navigate(routes.viewProfile({ id: article.user.id }))
             : '#'
         }
-        onKeyDown={() =>
-          article.user.id
-            ? navigate(routes.viewProfile({ id: article.user.id }))
-            : '#'
-        }
         tabIndex={0}
         role="button"
         key={article.user.id}
