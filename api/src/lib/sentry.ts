@@ -7,7 +7,7 @@ Sentry.init({
   dsn: process.env.SENTRY_DSN,
   environment: process.env.NODE_ENV,
   integrations: [new Tracing.Integrations.Prisma({ client })],
-  tracesSampleRate: 1.0,
+  tracesSampleRate: 0.25,
 })
 
 export default Sentry

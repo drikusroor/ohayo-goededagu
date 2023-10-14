@@ -5,7 +5,7 @@ Sentry.init({
   dsn: process.env.SENTRY_DSN,
   environment: process.env.NODE_ENV,
   integrations: [new BrowserTracing()],
-  tracesSampleRate: 1.0,
+  tracesSampleRate: 0.25,
 })
 
 export default Sentry
