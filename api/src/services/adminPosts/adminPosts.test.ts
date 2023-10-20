@@ -28,11 +28,7 @@ describe('posts', () => {
 
       const result = await adminPosts()
 
-      expect(result.length).toEqual(
-        Object.keys(scenario.post).filter(
-          (key) => scenario.post[key].userId === scenario.post.one.userId
-        ).length
-      )
+      expect(result.length).toEqual(Object.keys(scenario.post).length)
     }
   )
 

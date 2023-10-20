@@ -18,7 +18,8 @@ export const schema = gql`
   }
 
   type Query {
-    adminPosts: [Post!]! @requireAuth(roles: ["ADMIN"])
+    adminPosts: [Post!]! @requireAuth(roles: ["ADMIN", "MODERATOR"])
+    adminMyPosts: [Post!]! @requireAuth(roles: ["ADMIN", "MODERATOR"])
     allPosts: [Post!]! @skipAuth
     adminPost(id: Int!): Post @requireAuth(roles: ["ADMIN"])
   }

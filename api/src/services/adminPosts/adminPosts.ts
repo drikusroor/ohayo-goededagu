@@ -6,7 +6,16 @@ import notifyUsersOfPublishedPost from './helpers/notify-users-published-post'
 import upsertImageGalleriesOnPost from './helpers/upsert-image-galleries-on-post'
 
 export const adminPosts = () => {
-  return db.post.findMany({ where: { userId: context.currentUser.id } })
+  return db.post.findMany({
+    orderBy: { createdAt: 'desc' },
+  })
+}
+
+export const adminMyPosts = () => {
+  return db.post.findMany({
+    where: { userId: context.currentUser.id },
+    orderBy: { createdAt: 'desc' },
+  })
 }
 
 export const adminPost = ({ id }) => {
